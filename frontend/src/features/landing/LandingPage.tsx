@@ -42,7 +42,7 @@ import { useToast } from '../../context/useToast';
 import { ServiceTicketCard } from '../../components/ui/ServiceTicketCard';
 import { VerifiedBadge } from '../../components/ui/VerifiedBadge';
 import { BamboGuide } from '../../components/ui/BamboGuide';
-import { PhoneShowcaseSequence } from '../../components/ui/PhoneShowcaseSequence';
+import { SupermarcheIcon } from '../../components/ui/SupermarcheLogo';
 import { ServiceDetailModal } from '../../components/ui/ServiceDetailModal';
 import { SubmitReviewModal } from '../../components/ui/SubmitReviewModal';
 import { SEO } from '../../components/seo/SEO';
@@ -729,10 +729,11 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
 
               <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
                 <Button
+                  component={Link}
+                  to="/shop"
                   variant="contained"
                   size="large"
-                  onClick={() => onOpenBookingWithService()}
-                  startIcon={<SmartphoneIcon />}
+                  startIcon={<ShoppingBagIcon />}
                   sx={{
                     bgcolor: '#FF6B00',
                     color: '#FFFFFF',
@@ -745,31 +746,118 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                     '&:hover': { bgcolor: '#E05D00' },
                   }}
                 >
-                  {t('navbar.getTheApp')}
+                  Start Web Shopping
                 </Button>
               </Box>
             </Box>
 
-            {/* Right Column Canvas Showcase */}
+            {/* Right Column Supermarket Digital Showcase Card */}
             <Box
               sx={{
                 display: 'flex',
                 justify: 'center',
                 position: 'relative',
                 zIndex: 3,
-                my: { xs: 0, lg: -10 },
-                mr: { xs: 0, lg: '-10%' },
-                width: { xs: '100%', lg: '120%' },
-                maxWidth: '100%',
-                willChange: 'transform',
+                width: '100%',
               }}
             >
-              <PhoneShowcaseSequence
-                totalFrames={192}
-                fps={24}
-                basePath="/assets/phone-sequence/"
-                maxWidth={{ xs: '100%', sm: 540, lg: 720 }}
-              />
+              <Paper
+                elevation={0}
+                sx={{
+                  p: { xs: 3, sm: 4 },
+                  width: '100%',
+                  maxWidth: 580,
+                  borderRadius: '24px',
+                  bgcolor: (theme: Theme) => (theme.palette.mode === 'dark' ? '#1C1724' : '#FFFFFF'),
+                  border: '1px solid',
+                  borderColor: (theme: Theme) => (theme.palette.mode === 'dark' ? '#362C44' : '#FFE4D4'),
+                  boxShadow: (theme: Theme) =>
+                    theme.palette.mode === 'dark'
+                      ? '0 16px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 107, 0, 0.2)'
+                      : '0 16px 40px rgba(255, 107, 0, 0.15), 0 0 0 1px rgba(255, 107, 0, 0.12)',
+                }}
+              >
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                    <SupermarcheIcon size={36} />
+                    <Typography sx={{ fontWeight: 800, fontSize: 16, color: 'text.primary' }}>
+                      Supermarche Live Store
+                    </Typography>
+                  </Box>
+                  <Chip
+                    icon={<VerifiedIcon sx={{ color: '#FF6B00 !important', fontSize: '14px !important' }} />}
+                    label="EXPRESS DISPATCH"
+                    size="small"
+                    sx={{
+                      fontFamily: 'IBM Plex Mono, monospace',
+                      fontSize: 10,
+                      fontWeight: 700,
+                      bgcolor: 'rgba(255, 107, 0, 0.12)',
+                      color: '#FF6B00',
+                      border: '1px solid #FF6B00',
+                    }}
+                  />
+                </Box>
+
+                {/* Showcase Category Pills */}
+                <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 2, mb: 3 }}>
+                  {[
+                    { label: 'Trending Apparel', icon: '👕', desc: 'Hoodies, Denim & Wear' },
+                    { label: 'Sneakers & Kicks', icon: '👟', desc: 'Urban Retro Footwear' },
+                    { label: 'Cosmetics & Glow', icon: '✨', desc: 'Skincare & Sunscreen' },
+                    { label: 'Tech Accessories', icon: '🎧', desc: 'ANC Earbuds & Chargers' },
+                  ].map((cat, idx) => (
+                    <Box
+                      key={idx}
+                      sx={{
+                        p: 2,
+                        borderRadius: '14px',
+                        bgcolor: (theme: Theme) => (theme.palette.mode === 'dark' ? '#251F30' : '#FFF9F5'),
+                        border: '1px solid',
+                        borderColor: (theme: Theme) => (theme.palette.mode === 'dark' ? '#362C44' : '#FFEBE0'),
+                        transition: 'transform 0.2s ease, border-color 0.2s ease',
+                        '&:hover': {
+                          transform: 'translateY(-2px)',
+                          borderColor: '#FF6B00',
+                        },
+                      }}
+                    >
+                      <Typography sx={{ fontSize: 22, mb: 0.5 }}>{cat.icon}</Typography>
+                      <Typography sx={{ fontWeight: 700, fontSize: 13, color: 'text.primary' }}>
+                        {cat.label}
+                      </Typography>
+                      <Typography sx={{ fontSize: 11, color: 'text.secondary' }}>
+                        {cat.desc}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+
+                {/* Live Order Feature Banner */}
+                <Box
+                  sx={{
+                    p: 2,
+                    borderRadius: '12px',
+                    bgcolor: 'rgba(255, 107, 0, 0.08)',
+                    border: '1px dashed #FF6B00',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <Typography sx={{ fontSize: 12, fontWeight: 600, color: 'text.primary' }}>
+                    ⚡ Instant Mobile Money Payment & Same-Day Dispatch
+                  </Typography>
+                  <Button
+                    component={Link}
+                    to="/shop"
+                    size="small"
+                    sx={{ color: '#FF6B00', fontWeight: 700, textTransform: 'none', fontSize: 12 }}
+                  >
+                    Browse →
+                  </Button>
+                </Box>
+              </Paper>
             </Box>
           </Box>
         </Container>

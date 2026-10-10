@@ -38,20 +38,25 @@ export function SupermarcheLogo({ size = 42, showText = true, sx }: LogoProps) {
           <Typography
             variant="h6"
             sx={{
-              fontWeight: 800,
-              letterSpacing: '-0.02em',
-              lineHeight: 1.1,
-              background: 'linear-gradient(135deg, #FF6B00 0%, #FFA27B 100%)',
+              fontFamily: "'Outfit', 'Plus Jakarta Sans', 'Inter', sans-serif",
+              fontWeight: 900,
+              letterSpacing: '0.04em',
+              lineHeight: 1.05,
+              background: 'linear-gradient(135deg, #FF6B00 0%, #FF8C38 60%, #FFA27B 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              fontSize: '1.25rem',
+              fontSize: '1.35rem',
+              textTransform: 'uppercase',
+              filter: 'drop-shadow(0 2px 8px rgba(255, 107, 0, 0.15))',
             }}
           >
             SUPERMARCHÉ
           </Typography>
-          <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: '0.65rem' }}>
-            Store Platform
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+            <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: '0.62rem' }}>
+              EXPRESS MARKET
+            </Typography>
+          </Box>
         </Box>
       )}
     </Box>
