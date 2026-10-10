@@ -781,7 +781,7 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                     <SupermarcheIcon size={36} />
                     <Typography sx={{ fontWeight: 800, fontSize: 16, color: 'text.primary' }}>
-                      Supermarche Live Store
+                      Kim's Store Express
                     </Typography>
                   </Box>
                   <Chip

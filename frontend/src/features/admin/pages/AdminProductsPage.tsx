@@ -27,14 +27,24 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import api from '../../../api/client';
 import type { ProductItem } from '../../../context/CartContext';
+
+const STORE_CATEGORIES = [
+  'Apparel & Fashion',
+  'Footwear & Shoes',
+  'Cosmetics & Beauty',
+  'Electronics & Tech',
+  'Fresh Produce & Snacks'
+];
 
 export const AdminProductsPage: React.FC = () => {
   const [products, setProducts] = useState<ProductItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -42,7 +52,7 @@ export const AdminProductsPage: React.FC = () => {
     shortDescription: '',
     price: '',
     compareAtPrice: '',
-    category: 'Fresh Produce',
+    category: STORE_CATEGORIES[0],
     stockQuantity: '20',
     imageUrl: '',
     sku: '',
@@ -75,7 +85,7 @@ export const AdminProductsPage: React.FC = () => {
       shortDescription: '',
       price: '',
       compareAtPrice: '',
-      category: 'Fresh Produce',
+      category: STORE_CATEGORIES[0],
       stockQuantity: '20',
       imageUrl: '',
       sku: '',
@@ -92,7 +102,7 @@ export const AdminProductsPage: React.FC = () => {
       shortDescription: product.shortDescription || '',
       price: String(product.price),
       compareAtPrice: product.compareAtPrice ? String(product.compareAtPrice) : '',
-      category: product.category,
+      category: product.category || STORE_CATEGORIES[0],
       stockQuantity: String(product.stockQuantity),
       imageUrl: product.images?.[0] || '',
       sku: product.sku || '',
@@ -109,6 +119,31 @@ export const AdminProductsPage: React.FC = () => {
     } catch (err) {
       console.error('Delete error:', err);
     }
+  };
+
+  const handleImageFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImage(true);
+    const reader = new FileReader();
+    reader.onload = async () => {
+      const base64Data = reader.result as string;
+      try {
+        const res: any = await api.products.uploadImage({
+          filename: file.name,
+          fileData: base64Data
+        });
+        const uploadedUrl = res?.imageUrl || res?.data?.imageUrl || res?.url || base64Data;
+        setFormData((prev) => ({ ...prev, imageUrl: uploadedUrl }));
+      } catch (err) {
+        console.error('Upload failed, using base64 preview:', err);
+        setFormData((prev) => ({ ...prev, imageUrl: base64Data }));
+      } finally {
+        setUploadingImage(false);
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSaveProduct = async (e: React.FormEvent) => {
@@ -148,7 +183,7 @@ export const AdminProductsPage: React.FC = () => {
             <Inventory2OutlinedIcon color="primary" fontSize="large" /> Store Product Catalog
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Manage store inventory, update prices, stock levels, and add new items.
+            Manage store inventory, update prices (FCFA), stock levels, and upload product images.
           </Typography>
         </Box>
 
@@ -168,7 +203,7 @@ export const AdminProductsPage: React.FC = () => {
               <TableRow>
                 <TableCell sx={{ fontWeight: 700 }}>Product</TableCell>
                 <TableCell sx={{ fontWeight: 700 }}>Category</TableCell>
-                <TableCell sx={{ fontWeight: 700 }}>Price</TableCell>
+                <TableCell sx={{ fontWeight: 700 }}>Price (FCFA)</TableCell>
                 <TableCell sx={{ fontWeight: 700 }}>Stock Level</TableCell>
                 <TableCell sx={{ fontWeight: 700 }}>Status</TableCell>
                 <TableCell align="right" sx={{ fontWeight: 700 }}>Actions</TableCell>
@@ -202,11 +237,11 @@ export const AdminProductsPage: React.FC = () => {
 
                   <TableCell>
                     <Typography variant="subtitle2" color="primary.main" sx={{ fontWeight: 700 }}>
-                      ${prod.price.toFixed(2)}
+                      XAF {prod.price.toLocaleString()}
                     </Typography>
                     {prod.compareAtPrice && (
                       <Typography variant="caption" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                        ${prod.compareAtPrice.toFixed(2)}
+                        XAF {prod.compareAtPrice.toLocaleString()}
                       </Typography>
                     )}
                   </TableCell>
@@ -268,7 +303,7 @@ export const AdminProductsPage: React.FC = () => {
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
               >
-                {['Fresh Produce', 'Bakery', 'Dairy & Eggs', 'Pantry', 'Snacks & Sweets', 'Beverages'].map((cat) => (
+                {STORE_CATEGORIES.map((cat) => (
                   <MenuItem key={cat} value={cat}>
                     {cat}
                   </MenuItem>
@@ -288,7 +323,7 @@ export const AdminProductsPage: React.FC = () => {
                 required
                 fullWidth
                 type="number"
-                label="Price ($)"
+                label="Price (FCFA)"
                 value={formData.price}
                 onChange={(e) => setFormData({ ...formData, price: e.target.value })}
               />
@@ -296,19 +331,44 @@ export const AdminProductsPage: React.FC = () => {
               <TextField
                 fullWidth
                 type="number"
-                label="Original / Compare Price ($)"
+                label="Original / Compare Price (FCFA)"
                 value={formData.compareAtPrice}
                 onChange={(e) => setFormData({ ...formData, compareAtPrice: e.target.value })}
               />
 
               <Box sx={{ gridColumn: { xs: 'span 1', sm: 'span 2' } }}>
-                <TextField
-                  fullWidth
-                  label="Image URL"
-                  placeholder="https://images.unsplash.com/..."
-                  value={formData.imageUrl}
-                  onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                />
+                <Stack direction="row" spacing={2} alignItems="center">
+                  <TextField
+                    fullWidth
+                    label="Image URL or Uploaded Path"
+                    placeholder="https://images.unsplash.com/..."
+                    value={formData.imageUrl}
+                    onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+                  />
+                  <Button
+                    variant="outlined"
+                    component="label"
+                    startIcon={uploadingImage ? <CircularProgress size={18} /> : <CloudUploadIcon />}
+                    disabled={uploadingImage}
+                    sx={{ height: 56, whitespace: 'nowrap', px: 3 }}
+                  >
+                    {uploadingImage ? 'Uploading...' : 'Upload Image'}
+                    <input type="file" accept="image/*" hidden onChange={handleImageFileUpload} />
+                  </Button>
+                </Stack>
+                {formData.imageUrl && (
+                  <Box sx={{ mt: 1.5, display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box
+                      component="img"
+                      src={formData.imageUrl}
+                      alt="Preview"
+                      sx={{ width: 64, height: 64, borderRadius: 2, objectFit: 'cover', border: '1px solid rgba(255,255,255,0.1)' }}
+                    />
+                    <Typography variant="caption" color="text.secondary">
+                      Image Preview
+                    </Typography>
+                  </Box>
+                )}
               </Box>
 
               <Box sx={{ gridColumn: { xs: 'span 1', sm: 'span 2' } }}>
@@ -348,3 +408,4 @@ export const AdminProductsPage: React.FC = () => {
     </Box>
   );
 };
+

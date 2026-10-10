@@ -12,12 +12,12 @@ export interface SEOProps {
   noIndex?: boolean;
 }
 
-const DEFAULT_TITLE = 'Supermarche | Online Supermarket & Express Department Store';
+const DEFAULT_TITLE = "Kim's Store | Online Supermarket & Express Department Store";
 const DEFAULT_DESCRIPTION =
-  'Shop fashion apparel, footwear, cosmetics glow, tech accessories, fresh produce, and pantry snacks with express delivery across Cameroon on Supermarche.';
+  "Shop fashion apparel, footwear, cosmetics glow, tech accessories, fresh produce, and pantry snacks with express delivery across Cameroon on Kim's Store.";
 const DEFAULT_OG_IMAGE = `${DEFAULT_BASE_URL}/images/hero_banner.png`;
 const DEFAULT_KEYWORDS = [
-  'Supermarche',
+  "Kim's Store",
   'Online Supermarket Cameroon',
   'Express Shopping Cameroon',
   'Streetwear Fashion Douala',
@@ -38,7 +38,7 @@ export function SEO({
   noIndex = false,
 }: SEOProps) {
   const fullTitle = title
-    ? `${title} | Supermarche Cameroon & Worldwide`
+    ? `${title} | Kim's Store Cameroon & Worldwide`
     : DEFAULT_TITLE;
 
   const cleanPath = canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`;
@@ -53,7 +53,7 @@ export function SEO({
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords.join(', ')} />
-      <meta name="author" content="Supermarche" />
+      <meta name="author" content="Kim's Store" />
       <meta
         name="robots"
         content={noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
@@ -68,7 +68,7 @@ export function SEO({
       <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
 
       {/* Open Graph / Facebook */}
-      <meta property="og:site_name" content="Supermarche" />
+      <meta property="og:site_name" content="Kim's Store" />
       <meta property="og:type" content={ogType} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />

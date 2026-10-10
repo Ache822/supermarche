@@ -275,6 +275,8 @@ export const api = {
       request<T>(`/products/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
     delete: <T = unknown>(id: string) =>
       api.delete<T>(`/products/${id}`),
+    uploadImage: <T = unknown>(data: { filename: string; fileData: string }) =>
+      api.post<T>('/products/upload-image', data),
   },
 
   // E-Commerce Orders API

@@ -340,52 +340,61 @@ export const uploadProductImageHandler = async (req: Request, res: Response, nex
 export const seedProductsIfEmpty = async () => {
   try {
     const catCount = await Category.countDocuments();
+    let apparelCat;
     if (catCount === 0) {
-      const defaultCat = await Category.create({
-        name: "Fresh Produce",
-        slug: "fresh-produce",
-        description: "Fresh fruits and organic vegetables",
+      apparelCat = await Category.create({
+        name: "Apparel & Fashion",
+        slug: "apparel-fashion",
+        description: "Trendsetting apparel, hoodies, and fashion items.",
         is_active: true
       });
+      await Category.create([
+        { name: "Footwear & Shoes", slug: "footwear-shoes", description: "Sneakers, running shoes, and footwear.", is_active: true },
+        { name: "Cosmetics & Beauty", slug: "cosmetics-beauty", description: "Skincare, serums, and beauty essentials.", is_active: true },
+        { name: "Electronics & Tech", slug: "electronics-tech", description: "Earbuds, power banks, and tech accessories.", is_active: true },
+        { name: "Fresh Produce & Snacks", slug: "fresh-produce-snacks", description: "Fresh fruits, organic snacks, and beverages.", is_active: true }
+      ]);
+    } else {
+      apparelCat = await Category.findOne({ slug: "apparel-fashion" });
+    }
 
-      const prodCount = await Product.countDocuments();
-      if (prodCount === 0) {
-        await Product.create([
-          {
-            id: "prod-organic-apples-01",
-            title: "Fresh Organic Apples (1kg)",
-            category: defaultCat._id,
-            description: "Sweet, crisp red organic apples harvested locally.",
-            shortDescription: "Sweet, crisp red organic apples.",
-            price: 4.99,
-            priceRange: "$4.99",
-            estimatedTime: "Same day delivery",
-            imageUrl: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=600&q=80",
-            images: ["https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=600&q=80"],
-            stockQuantity: 100,
-            inStock: true,
-            isLive: true,
-            featured: true
-          },
-          {
-            id: "prod-whole-milk-02",
-            title: "Organic Whole Milk (1L)",
-            category: defaultCat._id,
-            description: "Pasteurized fresh farm whole milk enriched with Vitamin D.",
-            shortDescription: "Pure farm fresh whole milk.",
-            price: 2.79,
-            priceRange: "$2.79",
-            estimatedTime: "Same day delivery",
-            imageUrl: "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=600&q=80",
-            images: ["https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=600&q=80"],
-            stockQuantity: 80,
-            inStock: true,
-            isLive: true,
-            featured: true
-          }
-        ]);
-        console.log("Successfully seeded default store categories & products");
-      }
+    const prodCount = await Product.countDocuments();
+    if (prodCount === 0 && apparelCat) {
+      await Product.create([
+        {
+          id: "prod-hoodie-01",
+          title: "Oversized Vintage Graphic Hoodie",
+          category: apparelCat._id,
+          description: "Heavyweight premium cotton oversized hoodie with vintage graphic print.",
+          shortDescription: "Heavyweight cotton oversized hoodie.",
+          price: 18500,
+          priceRange: "18,500 FCFA",
+          estimatedTime: "Same day express delivery",
+          imageUrl: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80",
+          images: ["https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80"],
+          stockQuantity: 45,
+          inStock: true,
+          isLive: true,
+          featured: true
+        },
+        {
+          id: "prod-sneakers-01",
+          title: "Retro High-Top Campus Kicks",
+          category: apparelCat._id,
+          description: "Classic high-top retro basketball sneakers with cushioned insoles.",
+          shortDescription: "Classic high-top retro sneakers.",
+          price: 28000,
+          priceRange: "28,000 FCFA",
+          estimatedTime: "Same day express delivery",
+          imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80",
+          images: ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"],
+          stockQuantity: 30,
+          inStock: true,
+          isLive: true,
+          featured: true
+        }
+      ]);
+      console.log("Successfully seeded default store categories & products");
     }
   } catch (err) {
     console.warn("Product seeder warning:", err);

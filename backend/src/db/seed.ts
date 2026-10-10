@@ -40,12 +40,12 @@ const seedAtlasDatabase = async () => {
     }
 
     // 2. Seed Default Product Categories
-    const groceriesHub = await Category.findOneAndUpdate(
-      { slug: "groceries-fresh-produce" },
+    const apparelHub = await Category.findOneAndUpdate(
+      { slug: "apparel-fashion" },
       {
-        name: "Fresh Groceries & Produce",
-        slug: "groceries-fresh-produce",
-        description: "Fresh vegetables, fruits, meats, and daily market produce.",
+        name: "Apparel & Fashion",
+        slug: "apparel-fashion",
+        description: "Trendsetting apparel, streetwear hoodies, t-shirts, and stylish outfits.",
         iconName: "ShoppingBag",
         display_order: 1,
         parent: null
@@ -53,27 +53,53 @@ const seedAtlasDatabase = async () => {
       { upsert: true, new: true }
     );
 
-    const householdHub = await Category.findOneAndUpdate(
-      { slug: "household-essentials" },
+    const footwearHub = await Category.findOneAndUpdate(
+      { slug: "footwear-shoes" },
       {
-        name: "Household Essentials & Gas",
-        slug: "household-essentials",
-        description: "Cooking gas cylinders, cleaning supplies, and everyday home items.",
-        iconName: "Home",
+        name: "Footwear & Shoes",
+        slug: "footwear-shoes",
+        description: "High-top sneakers, breathable running shoes, and trendy footwear.",
+        iconName: "ShoppingBag",
         display_order: 2,
         parent: null
       },
       { upsert: true, new: true }
     );
 
-    const beveragesHub = await Category.findOneAndUpdate(
-      { slug: "beverages-drinks" },
+    const cosmeticsHub = await Category.findOneAndUpdate(
+      { slug: "cosmetics-beauty" },
       {
-        name: "Beverages & Drinks",
-        slug: "beverages-drinks",
-        description: "Juices, mineral water, soft drinks, and specialty beverages.",
-        iconName: "Coffee",
+        name: "Cosmetics & Beauty",
+        slug: "cosmetics-beauty",
+        description: "Skincare serums, sunscreen lotions, and everyday beauty products.",
+        iconName: "Heart",
         display_order: 3,
+        parent: null
+      },
+      { upsert: true, new: true }
+    );
+
+    const electronicsHub = await Category.findOneAndUpdate(
+      { slug: "electronics-tech" },
+      {
+        name: "Electronics & Tech",
+        slug: "electronics-tech",
+        description: "ANC wireless earbuds, high-capacity power banks, and gadgets.",
+        iconName: "Smartphone",
+        display_order: 4,
+        parent: null
+      },
+      { upsert: true, new: true }
+    );
+
+    const produceHub = await Category.findOneAndUpdate(
+      { slug: "fresh-produce-snacks" },
+      {
+        name: "Fresh Produce & Snacks",
+        slug: "fresh-produce-snacks",
+        description: "Fresh organic fruits, premium snacks, and beverages.",
+        iconName: "Coffee",
+        display_order: 5,
         parent: null
       },
       { upsert: true, new: true }
@@ -84,84 +110,84 @@ const seedAtlasDatabase = async () => {
     // 3. Seed Sample Store Products
     const sampleProducts = [
       {
-        id: "prod-sctm-cooking-gas-12kg",
-        title: "SCTM Cooking Gas Cylinder 12.5kg (Full Refill & Delivery)",
-        slug: "sctm-cooking-gas-12kg",
-        category: householdHub._id,
+        id: "prod-hoodie-01",
+        title: "Oversized Vintage Graphic Hoodie",
+        slug: "oversized-vintage-graphic-hoodie",
+        category: apparelHub._id,
+        price: 18500,
+        compareAtPrice: 22000,
+        description: "Heavyweight premium cotton oversized hoodie with vintage graphic print. Ultra-comfortable for everyday wear.",
+        shortDescription: "Heavyweight cotton oversized hoodie with vintage print.",
+        stockQuantity: 45,
+        inStock: true,
+        isLive: true,
+        featured: true,
+        imageUrl: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80",
+        images: ["https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80"]
+      },
+      {
+        id: "prod-sneakers-01",
+        title: "Retro High-Top Campus Kicks",
+        slug: "retro-high-top-campus-kicks",
+        category: footwearHub._id,
+        price: 28000,
+        compareAtPrice: 35000,
+        description: "Classic high-top retro basketball sneakers with cushioned insoles and durable rubber outsole.",
+        shortDescription: "Classic high-top retro sneakers with cushioned insoles.",
+        stockQuantity: 30,
+        inStock: true,
+        isLive: true,
+        featured: true,
+        imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+        images: ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80"]
+      },
+      {
+        id: "prod-serum-01",
+        title: "Hydrating Glow Vitamin C Face Serum",
+        slug: "hydrating-glow-vitamin-c-serum",
+        category: cosmeticsHub._id,
         price: 6500,
-        compareAtPrice: 7000,
-        description: "Standard 12.5kg cooking gas cylinder refill delivered directly to your kitchen with complimentary leak and valve test.",
-        shortDescription: "12.5kg cooking gas cylinder refill with free safety check.",
+        compareAtPrice: 8500,
+        description: "Nourishing facial serum infused with Hyaluronic Acid and Vitamin C for glowing skin.",
+        shortDescription: "Nourishing facial serum for bright, hydrated skin.",
         stockQuantity: 50,
         inStock: true,
         isLive: true,
         featured: true,
-        imageUrl: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=800&q=80",
-        images: ["https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=800&q=80"]
+        imageUrl: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
+        images: ["https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80"]
       },
       {
-        id: "prod-fresh-tomato-basket-5kg",
-        title: "Fresh Tomato Basket (5kg Organic Farm Produce)",
-        slug: "fresh-tomato-basket-5kg",
-        category: groceriesHub._id,
-        price: 3500,
-        compareAtPrice: 4000,
-        description: "Organically grown fresh red ripe tomatoes harvested directly from local farms and packaged cleanly.",
-        shortDescription: "5kg fresh organic red tomatoes.",
-        stockQuantity: 100,
+        id: "prod-earbuds-01",
+        title: "Pro ANC Wireless Bluetooth Earbuds",
+        slug: "pro-anc-wireless-bluetooth-earbuds",
+        category: electronicsHub._id,
+        price: 19500,
+        compareAtPrice: 24500,
+        description: "Active Noise-Canceling wireless earbuds with 30-hour total battery life and HD audio.",
+        shortDescription: "ANC wireless earbuds with 30h battery and HD audio.",
+        stockQuantity: 35,
         inStock: true,
         isLive: true,
         featured: true,
-        imageUrl: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80",
-        images: ["https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80"]
+        imageUrl: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+        images: ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"]
       },
       {
-        id: "prod-mineral-water-pack-1-5l",
-        title: "Natural Spring Mineral Water Pack (6 x 1.5L)",
-        slug: "mineral-water-pack-1-5l",
-        category: beveragesHub._id,
-        price: 2400,
-        compareAtPrice: 2700,
-        description: "Pure natural spring mineral water 6-bottle pack for healthy family daily hydration.",
-        shortDescription: "6 x 1.5L natural spring mineral water.",
-        stockQuantity: 200,
+        id: "prod-fruit-basket-01",
+        title: "Organic Fresh Fruit & Crunch Snack Pack",
+        slug: "organic-fresh-fruit-crunch-snack-pack",
+        category: produceHub._id,
+        price: 4500,
+        compareAtPrice: 5500,
+        description: "Handpicked fresh organic apples, bananas, and roasted cashew snack pack.",
+        shortDescription: "Handpicked fresh organic fruits and roasted cashew snack.",
+        stockQuantity: 60,
         inStock: true,
         isLive: true,
         featured: true,
-        imageUrl: "https://images.unsplash.com/photo-1560023907-5f31b61785db?auto=format&fit=crop&w=800&q=80",
-        images: ["https://images.unsplash.com/photo-1560023907-5f31b61785db?auto=format&fit=crop&w=800&q=80"]
-      },
-      {
-        id: "prod-jasmin-rice-5kg",
-        title: "Supermarche Premium Jasmin Rice (5kg Bag)",
-        slug: "jasmin-rice-5kg",
-        category: groceriesHub._id,
-        price: 4800,
-        compareAtPrice: 5200,
-        description: "Long-grain fragrant jasmine rice, triple-cleaned and perfect for jollof, fried rice, and daily meals.",
-        shortDescription: "5kg premium long-grain fragrant jasmine rice.",
-        stockQuantity: 150,
-        inStock: true,
-        isLive: true,
-        featured: true,
-        imageUrl: "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=800&q=80",
-        images: ["https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=800&q=80"]
-      },
-      {
-        id: "prod-fresh-eggs-crate-30",
-        title: "Fresh Farm Organic Eggs (Crate of 30 Large Eggs)",
-        slug: "fresh-eggs-crate-30",
-        category: groceriesHub._id,
-        price: 2200,
-        compareAtPrice: 2500,
-        description: "Grade-A fresh farm eggs harvested daily from free-range hens.",
-        shortDescription: "30 large fresh farm organic eggs.",
-        stockQuantity: 90,
-        inStock: true,
-        isLive: true,
-        featured: true,
-        imageUrl: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=800&q=80",
-        images: ["https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=800&q=80"]
+        imageUrl: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=800&q=80",
+        images: ["https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=800&q=80"]
       }
     ];
 
