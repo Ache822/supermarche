@@ -647,10 +647,6 @@ export function Footer({ mode, onOpenBooking }: FooterProps) {
             <Typography sx={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: 12, color: '#FFC4A8' }}>
               {t('footer.madeInCameroon', 'Made in Cameroon 🇨🇲')}
             </Typography>
-            <Typography sx={{ color: '#8F5424' }}>·</Typography>
-            <Typography sx={{ fontSize: 12, color: '#FFC4A8', fontWeight: 500 }}>
-              {t('footer.artBy', 'Art by: A.Chella Verse')}
-            </Typography>
 
             {/* Social Media Icon Links */}
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, color: '#FFA27B' }}>

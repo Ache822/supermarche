@@ -99,7 +99,7 @@ export function BamboGuide({
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: subtext ? 0.5 : 0 }}>
           <Chip
             size="small"
-            label="Supermarche Bot Guide"
+            label="Kimzy Bot Guide"
             sx={{
               fontFamily: 'IBM Plex Mono, monospace',
               fontSize: 9,
