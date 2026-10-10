@@ -55,94 +55,94 @@
   },
   "about": {
     "tag": "ABOUT SUPERMARCHE",
-    "heroTitle": "Everyday life comes with a lot of small, necessary errands. We built Supermarche so you don't have to run them alone.",
-    "heroSubtitle": "A platform connecting people across Cameroon to verified providers for the tasks that eat up a day — gas delivery, cleaning, beauty, shopping, and more.",
-    "storyLeft": "Supermarche started with a simple observation: getting everyday help shouldn't require knowing the right person.",
-    "storyP1": "Supermarche was born out of a real Cameroonian challenge: finding reliable, trustworthy help for home and daily errands without relying on personal contacts or guesswork.",
-    "storyP2": "What started as a way to book a handful of services has grown into a platform covering gas delivery, back-to-school shopping, beauty and selfcare, digital security, cleaning, and market shopping.",
-    "storyP3": "Today, Supermarche operates across major hubs in 10 regions nationwide, dispatching verified technicians and runners every day.",
+    "heroTitle": "Everyday university life moves fast. We built Supermarche so you get instant campus shopping delivered to your door.",
+    "heroSubtitle": "The premier student e-commerce hub in Cameroon — delivery for streetwear fashion, sneakers, cosmetics, tech accessories, and dorm snacks.",
+    "storyLeft": "Supermarche started with a simple vision: campus shopping should be instant, stylish, and seamless.",
+    "storyP1": "Finding quality streetwear, authentic sneakers, skincare essentials, and late-night study snacks on campus used to take hours of searching.",
+    "storyP2": "We curated an all-in-one store featuring trending hoodies, kicks, cosmetics glow kits, noise-canceling audio gear, and express dorm snack delivery.",
+    "storyP3": "Today, Supermarche operates across major university hubs in Cameroon, delivering express orders directly to students and campus dorms.",
     "principlesTag": "WHAT WE STAND FOR",
-    "principlesTitle": "The principles behind every booking",
-    "p1Title": "Trust first",
-    "p1Desc": "Every provider is verified before they can accept a job. No exceptions.",
-    "p2Title": "No surprises",
-    "p2Desc": "Pricing is locked in before you confirm. What you see is what you pay.",
-    "p3Title": "Fair to providers",
-    "p3Desc": "Transparent commissions and instant Mobile Money payouts ensure our service partners are valued and empowered.",
-    "p4Title": "Built for Cameroon",
-    "p4Desc": "Designed around how people here actually book, pay, and communicate — not a copy-paste of a foreign app.",
+    "principlesTitle": "The principles behind every order",
+    "p1Title": "Quality first",
+    "p1Desc": "Every item is authentic, inspected, and carefully packaged before dispatch.",
+    "p2Title": "Transparent pricing",
+    "p2Desc": "What you see is what you pay. Student discount rewards and clear pricing built in.",
+    "p3Title": "Express campus delivery",
+    "p3Desc": "Fast delivery straight to your dorm room or campus location with Mobile Money payment.",
+    "p4Title": "Built for students",
+    "p4Desc": "Designed specifically for how university students shop, pay, and get items delivered.",
     "ctaTitle": "Want to build this with us?",
-    "ctaSubtitle": "We're always looking for people who care about getting the details right.",
+    "ctaSubtitle": "We're always looking for energetic campus ambassadors and creative minds.",
     "ctaBtn": "See open roles"
   },
   "services": {
-    "chip": "VERIFIED OPERATOR SERVICES NETWORK",
-    "title": "Our Complete Range of Services",
-    "subtitle": "Discover express cooking gas refills, prepped market soup packs, back-to-school supplies, deep home cleaning, & digital security solutions delivered across Yaoundé, Douala, Buea & Bamenda.",
-    "searchPlaceholder": "Search services (e.g. Cooking Gas, Eru, Cleaning, Books)...",
-    "gasTitle": "Cooking Gas Refill & Delivery",
-    "gasDesc": "Express home delivery of 12.5kg & 6kg gas cylinders (SCTM, Total, Tradex, Camgaz). Leak check & regulator safety audit included.",
-    "marketTitle": "Fresh Market Errand & Shopping",
-    "marketDesc": "Dedicated runner buys fresh vegetables, meat, and provisions from Mokolo, Marché Mboppi, or Marché Central with video inspection.",
-    "schoolTitle": "Student Errand & School Delivery",
-    "schoolDesc": "Stationery, textbooks, and boarding school supplies delivered directly to campus or dorms in Yaoundé, Douala, Buea & Bamenda.",
-    "cleaningTitle": "Villa & Apartment Deep Cleaning",
-    "cleaningDesc": "Vetted cleaning staff equipped with professional equipment for post-construction, move-in, or routine home sanitization.",
-    "securityTitle": "Property & Personnel Safety Audit",
-    "securityDesc": "On-site security risk assessment, CCTV camera installation audit, and verified guard dispatch for private residences and events.",
-    "gas": {
-      "title": "Cooking Gas Cylinder Refill & Inspection",
-      "desc": "Rapid door-to-door delivery of Total, Tradex, and SCTM gas cylinders with safety pressure testing."
+    "chip": "VERIFIED CAMPUS E-COMMERCE STORE",
+    "title": "Explore Our Student Store Categories",
+    "subtitle": "Shop trending streetwear hoodies, sneakers & kicks, skincare & cosmetics, noise-canceling tech gear, and dorm snacks delivered to your campus.",
+    "searchPlaceholder": "Search products (e.g. Hoodies, Sneakers, Serums, Earbuds, Ramen)...",
+    "clothesTitle": "Trending Campus Apparel & Streetwear",
+    "clothesDesc": "Premium oversized hoodies, graphic vintage tees, denim jackets, and varsity gear styled for campus life.",
+    "shoesTitle": "Urban Sneakers & Campus Kicks",
+    "shoesDesc": "High-top retro sneakers, breathable running shoes, slide sandals, and casual everyday kicks.",
+    "cosmeticsTitle": "Glow Skincare & Beauty Essentials",
+    "cosmeticsDesc": "Hydrating face serums, SPF sunscreens, lip tints, body mists, and daily hygiene essentials.",
+    "techTitle": "Wireless Earbuds & Power Accessories",
+    "techDesc": "Noise-canceling ANC earbuds, 20,000mAh fast-charge power banks, desk lamps, and cables.",
+    "snacksTitle": "Dorm Snacks, Instant Meals & Drinks",
+    "snacksDesc": "Quick-prep ramen packs, energy drinks, imported chocolates, and late-night study study bites.",
+    "clothes": {
+      "title": "Trending Campus Apparel & Streetwear",
+      "desc": "Oversized hoodies, graphic tees, denim jackets, and varsity wear."
     },
-    "market": {
-      "title": "Marché Sandaga Errand Shopping",
-      "desc": "Fresh produce, spices, meat, and dry goods purchased directly from local markets with receipt proof."
+    "shoes": {
+      "title": "Urban Sneakers & Campus Kicks",
+      "desc": "Retro sneakers, sports shoes, and comfortable campus footwear."
     },
-    "school": {
-      "title": "Back to School Supplies Dispatch",
-      "desc": "Curated textbooks, notebooks, uniforms, and stationery delivered directly to your home."
+    "cosmetics": {
+      "title": "Glow Skincare & Beauty Essentials",
+      "desc": "Sunscreens, serums, lip cosmetics, and daily student care products."
     },
-    "cleaning": {
-      "title": "Villa & Apartment Deep Cleaning",
-      "desc": "Professional home sanitization, floor scrub, post-construction cleanup, and upholstery care."
+    "tech": {
+      "title": "Wireless Earbuds & Power Accessories",
+      "desc": "Wireless ANC earbuds, powerbanks, fast chargers, and desk gear."
     },
-    "security": {
-      "title": "CCTV & Smart Security Installation",
-      "desc": "Solar-powered security cameras, smart locks, and property alarm systems setup by certified technicians."
+    "snacks": {
+      "title": "Dorm Snacks, Instant Meals & Drinks",
+      "desc": "Ramen noodles, chocolates, energy drinks, and quick dorm bites."
     }
   },
   "regions": {
     "chip": "100% OPERATIONAL DISPATCH",
     "title": "Active Cameroon Coverage Regions",
-    "subtitle": "Click any hub or let the live dispatch carousel auto-rotate across Cameroon cities",
+    "subtitle": "Click any hub or let the live dispatch carousel auto-rotate across Cameroon campus hubs",
     "activeSlide": "ACTIVE SLIDE",
     "averageArrival": "{{mins}} Mins Average Arrival",
     "yaoundeHub": "Yaoundé Hub",
-    "yaoundeDistricts": "Bastos • Omnisports • Santa Barbara • Central",
-    "yaoundeBadge": "Yaoundé Hub: Bastos & Omnisports Express Coverage",
+    "yaoundeDistricts": "Bastos • Ngoa-Ekélé • Omnisports • Central",
+    "yaoundeBadge": "Yaoundé Hub: Campus & Express City Coverage",
     "doualaHub": "Douala Hub",
-    "doualaDistricts": "Bonapriso • Akwa • Bonanjo • Deido",
-    "doualaBadge": "Douala Hub: Bonapriso & Akwa Express Coverage",
+    "doualaDistricts": "Bonapriso • Akwa • Logbessou • Deido",
+    "doualaBadge": "Douala Hub: University & Express City Coverage",
     "bamendaHub": "Bamenda Hub",
-    "bamendaDistricts": "Commercial Ave • Nkwen • Up Station District",
-    "bamendaBadge": "Bamenda Hub: Commercial Ave & Nkwen Coverage",
+    "bamendaDistricts": "Commercial Ave • Bambili Campus • Nkwen",
+    "bamendaBadge": "Bamenda Hub: Bambili Campus & Nkwen Coverage",
     "bueaHub": "Buea Hub",
-    "bueaDistricts": "Clerks Quarters • Molyko • Great Soppo Area",
-    "bueaBadge": "Buea Hub: Molyko & Clerks Quarters Coverage"
+    "bueaDistricts": "UB Junction • Molyko Campus • Great Soppo",
+    "bueaBadge": "Buea Hub: Molyko Campus Express Coverage"
   },
   "liveSupport": {
-    "chip": "24/7 VERIFIED CUSTOMER SERVICE DESK",
+    "chip": "24/7 STUDENT SUPPORT DESK",
     "title": "Supermarche Bot Live Customer Service",
-    "subtitle": "Connect directly with actual Supermarche customer service employees in Cameroon for 24/7 order updates, gas refill assistance, and market errand tracking.",
-    "bamboBubble": "\"Hello! 👋 Need help with gas refills, market shopping, or tracking your active ticket?\"",
-    "bamboGuideTitle": "Supermarche Bot is active 24/7 across Cameroon!",
-    "bamboGuideSub": "Instant answers & live technician dispatch",
+    "subtitle": "Connect directly with Supermarche support team for instant order tracking, product recommendations, and express delivery updates.",
+    "bamboBubble": "\"Hello! 👋 Need help picking sneakers, streetwear sizes, or tracking your store order?\"",
+    "bamboGuideTitle": "Supermarche Bot is active 24/7 for student shoppers!",
+    "bamboGuideSub": "Instant order answers & campus delivery tracking",
     "chatTitle": "Start Live Chat Support",
     "chatSub": "Click the floating chat widget on the bottom right to talk with Supermarche Bot in real-time.",
-    "ticketTitle": "Download App to Order",
-    "ticketSub": "Need cooking gas, market errands, or villa cleaning dispatched? Download the Supermarche Mobile App on iOS & Android.",
-    "appTitle": "Mobile App Quick Support",
-    "appSub": "Get real-time push updates for technician arrival times on Google Play Store & Apple App Store."
+    "ticketTitle": "Express Web Checkout",
+    "ticketSub": "Browse fashion, cosmetics, sneakers, and snacks with instant web checkout and Mobile Money payment.",
+    "appTitle": "Campus Order Tracking",
+    "appSub": "Track your delivery runner status directly on the live web tracking dashboard."
   },
   "newsletter": {
     "title": "Subscribe to Supermarche Newsletter",
