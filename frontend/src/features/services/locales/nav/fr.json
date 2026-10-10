@@ -1,0 +1,8 @@
+{
+  "services": {
+    "nav": {
+      "catalog": "Catalogue de Services",
+      "categories": "Répertoire des Catégories"
+    }
+  }
+}

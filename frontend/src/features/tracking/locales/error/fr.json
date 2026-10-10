@@ -1,0 +1,7 @@
+{
+  "tracking": {
+    "error": {
+      "ticket_not_found": "Aucun ticket actif trouvé avec cet identifiant de référence."
+    }
+  }
+}

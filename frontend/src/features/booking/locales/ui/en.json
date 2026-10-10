@@ -1,0 +1,17 @@
+{
+  "booking": {
+    "modal_title": "Dispatch Service Booking Wizard",
+    "step_1": "1. Select Errand & Location",
+    "step_2": "2. Confirm Details & Payment Mode",
+    "step_3": "3. Dispatch Work Order Confirmation",
+    "pickup_quarter": "Pickup Quarter / City Pin",
+    "delivery_quarter": "Delivery Quarter / Drop-off Pin",
+    "momo_escrow": "MTN / Orange Mobile Money Escrow",
+    "cash_onsite": "On-Site Cash Payment to Runner",
+    "buttons": {
+      "confirm_dispatch": "Confirm Dispatch Ticket",
+      "back": "Previous Step",
+      "cancel": "Cancel Booking"
+    }
+  }
+}

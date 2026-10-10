@@ -1,0 +1,7 @@
+{
+  "services": {
+    "error": {
+      "load_failed": "Impossible de charger le catalogue des services."
+    }
+  }
+}

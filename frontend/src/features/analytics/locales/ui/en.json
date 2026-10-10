@@ -1,0 +1,10 @@
+{
+  "analytics": {
+    "title": "Dispatch Performance Analytics",
+    "metrics": {
+      "fulfillment_rate": "Order Fulfillment Rate",
+      "avg_dispatch_time": "Average Dispatch Time (mins)",
+      "customer_satisfaction": "Customer Satisfaction Rating"
+    }
+  }
+}

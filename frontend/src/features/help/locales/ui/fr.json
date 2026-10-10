@@ -1,0 +1,28 @@
+{
+  "help": {
+    "breadcrumbs": {
+      "help_center": "Centre d'Aide",
+      "knowledge_base": "Base de Connaissances"
+    },
+    "sidebar": {
+      "navigation_topics": "Navigation & Sujets",
+      "search_placeholder": "Rechercher des articles ou sujets...",
+      "no_categories_matching": "Aucune catégorie ne correspond au filtre."
+    },
+    "article": {
+      "verified_guide": "Guide Vérifié",
+      "views_count": "{{count}} vues",
+      "helpful_count": "{{count}} personnes ont trouvé ce guide utile",
+      "no_article_selected": "Aucun Article Sélectionné",
+      "select_article_prompt": "Veuillez choisir une catégorie dans le menu latéral pour lire son guide.",
+      "no_sections": "Aucun détail de section supplémentaire disponible pour cet article.",
+      "no_matching_articles": "Aucun article ne correspond à la recherche."
+    },
+    "footer": {
+      "still_need_assistance": "Besoin d'aide supplémentaire ?",
+      "support_availability": "Notre équipe de support Supermarche est disponible 24h/24 et 7j/7 pour vous aider.",
+      "email_support": "Support par Email",
+      "contact_support": "Contacter le Support"
+    }
+  }
+}

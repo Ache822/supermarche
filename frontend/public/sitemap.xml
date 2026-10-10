@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://supermarche.com/</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://supermarche.com/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://supermarche.com/" />
+  </url>
+  <url>
+    <loc>https://supermarche.com/services</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://supermarche.com/services" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://supermarche.com/services" />
+  </url>
+  <url>
+    <loc>https://supermarche.com/about</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://supermarche.com/about" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://supermarche.com/about" />
+  </url>
+  <url>
+    <loc>https://supermarche.com/help</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://supermarche.com/help" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://supermarche.com/help" />
+  </url>
+  <url>
+    <loc>https://supermarche.com/become-a-provider</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://supermarche.com/become-a-provider" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://supermarche.com/become-a-provider" />
+  </url>
+  <url>
+    <loc>https://supermarche.com/become-a-pro</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://supermarche.com/become-a-pro" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://supermarche.com/become-a-pro" />
+  </url>
+  <url>
+    <loc>https://supermarche.com/download</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://supermarche.com/download" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://supermarche.com/download" />
+  </url>
+</urlset>

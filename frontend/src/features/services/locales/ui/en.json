@@ -1,0 +1,15 @@
+{
+  "services": {
+    "chip": "VERIFIED OPERATOR SERVICES NETWORK",
+    "title": "Our Complete Range of Services",
+    "subtitle": "Discover express cooking gas refills, prepped market soup packs, back-to-school supplies, deep home cleaning, & digital security solutions.",
+    "searchPlaceholder": "Search services (e.g. Cooking Gas, Eru, Cleaning, Books)...",
+    "filterAll": "All Services",
+    "filterGas": "Cooking Gas",
+    "filterMarket": "Market & Produce",
+    "filterSchool": "School & Education",
+    "filterCleaning": "Home Sanitation",
+    "filterSecurity": "Digital Security",
+    "bookNow": "Book This Service"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "admin": {
+    "nav": {
+      "dashboard": "Tableau de Bord",
+      "tickets": "Tickets",
+      "providers": "Prestataires",
+      "settings": "Paramètres Système"
+    }
+  }
+}

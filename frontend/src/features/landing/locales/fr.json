@@ -1,0 +1,29 @@
+{
+  "hero": {
+    "chip": "Supermarché Express au Cameroun • Livraison Cuisine en 45 Min",
+    "title": "Vos courses et produits de supermarché livrés en quelques minutes",
+    "subtitle": "Des produits frais du marché au gaz de cuisine, boissons, épicerie et produits ménagers — Supermarche livre la qualité directement chez vous.",
+    "ctaBook": "Explorer le Catalogue",
+    "ctaTrack": "Suivre la Commande"
+  },
+  "regions": {
+    "chip": "LIVRAISON DE SUPERMARCHÉ 100% OPÉRATIONNELLE",
+    "title": "Zones d'Ergonomie & Couverture au Cameroun",
+    "subtitle": "Cliquez sur une ville hub pour voir la couverture de livraison express",
+    "yaoundeHub": "Hub Yaoundé",
+    "doualaHub": "Hub Douala",
+    "bamendaHub": "Hub Bamenda",
+    "bueaHub": "Hub Buea"
+  },
+  "liveSupport": {
+    "chip": "SERVICE CLIENT SUPERMARCHÉ VÉRIFIÉ 24/7",
+    "title": "Service Client Supermarche Bot en Direct",
+    "subtitle": "Contactez directement l'équipe Supermarche pour le suivi de vos commandes de courses et recharges de gaz.",
+    "chatTitle": "Démarrer le Chat en Direct",
+    "chatSub": "Cliquez sur l'icône de chat orange en bas à droite pour discuter en temps réel.",
+    "ticketTitle": "Commander la Livraison Express",
+    "ticketSub": "Besoin de produits frais ou de gaz livrés à domicile ? Passez commande en moins de 60 secondes.",
+    "appTitle": "Application Mobile Supermarche",
+    "appSub": "Suivez le livreur en temps réel sur l'application mobile."
+  }
+}

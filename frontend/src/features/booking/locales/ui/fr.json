@@ -1,0 +1,17 @@
+{
+  "booking": {
+    "modal_title": "Assistant de Réservation de Dispatch",
+    "step_1": "1. Sélectionner le Service & Emplacement",
+    "step_2": "2. Confirmer les Détails & Mode de Paiement",
+    "step_3": "3. Confirmation de l'Ordre de Mission",
+    "pickup_quarter": "Quartier de Prise en Charge / GPS",
+    "delivery_quarter": "Quartier de Livraison / Destination",
+    "momo_escrow": "Séquestre Mobile Money MTN / Orange",
+    "cash_onsite": "Paiement en Espèces au Prestataire",
+    "buttons": {
+      "confirm_dispatch": "Confirmer le Ticket de Dispatch",
+      "back": "Étape Précédente",
+      "cancel": "Annuler la Réservation"
+    }
+  }
+}

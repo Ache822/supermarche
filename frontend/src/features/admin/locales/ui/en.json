@@ -1,0 +1,19 @@
+{
+  "admin": {
+    "dashboard_title": "Admin Operations Command Center",
+    "overview": "Overview & System Stats",
+    "ticket_management": "Dispatch Ticket Management",
+    "provider_audits": "Provider Verification & Audits",
+    "buttons": {
+      "approve": "Approve Verification",
+      "reject": "Reject Application",
+      "export_csv": "Export CSV Report",
+      "refresh": "Refresh Live Feeds"
+    },
+    "stats": {
+      "total_tickets": "Total Active Tickets",
+      "verified_pros": "Verified Pros",
+      "escrow_volume": "MoMo Escrow Volume (FCFA)"
+    }
+  }
+}

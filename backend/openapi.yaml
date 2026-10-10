@@ -1,0 +1,296 @@
+openapi: 3.0.3
+info:
+  title: Supermarche Express Landing CMS & Admin REST API
+  version: 1.4.0
+  description: >
+    Industry-standard OpenAPI 3.0.3 developer specification for Supermarche multi-language service delivery platform.
+    Covers core services catalog, page-targeted FAQs, Knowledgebase Help Articles, instant search, article helpfulness voting,
+    identity management, provider onboarding, targeted email responses, marketing campaigns, visitor analytics, live support chat,
+    and free automatic EN/FR content translation engine.
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Local development server
+  - url: http://192.168.100.125:3000/api/v1
+    description: Local network Wi-Fi server (multi-device testing)
+  - url: https://api.supermarche.cm/api/v1
+    description: Production API server
+
+tags:
+  - name: Authentication
+    description: Identity, login, logout, and token session verification
+  - name: Page-Targeted FAQs & Instant Search
+    description: Page-specific FAQ retrieval, audience category filters, and instant multi-collection search
+  - name: Knowledgebase Help Articles
+    description: Knowledgebase articles directory, slug-based resolution, and helpfulness voting
+  - name: Services & Categories
+    description: Public service catalog, self-referencing category trees, and localization
+  - name: Provider Applications
+    description: Become Pro technician/runner onboarding and targeted email response dispatch
+  - name: Marketing Campaigns
+    description: Newsletter lead subscription and multi-recipient campaign broadcasts
+  - name: Visitor Tracking & Analytics
+    description: Public page view hit tracking ingestion and admin dashboard traffic overview
+  - name: Live Support Chat
+    description: Real-time Socket.IO customer live support widget and agent workspace
+  - name: Customer Testimonials
+    description: Public review submission and admin moderation workflow
+
+paths:
+  /faqs:
+    get:
+      tags: [Page-Targeted FAQs & Instant Search]
+      summary: Fetch page-targeted FAQs (Public)
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: string
+            enum: [home, become-a-provider, services, help, all]
+          description: Target page slug
+        - in: query
+          name: category
+          schema:
+            type: string
+            enum: [customers, pros, account]
+          description: Audience category filter
+        - in: query
+          name: featured
+          schema:
+            type: boolean
+          description: Filter trending/featured FAQs
+        - in: query
+          name: lang
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+      responses:
+        '200':
+          description: Page-targeted FAQs array
+          content:
+            application/json:
+              example:
+                page: become-a-provider
+                sectionTitle: Become a Supermarche Pro FAQs
+                data:
+                  - id: p-onb-1
+                    question: How do I register as a Supermarche Service Pro?
+                    answer: Download the Supermarche Provider app...
+
+  /faqs/search:
+    get:
+      tags: [Page-Targeted FAQs & Instant Search]
+      summary: Instant case-insensitive regex search across FAQs and Articles (Public)
+      parameters:
+        - in: query
+          name: q
+          required: true
+          schema:
+            type: string
+          description: Search query keyword (e.g. gas, refund, momo)
+        - in: query
+          name: lang
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+      responses:
+        '200':
+          description: Matched FAQs and Knowledgebase Articles
+          content:
+            application/json:
+              example:
+                query: gas
+                faqs: []
+                articles: []
+
+  /articles:
+    get:
+      tags: [Knowledgebase Help Articles]
+      summary: Fetch all published Knowledgebase Help Articles (Public)
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: Filter articles by category name
+        - in: query
+          name: lang
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+      responses:
+        '200':
+          description: Knowledgebase Articles array
+
+  /articles/{slug}:
+    get:
+      tags: [Knowledgebase Help Articles]
+      summary: Fetch single article by slug or MongoDB ObjectId (Public)
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+          description: Article URL slug or MongoDB ObjectId
+      responses:
+        '200':
+          description: Article detailed view payload
+        '404':
+          description: Article not found
+
+  /articles/{id}/vote:
+    post:
+      tags: [Knowledgebase Help Articles]
+      summary: Submit user helpfulness vote (Public)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [vote]
+              properties:
+                vote:
+                  type: string
+                  enum: [up, down, helpful, unhelpful]
+      responses:
+        '200':
+          description: Vote registered
+          content:
+            application/json:
+              example:
+                success: true
+                helpfulCount: 42
+                unhelpfulCount: 1
+
+  /services:
+    get:
+      tags: [Services & Categories]
+      summary: Get list of active services (Public)
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+        - in: query
+          name: featured
+          schema:
+            type: boolean
+        - in: query
+          name: lang
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+      responses:
+        '200':
+          description: Services array
+    post:
+      tags: [Services & Categories]
+      summary: Create new service item (Admin)
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id, title, category, description, priceRange, estimatedTime, iconName]
+              properties:
+                id:
+                  type: string
+                  example: srv-gas
+                title:
+                  type: string
+                  example: Cooking Gas Delivery
+                category:
+                  type: string
+                  example: 6512bd8f4f1c2b001c890123
+                description:
+                  type: string
+                  example: Instant delivery and installation of cooking gas cylinders.
+                priceRange:
+                  type: string
+                  example: 8,000 - 15,000 FCFA
+                estimatedTime:
+                  type: string
+                  example: 20-35 mins
+                iconName:
+                  type: string
+                  example: Flame
+                isLive:
+                  type: boolean
+                  default: true
+                featured:
+                  type: boolean
+                  default: false
+                imageUrl:
+                  type: string
+                  example: /uploads/services/service_gas.png
+      responses:
+        '201':
+          description: Service created successfully
+
+  /services/upload:
+    post:
+      tags: [Services & Categories]
+      summary: Upload service preview image (Admin)
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [fileData]
+              properties:
+                filename:
+                  type: string
+                  example: gas_delivery.png
+                fileData:
+                  type: string
+                  description: Base64 data string (e.g. data:image/png;base64,...)
+      responses:
+        '200':
+          description: Upload successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  imageUrl:
+                    type: string
+                    example: /uploads/services/service_1715629102_a8b9c0.png
+
+  /services/categories:
+    get:
+      tags: [Services & Categories]
+      summary: Get active service categories (Public)
+      parameters:
+        - in: query
+          name: parent
+          schema:
+            type: string
+        - in: query
+          name: lang
+          schema:
+            type: string
+            enum: [en, fr]
+            default: en
+      responses:
+        '200':
+          description: Service categories list
+

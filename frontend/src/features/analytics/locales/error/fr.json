@@ -1,0 +1,7 @@
+{
+  "analytics": {
+    "error": {
+      "load_failed": "Impossible de charger les données métriques."
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "auth": {
+    "nav": {
+      "login": "Login",
+      "logout": "Sign Out",
+      "forgot_password": "Forgot Password"
+    }
+  }
+}

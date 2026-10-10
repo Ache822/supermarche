@@ -1,0 +1,8 @@
+{
+  "help": {
+    "error": {
+      "load_failed": "Impossible de charger les articles d'aide. Veuillez réessayer plus tard.",
+      "not_found": "L'article demandé est introuvable."
+    }
+  }
+}

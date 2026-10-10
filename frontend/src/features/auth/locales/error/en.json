@@ -1,0 +1,9 @@
+{
+  "auth": {
+    "error": {
+      "invalid_credentials": "Invalid email address or password.",
+      "invalid_otp": "Invalid or expired OTP code.",
+      "required_field": "This field is required."
+    }
+  }
+}

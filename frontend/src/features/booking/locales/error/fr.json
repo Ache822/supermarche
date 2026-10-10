@@ -1,0 +1,8 @@
+{
+  "booking": {
+    "error": {
+      "select_service": "Veuillez sélectionner un type de service.",
+      "invalid_location": "Veuillez spécifier un lieu de livraison valide."
+    }
+  }
+}

@@ -1,0 +1,450 @@
+:root {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Suppress WebKit browser native autocomplete dropdown popups */
+input[autocomplete="off"]::-webkit-contacts-auto-fill-button,
+input[autocomplete="off"]::-webkit-credentials-auto-fill-button {
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  right: 0 !important;
+}
+
+/* ============================================================
+   SUPERMARCHE GREEN THEME ADAPTIVE SCROLLBAR SYSTEM
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track,
+body.dark-mode ::-webkit-scrollbar-track,
+[data-mui-color-scheme="dark"] ::-webkit-scrollbar-track {
+  background: rgba(31, 20, 12, 0.6) !important;
+  border: 1px solid rgba(58, 35, 22, 0.4) !important;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track,
+body.light-mode ::-webkit-scrollbar-track,
+[data-mui-color-scheme="light"] ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF6B00;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.25s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #E05D00;
+  box-shadow: 0 0 10px rgba(255, 107, 0, 0.6);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Firefox scrollbar styling */
+@supports (scrollbar-width: thin) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #FF6B00 transparent;
+  }
+}
+
+/* Delete Icon & Error Button Theme Blending */
+.MuiIconButton-colorError,
+.bb-delete-btn {
+  color: #EF4444 !important;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease !important;
+}
+
+.MuiIconButton-colorError:hover,
+.bb-delete-btn:hover {
+  background-color: rgba(239, 68, 68, 0.12) !important;
+  color: #DC2626 !important;
+  transform: scale(1.05);
+}
+
+/* Smooth, flicker-free panel entry transition */
+@keyframes bb-panel-fade {
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.bb-panel-enter {
+  animation: bb-panel-fade 0.15s cubic-bezier(0, 0, 0.2, 1) ease-out;
+  min-height: calc(100vh - 140px);
+  width: 100%;
+}
+
+/* ============================================================
+   LANDING PAGE ANIMATION SYSTEM
+   Scroll-triggered reveal animations — controlled by JS adding
+   .is-visible class via IntersectionObserver (useReveal hook).
+   ============================================================ */
+
+/* ── Hero entrance (runs immediately on mount, no JS needed) ── */
+@keyframes bb-hero-fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bb-hero-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes bb-scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bb-slide-left {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes bb-slide-right {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes bb-slide-up {
+  from { opacity: 0; transform: translateY(36px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bb-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes bb-pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.45); }
+  70%  { box-shadow: 0 0 0 14px rgba(255, 107, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 107, 0, 0); }
+}
+
+@keyframes bb-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@keyframes bb-counter-up {
+  from { opacity: 0; transform: translateY(12px) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+@keyframes bb-marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ── Hero section direct animation classes (no IntersectionObserver) ── */
+.bb-hero-chip {
+  animation: bb-hero-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.05s;
+}
+
+.bb-hero-title {
+  animation: bb-hero-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.18s;
+}
+
+.bb-hero-subtitle {
+  animation: bb-hero-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.32s;
+}
+
+.bb-hero-cta {
+  animation: bb-hero-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.46s;
+}
+
+.bb-hero-stats {
+  animation: bb-hero-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.6s;
+}
+
+.bb-hero-right {
+  animation: bb-scale-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.3s;
+}
+
+.bb-mascot-float {
+  animation: bb-float 3.5s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+/* ── Scroll-reveal base state (hidden before .is-visible added) ── */
+.bb-reveal {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bb-reveal-up {
+  transform: translate3d(0, 30px, 0);
+}
+
+.bb-reveal-left {
+  transform: translate3d(-30px, 0, 0);
+}
+
+.bb-reveal-right {
+  transform: translate3d(30px, 0, 0);
+}
+
+.bb-reveal-scale {
+  transform: scale3d(0.95, 0.95, 1);
+}
+
+/* When IntersectionObserver fires: element becomes visible */
+.bb-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+}
+
+/* Staggered children inside a reveal container */
+.bb-stagger > *:nth-child(1)  { transition-delay: 0.05s; }
+.bb-stagger > *:nth-child(2)  { transition-delay: 0.13s; }
+.bb-stagger > *:nth-child(3)  { transition-delay: 0.21s; }
+.bb-stagger > *:nth-child(4)  { transition-delay: 0.29s; }
+.bb-stagger > *:nth-child(5)  { transition-delay: 0.37s; }
+.bb-stagger > *:nth-child(6)  { transition-delay: 0.45s; }
+.bb-stagger > *:nth-child(7)  { transition-delay: 0.53s; }
+.bb-stagger > *:nth-child(8)  { transition-delay: 0.61s; }
+.bb-stagger > *:nth-child(9)  { transition-delay: 0.69s; }
+
+/* KPI / stat counter pop */
+.bb-kpi-pop {
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateY(16px) scale(0.88);
+}
+.bb-kpi-pop.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Pulse ring on key CTA elements */
+.bb-pulse {
+  animation: bb-pulse-ring 2.2s ease-out infinite;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .bb-reveal,
+  .bb-hero-chip,
+  .bb-hero-title,
+  .bb-hero-subtitle,
+  .bb-hero-cta,
+  .bb-hero-stats,
+  .bb-hero-right,
+  .bb-kpi-pop {
+    animation: none;
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  .bb-mascot-float {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   GLOBAL STANDARDIZED FORM FIELD & PLACEHOLDER STYLING (13px / 0.8125rem)
+   ============================================================ */
+input::placeholder,
+textarea::placeholder,
+.MuiInputBase-input::placeholder,
+.MuiOutlinedInput-input::placeholder {
+  font-size: 0.8125rem !important; /* 13px - standard clean placeholder size */
+  font-weight: 400 !important;
+  opacity: 0.7 !important;
+}
+
+.MuiInputLabel-root,
+.MuiFormLabel-root {
+  font-size: 0.8125rem !important; /* 13px - clean label size */
+}
+
+.MuiInputBase-input {
+  font-size: 0.8125rem !important; /* 13px - clean input text size */
+}
+
+/* ============================================================
+   REMOVE BROWSER AUTOFILL BLUE HIGHLIGHT BACKGROUND
+   ============================================================ */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #1F140C inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff !important;
+  transition: background-color 500000s ease-in-out 0s !important;
+}
+
+[data-mui-color-scheme="light"] input:-webkit-autofill,
+[data-mui-color-scheme="light"] textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #0f172a !important;
+  caret-color: #0f172a !important;
+}
+
+/* ============================================================
+   GLOBAL THEME-ADAPTIVE FORM DROPDOWNS & SELECT INPUT SYSTEM
+   Replaces default browser white box arrows (▲▼) with sleek theme styling
+   ============================================================ */
+
+/* Hide native webkit select indicators, calendar pickers, and spin buttons */
+select::-webkit-calendar-picker-indicator,
+input::-webkit-calendar-picker-indicator,
+select::-webkit-inner-spin-button,
+select::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  display: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Custom sleek theme styling for native HTML select controls */
+select:not(.MuiNativeSelect-select):not(.MuiTablePagination-select) {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  background-color: transparent !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233AAF49' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 10px center !important;
+  background-size: 14px 14px !important;
+  padding-right: 28px !important;
+  color: inherit !important;
+  border-radius: 8px !important;
+}
+
+.MuiTablePagination-select {
+  background-image: none !important;
+  padding-right: 24px !important;
+}
+
+/* Dark mode native select dropdown options */
+select option,
+.MuiNativeSelect-select option {
+  background-color: #1F140C !important;
+  color: #FFFFFF !important;
+  padding: 8px !important;
+}
+
+[data-mui-color-scheme="light"] select option,
+[data-mui-color-scheme="light"] .MuiNativeSelect-select option,
+body.light-mode select option {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+}
+
+/* MUI Select SVG Dropdown Icon Styling */
+.MuiSelect-icon,
+.MuiNativeSelect-icon,
+.MuiTablePagination-selectIcon {
+  color: #FF6B00 !important;
+  right: 8px !important;
+  transition: transform 0.2s ease, color 0.2s ease !important;
+}
+
+.MuiSelect-iconOpen {
+  transform: rotate(180deg) !important;
+}
+
+/* MUI Dropdown Menu Paper Styling */
+.MuiMenu-paper,
+.MuiPopover-paper {
+  background-color: #1F140C !important;
+  border: 1px solid #3A2316 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+  background-image: none !important;
+}
+
+[data-mui-color-scheme="light"] .MuiMenu-paper,
+[data-mui-color-scheme="light"] .MuiPopover-paper,
+body.light-mode .MuiMenu-paper {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.MuiMenuItem-root {
+  font-size: 0.8125rem !important; /* 13px */
+  border-radius: 6px !important;
+  margin: 2px 6px !important;
+  transition: background-color 0.15s ease, color 0.15s ease !important;
+}
+
+.MuiMenuItem-root:hover {
+  background-color: rgba(255, 107, 0, 0.15) !important;
+  color: #FF6B00 !important;
+}
+
+.MuiMenuItem-root.Mui-selected {
+  background-color: rgba(255, 107, 0, 0.22) !important;
+  color: #FF6B00 !important;
+  font-weight: 600 !important;
+}
+
+.MuiMenuItem-root.Mui-selected:hover {
+  background-color: rgba(255, 107, 0, 0.3) !important;
+}
+
+
+

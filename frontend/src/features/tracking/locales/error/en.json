@@ -1,0 +1,7 @@
+{
+  "tracking": {
+    "error": {
+      "ticket_not_found": "No active ticket order found with this reference ID."
+    }
+  }
+}

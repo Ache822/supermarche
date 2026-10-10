@@ -1,0 +1,7 @@
+{
+  "landing": {
+    "error": {
+      "load_failed": "Impossible de charger le contenu de la page d'accueil."
+    }
+  }
+}

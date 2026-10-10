@@ -1,0 +1,8 @@
+{
+  "admin": {
+    "error": {
+      "unauthorized": "Unauthorized access to admin console.",
+      "fetch_failed": "Failed to fetch admin operations data."
+    }
+  }
+}

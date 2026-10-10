@@ -1,0 +1,15 @@
+{
+  "auth": {
+    "login_title": "Partner & Admin Login",
+    "login_subtitle": "Enter your registered credentials to access your portal",
+    "email_label": "Email Address",
+    "password_label": "Password",
+    "otp_label": "SMS One-Time Password (OTP)",
+    "remember_me": "Remember this session",
+    "buttons": {
+      "login": "Sign In to Portal",
+      "verify_otp": "Verify OTP Code",
+      "resend_otp": "Resend SMS Code"
+    }
+  }
+}

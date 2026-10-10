@@ -1,0 +1,16 @@
+{
+  "tracking": {
+    "title": "Radar & Statut de Ticket de Dispatch en Direct",
+    "searchPlaceholder": "Entrez la Référence du Ticket (ex: BB-9482)...",
+    "ticketRef": "Référence du Ticket",
+    "status": {
+      "pending": "En Attente de Dispatch",
+      "assigned": "Coursier Assigné & En Route",
+      "completed": "Ordre de Mission Terminé"
+    },
+    "buttons": {
+      "track": "Suivre le Ticket",
+      "contact_runner": "Appeler le Coursier Assigné"
+    }
+  }
+}

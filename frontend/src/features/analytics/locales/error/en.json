@@ -1,0 +1,7 @@
+{
+  "analytics": {
+    "error": {
+      "load_failed": "Failed to load metrics data."
+    }
+  }
+}

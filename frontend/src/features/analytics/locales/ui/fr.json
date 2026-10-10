@@ -1,0 +1,10 @@
+{
+  "analytics": {
+    "title": "Analyse de la Performance des Dispatches",
+    "metrics": {
+      "fulfillment_rate": "Taux d'Exécution des Commandes",
+      "avg_dispatch_time": "Temps Moyen de Dispatch (mins)",
+      "customer_satisfaction": "Taux de Satisfaction Client"
+    }
+  }
+}

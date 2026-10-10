@@ -1,0 +1,16 @@
+# Root Dockerignore
+**/.git
+**/.gitignore
+**/.env
+**/.env.*
+!**/.env.example
+**/node_modules
+**/dist
+**/dist-ssr
+**/.agents
+**/.heroui*
+**/*.log
+**/.DS_Store
+**/.vscode
+**/.idea
+Docs/

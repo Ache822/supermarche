@@ -1,0 +1,8 @@
+{
+  "booking": {
+    "error": {
+      "select_service": "Please select a service type.",
+      "invalid_location": "Please specify a valid pickup/delivery location."
+    }
+  }
+}

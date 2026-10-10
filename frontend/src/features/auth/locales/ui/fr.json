@@ -1,0 +1,15 @@
+{
+  "auth": {
+    "login_title": "Connexion Partenaire & Admin",
+    "login_subtitle": "Entrez vos identifiants pour accéder à votre portail",
+    "email_label": "Adresse Email",
+    "password_label": "Mot de Passe",
+    "otp_label": "Code SMS à Usage Unique (OTP)",
+    "remember_me": "Mémoriser cette session",
+    "buttons": {
+      "login": "Se Connecter au Portail",
+      "verify_otp": "Vérifier le Code OTP",
+      "resend_otp": "Renvoyer le Code SMS"
+    }
+  }
+}

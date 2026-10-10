@@ -1,0 +1,9 @@
+{
+  "landing": {
+    "nav": {
+      "home": "Home",
+      "features": "Features",
+      "coverage": "Coverage"
+    }
+  }
+}

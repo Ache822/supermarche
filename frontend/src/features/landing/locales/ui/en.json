@@ -1,0 +1,31 @@
+{
+  "landing": {
+    "hero": {
+      "chip": "Nationwide Cameroon Express Supermarket • 45-Min Kitchen Delivery",
+      "title": "Your Everyday Grocery & Supermarket Store Delivered in Minutes",
+      "subtitle": "From fresh farm produce to cooking gas cylinders, beverages, pantry items, and household essentials — Supermarche delivers fresh quality straight to your kitchen.",
+      "ctaBook": "Shop Store Catalog",
+      "ctaTrack": "Track Express Order"
+    },
+    "regions": {
+      "chip": "100% OPERATIONAL EXPRESS STORE DELIVERY",
+      "title": "Active Cameroon Supermarket Coverage",
+      "subtitle": "Click any city hub or let the express delivery route auto-rotate across Cameroon",
+      "yaoundeHub": "Yaoundé Hub",
+      "doualaHub": "Douala Hub",
+      "bamendaHub": "Bamenda Hub",
+      "bueaHub": "Buea Hub"
+    },
+    "liveSupport": {
+      "chip": "24/7 VERIFIED SUPERMARKET CUSTOMER CARE",
+      "title": "Supermarche Bot Express Customer Service",
+      "subtitle": "Connect directly with actual Supermarche store team members in Cameroon for order updates, fresh item inquiries, and express delivery tracking.",
+      "chatTitle": "Start Live Support Chat",
+      "chatSub": "Click the floating orange chat button to talk with Supermarche Support in real-time.",
+      "ticketTitle": "Order Express Grocery Delivery",
+      "ticketSub": "Need fresh groceries or cooking gas delivered to your kitchen? Place your order in under 60 seconds.",
+      "appTitle": "Mobile Store App Quick Ordering",
+      "appSub": "Get real-time push updates for delivery runner arrival times on Google Play Store & Apple App Store."
+    }
+  }
+}

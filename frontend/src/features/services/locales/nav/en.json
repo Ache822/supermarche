@@ -1,0 +1,8 @@
+{
+  "services": {
+    "nav": {
+      "catalog": "Services Catalog",
+      "categories": "Categories Directory"
+    }
+  }
+}

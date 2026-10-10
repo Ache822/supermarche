@@ -1,0 +1,10 @@
+{
+  "admin": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "tickets": "Tickets",
+      "providers": "Providers",
+      "settings": "System Settings"
+    }
+  }
+}

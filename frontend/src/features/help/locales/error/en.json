@@ -1,0 +1,8 @@
+{
+  "help": {
+    "error": {
+      "load_failed": "Failed to load help articles. Please try again later.",
+      "not_found": "Requested article was not found."
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "auth": {
+    "nav": {
+      "login": "Connexion",
+      "logout": "Déconnexion",
+      "forgot_password": "Mot de Passe Oublié"
+    }
+  }
+}

@@ -1,0 +1,461 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{caption}
+
+% Color Definitions for Design System Code Highlight
+\definecolor{brandgreen}{HTML}{22C55E}
+\definecolor{branddarkgreen}{HTML}{3AAF49}
+\definecolor{darkbg}{HTML}{0A0F0D}
+\definecolor{darkcard}{HTML}{0D1510}
+\definecolor{darkborder}{HTML}{1E2A22}
+\definecolor{codebg}{HTML}{14201A}
+\definecolor{codetext}{HTML}{E2E8F0}
+\definecolor{codekeyword}{HTML}{4ADE80}
+\definecolor{codestring}{HTML}{86EFAC}
+\definecolor{codecomment}{HTML}{6EE7B7}
+
+% Listings Code Block Style Configuration
+\lstdefinestyle{supermarchecode}{
+    backgroundcolor=\color{codebg},
+    commentstyle=\color{codecomment},
+    keywordstyle=\color{codekeyword}\bfseries,
+    stringstyle=\color{codestring},
+    basicstyle=\ttfamily\small\color{codetext},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=8pt,
+    numberstyle=\tiny\color{gray},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single,
+    rulecolor=\color{darkborder}
+}
+\lstset{style=supermarchecode}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=branddarkgreen,
+    filecolor=branddarkgreen,      
+    urlcolor=branddarkgreen,
+    pdftitle={Supermarche Comprehensive Frontend Technical Architecture & Engineering Specifications},
+    pdfpagemode=UseOutlines,
+}
+
+\title{\textbf{\huge Supermarche Comprehensive Frontend Technical \\ Architecture \& Engineering Specifications}}
+\author{\textbf{Frontend Engineering Team} \\ Supermarche Everyday On-Demand Services Cameroon}
+\date{August 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This document serves as the authoritative technical reference manual and architectural blueprint for the \textbf{Supermarche} web application platform---an everyday on-demand express delivery and household service ecosystem serving major urban hubs across Cameroon (Yaound\'e, Douala, Bamenda, Buea, Kribi, and Bafoussam). Constructed upon React 18, TypeScript 5, Vite 5, Redux Toolkit, Tailwind CSS, Material UI, and \texttt{react-i18next} internationalization primitives, the application employs a dual-context viewport architecture. It seamlessly merges an SEO-optimized, highly accessible public consumer web portal with a high-density, real-time protected Administrative Operations Console. This comprehensive specification details our complete system architecture, directory structures, public consumer features, internationalization pipelines, 14 administrative control panels, granular Permission-Based Access Control (PBAC), real-time WebSocket communication pipelines, non-blocking visitor analytics engine, complete design system specifications, REST API contract catalog, local development workflows, and forward-looking architectural recommendations.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% =========================================================================
+\section{Executive Summary \& System Architecture}
+% =========================================================================
+
+\subsection{System Vision}
+Supermarche bridges urban Cameroonian households with verified service runners, certified cooking gas distributors, prepped fresh market food vendors, and skilled household maintenance technicians. The web application is engineered to perform impeccably across diverse connectivity conditions, supporting both high-speed 4G/5G connections and low-bandwidth 3G mobile networks common across Central Africa.
+
+\subsection{Technology Matrix}
+\begin{itemize}
+    \item \textbf{Core Framework:} React 18 using functional components, custom hooks, and strict TypeScript 5 contracts.
+    \item \textbf{Build Tooling \& Bundler:} Vite 5 featuring LightningCSS minification, automated sitemap generation, and fast Hot Module Replacement (HMR).
+    \item \textbf{Internationalization Engine (i18n):} \texttt{react-i18next} (\texttt{locales/config.ts}) providing seamless runtime switching between English (\texttt{en}) and French (\texttt{fr}).
+    \item \textbf{Global State Management:} Redux Toolkit (\texttt{@reduxjs/toolkit}) enforcing unidirectional data flow across administrative modules, dispatch queues, transaction ledgers, and catalog state.
+    \item \textbf{UI Styling \& Primitives:} Dual-layer design system leveraging custom CSS tokens, Material UI (MUI v6/v7), and utility styling for dark-mode glassmorphic aesthetics.
+    \item \textbf{Routing \& Navigation:} React Router v6 (\texttt{react-router-dom}) enforcing strict separation between public consumer routes and protected operational routes.
+    \item \textbf{SEO \& Head Metadata:} \texttt{react-helmet-async} orchestrating dynamic canonical links, Open Graph attributes, Twitter Card tags, \texttt{hreflang} multi-lingual headers (\texttt{en}, \texttt{fr}, \texttt{x-default}), and structured JSON-LD schemas (\texttt{LocalBusiness}, \texttt{Organization}, \texttt{WebSite}, \texttt{Service}, \texttt{BreadcrumbList}).
+    \item \textbf{Real-Time Communications:} Custom WebSocket engine (\texttt{socketClient.ts}) with automatic heartbeat reconnection and REST fallback polling.
+\end{itemize}
+
+\subsection{Complete Directory Tree Architecture}
+The codebase within \texttt{frontend/src} follows a feature-first domain architecture:
+
+\begin{lstlisting}[caption={Supermarche Comprehensive Frontend Directory Structure}]
+frontend/src/
+├── api/
+│   ├── client.ts             # REST API Singleton with HTTP-Only Cookie Credentials
+│   ├── mockApi.ts            # Standby Mock Data Engine & Standalone Fallback Store
+│   └── socketClient.ts       # Real-Time WebSocket Support Chat Client
+├── assets/                   # Static Graphic Assets, Vector Icons, & Brand Emblems
+├── components/
+│   ├── seo/                  # Dynamic Head SEO Component & JSON-LD Schemas
+│   ├── ui/                   # Reusable UI Primitives (24 Components)
+│   └── views/                # Site Wide Layout Components (Navbar, Footer)
+├── features/
+│   ├── about/                # Corporate Brand, Mission, & Operations Overview Page
+│   ├── admin/                # Admin Console (14 Operational Modules & Panels)
+│   │   ├── components/       # Executive Dashboards, Moderation, Dispatch, Analytics
+│   │   ├── pages/            # Admin Restricted Login Page (/admin/login)
+│   │   ├── store/            # Redux Admin State Slice & Async Actions
+│   │   └── types/            # Admin Domain Interfaces & PBAC Permissions
+│   ├── auth/                 # Team Member Activation Page (/accept-invite)
+│   ├── booking/             # Multi-Step Service Booking Wizard Modal
+│   ├── help/                 # Help Center Knowledge Base & Searchable FAQs
+│   ├── landing/              # High-Conversion Public Consumer Landing Page
+│   ├── partner/              # Service Provider Onboarding Portal (/become-a-pro)
+│   └── services/             # Dedicated Service Directory & Catalog (/services)
+├── hooks/
+│   ├── usePermission.ts      # Granular PBAC/RBAC Access Control Hook
+│   ├── useReveal.ts          # Scroll Intersection Animation Hook
+│   └── useVisitorTracker.ts  # Non-Blocking Website Hit Tracking Hook
+├── locales/
+│   ├── config.ts             # i18next Multi-Lingual Setup (en / fr)
+│   └── translations/         # Translation JSON Dictionaries
+├── routes/
+│   ├── protectedRoutes.tsx   # Authenticated Admin Guard & Route Definitions
+│   └── unprotectedRoutes.tsx # Public Consumer Route Definitions & Shell
+├── store/                    # Redux Store Configuration (services, tickets, admin)
+├── types/                    # Domain Type Definitions & Response Interfaces
+├── main.tsx                  # Application Root & HelmetProvider Initialization
+└── App.tsx                   # Top-Level Theme Provider & Router Integration
+\end{lstlisting}
+
+\newpage
+
+% =========================================================================
+\section{Public Consumer Web Portal Architecture}
+% =========================================================================
+
+\subsection{Dynamic Technical \& Local SEO Engine (\texttt{<SEO/>})}
+To dominate search engine indexing both globally and locally across Cameroonian cities, the application incorporates a dedicated SEO manager (\texttt{SEO.tsx} and \texttt{schemas.ts}):
+\begin{itemize}
+    \item \textbf{Dynamic Metadata Management:} Injects route-specific titles (\texttt{Supermarche | On-Demand Express Delivery \& Everyday Services in Cameroon}), localized meta descriptions, Open Graph cards (\texttt{og:title}, \texttt{og:image}, \texttt{og:url}), and Twitter cards.
+    \item \textbf{Localization Header Tags:} Automatically appends \texttt{hreflang} tags targeting English (\texttt{en}), French (\texttt{fr}), and global fallback (\texttt{x-default}).
+    \item \textbf{JSON-LD Structured Schemas:} Generates valid Schema.org JSON-LD scripts:
+    \begin{itemize}
+        \item \texttt{LocalBusiness}: Specifies geographical coordinates, opening hours, accepted currencies (\texttt{XAF}), and service regions (Yaound\'e, Douala, Bamenda, Buea).
+        \item \texttt{Organization}: Defines corporate identity, official logo URLs, and support contacts.
+        \item \texttt{Service}: Documents individual service offerings, pricing ranges, and delivery estimates.
+        \item \texttt{BreadcrumbList}: Outlines navigational hierarchy for search crawlers.
+    \end{itemize}
+    \item \textbf{Automated Sitemap Generation:} Pre-build script (\texttt{generate-sitemap.cjs}) dynamically builds \texttt{public/sitemap.xml} prior to production bundling.
+\end{itemize}
+
+\subsection{Navigation Header \& Localization (\texttt{Navbar.tsx})}
+The navigation header provides persistent branding and user preferences:
+\begin{itemize}
+    \item \textbf{Brand Identity Emblem (\texttt{SupermarcheLogo.tsx}):} Features a $44\text{ px} \times 44\text{ px}$ circular green emblem containing bold white `'BB'` initials next to the brand title text.
+    \item \textbf{Runtime Language Toggle:} Integrated with \texttt{react-i18next} to switch between English and French seamlessly.
+    \item \textbf{Theme Selector (\texttt{ThemeToggle.tsx}):} Toggles between Light and Dark visual modes.
+    \item \textbf{Responsive Navigation Drawer:} Mobile drawer equipped with smooth transitions for compact viewports.
+\end{itemize}
+
+\subsection{Landing Page Feature Architecture (\texttt{LandingPage.tsx})}
+The public landing page acts as the primary conversion engine:
+\begin{enumerate}
+    \item \textbf{Hero Section with City Hub Selector:} Allows visitors to filter services by urban hub (Bastos, Bonapriso, Molyko, Commercial Avenue).
+    \item \textbf{Priority Services 3-Card Highlight:} Highlights core high-intent offerings:
+    \begin{itemize}
+        \item \textit{Cooking Gas Cylinder Delivery:} Express dispatch of 12.5kg and 6kg cylinders (SCTM, Total, Tradex, Camgaz) with mandatory safety regulator audit.
+        \item \textit{Prepped Foods \& Market Shopping:} Fresh market procurement from March\'e Mokolo / March\'e Sandaga with pre-washed soup packs (Eru, Ndol\'e, Okok, Mbongo).
+        \item \textit{Back to School Supply Packs:} Complete textbook list procurement, custom uniform ordering, and doorstep delivery.
+    \end{itemize}
+    \item \textbf{Interactive App Showcase (\texttt{PhoneShowcaseSequence.tsx}):} Animated mobile UI sequence illustrating real-time order placement.
+    \item \textbf{Cameroon Regional Coverage Visualizer (\texttt{CameroonRegionsVisual.tsx}):} Interactive visual map displaying operational hubs across Yaound\'e, Douala, Bamenda, Buea, Kribi, and Bafoussam.
+    \item \textbf{Verified Security Shield (\texttt{VerifiedBadge.tsx}):} Displays safety badges for runner identity verification and gas cylinder pressure audits.
+    \item \textbf{Social Proof Testimonials Carousel:} Live rendering of approved client reviews.
+\end{enumerate}
+
+\subsection{Dedicated Service Catalog Directory (\texttt{/services})}
+The \texttt{ServicesPage.tsx} component enables deep exploration of all service verticals:
+\begin{itemize}
+    \item \textbf{Infinite Autocomplete Search (\texttt{<InfiniteAutocompleteSelector/>}):} Incorporates $300\text{ ms}$ input debouncing to prevent redundant API queries, coupled with \texttt{IntersectionObserver} infinite scroll pagination.
+    \item \textbf{Category Tree Filtering:} Allows customers to filter by main hubs (e.g., Gas, Market, Cleaning, Security) or drill down into sub-categories.
+    \item \textbf{Service Detail Drawer (\texttt{ServiceDetailModal.tsx}):} Provides detailed service inspection, pricing breakdowns, safety instructions, and direct booking triggers.
+\end{itemize}
+
+\subsection{Multi-Step Service Booking Wizard Modal (\texttt{BookingWizardModal.tsx})}
+When customers initiate a booking, the wizard modal guides them through instant execution options:
+\begin{itemize}
+    \item Direct mobile app launch via deep linking.
+    \item Smart user-agent app store redirection (\texttt{smartRedirect.ts}) routing iOS users to the Apple App Store, Android users to Google Play Store, and desktop users to QR code scan prompts (\texttt{PlayStorePrompt.tsx}, \texttt{SupermarcheQRCode.tsx}).
+    \item Instant live chat support escalation shortcut.
+\end{itemize}
+
+\subsection{Service Provider Onboarding Portal (\texttt{/become-a-pro})}
+The \texttt{BecomeProPage.tsx} module recruits field runners and certified technicians (\texttt{JoinAsProCTA.tsx}):
+\begin{itemize}
+    \item Collects applicant full name, contact channel (WhatsApp or Email), city hub, service specialization, and operational equipment.
+    \item Generates instant WhatsApp verification links (\texttt{wa.me}) for immediate coordinator contact.
+    \item Submits application payloads directly to \texttt{POST /api/v1/applications}.
+\end{itemize}
+
+\subsection{Help Center Knowledge Base (\texttt{/help})}
+The \texttt{HelpCenterPage.tsx} component provides customer self-service support:
+\begin{itemize}
+    \item Categorized FAQ accordions (\texttt{customers}, \texttt{pros}, \texttt{account}).
+    \item Instant query search bar (\texttt{Autocomplete} with \texttt{SearchIcon}).
+    \item Knowledge base article inspection drawer.
+    \item Multi-channel escalation triggers (Live Support Chat, Email Ticket, WhatsApp).
+\end{itemize}
+
+\subsection{Corporate Brand Page (\texttt{/about}) \& Footer Shell (\texttt{Footer.tsx})}
+\begin{itemize}
+    \item \textbf{About Page (\texttt{AboutPage.tsx}):} Presents corporate mission, principles scroll carousel, and \texttt{Organization} JSON-LD schema.
+    \item \textbf{Footer Shell (\texttt{Footer.tsx}):} Features a newsletter subscription form with instant feedback, mobile collapsible accordions, social links, operating hub links, and store badges (\texttt{StoreBadges.tsx}).
+\end{itemize}
+
+\newpage
+
+% =========================================================================
+\section{Protected Admin Console Operations}
+% =========================================================================
+
+\subsection{Viewport Scaffolding \& Layout Mechanics}
+The Admin Console is engineered specifically for desktop administrative workflows:
+\begin{itemize}
+    \item \textbf{Screen Viewport Scaffolding:} Main container applies \texttt{height: 100vh} and \texttt{overflow: hidden} to eliminate double scrollbars.
+    \item \textbf{Data Table Scaffolding (\texttt{ReusableDataTable.tsx}):} Enforces vertical-only table scrolling (\texttt{overflow-y: auto; overflow-x: hidden}) paired with CSS \texttt{position: sticky; top: 0} headers, maintaining header visibility during deep record scrolling.
+\end{itemize}
+
+\subsection{Granular Access Control Architecture (PBAC)}
+Security is enforced using a fine-grained Permission-Based Access Control model (\texttt{usePermission.ts}, \texttt{HasPermission.tsx}, and \texttt{PermissionProtectedRoute.tsx}):
+\begin{itemize}
+    \item \textbf{Supported Permissions:} \texttt{pages:read}, \texttt{pages:edit}, \texttt{users:read}, \texttt{users:manage}, \texttt{support:chat}, \texttt{campaigns:manage}, \texttt{faqs:manage}, \texttt{articles:manage}, \texttt{applications:read}, \texttt{applications:manage}.
+    \item \textbf{Super Admin Bypass:} Users possessing \texttt{SUPER\_ADMIN} role or wildcard permission (\texttt{*}) override restriction checks.
+    \item \textbf{Declarative Rendering Guard (\texttt{<HasPermission/>}):} Wraps administrative UI elements to conditionally render controls based on active session rights:
+\end{itemize}
+
+\begin{lstlisting}[language=TypeScript, caption={Declarative Permission Component Usage}]
+<HasPermission permission="applications:manage">
+  <Button variant="contained" onClick={handleApproveApplication}>
+    Approve Pro Application
+  </Button>
+</HasPermission>
+\end{lstlisting}
+
+\subsection{14 Operational Administrative Modules}
+
+\subsubsection{1. Executive KPI Overview (\texttt{AdminOverviewStats.tsx})}
+Displays real-time performance tiles tracking Gross Revenue (XAF), Active Dispatches, Average Delivery ETA (minutes), App Downloads, Active Field Runners, and MoMo Payout Balances.
+
+\subsubsection{2. Live Runner Dispatch Radar (\texttt{LiveDispatchRadar.tsx})}
+Interactive matrix monitoring field runner fleet status (vehicle types: Motorbike, Van, Bicycle, Foot; cash-on-hand XAF; active ticket assignments; KYC verification status).
+
+\subsubsection{3. Financial \& MoMo Payout Ledger (\texttt{FinancialMoMoOverview.tsx})}
+Tracks Mobile Money (MTN MoMo \& Orange Money) payout requests, transaction reference IDs, status badges (\texttt{COMPLETED}, \texttt{PENDING}, \texttt{FAILED}), and instant payout approvals.
+
+\subsubsection{4. Order Dispatch \& Priority Management (\texttt{TicketManagementTable.tsx})}
+Manages active customer dispatches, runner assignments, emergency ticket escalations, and status transitions.
+
+\subsubsection{5. Field Runner Fleet Table (\texttt{RunnerFleetTable.tsx})}
+Manages runner profiles, vehicle registrations, driver license verifications, and cash-on-hand balance limits.
+
+\subsubsection{6. Content Management System (\texttt{ContentManagementPanel.tsx})}
+Provides comprehensive CMS capabilities:
+\begin{itemize}
+    \item \textit{Category Tree Builder:} Manages self-referencing category hierarchies (\texttt{GET/POST /api/v1/services/categories}).
+    \item \textit{Service Catalog Editor:} Updates pricing ranges, estimated delivery times, and featured flags.
+    \item \textit{FAQ \& Knowledge Base Manager:} Edits customer support articles.
+    \item \textit{Blog \& Article Publisher:} Publishes promotional and technical news.
+\end{itemize}
+
+\subsubsection{7. Provider Application Queue (\texttt{ProviderApplicationsPanel.tsx})}
+Inspects incoming runner and technician registrations. Features instant WhatsApp contact links and a \textbf{Custom HTML Response Email Modal} connected to \texttt{POST /api/v1/applications/:id/email} sending structured payloads (\texttt{recipientEmail}, \texttt{subject}, \texttt{badgeText}, \texttt{subHeaderBadge}, \texttt{body}, \texttt{highlightBoxText}, \texttt{ctaText}, \texttt{ctaUrl}).
+
+\subsubsection{8. Testimonial Moderation Queue (\texttt{TestimonialModerationPanel.tsx})}
+Inspects customer reviews via \texttt{GET /api/v1/admin/testimonials}. Allows admins to toggle landing page featured flags, approve/reject reviews via \texttt{PATCH /admin/testimonials/:id/status}, or delete entries via \texttt{DELETE /admin/testimonials/:id}. Includes a privacy consent check warning modal if attempting to feature non-consenting reviews.
+
+\subsubsection{9. Marketing Email Broadcast Engine (\texttt{MarketingCampaignsPanel.tsx})}
+Segments target audiences (newsletter subscribers, cooking gas users, regional hubs), provides a rich HTML editor with quick-insert tags (\texttt{[Bold]}, \texttt{[List]}, \texttt{[Link]}, \texttt{[CTA]}), dispatches test emails (\texttt{isTest: true}), and executes bulk email broadcasts via \texttt{POST /api/v1/campaigns/broadcast}.
+
+\subsubsection{10. Live Support Operator Desk (\texttt{SupportDeskPanel.tsx})}
+Multi-session live chat desk featuring unread message badges, image attachment previews, quote replies, real-time WebSocket messaging, and ticket resolution dispatching via \texttt{POST /api/v1/support/chats/:id/resolve}.
+
+\subsubsection{11. Team Management \& Invitations (\texttt{UserPermissionPanel.tsx})}
+Manages internal team members, configures granular PBAC permission sets, and dispatches email invitation links via \texttt{POST /api/v1/users/invite}.
+
+\subsubsection{12. Account Activation Page (\texttt{AcceptInvitePage.tsx})}
+Public activation route at \texttt{/accept-invite?token=...} enabling invited team members to accept invitations, set up their credentials, and submit payloads to \texttt{POST /api/v1/users/accept-invite}.
+
+\subsubsection{13. Visitor Analytics Engine (\texttt{VisitorAnalyticsOverview.tsx})}
+Visualizes web traffic analytics (timeframe filters: 24h, 7d, 30d; referrer breakdown; device distribution; page route hit counters) backed by automatic offline local storage buffer reconciliation.
+
+\subsubsection{14. App Platform Controls (\texttt{AppPlatformControl.tsx})}
+Enforces mobile app min-version requirements, controls global emergency announcement banners, and toggles operational feature flags.
+
+\newpage
+
+% =========================================================================
+\section{Real-Time Sockets \& Visitor Analytics}
+% =========================================================================
+
+\subsection{WebSocket Chat Engine Architecture}
+Real-time customer support communication is driven by \texttt{socketClient.ts}:
+
+\begin{lstlisting}[language=TypeScript, caption={WebSocket Singleton Client Architecture}]
+export class SocketClient {
+  private socket: WebSocket | null = null;
+  private listeners: Map<string, Function[]> = new Map();
+
+  public connect(url: string = 'ws://localhost:3000/ws/chat'): void {
+    this.socket = new WebSocket(url);
+    this.socket.onopen = () => this.emit('status', 'connected');
+    this.socket.onmessage = (event) => {
+      const payload = JSON.parse(event.data);
+      this.emit(payload.event, payload.data);
+    };
+    this.socket.onclose = () => setTimeout(() => this.connect(url), 3000);
+  }
+
+  public sendMessage(sessionId: string, message: string): void {
+    if (this.socket?.readyState === WebSocket.OPEN) {
+      this.socket.send(JSON.stringify({ event: 'chat:message', data: { sessionId, message } }));
+    }
+  }
+}
+export const socketClient = new SocketClient();
+\end{lstlisting}
+
+\subsection{Non-Blocking Visitor Analytics Engine (\texttt{useVisitorTracker})}
+Website visitor activity is logged seamlessly without impeding main-thread execution:
+\begin{itemize}
+    \item Generates a persistent \texttt{sessionId} stored in \texttt{localStorage}.
+    \item Captures route \texttt{pathname}, document \texttt{referrer}, device category (Mobile, Tablet, Desktop), and UTC timestamp on every route navigation.
+    \item Asynchronously posts tracking events to \texttt{POST /api/v1/analytics/track}.
+    \item \textbf{Offline Resilience:} If the network or backend is unreachable, tracking payloads buffer locally inside \texttt{localStorage} under \texttt{bb\_local\_visitor\_logs} (capped at 100 entries) and synchronize automatically upon backend reconnect.
+\end{itemize}
+
+\newpage
+
+% =========================================================================
+\section{Design System \& Visual Identity Specifications}
+% =========================================================================
+
+\subsection{Color Palette Matrix}
+The Supermarche visual identity applies a dark, high-contrast palette:
+
+\begin{table}[h!]
+\centering
+\caption{Supermarche Design Token Palette Matrix}
+\begin{tabular}{lll}
+\toprule
+\textbf{Token Name} & \textbf{HEX Code} & \textbf{Design Context} \\
+\midrule
+Primary Accent Green & \texttt{\#22C55E} / \texttt{\#3AAF49} & Primary CTA Buttons, Active Badges, Icons \\
+Hover Accent Green   & \texttt{\#16A34A} / \texttt{\#2F8F3C} & Button Hover \& Focus States \\
+Dark Surface Card    & \texttt{\#0D1510} / \texttt{\#14201A} & Card Panels, Modal Papers, Navigation Bars \\
+Dark Surface Background & \texttt{\#0A0F0D} / \texttt{\#0E1712} & Main Page Viewport Background \\
+Subtle Border        & \texttt{\#1E2A22} / \texttt{\#23382C} & Structural Borders, Grid Lines \\
+High-Contrast Text   & \texttt{\#FFFFFF}             & Primary Headings, Title Text \\
+Muted Subtitle Text  & \texttt{\#A8DFB1} / \texttt{\#94A3B8} & Descriptive Labels, Timestamps \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Brand Identity Rules}
+\begin{itemize}
+    \item \textbf{Navbar Emblem:} Pinned $44\text{ px} \times 44\text{ px}$ circular green badge displaying white `'BB'` initials adjacent to the brand title text.
+    \item \textbf{Typography Stack:} Headings use \textit{Space Grotesk} with tight letter-spacing (\texttt{-0.02em}). Technical IDs, MoMo references, and status badges use \textit{IBM Plex Mono}. Body text uses clean sans-serif stacks.
+    \item \textbf{Form Control Specs:} Text inputs enforce a $13\text{ px}$ text size, $10\text{ px}$ border radius, dark input backgrounds (\texttt{\#0A120E}), and subtle green focus rings.
+\end{itemize}
+
+\newpage
+
+% =========================================================================
+\section{REST API \& WebSocket Contract Table}
+% =========================================================================
+
+All REST HTTP requests execute via the singleton in \texttt{frontend/src/api/client.ts} configured with \texttt{credentials: 'include'} to handle HTTP-Only cookies (\texttt{\_\_Secure-api-token}).
+
+\begin{table}[h!]
+\centering
+\scriptsize
+\caption{Complete Supermarche Frontend API \& Protocol Contract Catalog}
+\begin{tabular}{lp{3.2cm}lp{3.5cm}l}
+\toprule
+\textbf{Method} & \textbf{Endpoint Route} & \textbf{Access} & \textbf{Payload / Params} & \textbf{Purpose} \\
+\midrule
+\texttt{POST} & \texttt{/auth/login} & Public & \texttt{\{email, password\}} & Authenticate Admin \& Set Cookie \\
+\texttt{POST} & \texttt{/auth/logout} & Public & None & Terminate Session \& Clear Cookie \\
+\texttt{GET}  & \texttt{/auth/me} & Protected & None & Validate Session User Rights \\
+\texttt{POST} & \texttt{/users/invite} & Protected & \texttt{\{email, permissions\}} & Dispatch Email Team Invitation \\
+\texttt{POST} & \texttt{/users/accept-invite} & Public & \texttt{\{token, fullName, password\}} & Activate Invited Team Member \\
+\texttt{GET}  & \texttt{/services} & Public & \texttt{?featured=true\&lang=en} & Fetch Public Service Offerings \\
+\texttt{GET}  & \texttt{/services/categories} & Public & \texttt{?parent=null} & Fetch Category Hub Hierarchy \\
+\texttt{POST} & \texttt{/applications} & Public & \texttt{\{fullName, phone, city, ...\}} & Submit Provider Application \\
+\texttt{POST} & \texttt{/applications/:id/email}& Protected & \texttt{\{recipientEmail, body, ...\}} & Send Custom Response Mail \\
+\texttt{GET}  & \texttt{/testimonials/featured} & Public & None & Fetch Featured Landing Reviews \\
+\texttt{POST} & \texttt{/testimonials} & Public & \texttt{\{authorName, content, ...\}} & Submit Customer Review \\
+\texttt{GET}  & \texttt{/admin/testimonials} & Protected & \texttt{?status=PENDING} & Fetch Moderation Queue \\
+\texttt{PATCH}& \texttt{/admin/testimonials/:id/status}& Protected & \texttt{\{status: 'APPROVED'\}} & Update Testimonial Status \\
+\texttt{PATCH}& \texttt{/admin/testimonials/:id/toggle-featured}& Protected & \texttt{\{isFeatured: true\}} & Toggle Landing Featured Flag \\
+\texttt{DELETE}& \texttt{/admin/testimonials/:id} & Protected & None & Permanently Purge Review \\
+\texttt{POST} & \texttt{/campaigns/broadcast} & Protected & \texttt{\{subject, contentHtml, ...\}} & Dispatch Bulk Marketing Email \\
+\texttt{POST} & \texttt{/support/chats/:id/resolve}& Protected & \texttt{\{resolution\_notes\}} & Mark Support Ticket Resolved \\
+\texttt{POST} & \texttt{/analytics/track} & Public & \texttt{\{sessionId, pathname, ...\}} & Record Non-Blocking Visitor Hit \\
+\texttt{GET}  & \texttt{/admin/analytics/overview}& Protected & \texttt{?timeframe=last7days} & Fetch Traffic Analytics Metrics \\
+\texttt{WS}   & \texttt{/ws/chat} & Public & JSON Event Frames & Real-Time Support Chat Socket \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+% =========================================================================
+\section{Local Development, Build, \& Deployment Guide}
+% =========================================================================
+
+\subsection{Environment Setup}
+Define environment variables inside \texttt{frontend/.env}:
+
+\begin{lstlisting}[caption={Frontend Environment Setup (.env)}]
+VITE_API_BASE_URL=http://localhost:3000/api/v1
+VITE_WS_URL=ws://localhost:3000/ws/chat
+\end{lstlisting}
+
+\subsection{Execution Scripts}
+Execute development, type-checking, and production build routines:
+
+\begin{lstlisting}[language=bash, caption={Development and Build Commands}]
+# Install npm dependencies
+npm install
+
+# Launch Vite local dev server with HMR
+npm run dev
+
+# Generate XML Sitemap and run TypeScript strict type-checker
+npm run sitemap
+npx tsc -b
+
+# Execute production build compilation (outputs distribution to /dist)
+npm run build
+\end{lstlisting}
+
+\newpage
+
+% =========================================================================
+\section{Engineering Recommendations \& Future Roadmap}
+% =========================================================================
+
+To support Supermarche's rapid scaling across Central Africa, the engineering team recommends the following architectural enhancements:
+
+\begin{enumerate}
+    \item \textbf{Code-Splitting \& Dynamic Module Imports:} Implement \texttt{React.lazy()} and \texttt{Suspense} for heavy administrative modules (\texttt{VisitorAnalyticsOverview.tsx}, \texttt{ProviderApplicationsPanel.tsx}) to reduce initial vendor bundle size below $500\text{ kB}$.
+    \item \textbf{Progressive Web App (PWA) Offline Caching:} Integrate Service Worker caching (\texttt{workbox-build}) to allow field runners in low-connectivity zones to access active order tickets offline.
+    \item \textbf{Redis-Backed WebSocket Scalability:} Scale the real-time support engine (\texttt{socketClient.ts}) across multiple backend nodes using Redis Pub/Sub socket adapters.
+    \item \textbf{Automated End-to-End (E2E) Test Suite:} Deploy Playwright / Cypress integration tests validating critical booking checkout and admin moderation flows.
+\end{enumerate}
+
+\end{document}

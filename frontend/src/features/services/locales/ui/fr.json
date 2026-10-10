@@ -1,0 +1,15 @@
+{
+  "services": {
+    "chip": "RÉSEAU DE SERVICES OPÉRATEURS VÉRIFIÉS",
+    "title": "Gamme Complète de Nos Services",
+    "subtitle": "Découvrez les recharges express de gaz de cuisine, produits du marché, fournitures scolaires, nettoyage approfondi et sécurité numérique.",
+    "searchPlaceholder": "Rechercher un service (ex: Gaz, Épicerie, Nettoyage)...",
+    "filterAll": "Tous les Services",
+    "filterGas": "Gaz de Cuisine",
+    "filterMarket": "Marché & Produits Frais",
+    "filterSchool": "Éducation & Rentrée",
+    "filterCleaning": "Entretien de Maison",
+    "filterSecurity": "Sécurité Numérique",
+    "bookNow": "Réserver ce Service"
+  }
+}

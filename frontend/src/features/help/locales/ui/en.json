@@ -1,0 +1,28 @@
+{
+  "help": {
+    "breadcrumbs": {
+      "help_center": "Help Center",
+      "knowledge_base": "Knowledge Base"
+    },
+    "sidebar": {
+      "navigation_topics": "Navigation & Topics",
+      "search_placeholder": "Search articles or topics...",
+      "no_categories_matching": "No categories found matching filter."
+    },
+    "article": {
+      "verified_guide": "Verified Guide",
+      "views_count": "{{count}} views",
+      "helpful_count": "{{count}} people found this guide helpful",
+      "no_article_selected": "No Article Selected",
+      "select_article_prompt": "Please choose a category drawer from the sidebar and select an article to read its guide.",
+      "no_sections": "No additional section details available for this article.",
+      "no_matching_articles": "No articles match search query."
+    },
+    "footer": {
+      "still_need_assistance": "Still need assistance?",
+      "support_availability": "Our Supermarche support team is ready 24/7 to help resolve your inquiry.",
+      "email_support": "Email Support",
+      "contact_support": "Contact Support"
+    }
+  }
+}

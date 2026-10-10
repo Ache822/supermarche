@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: supermarche_backend_standalone
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - MONGODB_URI=${MONGODB_URI:-mongodb://127.0.0.1:27017/supermarche}
+      - JWT_SECRET=${JWT_SECRET:-super_secret_jwt_key_at_least_32_characters}
+      - CORS_ORIGIN=http://localhost:5173
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules

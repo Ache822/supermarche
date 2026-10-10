@@ -1,0 +1,8 @@
+{
+  "admin": {
+    "error": {
+      "unauthorized": "Accès non autorisé à la console d'administration.",
+      "fetch_failed": "Impossible de récupérer les données opérationnelles."
+    }
+  }
+}

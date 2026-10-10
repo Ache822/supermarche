@@ -1,0 +1,9 @@
+{
+  "auth": {
+    "error": {
+      "invalid_credentials": "Adresse email ou mot de passe invalide.",
+      "invalid_otp": "Code OTP invalide ou expiré.",
+      "required_field": "Ce champ est obligatoire."
+    }
+  }
+}

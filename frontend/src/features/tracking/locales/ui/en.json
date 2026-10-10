@@ -1,0 +1,16 @@
+{
+  "tracking": {
+    "title": "Live Dispatch Ticket Radar & Status",
+    "searchPlaceholder": "Enter Ticket Order Reference (e.g. BB-9482)...",
+    "ticketRef": "Ticket Reference",
+    "status": {
+      "pending": "Pending Dispatch",
+      "assigned": "Runner Assigned & En Route",
+      "completed": "Work Order Completed"
+    },
+    "buttons": {
+      "track": "Track Ticket Now",
+      "contact_runner": "Call Assigned Runner"
+    }
+  }
+}

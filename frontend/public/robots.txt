@@ -1,0 +1,18 @@
+# www.robotstxt.org/
+
+User-agent: *
+Allow: /
+Allow: /services
+Allow: /about
+Allow: /help
+Allow: /become-a-provider
+Allow: /become-a-pro
+Allow: /download
+
+# Disallow Private & Admin Control Panel Paths
+Disallow: /admin
+Disallow: /admin/
+Disallow: /admin/*
+
+# Sitemap Location
+Sitemap: https://supermarche.com/sitemap.xml

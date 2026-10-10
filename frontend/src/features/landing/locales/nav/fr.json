@@ -1,0 +1,9 @@
+{
+  "landing": {
+    "nav": {
+      "home": "Accueil",
+      "features": "Fonctionnalités",
+      "coverage": "Couverture"
+    }
+  }
+}

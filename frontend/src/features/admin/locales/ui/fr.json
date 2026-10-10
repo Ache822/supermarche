@@ -1,0 +1,19 @@
+{
+  "admin": {
+    "dashboard_title": "Centre de Commandement des Opérations",
+    "overview": "Aperçu & Statistiques Système",
+    "ticket_management": "Gestion des Tickets de Dispatch",
+    "provider_audits": "Vérification & Audits des Prestataires",
+    "buttons": {
+      "approve": "Approuver la Vérification",
+      "reject": "Rejeter la Candidature",
+      "export_csv": "Exporter le Rapport CSV",
+      "refresh": "Actualiser le Flux"
+    },
+    "stats": {
+      "total_tickets": "Total des Tickets Actifs",
+      "verified_pros": "Prestataires Vérifiés",
+      "escrow_volume": "Volume Escrow MoMo (FCFA)"
+    }
+  }
+}
