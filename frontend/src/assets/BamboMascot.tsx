@@ -9,7 +9,7 @@ export function BamboMascot({ width = 320, height = 400 }: { width?: number; hei
       aria-labelledby="mascotTitle"
     >
       <title id="mascotTitle">
-        Kimzy Bot, the friendly supermarket grocery assistant, holding a fresh market basket filled with groceries
+        Kimzy, the friendly supermarket grocery assistant, holding a fresh market basket filled with groceries
       </title>
 
       {/* Ground Shadow */}

@@ -13,7 +13,7 @@ export function getOrganizationSchema() {
     legalName: 'Supermarche Services Ltd',
     url: DEFAULT_BASE_URL,
     logo: `${DEFAULT_BASE_URL}/favicon.svg`,
-    description: 'On-Demand Express Delivery & Everyday Services in Cameroon & Worldwide',
+    description: 'Online Supermarket & Express Department Store in Cameroon',
     sameAs: [
       'https://facebook.com/supermarche',
       'https://twitter.com/supermarche',
@@ -47,7 +47,7 @@ export function getLocalBusinessSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: 'Supermarche Express Delivery & Everyday Services',
+    name: 'Supermarche Online Supermarket & Express Store',
     image: `${DEFAULT_BASE_URL}/images/hero_banner.png`,
     url: DEFAULT_BASE_URL,
     telephone: '+237670000000',

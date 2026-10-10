@@ -12,21 +12,19 @@ export interface SEOProps {
   noIndex?: boolean;
 }
 
-const DEFAULT_TITLE = 'Supermarche | On-Demand Express Delivery & Everyday Services in Cameroon';
+const DEFAULT_TITLE = 'Supermarche | Online Supermarket & Express Department Store';
 const DEFAULT_DESCRIPTION =
-  'Order fast cooking gas refills, fresh market shopping, and home services in Yaoundé & Douala with Supermarche. Reliable on-demand express delivery & concierge platform.';
+  'Shop fashion apparel, footwear, cosmetics glow, tech accessories, fresh produce, and pantry snacks with express delivery across Cameroon on Supermarche.';
 const DEFAULT_OG_IMAGE = `${DEFAULT_BASE_URL}/images/hero_banner.png`;
 const DEFAULT_KEYWORDS = [
   'Supermarche',
-  'Express Delivery Cameroon',
-  'Cooking Gas Refill Yaounde',
-  'Fresh Market Shopping Douala',
-  'Home Cleaning Buea',
-  'On-demand errand service',
-  'Cameroon concierge service',
-  'Africa diaspora errand app',
-  'Yaoundé hub express',
-  'Douala hub express',
+  'Online Supermarket Cameroon',
+  'Express Shopping Cameroon',
+  'Streetwear Fashion Douala',
+  'Sneakers Kicks Yaounde',
+  'Beauty Skincare Buea',
+  'Tech Accessories Bamenda',
+  'Mobile Money Shopping Cameroon',
 ];
 
 export function SEO({
