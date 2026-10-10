@@ -26,7 +26,7 @@ function VisitorTrackerRunner() {
 }
 
 export function App() {
-  const [mode, setMode] = useState<'light' | 'dark'>('dark');
+  const [mode, setMode] = useState<'light' | 'dark'>('light');
   const [bookingOpen, setBookingOpen] = useState(false);
   const [preselectedServiceId, setPreselectedServiceId] = useState<string | null>(null);
   const [chatOpen, setChatOpen] = useState(false);

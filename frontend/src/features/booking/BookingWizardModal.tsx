@@ -34,28 +34,28 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
 
   const getLocalizedServiceTitle = (srvId?: string, defaultTitle?: string) => {
     switch (srvId) {
-      case 'srv-gas': return t('services.gasTitle', defaultTitle || '');
-      case 'srv-market': return t('services.marketTitle', defaultTitle || '');
-      case 'srv-school': return t('services.schoolTitle', defaultTitle || '');
-      case 'srv-cleaning': return t('services.cleaningTitle', defaultTitle || '');
-      case 'srv-security': return t('services.securityTitle', defaultTitle || '');
+      case 'srv-clothes': return t('services.clothesTitle', defaultTitle || '');
+      case 'srv-shoes': return t('services.shoesTitle', defaultTitle || '');
+      case 'srv-cosmetics': return t('services.cosmeticsTitle', defaultTitle || '');
+      case 'srv-tech': return t('services.techTitle', defaultTitle || '');
+      case 'srv-snacks': return t('services.snacksTitle', defaultTitle || '');
       default: return defaultTitle;
     }
   };
 
   const getLocalizedServiceDesc = (srvId?: string, defaultDesc?: string) => {
     switch (srvId) {
-      case 'srv-gas': return t('services.gasDesc', defaultDesc || '');
-      case 'srv-market': return t('services.marketDesc', defaultDesc || '');
-      case 'srv-school': return t('services.schoolDesc', defaultDesc || '');
-      case 'srv-cleaning': return t('services.cleaningDesc', defaultDesc || '');
-      case 'srv-security': return t('services.securityDesc', defaultDesc || '');
+      case 'srv-clothes': return t('services.clothesDesc', defaultDesc || '');
+      case 'srv-shoes': return t('services.shoesDesc', defaultDesc || '');
+      case 'srv-cosmetics': return t('services.cosmeticsDesc', defaultDesc || '');
+      case 'srv-tech': return t('services.techDesc', defaultDesc || '');
+      case 'srv-snacks': return t('services.snacksDesc', defaultDesc || '');
       default: return defaultDesc;
     }
   };
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText('https://play.google.com/store/apps/details?id=com.supermarche.app');
+    navigator.clipboard.writeText('https://supermarche.app/shop');
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };

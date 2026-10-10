@@ -71,45 +71,45 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
 
   const getLocalizedService = (srv: ServiceItem) => {
     switch (srv.id) {
-      case 'srv-gas':
+      case 'srv-clothes':
         return {
           ...srv,
-          title: t('services.gasTitle', { defaultValue: srv.title }),
-          categoryLabel: t('catalog.filterGas', { defaultValue: srv.categoryLabel || '' }),
-          description: t('services.gasDesc', { defaultValue: srv.description }),
-          estimatedTime: i18n.language === 'fr' ? '30 – 45 min' : srv.estimatedTime,
+          title: t('services.clothesTitle', { defaultValue: srv.title }),
+          categoryLabel: t('catalog.filterClothes', { defaultValue: srv.categoryLabel || '' }),
+          description: t('services.clothesDesc', { defaultValue: srv.description }),
+          estimatedTime: i18n.language === 'fr' ? '15 – 30 min livraison campus' : srv.estimatedTime,
         };
-      case 'srv-market':
+      case 'srv-shoes':
         return {
           ...srv,
-          title: t('services.marketTitle', { defaultValue: srv.title }),
-          categoryLabel: t('catalog.filterMarket', { defaultValue: srv.categoryLabel || '' }),
-          description: t('services.marketDesc', { defaultValue: srv.description }),
-          estimatedTime: i18n.language === 'fr' ? '60 – 90 min' : srv.estimatedTime,
+          title: t('services.shoesTitle', { defaultValue: srv.title }),
+          categoryLabel: t('catalog.filterShoes', { defaultValue: srv.categoryLabel || '' }),
+          description: t('services.shoesDesc', { defaultValue: srv.description }),
+          estimatedTime: i18n.language === 'fr' ? 'Livraison express le jour même' : srv.estimatedTime,
         };
-      case 'srv-school':
+      case 'srv-cosmetics':
         return {
           ...srv,
-          title: t('services.schoolTitle', { defaultValue: srv.title }),
-          categoryLabel: t('catalog.filterSchool', { defaultValue: srv.categoryLabel || '' }),
-          description: t('services.schoolDesc', { defaultValue: srv.description }),
-          estimatedTime: i18n.language === 'fr' ? 'Livraison le jour même' : srv.estimatedTime,
+          title: t('services.cosmeticsTitle', { defaultValue: srv.title }),
+          categoryLabel: t('catalog.filterCosmetics', { defaultValue: srv.categoryLabel || '' }),
+          description: t('services.cosmeticsDesc', { defaultValue: srv.description }),
+          estimatedTime: i18n.language === 'fr' ? '20 – 40 min' : srv.estimatedTime,
         };
-      case 'srv-cleaning':
+      case 'srv-tech':
         return {
           ...srv,
-          title: t('services.cleaningTitle', { defaultValue: srv.title }),
-          categoryLabel: t('catalog.filterCleaning', { defaultValue: srv.categoryLabel || '' }),
-          description: t('services.cleaningDesc', { defaultValue: srv.description }),
-          estimatedTime: i18n.language === 'fr' ? '2 – 4 heures' : srv.estimatedTime,
+          title: t('services.techTitle', { defaultValue: srv.title }),
+          categoryLabel: t('catalog.filterTech', { defaultValue: srv.categoryLabel || '' }),
+          description: t('services.techDesc', { defaultValue: srv.description }),
+          estimatedTime: i18n.language === 'fr' ? '30 min express' : srv.estimatedTime,
         };
-      case 'srv-security':
+      case 'srv-snacks':
         return {
           ...srv,
-          title: t('services.securityTitle', { defaultValue: srv.title }),
-          categoryLabel: t('catalog.filterSecurity', { defaultValue: srv.categoryLabel || '' }),
-          description: t('services.securityDesc', { defaultValue: srv.description }),
-          estimatedTime: i18n.language === 'fr' ? 'Dispatch sous 24h' : srv.estimatedTime,
+          title: t('services.snacksTitle', { defaultValue: srv.title }),
+          categoryLabel: t('catalog.filterSnacks', { defaultValue: srv.categoryLabel || '' }),
+          description: t('services.snacksDesc', { defaultValue: srv.description }),
+          estimatedTime: i18n.language === 'fr' ? '15 min express' : srv.estimatedTime,
         };
       default:
         return srv;
@@ -1307,7 +1307,7 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                           title: srv.title,
                           slug: srv.id,
                           description: srv.description,
-                          price: srv.id === 'srv-gas' ? 6500 : srv.id === 'srv-market' ? 12000 : 8500,
+                          price: srv.id === 'srv-clothes' ? 12500 : srv.id === 'srv-shoes' ? 24000 : srv.id === 'srv-cosmetics' ? 4500 : srv.id === 'srv-tech' ? 15000 : 2500,
                           category: srv.categoryLabel || 'Store',
                           images: srv.imageUrl ? [srv.imageUrl] : ['/images/hero_banner.png'],
                           stockQuantity: 100,
