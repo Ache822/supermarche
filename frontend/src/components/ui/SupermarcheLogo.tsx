@@ -50,7 +50,7 @@ export function SupermarcheLogo({ size = 42, showText = true, sx }: LogoProps) {
               filter: 'drop-shadow(0 2px 8px rgba(255, 107, 0, 0.15))',
             }}
           >
-            SUPERMARCHÉ
+            KIM'S STORE
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
             <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: '0.62rem' }}>

@@ -9,15 +9,15 @@ export function getOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Supermarche',
-    legalName: 'Supermarche Services Ltd',
+    name: "Kim's Store",
+    legalName: "Kim's Store Ltd",
     url: DEFAULT_BASE_URL,
     logo: `${DEFAULT_BASE_URL}/favicon.svg`,
     description: 'Online Supermarket & Express Department Store in Cameroon',
     sameAs: [
-      'https://facebook.com/supermarche',
-      'https://twitter.com/supermarche',
-      'https://instagram.com/supermarche',
+      'https://facebook.com/kimsstore',
+      'https://twitter.com/kimsstore',
+      'https://instagram.com/kimsstore',
     ],
     contactPoint: {
       '@type': 'ContactPoint',
@@ -33,7 +33,7 @@ export function getWebSiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Supermarche',
+    name: "Kim's Store",
     url: DEFAULT_BASE_URL,
     potentialAction: {
       '@type': 'SearchAction',
@@ -47,7 +47,7 @@ export function getLocalBusinessSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: 'Supermarche Online Supermarket & Express Store',
+    name: "Kim's Store Online Supermarket & Express Store",
     image: `${DEFAULT_BASE_URL}/images/hero_banner.png`,
     url: DEFAULT_BASE_URL,
     telephone: '+237670000000',
