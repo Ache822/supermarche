@@ -337,7 +337,7 @@ export const AdminProductsPage: React.FC = () => {
               />
 
               <Box sx={{ gridColumn: { xs: 'span 1', sm: 'span 2' } }}>
-                <Stack direction="row" spacing={2} alignItems="center">
+                <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
                   <TextField
                     fullWidth
                     label="Image URL or Uploaded Path"
