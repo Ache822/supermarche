@@ -60,7 +60,7 @@ export function Navbar({ mode, onToggleTheme, onOpenBooking: _onOpenBooking }: N
 
   const navItems = [
     { label: t('navbar.home'), path: '/', icon: <HomeIcon fontSize="small" /> },
-    { label: 'Store', path: '/shop', icon: <ShoppingBagIcon fontSize="small" /> },
+    { label: 'Products', path: '/shop', icon: <ShoppingBagIcon fontSize="small" /> },
     { label: t('navbar.aboutUs'), path: '/about', icon: <InfoIcon fontSize="small" /> },
     { label: t('navbar.helpCenter'), path: '/help', icon: <HelpIcon fontSize="small" /> },
   ];
@@ -221,7 +221,7 @@ export function Navbar({ mode, onToggleTheme, onOpenBooking: _onOpenBooking }: N
                 },
               }}
             >
-              Shop Store
+              Order Now
             </Button>
 
             {/* Mobile / Tablet Hamburger Toggle Button (Visible on < 900px) */}
@@ -394,7 +394,7 @@ export function Navbar({ mode, onToggleTheme, onOpenBooking: _onOpenBooking }: N
               textTransform: 'none',
             }}
           >
-            Shop Store
+            Order Now
           </Button>
         </Box>
       </Drawer>
