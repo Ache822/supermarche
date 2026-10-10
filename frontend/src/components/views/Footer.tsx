@@ -79,8 +79,8 @@ export function Footer({ mode, onOpenBooking }: FooterProps) {
             p: { xs: 3, md: 4 },
             borderRadius: '20px',
             background: isDark
-              ? 'linear-gradient(135deg, rgba(224, 93, 0, 0.45) 0%, rgba(31, 20, 12, 0.8) 100%)'
-              : 'linear-gradient(135deg, rgba(255, 107, 0, 0.15) 0%, rgba(20, 50, 28, 0.9) 100%)',
+              ? 'linear-gradient(135deg, rgba(224, 93, 0, 0.45) 0%, rgba(31, 20, 12, 0.9) 100%)'
+              : 'linear-gradient(135deg, #2D1A10 0%, #1A0F09 100%)',
             border: '1px solid',
             borderColor: isDark ? 'rgba(255, 107, 0, 0.35)' : 'rgba(255, 107, 0, 0.45)',
             backdropFilter: 'blur(12px)',
