@@ -62,6 +62,26 @@ interface ChatSessionItem {
   assignedAgent?: string;
 }
 
+const formatChatTime = (val?: string | number | Date): string => {
+  if (!val) return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const str = String(val).trim();
+  if (!str.includes('T') && !str.includes('-') && (str.includes('AM') || str.includes('PM') || str.length <= 8)) {
+    return str;
+  }
+  const date = new Date(str);
+  if (isNaN(date.getTime())) return str;
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+};
+
+const isMessageDuplicate = (list: MessageItem[], msg: { id?: string; sender?: string; text?: string }): boolean => {
+  if (msg.id && list.some((m) => m.id === msg.id)) return true;
+  return list.some(
+    (m) =>
+      m.sender === msg.sender &&
+      m.text.trim().toLowerCase() === (msg.text || '').trim().toLowerCase()
+  );
+};
+
 export function SupportDeskPanel() {
   const { t } = useTranslation();
   const [isLoadingChats, setIsLoadingChats] = useState<boolean>(true);
@@ -243,18 +263,17 @@ export function SupportDeskPanel() {
         if (raw) {
           const parsed: ChatMessagePayload[] = JSON.parse(raw);
           if (parsed.length > 0) {
-            const formatted: MessageItem[] = parsed.map((m) => ({
-              id: m.id || `msg_${Math.random()}`,
+            const formatted: MessageItem[] = parsed.map((m, idx) => ({
+              id: m.id || `local_${activeChatId}_${idx}`,
               sender: (m.sender === 'admin' ? 'agent' : 'customer') as 'customer' | 'agent',
               text: m.message || m.text || m.body || '',
-              time: m.timestamp || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+              time: formatChatTime(m.timestamp),
               attachment: m.attachment,
               status: 'sent',
             }));
             setChatStore((prev) => {
               const current = prev[activeChatId] || [];
-              const ids = new Set(current.map((m) => m.id));
-              const missing = formatted.filter((m) => !ids.has(m.id));
+              const missing = formatted.filter((m) => !isMessageDuplicate(current, m));
               if (missing.length === 0) return prev;
               return {
                 ...prev,
@@ -278,20 +297,19 @@ export function SupportDeskPanel() {
         const data = (Array.isArray(res) ? res : (res as { data?: Array<{ message_id?: string; body?: string; text?: string; message?: string; sender?: string; sent_at?: string }> })?.data || []);
         if (data.length > 0) {
           const apiFormatted: MessageItem[] = data.map((m, idx) => ({
-            id: m.message_id || `msg_api_${idx}_${m.sent_at || Date.now()}`,
+            id: m.message_id || `api_${activeChatId}_${idx}`,
             sender: (m.sender === 'ADMIN' ? 'agent' : 'customer') as 'customer' | 'agent',
             text: m.body || m.message || m.text || '',
-            time: m.sent_at ? new Date(m.sent_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            time: formatChatTime(m.sent_at),
             status: 'sent',
           }));
           setChatStore((prev) => {
             const current = prev[activeChatId] || [];
-            const ids = new Set(current.map((m) => m.id));
-            const missing = apiFormatted.filter((m) => !ids.has(m.id));
+            const missing = apiFormatted.filter((m) => !isMessageDuplicate(current, m));
             if (missing.length === 0) return prev;
             return {
               ...prev,
-              [activeChatId]: [...missing, ...current],
+              [activeChatId]: [...current, ...missing],
             };
           });
         }
@@ -399,13 +417,12 @@ export function SupportDeskPanel() {
 
       setChatStore((prev) => {
         const existingList = prev[payload.sessionId] || [];
-        const isDuplicate = existingList.some((m) => m.id === msgId);
-        if (isDuplicate) return prev;
+        if (isMessageDuplicate(existingList, { id: msgId, sender: 'customer', text: msgText })) return prev;
         const newMsg: MessageItem = {
           id: msgId,
           sender: 'customer',
           text: msgText,
-          time: payload.timestamp || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          time: formatChatTime(payload.timestamp),
           attachment: payload.attachment,
           status: 'sent',
         };
@@ -1253,9 +1270,9 @@ export function SupportDeskPanel() {
             {/* Quick Canned Responses Toolbar */}
             <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', flexShrink: 0, py: 1, borderTop: '1px solid', borderColor: (theme) => (theme.palette.mode === 'dark' ? '#3A2316' : '#E2E8F0') }}>
               <Chip
-                label={t('admin.macroGasEnRoute', '🔥 Gas technician en route (25-30m)')}
+                label={t('admin.macroCourierEnRoute', '🛵 Express courier en route (30-45m)')}
                 size="small"
-                onClick={() => handleInputChange('Your gas refill technician has been dispatched and will arrive in 25-30 minutes.')}
+                onClick={() => handleInputChange("Your Kim's Store express courier has been dispatched and will arrive at your address in 30-45 minutes.")}
                 sx={{
                   fontSize: 10,
                   fontWeight: 600,
@@ -1267,9 +1284,9 @@ export function SupportDeskPanel() {
                 }}
               />
               <Chip
-                label={t('admin.macroSandagaVerified', '🥗 Sandaga order verified')}
+                label={t('admin.macroOrderVerified', '🛍️ Order packed & verified')}
                 size="small"
-                onClick={() => handleInputChange('Your fresh food order is being packed at Marché Sandaga. Our runner will contact you shortly.')}
+                onClick={() => handleInputChange("Your items have successfully passed authenticity inspection at our fulfillment hub and are packed for dispatch.")}
                 sx={{
                   fontSize: 10,
                   fontWeight: 600,
@@ -1281,9 +1298,23 @@ export function SupportDeskPanel() {
                 }}
               />
               <Chip
-                label={t('admin.macroRequestPhoto', '📑 Request photo/receipt')}
+                label={t('admin.macroExchangeInitiated', '👟 7-Day size swap initiated')}
                 size="small"
-                onClick={() => handleInputChange('Could you please upload a photo or receipt so our operator team can verify your request?')}
+                onClick={() => handleInputChange("We have initiated your 7-day size swap request. Our dispatch runner will bring the replacement size to your doorstep.")}
+                sx={{
+                  fontSize: 10,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  bgcolor: (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0,0.18)' : '#FFF4ED'),
+                  color: '#FF6B00',
+                  border: '1px solid rgba(255, 107, 0,0.3)',
+                  '&:hover': { bgcolor: 'rgba(255, 107, 0,0.3)' },
+                }}
+              />
+              <Chip
+                label={t('admin.macroRequestPhoto', '📸 Request item photo / tag')}
+                size="small"
+                onClick={() => handleInputChange('Could you please upload a clear photo of the item or size tag so our team can assist you right away?')}
                 sx={{
                   fontSize: 10,
                   fontWeight: 600,
