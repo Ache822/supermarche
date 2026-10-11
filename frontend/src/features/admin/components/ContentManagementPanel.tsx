@@ -640,7 +640,7 @@ export function ContentManagementPanel() {
   ];
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, width: '100%', maxHeight: 'calc(100vh - 160px)', minHeight: 0 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, width: '100%' }}>
       <Grid container spacing={3} sx={{ maxHeight: '100%', flex: 1, minHeight: 0 }}>
         {/* Left Sidebar: Categories Management */}
         <Grid size={{ xs: 12, md: 4 }} sx={{ maxHeight: '100%', minHeight: 0, display: 'flex', flexDirection: 'column' }}>

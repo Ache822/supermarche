@@ -328,7 +328,7 @@ export function TestimonialModerationPanel() {
   ];
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, width: '100%', maxHeight: 'calc(100vh - 160px)', minHeight: 0 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, width: '100%' }}>
       {/* Header Panel */}
       <Paper
         elevation={0}

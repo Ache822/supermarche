@@ -316,7 +316,7 @@ export function FaqManagementPanel() {
   ];
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, width: '100%', maxHeight: 'calc(100vh - 160px)', minHeight: 0 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, width: '100%' }}>
       {/* Header Controls Bar */}
       <Paper
         elevation={0}
