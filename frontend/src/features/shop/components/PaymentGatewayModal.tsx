@@ -17,6 +17,7 @@ import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import SecurityIcon from '@mui/icons-material/Security';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import { useTranslation } from 'react-i18next';
 
 /**
  * ============================================================================
@@ -60,6 +61,7 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
   cardLast4 = '4242',
   onPaymentSuccess,
 }) => {
+  const { t } = useTranslation();
   const [step, setStep] = useState<'initiating' | 'waiting_auth' | 'processing' | 'success'>('initiating');
   const [countdown, setCountdown] = useState(25);
   const [pinInput] = useState('••••');
@@ -108,39 +110,39 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
     switch (paymentMethod) {
       case 'mtn_momo':
         return {
-          title: 'MTN Mobile Money Gateway',
-          badgeText: 'MTN MoMo Cameroon',
+          title: t('paymentModal.mtnTitle'),
+          badgeText: t('paymentModal.mtnBadge'),
           badgeBg: '#FFCC00',
           badgeColor: '#000000',
           accentColor: '#E5A800',
-          phoneLabel: `MTN Number (+237 ${phone || '670 000 000'})`,
-          authInstruction: 'Push prompt sent! Dial *126# or check your phone to confirm your 4-digit MoMo PIN.',
-          promptScreenMsg: 'Supermarche: Confirm payment of XAF ' + amount.toLocaleString() + ' with PIN?',
+          phoneLabel: t('paymentModal.numberLabel', { provider: 'MTN', phone: phone || '670 000 000' }),
+          authInstruction: t('paymentModal.mtnAuthInstruction'),
+          promptScreenMsg: t('paymentModal.mtnPromptMsg', { amount: amount.toLocaleString() }),
           icon: <PhoneAndroidIcon sx={{ fontSize: 24, color: '#000000' }} />,
         };
       case 'orange_money':
         return {
-          title: 'Orange Money Gateway',
-          badgeText: 'Orange Money Cameroon',
+          title: t('paymentModal.orangeTitle'),
+          badgeText: t('paymentModal.orangeBadge'),
           badgeBg: '#FF7900',
           badgeColor: '#FFFFFF',
           accentColor: '#FF7900',
-          phoneLabel: `Orange Number (+237 ${phone || '690 000 000'})`,
-          authInstruction: 'Authorization request sent! Dial #150# or validate the notification on your phone.',
-          promptScreenMsg: 'Paiement Supermarche: Autoriser XAF ' + amount.toLocaleString() + ' ?',
+          phoneLabel: t('paymentModal.numberLabel', { provider: 'Orange', phone: phone || '690 000 000' }),
+          authInstruction: t('paymentModal.orangeAuthInstruction'),
+          promptScreenMsg: t('paymentModal.orangePromptMsg', { amount: amount.toLocaleString() }),
           icon: <PhoneAndroidIcon sx={{ fontSize: 24, color: '#FFFFFF' }} />,
         };
       case 'card':
       default:
         return {
-          title: '3D Secure Bank Gateway',
-          badgeText: 'Verified by Visa / Mastercard',
+          title: t('paymentModal.cardTitle'),
+          badgeText: t('paymentModal.cardBadge'),
           badgeBg: '#1E293B',
           badgeColor: '#FFFFFF',
           accentColor: '#2563EB',
-          phoneLabel: `Card Ending in •••• ${cardLast4}`,
-          authInstruction: 'Your card issuer sent a 6-digit One-Time Password (OTP) via SMS to verify this payment.',
-          promptScreenMsg: 'Bank 3D-Secure: Authenticate debit of XAF ' + amount.toLocaleString(),
+          phoneLabel: t('paymentModal.cardEnding', { last4: cardLast4 }),
+          authInstruction: t('paymentModal.cardAuthInstruction'),
+          promptScreenMsg: t('paymentModal.cardPromptMsg', { amount: amount.toLocaleString() }),
           icon: <CreditCardIcon sx={{ fontSize: 24, color: '#FFFFFF' }} />,
         };
     }
@@ -227,10 +229,10 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
           <Box sx={{ textAlign: 'center', py: 4 }}>
             <CircularProgress sx={{ color: brand.accentColor, mb: 2 }} />
             <Typography variant="h6" sx={{ fontWeight: 700, mb: 0.5 }}>
-              Connecting to Gateway...
+              {t('paymentModal.connecting')}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Transmitting secure transaction request for XAF {amount.toLocaleString()}
+              {t('paymentModal.transmitting', { amount: amount.toLocaleString() })}
             </Typography>
           </Box>
         )}
@@ -251,13 +253,13 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
               }}
             >
               <Typography variant="caption" color="text.secondary" sx={{ textTransform: 'uppercase', fontWeight: 700 }}>
-                Total Payment Due
+                {t('paymentModal.totalDue')}
               </Typography>
               <Typography variant="h4" sx={{ fontWeight: 800, color: '#FF6B00', my: 0.5 }}>
                 XAF {amount.toLocaleString()}
               </Typography>
               <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block' }}>
-                Account: <strong>{customerName || 'Customer'}</strong> ({brand.phoneLabel})
+                {t('paymentModal.account')}: <strong>{customerName || t('paymentModal.customer')}</strong> ({brand.phoneLabel})
               </Typography>
             </Box>
 
@@ -276,7 +278,7 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>
                 <Typography variant="caption" sx={{ color: '#94A3B8', display: 'flex', alignItems: 'center', gap: 0.5 }}>
                   <VpnKeyIcon sx={{ fontSize: 14, color: brand.accentColor }} />
-                  {paymentMethod === 'card' ? '3D Secure Prompt' : 'USSD Push Prompt'}
+                  {paymentMethod === 'card' ? t('paymentModal.cardPrompt') : t('paymentModal.ussdPrompt')}
                 </Typography>
                 <Chip
                   label={`${countdown}s`}
@@ -295,7 +297,7 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
                     size="small"
                     value={otpInput}
                     onChange={(e) => setOtpInput(e.target.value)}
-                    placeholder="Enter 6-digit OTP"
+                    placeholder={t('paymentModal.otpPlaceholder')}
                     sx={{
                       bgcolor: '#1E293B',
                       borderRadius: 1.5,
@@ -307,7 +309,7 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
               ) : (
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', py: 0.5, gap: 1.5 }}>
                   <Typography variant="caption" sx={{ color: '#94A3B8' }}>
-                    PIN:
+                    {t('paymentModal.pin')}:
                   </Typography>
                   <Box
                     sx={{
@@ -351,14 +353,14 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
               }}
             >
               {paymentMethod === 'card'
-                ? 'Submit OTP & Approve (Simulate Demo)'
-                : `Enter PIN & Authorize (Simulate Demo)`}
+                ? t('paymentModal.simulateCard')
+                : t('paymentModal.simulateMtnOrange')}
             </Button>
 
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5, mt: 1.5 }}>
               <SecurityIcon sx={{ fontSize: 13, color: '#16A34A' }} />
               <Typography variant="caption" color="text.secondary" sx={{ fontSize: 11 }}>
-                256-Bit Encrypted Secure Channel • Ready for Live API Linking
+                {t('paymentModal.encryptionNotice')}
               </Typography>
             </Box>
           </Box>
@@ -369,10 +371,10 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
           <Box sx={{ textAlign: 'center', py: 4 }}>
             <CircularProgress sx={{ color: '#16A34A', mb: 2 }} />
             <Typography variant="h6" sx={{ fontWeight: 700, mb: 0.5 }}>
-              Verifying Authorization...
+              {t('paymentModal.verifying')}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Confirming transaction reference <strong>{transactionRef}</strong>
+              {t('paymentModal.confirmingSwitch')}
             </Typography>
           </Box>
         )}
@@ -398,14 +400,14 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
             </Box>
 
             <Typography variant="h5" sx={{ fontWeight: 800, fontFamily: 'Space Grotesk, sans-serif', mb: 0.5 }}>
-              Payment Approved!
+              {t('paymentModal.approved')}
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              XAF {amount.toLocaleString()} debited successfully.
+              XAF {amount.toLocaleString()}
             </Typography>
 
             <Chip
-              label={`Ref: ${transactionRef}`}
+              label={`${t('paymentModal.ref')}: ${transactionRef}`}
               size="small"
               sx={{
                 bgcolor: '#16A34A',
@@ -417,7 +419,7 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
             />
 
             <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
-              Finalizing your order and dispatching runner...
+              {t('paymentModal.finalizing')}
             </Typography>
           </Box>
         )}

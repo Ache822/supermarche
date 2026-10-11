@@ -436,11 +436,11 @@ export const ShopPage: React.FC = () => {
                   <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between', mt: 'auto' }}>
                     <Box>
                       <Typography variant="h6" color="primary.main" sx={{ fontWeight: 800 }}>
-                        {product.price > 100 ? `${product.price.toLocaleString()} FCFA` : `$${product.price.toFixed(2)}`}
+                        XAF {product.price.toLocaleString()}
                       </Typography>
                       {product.compareAtPrice && (
                         <Typography variant="caption" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                          {product.compareAtPrice > 100 ? `${product.compareAtPrice.toLocaleString()} FCFA` : `$${product.compareAtPrice.toFixed(2)}`}
+                          XAF {product.compareAtPrice.toLocaleString()}
                         </Typography>
                       )}
                     </Box>
