@@ -29,13 +29,13 @@ export const ArticleListItem: React.FC<ArticleListItemProps> = ({
         px: 1.5,
         borderRadius: '8px',
         textTransform: 'none',
-        bgcolor: isSelected ? '#16a34a !important' : 'transparent',
+        bgcolor: isSelected ? '#FF6B00 !important' : 'transparent',
         color: isSelected ? '#FFFFFF !important' : isDark ? '#cbd5e1' : '#334155',
         fontWeight: isSelected ? 700 : 500,
-        boxShadow: isSelected ? '0 4px 12px rgba(22, 163, 74, 0.35)' : 'none',
+        boxShadow: isSelected ? '0 4px 12px rgba(255, 107, 0, 0.35)' : 'none',
         transition: 'all 0.2s ease-in-out',
         '&:hover': {
-          bgcolor: isSelected ? '#16a34a' : isDark ? 'rgba(30, 42, 34, 0.7)' : 'rgba(22, 163, 74, 0.08)',
+          bgcolor: isSelected ? '#FF6B00' : isDark ? 'rgba(255, 107, 0, 0.15)' : 'rgba(255, 107, 0, 0.08)',
           color: isSelected ? '#FFFFFF' : isDark ? '#FFFFFF' : '#0f172a',
         },
       }}
@@ -64,7 +64,7 @@ export const ArticleListItem: React.FC<ArticleListItemProps> = ({
         <VerifiedIcon
           sx={{
             fontSize: 16,
-            color: isSelected ? '#FFFFFF' : '#16a34a',
+            color: isSelected ? '#FFFFFF' : '#FF6B00',
             flexShrink: 0,
             ml: 1,
           }}

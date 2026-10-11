@@ -1722,10 +1722,10 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
               }}
             />
             <Typography variant="h2" sx={{ fontSize: { xs: 26, md: 32 }, fontWeight: 700, fontFamily: 'Space Grotesk, sans-serif', mb: 1 }}>
-              {t('liveSupport.title', 'Supermarche Bot Live Customer Service')}
+              {t('liveSupport.title', 'Kimzy Live Customer Service')}
             </Typography>
             <Typography sx={{ fontSize: 14, color: 'text.secondary', maxWidth: 620, mx: 'auto' }}>
-              {t('liveSupport.subtitle', 'Connect directly with actual Supermarche customer service employees in Cameroon for 24/7 order updates, gas refill assistance, and market errand tracking.')}
+              {t('liveSupport.subtitle', "Connect directly with Kimzy and our Kim's Store customer service team in Cameroon for 24/7 order updates, styling guidance, and express delivery tracking.")}
             </Typography>
           </Box>
 
@@ -1747,7 +1747,7 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                   : '0 12px 36px rgba(255, 107, 0, 0.12)',
             }}
           >
-            {/* Left Side: Mascot Supermarche Bot at Dispatch Desk Visual */}
+            {/* Left Side: Mascot Kimzy at Dispatch Desk Visual */}
             <Box
               sx={{
                 position: 'relative',
@@ -1777,14 +1777,14 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                   maxWidth: 340,
                 }}
               >
-                {t('liveSupport.bamboBubble', '"Hello! 👋 Need help with gas refills, market shopping, or tracking your active ticket?"')}
+                {t('liveSupport.bamboBubble', '"Hello! 👋 Need help with sizes, new collections, or tracking your active order?"')}
               </Box>
 
-              {/* Supermarche Bot Mascot Component */}
+              {/* Kimzy Mascot Component */}
               <BamboGuide
                 pointingDirection="down"
-                text={t('liveSupport.bamboGuideTitle', 'Supermarche Bot is active 24/7 across Cameroon!')}
-                subtext={t('liveSupport.bamboGuideSub', 'Instant answers & live technician dispatch')}
+                text={t('liveSupport.bamboGuideTitle', 'Kimzy is active 24/7 across Cameroon!')}
+                subtext={t('liveSupport.bamboGuideSub', 'Instant answers & express order assistance')}
                 height={160}
                 width={125}
               />
@@ -1814,7 +1814,7 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                   {t('liveSupport.chatTitle', 'Start Live Chat Support')}
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: 13, lineHeight: 1.45 }}>
-                  {t('liveSupport.chatSub', 'Click the floating chat widget on the bottom right to talk with Supermarche Bot in real-time.')}
+                  {t('liveSupport.chatSub', 'Click the floating chat widget on the bottom right to talk with Kimzy in real-time.')}
                 </Typography>
               </Box>
 
@@ -1840,7 +1840,7 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                   {t('liveSupport.ticketTitle', 'Download App to Order')} →
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: 13, lineHeight: 1.45 }}>
-                  {t('liveSupport.ticketSub', 'Need cooking gas, market errands, or villa cleaning dispatched? Download the Supermarche Mobile App on iOS & Android.')}
+                  {t('liveSupport.ticketSub', "Need trending fashion, skincare, gadgets, or groceries dispatched? Order on Kim's Store Mobile App on iOS & Android.")}
                 </Typography>
               </Box>
 
@@ -1866,7 +1866,7 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                   {t('liveSupport.appTitle', 'Mobile App Quick Support')} →
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: 13, lineHeight: 1.45 }}>
-                  {t('liveSupport.appSub', 'Get real-time push updates for technician arrival times on Google Play Store & Apple App Store.')}
+                  {t('liveSupport.appSub', 'Get real-time push updates for delivery arrival times on Google Play Store & Apple App Store.')}
                 </Typography>
               </Box>
             </Box>
@@ -1891,19 +1891,19 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
             }}
           >
             <Typography variant="h2" sx={{ fontSize: 30, fontWeight: 700, mb: 2 }}>
-              {t('cta.title', 'Ready to simplify your everyday errands?')}
+              {t('cta.title', 'Ready to elevate your shopping experience?')}
             </Typography>
 
             <Typography sx={{ fontSize: 16, color: 'text.secondary', mb: 3, maxWidth: 500, mx: 'auto' }}>
-              {t('cta.subtitle', 'Book your cooking gas, fresh market shopping, or cleaning service in under 60 seconds.')}
+              {t('cta.subtitle', 'Discover trending streetwear, sneakers, skincare, tech accessories, and express supermarket essentials.')}
             </Typography>
 
-            {/* Supermarche Bot Mascot Pointing to CTA Action */}
+            {/* Kimzy Mascot Pointing to CTA Action */}
             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
               <BamboGuide
                 pointingDirection="down"
-                text={t('cta.bamboTitle', 'Click below to dispatch your first ticket!')}
-                subtext={t('cta.bamboSub', 'Instant confirmation & live technician status updates')}
+                text={t('cta.bamboTitle', "Explore Kim's Store collections!")}
+                subtext={t('cta.bamboSub', 'Fast delivery & instant Mobile Money checkout across Cameroon')}
                 height={140}
                 width={110}
               />

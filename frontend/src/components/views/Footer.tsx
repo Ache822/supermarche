@@ -34,7 +34,7 @@ interface FooterProps {
   onOpenBooking?: (serviceId?: string) => void;
 }
 
-export function Footer({ mode, onOpenBooking }: FooterProps) {
+export function Footer({ mode, onOpenBooking: _onOpenBooking }: FooterProps) {
   const { t } = useTranslation();
   const isDark = mode === 'dark';
   const [email, setEmail] = useState('');
@@ -118,11 +118,11 @@ export function Footer({ mode, onOpenBooking }: FooterProps) {
                   letterSpacing: '-0.02em',
                 }}
               >
-                {t('newsletter.title', 'Subscribe to Supermarche Newsletter')}
+                {t('newsletter.title', "Subscribe to Kim's Store Newsletter")}
               </Typography>
             </Box>
             <Typography sx={{ fontSize: 13.5, color: '#FFC4A8', lineHeight: 1.5 }}>
-              {t('newsletter.subtitle', 'Get instant updates on service launches, regional promo codes & exclusive mobile money discounts across Douala, Yaoundé, Bamenda & Buea.')}
+              {t('newsletter.subtitle', 'Get instant updates on latest drops, fashion arrivals, regional promo codes & exclusive discounts across Douala, Yaoundé, Bamenda & Buea.')}
             </Typography>
           </Box>
 
@@ -232,18 +232,18 @@ export function Footer({ mode, onOpenBooking }: FooterProps) {
               <SupermarcheLogo size={44} />
             </Box>
             <Typography sx={{ fontSize: 13, color: '#FFC4A8', mb: 2.5, lineHeight: 1.6, maxWidth: 260 }}>
-              {t('footer.description')}
+              {t('footer.description', "Cameroon's premier online lifestyle department store & express supermarket. Trending apparel, urban footwear, beauty, tech accessories, and daily essentials delivered directly to your doorstep.")}
             </Typography>
 
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, color: '#FFA27B', flexWrap: 'wrap', mb: 2.5 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, fontSize: 11 }}>
-                <ShieldIcon sx={{ fontSize: 14 }} /> {t('footer.insured', '100% Insured')}
+                <ShieldIcon sx={{ fontSize: 14 }} /> {t('footer.insured', '100% Authentic Quality')}
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, fontSize: 11 }}>
-                <VerifiedUserIcon sx={{ fontSize: 14 }} /> {t('footer.vetted', 'Vetted Staff')}
+                <VerifiedUserIcon sx={{ fontSize: 14 }} /> {t('footer.vetted', 'Verified Fast Delivery')}
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, fontSize: 11 }}>
-                <LocalShippingIcon sx={{ fontSize: 14 }} /> {t('footer.express', 'Express Radar')}
+                <LocalShippingIcon sx={{ fontSize: 14 }} /> {t('footer.express', 'Express Doorstep')}
               </Box>
             </Box>
 
@@ -420,8 +420,8 @@ export function Footer({ mode, onOpenBooking }: FooterProps) {
               </AccordionSummary>
               <AccordionDetails sx={{ pt: 0, pb: 2 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.2, fontSize: 13, color: '#FFC4A8' }}>
-                  <Box onClick={() => onOpenBooking?.()} sx={{ color: '#FFC4A8', cursor: 'pointer' }}>
-                    {t('footer.exploreServices', 'Explore All Services')}
+                  <Box component={Link} to="/shop" sx={{ color: '#FFC4A8', textDecoration: 'none' }}>
+                    Shop Products
                   </Box>
                   <Box component={Link} to="/about" sx={{ color: '#FFC4A8', textDecoration: 'none' }}>
                     {t('footer.aboutUs', 'About Us')}
@@ -439,7 +439,7 @@ export function Footer({ mode, onOpenBooking }: FooterProps) {
               </AccordionDetails>
             </Accordion>
 
-            {/* Accordion 2: For Service Providers */}
+            {/* Accordion 2: Partner With Us */}
             <Accordion
               elevation={0}
               sx={{
@@ -452,19 +452,19 @@ export function Footer({ mode, onOpenBooking }: FooterProps) {
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: '#FF6B00' }} />}>
                 <Typography sx={{ fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700, fontSize: 14 }}>
-                  {t('footer.colProviders', 'For Service Providers')}
+                  {t('footer.colProviders', 'Partner With Us')}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ pt: 0, pb: 2 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.2, fontSize: 13, color: '#FFC4A8' }}>
-                  <Box component={Link} to="/become-a-provider" sx={{ color: '#FFC4A8', textDecoration: 'none' }}>
-                    {t('footer.becomeProvider', 'Become a Service Provider')}
+                  <Box component={Link} to="/shop" sx={{ color: '#FFC4A8', textDecoration: 'none' }}>
+                    {t('footer.becomeProvider', "Sell on Kim's Store")}
                   </Box>
-                  <Box component={Link} to="/become-a-provider" sx={{ color: '#FFC4A8', textDecoration: 'none' }}>
-                    {t('footer.providerVetting', 'Provider Vetting & ID Check')}
+                  <Box component={Link} to="/about" sx={{ color: '#FFC4A8', textDecoration: 'none' }}>
+                    {t('footer.providerVetting', 'Merchant Quality Check')}
                   </Box>
-                  <Box component={Link} to="/become-a-provider" sx={{ color: '#FFC4A8', textDecoration: 'none' }}>
-                    {t('footer.providerPayouts', 'Provider Payout Schedules')}
+                  <Box component={Link} to="/help" sx={{ color: '#FFC4A8', textDecoration: 'none' }}>
+                    {t('footer.providerPayouts', 'Seller Payouts')}
                   </Box>
                 </Box>
               </AccordionDetails>

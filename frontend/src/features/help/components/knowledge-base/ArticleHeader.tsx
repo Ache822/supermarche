@@ -16,7 +16,7 @@ export const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article }) => {
   const { t } = useTranslation();
 
   return (
-    <Box sx={{ pb: 3, mb: 3, borderBottom: '1px solid', borderColor: isDark ? '#1e2a22' : '#e2e8f0' }}>
+    <Box sx={{ pb: 3, mb: 3, borderBottom: '1px solid', borderColor: isDark ? '#3A2316' : '#e2e8f0' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 1.5, mb: 2 }}>
         <Chip
           label={article.categoryName.toUpperCase()}
@@ -24,25 +24,25 @@ export const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article }) => {
           sx={{
             fontWeight: 800,
             fontSize: '11px',
-            bgcolor: 'rgba(22, 163, 74, 0.15)',
-            color: '#16a34a',
-            border: '1px solid rgba(22, 163, 74, 0.3)',
+            bgcolor: 'rgba(255, 107, 0, 0.15)',
+            color: '#FF6B00',
+            border: '1px solid rgba(255, 107, 0, 0.3)',
             borderRadius: '999px',
           }}
         />
 
         {article.verified && (
           <Chip
-            icon={<VerifiedIcon sx={{ fontSize: '14px !important', color: isDark ? '#10b981 !important' : '#059669 !important' }} />}
+            icon={<VerifiedIcon sx={{ fontSize: '14px !important', color: '#FF6B00 !important' }} />}
             label={t('help.article.verified_guide', 'Verified Guide')}
             size="small"
             sx={{
               fontWeight: 700,
               fontSize: '11px',
-              bgcolor: isDark ? 'rgba(6, 78, 59, 0.6)' : 'rgba(209, 250, 229, 0.8)',
-              color: isDark ? '#34d399' : '#047857',
+              bgcolor: isDark ? 'rgba(255, 107, 0, 0.2)' : 'rgba(255, 107, 0, 0.1)',
+              color: '#FF6B00',
               border: '1px solid',
-              borderColor: isDark ? 'rgba(16, 185, 129, 0.4)' : 'rgba(52, 211, 153, 0.4)',
+              borderColor: isDark ? 'rgba(255, 107, 0, 0.4)' : 'rgba(255, 107, 0, 0.3)',
               borderRadius: '999px',
             }}
           />
@@ -77,9 +77,9 @@ export const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article }) => {
         <Box
           sx={{
             p: 2.5,
-            bgcolor: isDark ? '#070b09' : '#f8fafc',
+            bgcolor: isDark ? '#140C07' : '#FFF4ED',
             border: '1px solid',
-            borderColor: isDark ? '#1e2a22' : '#e2e8f0',
+            borderColor: isDark ? '#3A2316' : '#FFE4D4',
             borderRadius: '12px',
             mb: 2,
           }}
@@ -98,7 +98,7 @@ export const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article }) => {
 
       {article.helpfulCount !== undefined && (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <ThumbUpIcon sx={{ fontSize: 15, color: '#16a34a' }} />
+          <ThumbUpIcon sx={{ fontSize: 15, color: '#FF6B00' }} />
           <Typography sx={{ fontSize: 12, color: isDark ? '#94a3b8' : '#64748b' }}>
             {t('help.article.helpful_count', '{{count}} people found this guide helpful', { count: article.helpfulCount })}
           </Typography>

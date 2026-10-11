@@ -9,206 +9,221 @@ const FAQ_SEED_DATA = [
   {
     page: "help",
     category: "customers",
-    subCategory: "Booking & Requests",
-    question: "How do I book a service on Supermarche?",
-    answer: "Download the Supermarche Mobile App on iOS or Android. Select your required errand or repair (e.g., Gas Refill, Market Errands, Deep Cleaning), set your GPS pin in Douala or Yaoundé, add job description or photos, and confirm dispatch.",
-    articleSlug: "guide-to-supermarche-service-booking",
+    subCategory: "Orders & Shopping",
+    question: "How do I place an order on Kim's Store?",
+    answer: "Browse our collections (Fashion, Sneakers, Cosmetics, Tech, or Supermarket), add items to your cart, and proceed to checkout. Enter your delivery address in Douala, Yaoundé, Buea, or Bamenda and select your preferred payment method.",
+    articleSlug: "about-kims-store",
     is_featured: true,
     is_published: true,
     display_order: 1,
     translations: {
       fr: {
-        question: "Comment réserver un service sur Supermarche ?",
-        answer: "Téléchargez l'application mobile Supermarche sur iOS ou Android. Sélectionnez votre cours ou réparation requise (ex. Recharge Gaz, Achats au Marché, Nettoyage), définissez votre point GPS à Douala ou Yaoundé, et confirmez l'envoi."
+        question: "Comment passer une commande sur Kim's Store ?",
+        answer: "Parcourez nos rayons (Mode, Sneakers, Cosmétiques, Tech ou Supermarché), ajoutez vos articles au panier et validez la commande avec votre adresse de livraison à Douala, Yaoundé, Buea ou Bamenda."
       }
     }
   },
   {
     page: "help",
     category: "customers",
-    subCategory: "Booking & Requests",
-    question: "What is the policy for rescheduling or cancelling a request?",
-    answer: "You can cancel or reschedule any pending request free of charge before a Supermarche Pro is dispatched. If cancelled after a Pro is en route (within 10 minutes of arrival), a nominal 1,000 FCFA runner compensation fee applies.",
-    articleSlug: "guide-to-supermarche-service-booking",
+    subCategory: "Delivery & Timelines",
+    question: "How fast is delivery and can I track my order?",
+    answer: "Supermarket pantry essentials are delivered within 45 to 90 minutes. Fashion, shoes, and tech products are delivered same-day or next-day. You will receive an SMS with a live GPS tracking link once your dispatch courier is on the road, or you can ask Kimzy in live chat for real-time updates.",
+    articleSlug: "kims-store-delivery-guide",
     is_featured: true,
     is_published: true,
     display_order: 2,
     translations: {
       fr: {
-        question: "Quelle est la politique de modification ou d'annulation ?",
-        answer: "Vous pouvez annuler ou modifier toute demande en attente gratuitement avant l'envoi d'un Pro. Si annulé après le départ du Pro, des frais de compensation de 1 000 FCFA s'appliquent."
+        question: "Quels sont les délais de livraison et puis-je suivre ma commande ?",
+        answer: "Les essentiels du supermarché sont livrés en 45 à 90 minutes. La mode et les produits tech sont livrés le jour même ou le lendemain avec suivi GPS en direct par SMS et assistance Kimzy."
       }
     }
   },
   {
     page: "help",
     category: "customers",
-    subCategory: "Booking & Requests",
-    question: "How do emergency requests work (gas leaks, burst pipes)?",
-    answer: "Mark your booking as 'Urgent Dispatch' in the app. Our priority radar dispatches the nearest verified Supermarche runner within 5 minutes, backed by 24/7 direct telephone support.",
-    articleSlug: "guide-to-supermarche-service-booking",
-    is_featured: false,
+    subCategory: "Payments & Mobile Money",
+    question: "What payment methods are supported on Kim's Store?",
+    answer: "We support MTN Mobile Money, Orange Money, Visa/Mastercard debit and credit cards, as well as Cash on Delivery in eligible delivery zones with instant digital receipts.",
+    articleSlug: "payment-momo-security-guide",
+    is_featured: true,
     is_published: true,
     display_order: 3,
     translations: {
       fr: {
-        question: "Comment fonctionnent les demandes d'urgence (fuite de gaz, tuyaux percés) ?",
-        answer: "Marquez votre réservation comme 'Envoi Urgent' dans l'application. Notre radar de priorité dépêche le coursier vérifié le plus proche en moins de 5 minutes."
+        question: "Quels modes de paiement sont acceptés sur Kim's Store ?",
+        answer: "Nous acceptons MTN Mobile Money, Orange Money, les cartes bancaires Visa/Mastercard ainsi que le paiement en espèces à la livraison avec facture numérique instantanée."
       }
     }
   },
   {
     page: "help",
     category: "customers",
-    subCategory: "Payments & Pricing",
-    question: "What payment methods are accepted on Supermarche?",
-    answer: "We support Online Payment via MTN Mobile Money, Orange Money, and Visa/Mastercard credit/debit cards, as well as On-Site Payment (Cash to Pro) upon job completion.",
-    articleSlug: "payment-methods-and-escrow-refunds",
+    subCategory: "Returns & Exchanges",
+    question: "What if a shoe or clothing item does not fit my size?",
+    answer: "We provide a hassle-free 7-day size exchange guarantee. If an outfit or sneaker doesn't fit, request a size swap through your order history or chat with Kimzy. Our courier will bring the right size to your doorstep.",
+    articleSlug: "returns-exchanges-warranty",
     is_featured: true,
     is_published: true,
     display_order: 4,
     translations: {
       fr: {
-        question: "Quels modes de paiement sont acceptés sur Supermarche ?",
-        answer: "Nous acceptons le paiement en ligne via MTN Mobile Money, Orange Money, Visa/Mastercard, ainsi que le paiement en espèces sur place à la fin du travail."
+        question: "Que faire si la pointure ou la taille ne me convient pas ?",
+        answer: "Nous offrons une garantie d'échange de taille sous 7 jours sans tracas. Demandez un échange via votre compte ou avec Kimzy, et notre livreur vous apportera la bonne taille."
       }
     }
   },
   {
     page: "help",
     category: "customers",
-    subCategory: "Payments & Pricing",
-    question: "How are service prices, diagnostics, and extra materials calculated?",
-    answer: "Standard errands (cooking gas, market delivery) have transparent fixed prices shown in-app. For complex repairs, a standard 2,000 FCFA diagnostic fee covers on-site inspection. If extra replacement parts are required, the Pro provides an itemized digital receipt in the app before purchase.",
-    articleSlug: "payment-methods-and-escrow-refunds",
+    subCategory: "Authenticity & Products",
+    question: "Are all sneakers, fashion brands, and beauty products 100% genuine?",
+    answer: "Yes. Every single item at Kim's Store is sourced directly from verified brand partners and inspected by our quality assurance team before dispatch.",
+    articleSlug: "about-kims-store",
     is_featured: false,
     is_published: true,
     display_order: 5,
     translations: {
       fr: {
-        question: "Comment sont calculés les prix des services et diagnostics ?",
-        answer: "Les courses standard ont des prix fixes transparents. Pour les réparations complexes, des frais de diagnostic de 2 000 FCFA couvrent l'inspection sur place."
+        question: "Les sneakers, vêtements et produits de beauté sont-ils 100% authentiques ?",
+        answer: "Oui. Tous les articles de Kim's Store proviennent directement de marques et fournisseurs certifiés et sont rigoureusement contrôlés avant expédition."
       }
     }
   },
+
+  // --- MERCHANT & PARTNER FAQs ---
   {
-    page: "help",
-    category: "customers",
-    subCategory: "Payments & Pricing",
-    question: "How do refunds and dispute resolution work?",
-    answer: "If a job is incomplete or unsatisfactory, tap 'Report Issue' in your app order history or chat with Supermarche Bot Live Support within 48 hours. Funds held in Mobile Money escrow are refunded directly to your MoMo/Orange Money wallet after review.",
-    articleSlug: "payment-methods-and-escrow-refunds",
+    page: "become-a-provider",
+    category: "pros",
+    subCategory: "Selling & Onboarding",
+    question: "How can I sell my products or brand on Kim's Store?",
+    answer: "Boutiques, local fashion creators, and certified suppliers can apply via our Merchant Partner portal. Submit your catalog, business registration or CNI, and start selling after a swift 48-hour verification process.",
+    articleSlug: "sell-on-kims-store",
     is_featured: true,
     is_published: true,
     display_order: 6,
     translations: {
       fr: {
-        question: "Comment fonctionnent les remboursements et la résolution des litiges ?",
-        answer: "Si un travail est incomplet, appuyez sur 'Signaler un problème' dans l'historique ou discutez avec le support en direct sous 48 heures. Les fonds retenus en séquestre MoMo sont remboursés après examen."
+        question: "Comment vendre mes créations ou ma boutique sur Kim's Store ?",
+        answer: "Les boutiques, créateurs de mode et importateurs peuvent postuler via notre portail Partenaires Marchands. Soumettez votre catalogue pour vérification sous 48h."
       }
     }
   },
-
-  // --- SERVICE PRO (PROS) FAQs ---
   {
     page: "become-a-provider",
     category: "pros",
-    subCategory: "Getting Started & Onboarding",
-    question: "How do I register as a Supermarche Service Pro?",
-    answer: "Download the 'Supermarche Provider' app, submit your CNI copy, proof of residence, trade certification or references, and complete our 30-minute safety orientation session.",
-    articleSlug: "pro-onboarding-and-verification-guide",
+    subCategory: "Payouts & Logistics",
+    question: "When and how do Kim's Store partners receive payouts?",
+    answer: "Sales revenue is automatically disbursed every Monday directly to your MTN Mobile Money or Orange Money merchant account with zero processing deductions.",
+    articleSlug: "sell-on-kims-store",
     is_featured: true,
     is_published: true,
-    display_order: 10,
+    display_order: 7,
     translations: {
       fr: {
-        question: "Comment m'inscrire en tant que Prestataire Supermarche Pro ?",
-        answer: "Téléchargez l'application 'Supermarche Provider', soumettez votre CNI, justificatif de domicile, certification de métier et suivez la session d'orientation de 30 minutes."
-      }
-    }
-  },
-  {
-    page: "become-a-provider",
-    category: "pros",
-    subCategory: "Getting Started & Onboarding",
-    question: "How long does background check and profile verification take?",
-    answer: "Profile verification typically takes 24 to 48 business hours. Once verified, you will receive an SMS and push notification to activate your account and start accepting nearby jobs.",
-    articleSlug: "pro-onboarding-and-verification-guide",
-    is_featured: false,
-    is_published: true,
-    display_order: 11,
-    translations: {
-      fr: {
-        question: "Combien de temps prend la vérification du profil et des antécédents ?",
-        answer: "La vérification du profil prend généralement entre 24 et 48 heures ouvrables. Vous recevrez un SMS dès que votre compte sera activé."
-      }
-    }
-  },
-  {
-    page: "become-a-provider",
-    category: "pros",
-    subCategory: "Managing Jobs & Earnings",
-    question: "When and how do Pros receive earnings for online payments?",
-    answer: "Earnings for Mobile Money and Card payments are transferred automatically every Monday directly to your registered MTN Mobile Money or Orange Money account with zero transfer fees.",
-    articleSlug: "pro-onboarding-and-verification-guide",
-    is_featured: true,
-    is_published: true,
-    display_order: 14,
-    translations: {
-      fr: {
-        question: "Quand et comment les Pros reçoivent-ils leurs gains ?",
-        answer: "Les gains pour les paiements en ligne sont transférés automatiquement chaque lundi directement vers votre compte MTN Mobile Money ou Orange Money sans frais de transfert."
+        question: "Quand et comment les vendeurs partenaires reçoivent-ils leurs paiements ?",
+        answer: "Les revenus des ventes sont versés automatiquement chaque lundi directement sur votre compte MTN Mobile Money ou Orange Money sans frais cachés."
       }
     }
   }
 ];
 
+
 const ARTICLE_SEED_DATA = [
   {
-    slug: "guide-to-supermarche-service-booking",
-    category: "Booking & Requests",
-    title: "Complete Guide to Booking Errand & Home Delivery Services",
-    summary: "Step-by-step instructions on setting GPS pins, selecting services, and scheduling express deliveries in Douala and Yaoundé.",
-    content: "<h3>Booking Your Service</h3><p>Download the Supermarche Mobile App on iOS or Android. Select your required errand or repair (e.g. Gas Refill, Market Errands, Deep Cleaning), set your GPS pin in Douala or Yaoundé, add job description or photos, and confirm dispatch.</p>",
+    slug: "about-kims-store",
+    category: "About Kim's Store",
+    title: "About Kim's Store — Cameroon's Modern Lifestyle & Express Shopping Destination",
+    summary: "Discover our curated departments: trending streetwear, genuine sneakers, beauty cosmetics, tech accessories, and express supermarket essentials.",
+    content: "<h3>Welcome to Kim's Store</h3><p>Kim's Store is Cameroon's premier multi-department retail and express supermarket platform operating across Douala, Yaoundé, Buea, and Bamenda. We offer carefully curated streetwear fashion, brand-name sneakers, premium skincare & cosmetics, smartphones and smart tech accessories, plus fresh pantry groceries.</p><h3>Authentic Quality Guarantee</h3><p>Every item undergoes a strict authenticity inspection before dispatch. Kimzy, our virtual shopping assistant, is available 24/7 in the chat to answer sizing questions and check order statuses.</p>",
     display_order: 1,
     is_published: true,
     translations: {
       fr: {
-        title: "Guide complet de réservation de coursier et livraison à domicile",
-        summary: "Instructions étape par étape pour définir vos coordonnées GPS et programmer des livraisons express à Douala et Yaoundé.",
-        content: "<h3>Réserver votre service</h3><p>Téléchargez l'application mobile Supermarche sur iOS ou Android. Sélectionnez votre cours ou réparation (ex. Recharge Gaz, Achats au Marché, Nettoyage), définissez votre position GPS à Douala ou Yaoundé, ajoutez des photos et confirmez l'envoi.</p>"
+        title: "À propos de Kim's Store — Grand Magasin & Supermarché Express de Référence au Cameroun",
+        summary: "Découvrez nos rayons : mode urbaine, sneakers authentiques, cosmétiques éclat, accessoires tech et essentiels du supermarché.",
+        content: "<h3>Bienvenue chez Kim's Store</h3><p>Kim's Store est la référence du grand magasin et supermarché en ligne au Cameroun. Nous livrons à Douala, Yaoundé, Buea et Bamenda avec des articles 100% authentiques inspectés avant chaque envoi. Kimzy, notre mascotte et assistant virtuel, est disponible 24/7 pour vos questions.</p>"
       }
     }
   },
   {
-    slug: "payment-methods-and-escrow-refunds",
-    category: "Payments & Pricing",
-    title: "Understanding Mobile Money Payments, Escrow & Refund Protection",
-    summary: "Detailed overview of MTN MoMo, Orange Money, card payments, and 48-hour escrow protection.",
-    content: "<h3>Payment & Escrow Protection</h3><p>We support Online Payment via MTN Mobile Money, Orange Money, and Visa/Mastercard credit/debit cards, as well as On-Site Payment (Cash to Pro) upon job completion. All online payments are held in Mobile Money escrow until job completion.</p>",
+    slug: "kims-store-delivery-guide",
+    category: "Orders & Delivery",
+    title: "Express Doorstep Delivery Across Cameroon — Timelines & Tracking",
+    summary: "Learn how delivery works in Douala, Yaoundé, Buea & Bamenda with real-time runner tracking and 45-minute express grocery options.",
+    content: "<h3>Delivery Coverage & Timelines</h3><p>We operate local fulfillment and delivery hubs in Douala, Yaoundé, Buea, and Bamenda. Everyday groceries and pantry items arrive in 45–90 minutes. Fashion collections, shoes, and tech products are delivered same-day or on convenient scheduled morning/evening slots.</p><h3>Live Runner Tracking</h3><p>Every order includes an SMS tracking link and real-time live map tracking. Ask Kimzy in chat for instant status updates.</p>",
     display_order: 2,
     is_published: true,
     translations: {
       fr: {
-        title: "Comprendre les paiements Mobile Money, le séquestre et la protection des remboursements",
-        summary: "Présentation détaillée de MTN MoMo, Orange Money, paiements par carte et protection séquestre sous 48 heures.",
-        content: "<h3>Protection des paiements et du séquestre</h3><p>Nous acceptons les paiements en ligne via MTN Mobile Money, Orange Money et cartes Visa/Mastercard. Tous les paiements en ligne sont sécurisés en séquestre jusqu'à la fin de la prestation.</p>"
+        title: "Livraison Express à Domicile au Cameroun — Délais et Suivi en Direct",
+        summary: "Découvrez notre service de livraison à Douala, Yaoundé, Buea et Bamenda avec suivi en temps réel et livraison express en 45 minutes.",
+        content: "<h3>Zones de Couverture & Délais</h3><p>Nos hubs locaux assurent la livraison en 45 à 90 minutes pour l'épicerie et le jour même pour la mode et les accessoires. Suivez votre livreur en temps réel sur carte interactive.</p>"
       }
     }
   },
   {
-    slug: "pro-onboarding-and-verification-guide",
-    category: "Getting Started & Onboarding",
-    title: "Service Pro Onboarding & Background Verification Manual",
-    summary: "Requirements for CNI identity checks, police clearance, and trade skill verification for technicians.",
-    content: "<h3>Becoming a Supermarche Pro</h3><p>Download the 'Supermarche Provider' app, submit your CNI copy, proof of residence, trade certification or references, and complete our 30-minute safety orientation session.</p>",
+    slug: "payment-momo-security-guide",
+    category: "Payments & MoMo",
+    title: "Payment Security & Mobile Money Checkout (MTN MoMo & Orange Money)",
+    summary: "Seamless zero-fee Mobile Money checkout, Cash on Delivery options, and instant automated digital invoices.",
+    content: "<h3>Secure Mobile Money Payments</h3><p>Paying on Kim's Store is instant and secure. We accept MTN Mobile Money, Orange Money, credit/debit cards, and Cash on Delivery for eligible zones. Digital payments trigger a prompt on your phone with zero hidden fees. Once authorized, a digital receipt and invoice is automatically generated.</p>",
     display_order: 3,
     is_published: true,
     translations: {
       fr: {
-        title: "Manuel d'intégration des Prestataires et vérification d'identité Pro",
-        summary: "Exigences pour la vérification CNI, contrôle d'antécédents et validation des compétences pour les techniciens.",
-        content: "<h3>Devenir un Pro Supermarche</h3><p>Téléchargez l'application 'Supermarche Provider', soumettez votre CNI, preuve de domicile et certification professionnelle, puis suivez notre session d'orientation de 30 minutes.</p>"
+        title: "Sécurité des Paiements & Règlement Mobile Money (MTN MoMo & Orange Money)",
+        summary: "Paiement Mobile Money sans frais cachés, option de paiement à la livraison et factures numériques automatiques.",
+        content: "<h3>Paiement Sécurisé Mobile Money</h3><p>Payez en un clic via MTN Mobile Money ou Orange Money avec validation USSD directe sur votre téléphone. Reçu et facture numérique instantanés disponibles sur votre compte.</p>"
+      }
+    }
+  },
+  {
+    slug: "returns-exchanges-warranty",
+    category: "Returns & Exchanges",
+    title: "Returns, Sizing Guide & 7-Day Easy Exchange Policy",
+    summary: "Hassle-free 7-day size exchanges for shoes and apparel, size charts, and our 100% authentic merchandise guarantee.",
+    content: "<h3>7-Day Size Exchanges</h3><p>We want you to love everything you order from Kim's Store. If a pair of sneakers or an outfit does not fit properly, request a size exchange within 7 days. If an item arrives with any defect, we pick it up and replace it completely free of charge. Chat with Kimzy to start an exchange instantly.</p>",
+    display_order: 4,
+    is_published: true,
+    translations: {
+      fr: {
+        title: "Retours, Guide des Tailles & Échanges Faciles sous 7 Jours",
+        summary: "Échanges de pointures et de tailles sans tracas sous 7 jours, guide des pointures et garantie 100% authentique.",
+        content: "<h3>Échanges sous 7 Jours</h3><p>Si une pointure ou une taille ne vous convient pas, demandez un échange simple sous 7 jours. En cas de défaut, le retour et le remplacement sont entièrement gratuits.</p>"
+      }
+    }
+  },
+  {
+    slug: "sell-on-kims-store",
+    category: "Partner With Us",
+    title: "Sell on Kim's Store — Merchant & Local Brand Partnership Guide",
+    summary: "How fashion designers, local boutiques, and tech importers can showcase their inventory on Cameroon's top lifestyle store.",
+    content: "<h3>Partnering with Kim's Store</h3><p>Expand your retail brand across Cameroon. Approved vendors get instant access to our customer base, delivery courier network, and automated weekly Mobile Money payouts. Submit your catalog through the partner portal to get verified in 48 hours.</p>",
+    display_order: 5,
+    is_published: true,
+    translations: {
+      fr: {
+        title: "Vendre sur Kim's Store — Guide des Partenariats et Boutiques Locales",
+        summary: "Comment les créateurs de mode, boutiques locales et importateurs tech peuvent distribuer leurs produits sur Kim's Store.",
+        content: "<h3>Devenir Partenaire Vendeur</h3><p>Rejoignez Kim's Store pour toucher des milliers de clients au Cameroun en bénéficiant de notre logistique express et de règlements MoMo hebdomadaires automatiques.</p>"
+      }
+    }
+  },
+  {
+    slug: "customer-support-kimzy",
+    category: "Customer Support",
+    title: "24/7 Customer Care — Chatting with Kimzy & Direct Support Hotlines",
+    summary: "How to get quick assistance via our Kimzy chat widget, direct phone numbers, and official customer email.",
+    content: "<h3>Customer Care Channels</h3><p>Our customer support team is always within reach. Tap the floating chat bubble on the bottom right to speak with Kimzy in real-time. For urgent order inquiries, call +237 655 822 100 or +237 677 822 200, or email support@kimsstore.cm.</p>",
+    display_order: 6,
+    is_published: true,
+    translations: {
+      fr: {
+        title: "Service Client 24/7 — Chat avec Kimzy et Numéros d'Assistance Directe",
+        summary: "Comment obtenir de l'aide via le widget de chat Kimzy, nos numéros de téléphone directs et notre email support officiel.",
+        content: "<h3>Canaux d'Assistance Clientèle</h3><p>Notre équipe support est à votre disposition 24h/24. Discutez en direct avec Kimzy via le widget flottant, appelez au +237 655 822 100 / +237 677 822 200 ou écrivez à support@kimsstore.cm.</p>"
       }
     }
   }

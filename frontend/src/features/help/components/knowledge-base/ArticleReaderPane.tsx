@@ -25,11 +25,11 @@ export const ArticleReaderPane: React.FC<ArticleReaderPaneProps> = ({
   return (
     <Box
       sx={{
-        bgcolor: isDark ? '#0d1510' : '#ffffff',
+        bgcolor: isDark ? '#1F140C' : '#ffffff',
         p: { xs: 3, md: 4 },
         borderRadius: '18px',
         border: '1px solid',
-        borderColor: isDark ? '#1e2a22' : '#e2e8f0',
+        borderColor: isDark ? '#3A2316' : '#e2e8f0',
         boxShadow: isDark ? '0 8px 32px rgba(0,0,0,0.4)' : '0 4px 20px rgba(0,0,0,0.06)',
         minHeight: 500,
         display: 'flex',
@@ -60,9 +60,9 @@ export const ArticleReaderPane: React.FC<ArticleReaderPaneProps> = ({
             sx={{
               p: 2,
               borderRadius: '50%',
-              bgcolor: 'rgba(22, 163, 74, 0.1)',
-              border: '1px solid rgba(22, 163, 74, 0.25)',
-              color: '#16a34a',
+              bgcolor: 'rgba(255, 107, 0, 0.1)',
+              border: '1px solid rgba(255, 107, 0, 0.25)',
+              color: '#FF6B00',
               mb: 2,
             }}
           >

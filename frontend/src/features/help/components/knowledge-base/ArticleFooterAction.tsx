@@ -25,9 +25,9 @@ export const ArticleFooterAction: React.FC<ArticleFooterActionProps> = ({ onOpen
         gap: 2,
         p: 2.5,
         borderRadius: '16px',
-        bgcolor: isDark ? '#070b09' : '#f8fafc',
+        bgcolor: isDark ? '#140C07' : '#FFF4ED',
         border: '1px solid',
-        borderColor: isDark ? '#1e2a22' : '#e2e8f0',
+        borderColor: isDark ? '#3A2316' : '#FFE4D4',
       }}
     >
       <Box>
@@ -46,8 +46,8 @@ export const ArticleFooterAction: React.FC<ArticleFooterActionProps> = ({ onOpen
           variant="outlined"
           startIcon={<EmailIcon sx={{ fontSize: 18 }} />}
           sx={{
-            borderColor: isDark ? '#1e2a22' : '#cbd5e1',
-            bgcolor: isDark ? '#0d1510' : '#ffffff',
+            borderColor: isDark ? '#3A2316' : '#E2E8F0',
+            bgcolor: isDark ? '#1F140C' : '#ffffff',
             color: isDark ? '#cbd5e1' : '#334155',
             fontSize: '12px',
             fontWeight: 600,
@@ -56,8 +56,8 @@ export const ArticleFooterAction: React.FC<ArticleFooterActionProps> = ({ onOpen
             px: 2,
             py: 1,
             '&:hover': {
-              bgcolor: isDark ? '#1e2a22' : '#f1f5f9',
-              borderColor: '#16a34a',
+              bgcolor: isDark ? '#2D1A10' : '#f1f5f9',
+              borderColor: '#FF6B00',
               color: isDark ? '#FFFFFF' : '#0f172a',
             },
           }}
@@ -70,7 +70,7 @@ export const ArticleFooterAction: React.FC<ArticleFooterActionProps> = ({ onOpen
           onClick={onOpenSupport}
           startIcon={<ChatIcon sx={{ fontSize: 18 }} />}
           sx={{
-            bgcolor: '#16a34a',
+            bgcolor: '#FF6B00',
             color: '#FFFFFF',
             fontSize: '12px',
             fontWeight: 700,
@@ -78,9 +78,9 @@ export const ArticleFooterAction: React.FC<ArticleFooterActionProps> = ({ onOpen
             borderRadius: '10px',
             px: 2.5,
             py: 1,
-            boxShadow: '0 4px 14px rgba(22, 163, 74, 0.4)',
+            boxShadow: '0 4px 14px rgba(255, 107, 0, 0.4)',
             '&:hover': {
-              bgcolor: '#15803d',
+              bgcolor: '#E05D00',
             },
           }}
         >

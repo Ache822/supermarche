@@ -17,9 +17,9 @@ export const BreadcrumbNav: React.FC<BreadcrumbNavProps> = ({ activeCategoryName
   return (
     <Box
       sx={{
-        bgcolor: isDark ? '#0d1510' : '#ffffff',
+        bgcolor: isDark ? '#1F140C' : '#ffffff',
         border: '1px solid',
-        borderColor: isDark ? '#1e2a22' : '#e2e8f0',
+        borderColor: isDark ? '#3A2316' : '#e2e8f0',
         borderRadius: '12px',
         py: 1.5,
         px: 2.5,
@@ -42,10 +42,10 @@ export const BreadcrumbNav: React.FC<BreadcrumbNavProps> = ({ activeCategoryName
             fontSize: 14,
             fontWeight: 600,
             color: isDark ? '#cbd5e1' : '#475569',
-            '&:hover': { color: '#16a34a' },
+            '&:hover': { color: '#FF6B00' },
           }}
         >
-          <MenuBookIcon sx={{ fontSize: 18, color: '#16a34a' }} />
+          <MenuBookIcon sx={{ fontSize: 18, color: '#FF6B00' }} />
           {t('help.breadcrumbs.help_center', 'Help Center')}
         </Link>
 
@@ -57,7 +57,7 @@ export const BreadcrumbNav: React.FC<BreadcrumbNavProps> = ({ activeCategoryName
             fontSize: 14,
             fontWeight: 600,
             color: isDark ? '#cbd5e1' : '#475569',
-            '&:hover': { color: '#16a34a' },
+            '&:hover': { color: '#FF6B00' },
           }}
         >
           {t('help.breadcrumbs.knowledge_base', 'Knowledge Base')}
@@ -68,7 +68,7 @@ export const BreadcrumbNav: React.FC<BreadcrumbNavProps> = ({ activeCategoryName
             sx={{
               fontSize: 14,
               fontWeight: 700,
-              color: '#16a34a',
+              color: '#FF6B00',
             }}
           >
             {activeCategoryName}
