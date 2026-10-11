@@ -247,6 +247,22 @@ export const OrderSuccessPage: React.FC = () => {
 
   const activeStep = getActiveStep(order.orderStatus);
 
+  const getPaymentMethodDisplay = (method: string) => {
+    switch (method) {
+      case 'mtn_momo':
+        return { label: 'MTN Mobile Money (MoMo)', badgeBg: '#FFCC00', badgeColor: '#000000' };
+      case 'orange_money':
+        return { label: 'Orange Money (OM)', badgeBg: '#FF7900', badgeColor: '#FFFFFF' };
+      case 'card':
+        return { label: 'Credit / Debit Card (Online)', badgeBg: '#1E293B', badgeColor: '#FFFFFF' };
+      case 'cash_on_delivery':
+      default:
+        return { label: 'Cash on Delivery (Doorstep)', badgeBg: '#FF6B00', badgeColor: '#FFFFFF' };
+    }
+  };
+
+  const paymentInfo = getPaymentMethodDisplay(order.paymentMethod);
+
   return (
     <Container maxWidth="md" sx={{ py: 6 }}>
       <Paper
@@ -323,8 +339,8 @@ export const OrderSuccessPage: React.FC = () => {
 
         <Divider sx={{ my: 4 }} />
 
-        {/* Order Summary Details */}
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 4, mb: 4 }}>
+        {/* Order Summary Details: 3 Columns on sm+ */}
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr 1fr' }, gap: 3, mb: 4 }}>
           <Box>
             <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#FF6B00', mb: 1, textTransform: 'uppercase', fontSize: 12 }}>
               Customer Info
@@ -353,6 +369,32 @@ export const OrderSuccessPage: React.FC = () => {
             <Typography variant="body2" color="text.secondary">
               {order.shippingAddress.country}
             </Typography>
+          </Box>
+
+          <Box>
+            <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#FF6B00', mb: 1, textTransform: 'uppercase', fontSize: 12 }}>
+              Payment Channel
+            </Typography>
+            <Typography variant="body2" sx={{ fontWeight: 600, color: 'text.primary', mb: 0.5 }}>
+              {paymentInfo.label}
+            </Typography>
+            <Chip
+              label={order.paymentStatus === 'paid' ? 'PAID (Verified Online)' : 'PENDING (Doorstep COD)'}
+              size="small"
+              sx={{
+                bgcolor: order.paymentStatus === 'paid' ? '#16A34A' : '#FF6B00',
+                color: '#FFFFFF',
+                fontWeight: 800,
+                fontSize: 10,
+                height: 22,
+                mb: 0.5,
+              }}
+            />
+            {order.transactionReference && (
+              <Typography variant="caption" sx={{ display: 'block', color: 'text.secondary', fontFamily: 'monospace', fontSize: 11 }}>
+                TxRef: {order.transactionReference}
+              </Typography>
+            )}
           </Box>
         </Box>
 

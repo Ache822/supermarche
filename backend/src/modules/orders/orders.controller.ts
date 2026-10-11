@@ -25,7 +25,8 @@ const createOrderSchema = z.object({
       })
     )
     .min(1, "Order must contain at least one item"),
-  paymentMethod: z.enum(["cash_on_delivery", "card", "bank_transfer", "manual"]).default("cash_on_delivery"),
+  paymentMethod: z.enum(["cash_on_delivery", "card", "mtn_momo", "orange_money", "bank_transfer", "manual"]).default("cash_on_delivery"),
+  transactionReference: z.string().optional(),
   notes: z.string().optional()
 });
 
@@ -78,6 +79,10 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
 
     const orderNumber = `ORD-${Date.now().toString().slice(-6)}-${Math.floor(100 + Math.random() * 900)}`;
 
+    const isOnlinePaid = ["card", "mtn_momo", "orange_money"].includes(validatedData.paymentMethod);
+    const paymentStatus = isOnlinePaid ? "paid" : "pending";
+    const transactionReference = validatedData.transactionReference || (isOnlinePaid ? `TX-${Date.now().toString().slice(-8)}` : undefined);
+
     const order = await OrderModel.create({
       orderNumber,
       customer: validatedData.customer,
@@ -88,7 +93,8 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
       discount: 0,
       totalAmount,
       paymentMethod: validatedData.paymentMethod,
-      paymentStatus: validatedData.paymentMethod === "cash_on_delivery" ? "pending" : "paid",
+      paymentStatus,
+      transactionReference,
       orderStatus: "pending",
       notes: validatedData.notes
     });

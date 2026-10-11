@@ -28,10 +28,11 @@ export interface IOrder extends Document {
   shippingFee: number;
   discount: number;
   totalAmount: number;
-  paymentMethod: "cash_on_delivery" | "card" | "bank_transfer" | "manual";
+  paymentMethod: "cash_on_delivery" | "card" | "mtn_momo" | "orange_money" | "bank_transfer" | "manual";
   paymentStatus: "pending" | "paid" | "failed" | "refunded";
   orderStatus: "pending" | "processing" | "shipped" | "delivered" | "cancelled";
   trackingNumber?: string;
+  transactionReference?: string;
   notes?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -71,7 +72,7 @@ const orderSchema = new Schema<IOrder>(
     totalAmount: { type: Number, required: true },
     paymentMethod: {
       type: String,
-      enum: ["cash_on_delivery", "card", "bank_transfer", "manual"],
+      enum: ["cash_on_delivery", "card", "mtn_momo", "orange_money", "bank_transfer", "manual"],
       default: "cash_on_delivery"
     },
     paymentStatus: {
@@ -85,6 +86,7 @@ const orderSchema = new Schema<IOrder>(
       default: "pending"
     },
     trackingNumber: { type: String },
+    transactionReference: { type: String },
     notes: { type: String }
   },
   { timestamps: true }
