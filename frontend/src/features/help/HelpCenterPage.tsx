@@ -139,10 +139,146 @@ const DEFAULT_HELP_ARTICLES: HelpArticleItem[] = [
   },
 ];
 
+const DEFAULT_FAQS: FAQItem[] = [
+  // --- CUSTOMERS (For Shoppers) ---
+  {
+    id: 'faq-cust-1',
+    category: 'customers',
+    subCategory: 'Orders & Shopping',
+    question: "How do I place an order on Kim's Store?",
+    answer: "Browse our collections (Fashion, Sneakers, Cosmetics, Tech, or Supermarket Pantry), add items to your shopping bag, and proceed to checkout. Enter your delivery address in Douala, Yaoundé, Buea, or Bamenda and choose MTN MoMo, Orange Money, or Cash on Delivery.",
+    trending: true,
+  },
+  {
+    id: 'faq-cust-2',
+    category: 'customers',
+    subCategory: 'Delivery & Timelines',
+    question: "How fast is delivery and can I track my order?",
+    answer: "Supermarket pantry essentials are delivered within 45 to 90 minutes. Fashion, sneakers, and tech products are delivered same-day or next-day. You will receive an SMS with a live GPS tracking link once your dispatch courier is on the road, or you can ask Kimzy in live chat for real-time updates.",
+    trending: true,
+  },
+  {
+    id: 'faq-cust-3',
+    category: 'customers',
+    subCategory: 'Payments & Mobile Money',
+    question: "What payment methods are supported on Kim's Store?",
+    answer: "We support MTN Mobile Money, Orange Money, Visa/Mastercard debit and credit cards, as well as Cash on Delivery in eligible delivery zones with instant digital receipts.",
+    trending: true,
+  },
+  {
+    id: 'faq-cust-4',
+    category: 'customers',
+    subCategory: 'Returns & Exchanges',
+    question: "What if a shoe or clothing item does not fit my size?",
+    answer: "We provide a hassle-free 7-day size exchange guarantee. If an outfit or sneaker doesn't fit, request a size swap through your order history or chat with Kimzy. Our courier will bring the right size to your doorstep.",
+    trending: true,
+  },
+  {
+    id: 'faq-cust-5',
+    category: 'customers',
+    subCategory: 'Authenticity & Inspection',
+    question: "Are brand sneakers, cosmetics, and tech products 100% genuine?",
+    answer: "Yes. Every single item at Kim's Store is sourced directly from verified brand partners and inspected by our quality assurance team before dispatch.",
+    trending: false,
+  },
+  {
+    id: 'faq-cust-6',
+    category: 'customers',
+    subCategory: 'Campus Express',
+    question: "Can I receive orders on university campuses or student hostels?",
+    answer: "Yes! We offer dedicated campus drop zones in Yaoundé (Ngoa-Ekélé, Soa), Douala (PK17, Ndogbong), Buea (Molyko, UB Junction), and Bamenda with direct courier contact upon arrival.",
+    trending: false,
+  },
+
+  // --- PROS (For Merchants & Partners) ---
+  {
+    id: 'faq-pros-1',
+    category: 'pros',
+    subCategory: 'Merchant Onboarding',
+    question: "How can local boutiques or fashion creators sell on Kim's Store?",
+    answer: "Boutiques, local fashion designers, and certified tech distributors can apply through our Merchant Partner portal. Submit your catalog, business registration or CNI, and start selling after a swift 48-hour onboarding review.",
+    trending: true,
+  },
+  {
+    id: 'faq-pros-2',
+    category: 'pros',
+    subCategory: 'Payouts & Logistics',
+    question: "When and how do Kim's Store partners receive payouts?",
+    answer: "Sales revenue is automatically disbursed every Monday directly to your MTN Mobile Money or Orange Money merchant account with zero processing deductions and full itemized reports.",
+    trending: true,
+  },
+  {
+    id: 'faq-pros-3',
+    category: 'pros',
+    subCategory: 'Courier Network',
+    question: "Does Kim's Store handle doorstep shipping and customer returns?",
+    answer: "Yes. Our centralized logistics fleet picks up packaged items from your shop or storage hub, conducts quality verification, and handles last-mile doorstep delivery and size exchanges directly.",
+    trending: true,
+  },
+  {
+    id: 'faq-pros-4',
+    category: 'pros',
+    subCategory: 'Commission & Fees',
+    question: "What are the listing fees and commission rates for Kim's Store merchants?",
+    answer: "There are zero upfront listing fees. Kim's Store operates on a fair commission per completed order (5% to 12% depending on department category), which covers payment gateway charges and buyer insurance.",
+    trending: true,
+  },
+  {
+    id: 'faq-pros-5',
+    category: 'pros',
+    subCategory: 'Inventory Control',
+    question: "How do I update product stock and pricing from my seller dashboard?",
+    answer: "You get access to a real-time Merchant Portal where you can update stock quantities, run promotional discount campaigns, monitor pending dispatch orders, and communicate with Kim's Store support.",
+    trending: false,
+  },
+
+  // --- ACCOUNT (Account Security & Privacy) ---
+  {
+    id: 'faq-acc-1',
+    category: 'account',
+    subCategory: 'Payment & MoMo Security',
+    question: "How is my phone number and Mobile Money payment info protected?",
+    answer: "Transactions are processed over encrypted banking tunnels with zero storage of your Mobile Money PIN. All OTP prompts are generated directly by your telecom network (MTN / Orange).",
+    trending: true,
+  },
+  {
+    id: 'faq-acc-2',
+    category: 'account',
+    subCategory: 'Password & Sign-In',
+    question: "How do I reset my password or update my login credentials?",
+    answer: "Navigate to your Account Profile or click 'Forgot Password' on the login screen. You will receive an instant verification link or SMS OTP to securely reset your password in seconds.",
+    trending: true,
+  },
+  {
+    id: 'faq-acc-3',
+    category: 'account',
+    subCategory: 'Order Privacy & Receipts',
+    question: "Who can see my order history, delivery addresses, and invoices?",
+    answer: "Only you and authorized fulfillment agents assigned to your delivery have access to your shipping details. Your order history and digital PDF receipts are permanently encrypted in your personal dashboard.",
+    trending: true,
+  },
+  {
+    id: 'faq-acc-4',
+    category: 'account',
+    subCategory: 'Two-Factor Auth',
+    question: "Does Kim's Store require two-factor verification for high-value orders?",
+    answer: "Yes. For wholesale or high-ticket electronics purchases, an SMS or WhatsApp confirmation code is sent to your registered number to guarantee buyer protection against unauthorized orders.",
+    trending: true,
+  },
+  {
+    id: 'faq-acc-5',
+    category: 'account',
+    subCategory: 'Data Privacy & Deletion',
+    question: "How can I download my order data or request account deletion?",
+    answer: "You retain full ownership of your data under CEMAC digital privacy guidelines. You can export your order invoices or request full data deletion by contacting privacy@kimsstore.cm or chatting with Kimzy.",
+    trending: false,
+  },
+];
+
 export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPageProps) {
   const { t, i18n } = useTranslation();
   const reduxHelpArticles = useAppSelector((state) => state.admin.helpArticles || []);
-  const [faqs, setFaqs] = useState<FAQItem[]>([]);
+  const [faqs, setFaqs] = useState<FAQItem[]>(DEFAULT_FAQS);
   const [helpArticles, setHelpArticles] = useState<HelpArticleItem[]>(
     reduxHelpArticles.length > 0 ? reduxHelpArticles : DEFAULT_HELP_ARTICLES
   );
@@ -167,21 +303,31 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
 
     // Fetch dynamic FAQs from backend API
     api.faqs
-      .list<{ data?: Record<string, unknown>[] }>({ page: 'help', lang: currentLang })
+      .list<{ data?: Record<string, unknown>[] }>({ page: 'all', lang: currentLang })
       .then((res) => {
         const rawList = res?.data || (Array.isArray(res) ? res : []);
-        const mappedFaqs: FAQItem[] = rawList.map((item: Record<string, unknown>) => ({
-          id: String(item._id || item.id || ''),
-          category: (item.category === 'pros' || item.category === 'account' ? item.category : 'customers') as 'customers' | 'pros' | 'account',
-          subCategory: String(item.subCategory || item.categoryLabel || 'General'),
-          question: typeof item.question === 'string' ? item.question : String((item.question as Record<string, unknown>)?.[currentLang] || (item.question as Record<string, unknown>)?.en || ''),
-          answer: typeof item.answer === 'string' ? item.answer : String((item.answer as Record<string, unknown>)?.[currentLang] || (item.answer as Record<string, unknown>)?.en || ''),
-          trending: Boolean(item.is_featured || item.trending || false),
-        }));
-        setFaqs(mappedFaqs);
+        if (rawList.length > 0) {
+          const mappedFaqs: FAQItem[] = rawList.map((item: Record<string, unknown>) => ({
+            id: String(item._id || item.id || ''),
+            category: (item.category === 'pros' || item.category === 'account' ? item.category : 'customers') as 'customers' | 'pros' | 'account',
+            subCategory: String(item.subCategory || item.categoryLabel || 'General'),
+            question: typeof item.question === 'string' ? item.question : String((item.question as Record<string, unknown>)?.[currentLang] || (item.question as Record<string, unknown>)?.en || ''),
+            answer: typeof item.answer === 'string' ? item.answer : String((item.answer as Record<string, unknown>)?.[currentLang] || (item.answer as Record<string, unknown>)?.en || ''),
+            trending: Boolean(item.is_featured || item.trending || false),
+          }));
+
+          // Merge with DEFAULT_FAQS to ensure all categories (pros, account) are populated even if DB only has customers
+          const merged = [...mappedFaqs];
+          for (const defFaq of DEFAULT_FAQS) {
+            if (!merged.some((f) => f.question.toLowerCase() === defFaq.question.toLowerCase())) {
+              merged.push(defFaq);
+            }
+          }
+          setFaqs(merged);
+        }
       })
       .catch(() => {
-        setFaqs([]);
+        setFaqs(DEFAULT_FAQS);
       });
 
     // Fetch dynamic Knowledge Base Articles from backend API
@@ -220,7 +366,10 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
     return matchesTab && matchesQuery;
   });
 
-  const trendingFaqs = faqs.filter((faq) => faq.trending);
+  const currentTabFaqs = faqs.filter((faq) => faq.category === activeTab);
+  const currentTabTrending = currentTabFaqs.filter((faq) => faq.trending);
+  const featuredTopicsForTab =
+    currentTabTrending.length >= 2 ? currentTabTrending.slice(0, 4) : currentTabFaqs.slice(0, 4);
 
   const handleAccordionToggle = (panelId: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {
     setExpandedAccordion(isExpanded ? panelId : false);
@@ -542,7 +691,7 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
                 scrollbarWidth: 'none',
               }}
             >
-              {trendingFaqs.slice(0, 4).map((faq) => (
+              {featuredTopicsForTab.map((faq) => (
                 <Box
                   key={`trend-${faq.id}`}
                   sx={{
@@ -632,7 +781,9 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
               }}
             >
               <Typography sx={{ fontWeight: 700, fontSize: 18, color: 'text.primary', mb: 1 }}>
-                {t('help.noResultsFound', 'No matching help articles found for "{{query}}"', { query: searchQuery })}
+                {searchQuery.trim() !== ''
+                  ? t('help.noResultsFound', 'No matching help articles found for "{{query}}"', { query: searchQuery })
+                  : t('help.noArticlesYet', 'No articles found in this category yet.')}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary', mb: 3 }}>
                 {t('help.noResultsSub', 'Try searching with different terms or speak directly with our 24/7 Kimzy Support Desk.')}
