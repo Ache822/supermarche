@@ -810,7 +810,17 @@
     "paid": "PAID",
     "pending": "PENDING",
     "continueShopping": "Continue Shopping",
-    "supportNote": "Need to modify your delivery or speak with support? Connect with Kimzy via live chat."
+    "supportNote": "Need to modify your delivery or speak with support? Connect with Kimzy via live chat.",
+    "smsSentNotice": "SMS & WhatsApp notification dispatched to {{phone}} with your tracking reference.",
+    "printReceipt": "Print / Download Receipt",
+    "shareWhatsApp": "Share on WhatsApp",
+    "refreshStatus": "Refresh Status",
+    "recentOrdersTitle": "My Recent Orders",
+    "recentOrdersSub": "Quickly access and track orders placed on this device",
+    "viewOrder": "Track Order",
+    "orderDate": "Date",
+    "orderTotal": "Total",
+    "noRecentOrders": "No recent orders stored on this device."
   },
   "shop": {
     "marketplaceChip": "Kim's Store Marketplace",
@@ -872,7 +882,13 @@
         "title": "Artisan Chocolates & Dorm Snack Pack",
         "desc": "Curated mix of imported chocolates, crunchy biscuits, wafer sticks, and late-night snacks."
       }
-    }
+    },
+    "productsFound": "products available",
+    "inStockOnly": "In Stock Only",
+    "sortFeatured": "Featured Items",
+    "sortPriceLow": "Price: Low to High",
+    "sortPriceHigh": "Price: High to Low",
+    "sortNewest": "Newest Arrivals"
   },
   "cartDrawer": {
     "title": "Shopping Cart",

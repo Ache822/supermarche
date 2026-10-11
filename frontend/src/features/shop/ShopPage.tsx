@@ -14,7 +14,10 @@ import {
   Rating,
   CircularProgress,
   IconButton,
-  Tooltip
+  Tooltip,
+  Select,
+  MenuItem,
+  FormControl
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -179,6 +182,9 @@ export const ShopPage: React.FC = () => {
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
+  const [sortBy, setSortBy] = useState<'featured' | 'price_low' | 'price_high' | 'newest'>('featured');
+  const [inStockOnly, setInStockOnly] = useState(false);
+
   const STORE_CATEGORIES = [
     'All',
     'Apparel & Fashion',
@@ -262,6 +268,18 @@ export const ShopPage: React.FC = () => {
         );
       }
 
+      if (inStockOnly) {
+        items = items.filter((p) => p.inStock !== false);
+      }
+
+      if (sortBy === 'price_low') {
+        items = [...items].sort((a, b) => a.price - b.price);
+      } else if (sortBy === 'price_high') {
+        items = [...items].sort((a, b) => b.price - a.price);
+      } else if (sortBy === 'newest') {
+        items = [...items].reverse();
+      }
+
       setProducts(items);
       setCategories(STORE_CATEGORIES);
     } catch (err) {
@@ -270,6 +288,14 @@ export const ShopPage: React.FC = () => {
       let items = DEFAULT_STORE_PRODUCTS;
       if (selectedCategory !== 'All') {
         items = items.filter((p) => String(p.category).toLowerCase().includes(selectedCategory.toLowerCase()));
+      }
+      if (inStockOnly) {
+        items = items.filter((p) => p.inStock !== false);
+      }
+      if (sortBy === 'price_low') {
+        items = [...items].sort((a, b) => a.price - b.price);
+      } else if (sortBy === 'price_high') {
+        items = [...items].sort((a, b) => b.price - a.price);
       }
       setProducts(items);
       setCategories(STORE_CATEGORIES);
@@ -280,7 +306,7 @@ export const ShopPage: React.FC = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, [selectedCategory]);
+  }, [selectedCategory, sortBy, inStockOnly]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -371,6 +397,60 @@ export const ShopPage: React.FC = () => {
             />
           ))}
         </Stack>
+
+        {/* Sorting & Filter Bar */}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', sm: 'row' },
+            alignItems: { xs: 'flex-start', sm: 'center' },
+            justifyContent: 'space-between',
+            gap: 2,
+            mb: 3,
+            px: 0.5,
+          }}
+        >
+          <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 600 }}>
+            {products.length} {t('shop.productsFound', 'products available')}
+          </Typography>
+
+          <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center', width: { xs: '100%', sm: 'auto' }, flexWrap: 'wrap' }}>
+            <Chip
+              label={t('shop.inStockOnly', 'In Stock Only')}
+              clickable
+              color={inStockOnly ? 'primary' : 'default'}
+              variant={inStockOnly ? 'filled' : 'outlined'}
+              onClick={() => setInStockOnly((prev) => !prev)}
+              sx={{
+                fontWeight: 600,
+                height: 36,
+                borderColor: inStockOnly ? '#FF6B00' : 'rgba(255, 107, 0, 0.3)',
+                bgcolor: inStockOnly ? '#FF6B00' : 'background.paper',
+                color: inStockOnly ? '#FFFFFF' : 'text.primary',
+              }}
+            />
+
+            <FormControl size="small" sx={{ minWidth: 180, flex: { xs: 1, sm: 'none' } }}>
+              <Select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as any)}
+                displayEmpty
+                sx={{
+                  borderRadius: 2,
+                  bgcolor: 'background.paper',
+                  fontSize: '0.875rem',
+                  fontWeight: 600,
+                  height: 36,
+                }}
+              >
+                <MenuItem value="featured">{t('shop.sortFeatured', 'Featured Items')}</MenuItem>
+                <MenuItem value="price_low">{t('shop.sortPriceLow', 'Price: Low to High')}</MenuItem>
+                <MenuItem value="price_high">{t('shop.sortPriceHigh', 'Price: High to Low')}</MenuItem>
+                <MenuItem value="newest">{t('shop.sortNewest', 'Newest Arrivals')}</MenuItem>
+              </Select>
+            </FormControl>
+          </Stack>
+        </Box>
 
         {/* Product Grid */}
         {loading ? (

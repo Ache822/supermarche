@@ -17,11 +17,19 @@ import {
   CircularProgress,
   TextField,
   InputAdornment,
+  Stack,
+  Snackbar,
+  Alert
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import SearchIcon from '@mui/icons-material/Search';
+import PrintIcon from '@mui/icons-material/Print';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import HistoryIcon from '@mui/icons-material/History';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useTranslation } from 'react-i18next';
 import api from '../../api/client';
 
@@ -40,18 +48,29 @@ export const OrderSuccessPage: React.FC = () => {
   const [order, setOrder] = useState<any>(null);
   const [loading, setLoading] = useState(Boolean(orderNumber));
   const [searchInput, setSearchInput] = useState(orderNumber || '');
+  const [recentOrders, setRecentOrders] = useState<any[]>([]);
+  const [copyNotice, setCopyNotice] = useState(false);
 
   useEffect(() => {
-    if (!orderNumber) {
+    try {
+      const stored = JSON.parse(localStorage.getItem('kim_recent_orders') || '[]');
+      if (Array.isArray(stored)) {
+        setRecentOrders(stored);
+      }
+    } catch {}
+  }, []);
+
+  const fetchOrderData = (num: string) => {
+    if (!num) {
       setLoading(false);
       return;
     }
 
     setLoading(true);
 
-    if (orderNumber.toUpperCase().includes('DEMO')) {
+    if (num.toUpperCase().includes('DEMO')) {
       setOrder({
-        orderNumber: orderNumber.toUpperCase(),
+        orderNumber: num.toUpperCase(),
         orderStatus: 'shipped',
         customer: {
           name: 'Sandrine Ngono',
@@ -67,20 +86,20 @@ export const OrderSuccessPage: React.FC = () => {
         items: [
           {
             title: 'Retro High Urban Streetwear Sneakers (Size 42)',
-            price: 42.0,
+            price: 42000,
             quantity: 1,
             image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=400&q=80',
           },
           {
             title: 'Hydrating Botanical Glow Facial Cleanser',
-            price: 18.0,
+            price: 18000,
             quantity: 2,
             image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80',
           },
         ],
-        subtotal: 78.0,
+        subtotal: 78000,
         shippingFee: 0,
-        totalAmount: 78.0,
+        totalAmount: 78000,
         paymentMethod: 'mtn_momo',
         paymentStatus: 'paid',
         notes: 'Express courier runner Jean-Paul assigned (Motorbike CM-LT-842)',
@@ -90,7 +109,7 @@ export const OrderSuccessPage: React.FC = () => {
     }
 
     api.orders
-      .track<{ success: boolean; data: any }>(orderNumber)
+      .track<{ success: boolean; data: any }>(num)
       .then((res) => {
         if (res?.success && res.data) {
           setOrder(res.data);
@@ -102,7 +121,33 @@ export const OrderSuccessPage: React.FC = () => {
         setOrder(null);
       })
       .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    if (orderNumber) {
+      fetchOrderData(orderNumber);
+    } else {
+      setOrder(null);
+      setLoading(false);
+    }
   }, [orderNumber]);
+
+  const handlePrintReceipt = () => {
+    window.print();
+  };
+
+  const handleShareWhatsApp = () => {
+    if (!order) return;
+    const itemList = order.items?.map((it: any) => `• ${it.title} (x${it.quantity})`).join('\n') || '';
+    const text = `🛍️ *KIM'S STORE EXPRESS MARKET*\n*Commande:* ${order.orderNumber}\n*Statut:* ${order.orderStatus?.toUpperCase()} (${order.paymentStatus?.toUpperCase()})\n*Total:* XAF ${(order.totalAmount || 0).toLocaleString()}\n*Articles:*\n${itemList}\n*Livraison:* ${order.shippingAddress?.street}, ${order.shippingAddress?.city}\n\nSuivi en direct: ${window.location.origin}/order-status/${order.orderNumber}`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  const handleCopyOrderRef = () => {
+    if (!order?.orderNumber) return;
+    navigator.clipboard?.writeText(order.orderNumber);
+    setCopyNotice(true);
+  };
 
   const getActiveStep = (status: string) => {
     switch (status) {
@@ -129,7 +174,7 @@ export const OrderSuccessPage: React.FC = () => {
 
   if (!order) {
     return (
-      <Container maxWidth="sm" sx={{ py: 10, textAlign: 'center' }}>
+      <Container maxWidth="md" sx={{ py: 8 }}>
         <Paper
           elevation={0}
           sx={{
@@ -138,6 +183,8 @@ export const OrderSuccessPage: React.FC = () => {
             border: '1px solid',
             borderColor: (theme) => (theme.palette.mode === 'dark' ? '#3A2316' : '#E2E8F0'),
             bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#1A110A' : '#FFFFFF'),
+            textAlign: 'center',
+            mb: 4,
           }}
         >
           <Box
@@ -173,7 +220,7 @@ export const OrderSuccessPage: React.FC = () => {
                 navigate(`/order-status/${encodeURIComponent(searchInput.trim())}`);
               }
             }}
-            sx={{ display: 'flex', gap: 1.5, mb: 2 }}
+            sx={{ display: 'flex', gap: 1.5, mb: 2, maxWidth: 540, mx: 'auto' }}
           >
             <TextField
               fullWidth
@@ -234,19 +281,91 @@ export const OrderSuccessPage: React.FC = () => {
             />
           </Box>
 
-          <Button
-            variant="outlined"
-            onClick={() => navigate('/shop')}
-            sx={{
-              borderColor: 'divider',
-              color: 'text.secondary',
-              textTransform: 'none',
-              fontWeight: 600,
-              borderRadius: '10px',
-            }}
-          >
-            ← {t('checkout.browseCatalog')}
-          </Button>
+          {/* Recent Orders List if available */}
+          {recentOrders.length > 0 && (
+            <Box sx={{ mt: 5, textAlign: 'left', borderTop: '1px solid', borderColor: 'divider', pt: 4 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+                <HistoryIcon sx={{ color: '#FF6B00' }} />
+                <Typography variant="h6" sx={{ fontWeight: 800, fontFamily: 'Space Grotesk, sans-serif' }}>
+                  {t('orderSuccess.recentOrdersTitle', 'My Recent Orders')}
+                </Typography>
+              </Box>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2.5 }}>
+                {t('orderSuccess.recentOrdersSub', 'Quickly access and track orders placed on this device')}
+              </Typography>
+
+              <Stack spacing={1.5}>
+                {recentOrders.map((ro) => (
+                  <Paper
+                    key={ro.orderNumber}
+                    variant="outlined"
+                    sx={{
+                      p: 2,
+                      borderRadius: 3,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      flexWrap: 'wrap',
+                      gap: 2,
+                      transition: 'all 0.2s ease-in-out',
+                      '&:hover': {
+                        borderColor: '#FF6B00',
+                        bgcolor: (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.08)' : 'rgba(255, 107, 0, 0.03)')
+                      }
+                    }}
+                  >
+                    <Box>
+                      <Typography variant="subtitle2" sx={{ fontWeight: 800, fontFamily: 'IBM Plex Mono, monospace', color: 'primary.main' }}>
+                        {ro.orderNumber}
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
+                        {ro.date ? new Date(ro.date).toLocaleDateString() : ''} • {ro.itemCount || 1} items • XAF {(ro.total || 0).toLocaleString()}
+                      </Typography>
+                    </Box>
+
+                    <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+                      <Chip
+                        label={ro.paymentStatus === 'paid' ? 'PAID' : 'PENDING'}
+                        size="small"
+                        color={ro.paymentStatus === 'paid' ? 'success' : 'warning'}
+                        sx={{ fontWeight: 700, fontSize: 10, height: 20 }}
+                      />
+                      <Button
+                        size="small"
+                        variant="contained"
+                        onClick={() => navigate(`/order-status/${ro.orderNumber}`)}
+                        sx={{
+                          borderRadius: 2,
+                          textTransform: 'none',
+                          fontWeight: 700,
+                          bgcolor: '#FF6B00',
+                          '&:hover': { bgcolor: '#E05D00' }
+                        }}
+                      >
+                        {t('orderSuccess.viewOrder', 'Track Order')}
+                      </Button>
+                    </Stack>
+                  </Paper>
+                ))}
+              </Stack>
+            </Box>
+          )}
+
+          <Box sx={{ mt: 4 }}>
+            <Button
+              variant="outlined"
+              onClick={() => navigate('/shop')}
+              sx={{
+                borderColor: 'divider',
+                color: 'text.secondary',
+                textTransform: 'none',
+                fontWeight: 600,
+                borderRadius: '10px',
+              }}
+            >
+              ← {t('checkout.browseCatalog')}
+            </Button>
+          </Box>
         </Paper>
       </Container>
     );
@@ -271,7 +390,21 @@ export const OrderSuccessPage: React.FC = () => {
   const paymentInfo = getPaymentMethodDisplay(order.paymentMethod);
 
   return (
-    <Container maxWidth="md" sx={{ py: 6 }}>
+    <Container maxWidth="md" sx={{ py: 6 }} className="print-area">
+      {/* Print media stylesheet */}
+      <Box
+        component="style"
+        dangerouslySetInnerHTML={{
+          __html: `
+            @media print {
+              header, nav, footer, .print-hide, .MuiButton-root { display: none !important; }
+              body { background: #FFFFFF !important; color: #000000 !important; }
+              .print-area { padding: 0 !important; max-width: 100% !important; }
+            }
+          `
+        }}
+      />
+
       <Paper
         elevation={0}
         sx={{
@@ -286,30 +419,118 @@ export const OrderSuccessPage: React.FC = () => {
               : '0 8px 32px rgba(255, 107, 0, 0.08)',
         }}
       >
+        {/* Simulated SMS Notification Alert */}
+        <Box
+          className="print-hide"
+          sx={{
+            p: 2,
+            mb: 4,
+            borderRadius: 2.5,
+            bgcolor: 'rgba(22, 163, 74, 0.08)',
+            border: '1px solid rgba(22, 163, 74, 0.25)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1.5,
+          }}
+        >
+          <CheckCircleIcon sx={{ color: '#16A34A', fontSize: 24, flexShrink: 0 }} />
+          <Typography variant="body2" sx={{ color: '#16A34A', fontWeight: 600 }}>
+            {t('orderSuccess.smsSentNotice', { phone: order.customer?.phone || '+237 6xx xxx xxx' })}
+          </Typography>
+        </Box>
+
         {/* Success Header */}
-        <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <CheckCircleIcon sx={{ fontSize: 72, color: '#16A34A', mb: 2 }} />
+        <Box sx={{ textAlign: 'center', mb: 3 }}>
+          <CheckCircleIcon sx={{ fontSize: 68, color: '#16A34A', mb: 1.5 }} />
           <Typography variant="h4" sx={{ fontWeight: 800, mb: 1, fontFamily: 'Space Grotesk, sans-serif', color: 'text.primary' }}>
             {t('orderSuccess.title')}
           </Typography>
           <Typography variant="body1" color="text.secondary">
             {t('orderSuccess.subtitle')}
           </Typography>
-          <Chip
-            icon={<ShoppingBagOutlinedIcon sx={{ color: '#FFFFFF !important' }} />}
-            label={`${t('orderSuccess.orderRef')}: ${order.orderNumber}`}
-            sx={{
-              mt: 2,
-              px: 1.5,
-              py: 2.2,
-              fontWeight: 700,
-              fontSize: '0.95rem',
-              bgcolor: '#FF6B00',
-              color: '#FFFFFF',
-              boxShadow: '0 4px 14px rgba(255, 107, 0, 0.35)',
-            }}
-          />
+
+          <Stack direction="row" spacing={1} sx={{ justifyContent: 'center', alignItems: 'center', mt: 2 }}>
+            <Chip
+              icon={<ShoppingBagOutlinedIcon sx={{ color: '#FFFFFF !important' }} />}
+              label={`${t('orderSuccess.orderRef')}: ${order.orderNumber}`}
+              onClick={handleCopyOrderRef}
+              sx={{
+                px: 1.5,
+                py: 2.2,
+                fontWeight: 700,
+                fontSize: '0.95rem',
+                bgcolor: '#FF6B00',
+                color: '#FFFFFF',
+                boxShadow: '0 4px 14px rgba(255, 107, 0, 0.35)',
+                cursor: 'pointer',
+              }}
+            />
+            <Chip
+              icon={<ContentCopyIcon sx={{ fontSize: 14 }} />}
+              label="Copy"
+              size="small"
+              onClick={handleCopyOrderRef}
+              className="print-hide"
+              sx={{ cursor: 'pointer', fontWeight: 600 }}
+            />
+          </Stack>
         </Box>
+
+        {/* Action Bar (Print, WhatsApp Share, Refresh Status) */}
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          spacing={1.5}
+          className="print-hide"
+          sx={{ justifyContent: 'center', mb: 4, flexWrap: 'wrap' }}
+        >
+          <Button
+            variant="outlined"
+            startIcon={<PrintIcon />}
+            onClick={handlePrintReceipt}
+            sx={{
+              borderRadius: 2,
+              textTransform: 'none',
+              fontWeight: 700,
+              borderColor: 'divider',
+              color: 'text.primary',
+              '&:hover': { borderColor: '#FF6B00' }
+            }}
+          >
+            {t('orderSuccess.printReceipt', 'Print / Download Receipt')}
+          </Button>
+
+          <Button
+            variant="outlined"
+            startIcon={<WhatsAppIcon sx={{ color: '#25D366' }} />}
+            onClick={handleShareWhatsApp}
+            sx={{
+              borderRadius: 2,
+              textTransform: 'none',
+              fontWeight: 700,
+              borderColor: 'rgba(37, 211, 102, 0.4)',
+              color: '#25D366',
+              '&:hover': { borderColor: '#25D366', bgcolor: 'rgba(37, 211, 102, 0.08)' }
+            }}
+          >
+            {t('orderSuccess.shareWhatsApp', 'Share on WhatsApp')}
+          </Button>
+
+          <Button
+            variant="outlined"
+            startIcon={<RefreshIcon />}
+            onClick={() => fetchOrderData(order.orderNumber)}
+            sx={{
+              borderRadius: 2,
+              textTransform: 'none',
+              fontWeight: 700,
+              borderColor: 'divider',
+              color: 'text.secondary',
+              '&:hover': { borderColor: 'text.primary' }
+            }}
+          >
+            {t('orderSuccess.refreshStatus', 'Refresh Status')}
+          </Button>
+        </Stack>
 
         <Divider sx={{ my: 4 }} />
 
@@ -467,7 +688,7 @@ export const OrderSuccessPage: React.FC = () => {
           </Box>
         </Box>
 
-        <Box sx={{ textAlign: 'center' }}>
+        <Box sx={{ textAlign: 'center' }} className="print-hide">
           <Button
             variant="contained"
             size="large"
@@ -487,6 +708,17 @@ export const OrderSuccessPage: React.FC = () => {
           </Button>
         </Box>
       </Paper>
+
+      <Snackbar
+        open={copyNotice}
+        autoHideDuration={2500}
+        onClose={() => setCopyNotice(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert severity="success" sx={{ width: '100%', fontWeight: 600 }}>
+          Order reference copied to clipboard!
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };

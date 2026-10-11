@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Box,
@@ -84,6 +84,29 @@ export const CheckoutPage: React.FC = () => {
     setFormData({ ...formData, cardExpiry: raw });
   };
 
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('kim_saved_address');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setFormData((prev) => ({
+          ...prev,
+          name: parsed.name || prev.name,
+          email: parsed.email || prev.email,
+          phone: parsed.phone || prev.phone,
+          street: parsed.street || prev.street,
+          city: parsed.city || prev.city,
+          state: parsed.state || prev.state,
+          postalCode: parsed.postalCode || prev.postalCode,
+          country: parsed.country || prev.country,
+          momoPhone: parsed.phone || prev.momoPhone,
+          orangePhone: parsed.phone || prev.orangePhone,
+          cardHolder: parsed.name || prev.cardHolder,
+        }));
+      }
+    } catch {}
+  }, []);
+
   const shippingFee = cartTotal >= 25000 ? 0 : 1500;
   const grandTotal = cartTotal + shippingFee;
 
@@ -116,6 +139,41 @@ export const CheckoutPage: React.FC = () => {
 
       const res: any = await api.orders.create(orderPayload);
       if (res?.success && res.data) {
+        // Save to Recent Orders & Remember Address
+        try {
+          const savedOrder = {
+            orderNumber: res.data.orderNumber,
+            date: new Date().toISOString(),
+            total: res.data.totalAmount,
+            itemCount: res.data.items?.length || cart.length,
+            items: res.data.items?.map((it: any) => ({
+              title: it.title,
+              image: it.image,
+              quantity: it.quantity,
+              price: it.price
+            })) || [],
+            paymentMethod: res.data.paymentMethod,
+            paymentStatus: res.data.paymentStatus,
+            orderStatus: res.data.orderStatus || 'pending'
+          };
+          const existing = JSON.parse(localStorage.getItem('kim_recent_orders') || '[]');
+          const updated = [savedOrder, ...existing.filter((o: any) => o.orderNumber !== res.data.orderNumber)].slice(0, 8);
+          localStorage.setItem('kim_recent_orders', JSON.stringify(updated));
+
+          localStorage.setItem('kim_saved_address', JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            street: formData.street,
+            city: formData.city,
+            state: formData.state,
+            postalCode: formData.postalCode,
+            country: formData.country,
+          }));
+        } catch {
+          // Ignore localStorage errors
+        }
+
         clearCart();
         navigate(`/order-status/${res.data.orderNumber}`);
       } else {
