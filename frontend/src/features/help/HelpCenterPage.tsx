@@ -42,6 +42,7 @@ import type { HelpArticleItem } from '../admin/types/admin.types';
 import { SEO } from '../../components/seo/SEO';
 import { getBreadcrumbSchema } from '../../components/seo/schemas';
 import api from '../../api/client';
+import { HtmlContent } from '../../components/ui/HtmlContent';
 
 interface HelpCenterPageProps {
   onOpenBooking?: () => void;
@@ -832,9 +833,7 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
                   </Box>
                 </AccordionSummary>
                 <AccordionDetails sx={{ pt: 0, pb: 2.5, px: 3 }}>
-                  <Typography variant="body1" sx={{ color: 'text.secondary', lineHeight: 1.65, fontSize: 15 }}>
-                    {faq.answer}
-                  </Typography>
+                  <HtmlContent content={faq.answer} variant="body1" sx={{ color: 'text.secondary', lineHeight: 1.65, fontSize: 15 }} />
                 </AccordionDetails>
               </Accordion>
             ))

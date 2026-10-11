@@ -881,6 +881,126 @@
       "prod-snacks-02": {
         "title": "Artisan Chocolates & Dorm Snack Pack",
         "desc": "Curated mix of imported chocolates, crunchy biscuits, wafer sticks, and late-night snacks."
+      },
+      "prod-app-01": {
+        "title": "Oversized Vintage Heavyweight Graphic Hoodie",
+        "desc": "Premium 450GSM cotton fleece oversized hoodie with vintage washed distressed aesthetic. Double-layered hood and kangaroo pocket."
+      },
+      "prod-app-02": {
+        "title": "Minimalist Streetwear Heavyweight Tee",
+        "desc": "Structured 260GSM combed cotton boxy tee. Thick ribbed collar and clean aesthetic for effortless everyday streetwear styling."
+      },
+      "prod-app-03": {
+        "title": "Cargo Tactical Multi-Pocket Techwear Pants",
+        "desc": "Durable water-repellent ripstop cargo trousers featuring 6 tactical utility pockets and adjustable toggle ankle drawstrings."
+      },
+      "prod-app-04": {
+        "title": "Retro Embroidered Varsity Bomber Jacket",
+        "desc": "Classic campus collegiate varsity jacket featuring woolen body, contrasting faux-leather sleeves, and custom chenille embroidered badges."
+      },
+      "prod-app-05": {
+        "title": "Vintage Acid-Wash Denim Trucker Jacket",
+        "desc": "Timeless 14oz rigid denim trucker jacket with an authentic stone acid-wash texture and classic dual flap chest pockets."
+      },
+      "prod-app-06": {
+        "title": "Casual Cotton Zip-Up Tracksuit Set",
+        "desc": "Coordinated 2-piece fleece tracksuit featuring a full-zip hoodie jacket and tapered matching joggers with brushed inner fleece."
+      },
+      "prod-ftw-01": {
+        "title": "Retro High-Top Campus Basketball Sneakers",
+        "desc": "Iconic high-top basketball silhouette engineered with genuine leather overlays, air-cushioned midsole, and pivot-point rubber outsole."
+      },
+      "prod-ftw-02": {
+        "title": "Breathable Lightweight Mesh Running Shoes",
+        "desc": "Engineered for maximum breathability during runs and long walking commutes. Responsive EVA foam midsoles and flexible knit mesh uppers."
+      },
+      "prod-ftw-03": {
+        "title": "Chunky Platform Streetwear Trainers",
+        "desc": "Bold 90s aesthetic elevated with a sculpted chunky 5cm platform sole, cushioned collar, and reflective 3M accent paneling."
+      },
+      "prod-ftw-04": {
+        "title": "Classic Low-Profile Canvas Skate Shoes",
+        "desc": "Durable 12oz double-stitched canvas low-tops featuring vulcanized waffle rubber grip soles and reinforced protective toe caps."
+      },
+      "prod-ftw-05": {
+        "title": "All-Weather Waterproof Trail & Hiking Boots",
+        "desc": "Rugged outdoor boots engineered with waterproof membrane lining, padded ankle collars, and deep 5mm lug traction outsoles."
+      },
+      "prod-ftw-06": {
+        "title": "Ergonomic Slip-On Comfort Cloud Slides",
+        "desc": "Molded 4cm high-density EVA foam slides with an anatomical footbed and non-slip diamond sole for post-workout recovery and relaxation."
+      },
+      "prod-cos-01": {
+        "title": "Hydrating Glow Vitamin C & Hyaluronic Serum",
+        "desc": "Brightening antioxidant facial serum concentrated with 15% Ethyl Ascorbic Acid, Hyaluronic Acid, and Vitamin E to fade dark spots."
+      },
+      "prod-cos-02": {
+        "title": "Broad Spectrum SPF 50+ Invisible Shield Sunscreen",
+        "desc": "Ultra-lightweight gel cream SPF 50+ sunscreen formulated for melanin-rich skin. Leaves zero white cast with velvety matte finish."
+      },
+      "prod-cos-03": {
+        "title": "Deep Cleansing Botanical Exfoliating Face Scrub",
+        "desc": "Gentle micro-polishing facial scrub infused with salicylic acid (BHA), jojoba beads, and tea tree oil to decongest pores."
+      },
+      "prod-cos-04": {
+        "title": "Ultra-Nourishing Shea & Cocoa Whipped Body Butter",
+        "desc": "Rich decadent body moisturizer hand-whipped with raw unrefined West African Shea Butter, pure Cocoa Butter, and sweet almond oil."
+      },
+      "prod-cos-05": {
+        "title": "Matte Long-Wear Lip Glaze & Lip Oil Duo",
+        "desc": "Dual-ended luxury lip set featuring a transfer-proof liquid matte lipstick on one end and a nourishing hyaluronic lip oil on the other."
+      },
+      "prod-cos-06": {
+        "title": "Aromatherapy Botanical Mist & Rosewater Toner",
+        "desc": "Pure distilled Damask rose petal hydrosol blended with aloe vera extract and chamomile to refresh skin and balance pH."
+      },
+      "prod-tec-01": {
+        "title": "Pro ANC Wireless Bluetooth Noise-Canceling Earbuds",
+        "desc": "True wireless earbuds with 35dB active noise canceling, transparency mode, 10mm dynamic bass drivers, and 32h playback."
+      },
+      "prod-tec-02": {
+        "title": "20,000mAh Dual USB-C Fast Power Bank (22.5W)",
+        "desc": "High-capacity portable battery pack equipped with dual 22.5W USB-C Power Delivery ports and smart digital LED battery readout."
+      },
+      "prod-tec-03": {
+        "title": "Waterproof Portable Bluetooth Bass Speaker",
+        "desc": "Rugged outdoor speaker pumping 360-degree punchy bass audio with dual passive radiators and IPX7 complete submersion waterproofing."
+      },
+      "prod-tec-04": {
+        "title": "Smart Fitness Watch with Heart Rate & GPS Track",
+        "desc": "Sleek AMOLED touch smartwatch featuring 24/7 heart rate and blood oxygen monitoring, 100+ workout modes, and 7-day battery life."
+      },
+      "prod-tec-05": {
+        "title": "Multi-Angle MagSafe Wireless Phone Charging Stand",
+        "desc": "Solid aluminum alloy adjustable desktop stand with integrated 15W Qi wireless fast charger and magnetic auto-alignment."
+      },
+      "prod-tec-06": {
+        "title": "Braided Nylon 100W Fast Charging Cable Kit (3-Pack)",
+        "desc": "Triple pack of ultra-durable braided nylon cables (1m, 2m, 3m) supporting up to 100W Power Delivery and high-speed data transfer."
+      },
+      "prod-prd-01": {
+        "title": "Fresh Organic Fruit & Farm Produce Basket",
+        "desc": "Hand-picked farm-fresh basket including crisp red apples, sweet bananas, seasonal oranges, avocados, and fresh farm veggies."
+      },
+      "prod-prd-02": {
+        "title": "Artisan Chocolates & Campus Munchies Snack Pack",
+        "desc": "Delightful variety snack box containing imported milk and dark chocolates, crisp hazelnut wafer rolls, and sweet cookies."
+      },
+      "prod-prd-03": {
+        "title": "Premium Roasted Cashews & Plantain Chips Mix",
+        "desc": "Crunchy golden lightly-salted roasted cashew nuts paired with freshly sliced artisan ripe plantain crisps in stay-fresh pouch."
+      },
+      "prod-prd-04": {
+        "title": "Farm Fresh Grade-A Organic Eggs & Dairy Pack",
+        "desc": "Crate of 30 farm-fresh Grade-A brown eggs from free-range hens paired with pasteurized fresh whole milk in protective packaging."
+      },
+      "prod-prd-05": {
+        "title": "Imported Gourmet Biscuits & Belgian Wafers Box",
+        "desc": "Deluxe tin collection of European butter cookies, chocolate-dipped shortbreads, and crispy caramelized Belgian waffle biscuits."
+      },
+      "prod-prd-06": {
+        "title": "Fresh Juicy Tropical Citrus Basket (Oranges & Limes)",
+        "desc": "5kg crate of sweet Valencia sun-ripened oranges, juicy pink grapefruits, and aromatic green limes fresh from orchard groves."
       }
     },
     "productsFound": "products available",

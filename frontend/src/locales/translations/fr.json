@@ -872,6 +872,126 @@
       "prod-snacks-02": {
         "title": "Chocolats Artisanaux & Pack Snacks Gourmands",
         "desc": "Assortiment gourmand de chocolats importés, biscuits croquants, gaufrettes et en-cas."
+      },
+      "prod-app-01": {
+        "title": "Sweat à Capuche Vintage Oversize Premium",
+        "desc": "Sweat à capuche oversize en molleton de coton lourd 450GSM avec finition délavée vintage. Capuche thermique doublée et poche kangourou."
+      },
+      "prod-app-02": {
+        "title": "T-Shirt Épais Streetwear Minimaliste",
+        "desc": "T-shirt boxy structuré en coton peigné 260GSM. Col côtelé épais et esthétique épurée pour un style streetwear quotidien sans effort."
+      },
+      "prod-app-03": {
+        "title": "Pantalon Cargo Tactique Multi-Poches Techwear",
+        "desc": "Pantalon cargo en ripstop hydrofuge résistant doté de 6 poches tactiques utilitaires et cordons de serrage ajustables aux chevilles."
+      },
+      "prod-app-04": {
+        "title": "Blouson Bomber Varsity Brodier Rétro",
+        "desc": "Veste varsity universitaire classique avec corps en laine, manches contrastées en simili cuir et badges brodés en chenille."
+      },
+      "prod-app-05": {
+        "title": "Veste en Jean Trucker Délavée Vintage",
+        "desc": "Veste en denim rigide intemporelle 14oz avec texture délavée à l'acide authentique et doubles poches poitrine à rabat."
+      },
+      "prod-app-06": {
+        "title": "Ensemble Survêtement Zippé en Coton",
+        "desc": "Ensemble de survêtement 2 pièces en molleton comprenant une veste à capuche entièrement zippée et un pantalon de jogging fuselé assorti."
+      },
+      "prod-ftw-01": {
+        "title": "Baskets Montantes Rétro Campus Basketball",
+        "desc": "Silhouette montante de basket iconique conçue avec empiècements en cuir véritable, semelle amortissante et semelle extérieure adhérente."
+      },
+      "prod-ftw-02": {
+        "title": "Chaussures de Running Légères et Respirantes",
+        "desc": "Conçues pour une respirabilité optimale lors des courses et longues marches. Mousse EVA réactive et tige en maille souple."
+      },
+      "prod-ftw-03": {
+        "title": "Baskets Basses Chunky Streetwear à Plateforme",
+        "desc": "Style audacieux des années 90 rehaussé d'une semelle plateforme de 5 cm, col rembourré et détails réfléchissants 3M."
+      },
+      "prod-ftw-04": {
+        "title": "Chaussures de Skate en Toile Classiques",
+        "desc": "Baskets basses en toile robuste 12oz à double couture avec semelle vulcanisée gaufrée et embout de protection renforcé."
+      },
+      "prod-ftw-05": {
+        "title": "Chaussures de Trail & Randonnée Imperméables",
+        "desc": "Chaussures d'extérieur robustes dotées d'une membrane imperméable scellée, col montant matelassé et semelles crantées 5mm."
+      },
+      "prod-ftw-06": {
+        "title": "Claquettes Ergonomiques Ultra Confort Cloud",
+        "desc": "Claquettes moulées en mousse EVA haute densité 4 cm avec assise plantaire anatomique et semelle antidérapante pour la détente."
+      },
+      "prod-cos-01": {
+        "title": "Sérum Éclat Vitamine C & Acide Hyaluronique",
+        "desc": "Sérum visage antioxydant illuminateur concentré à 15% de Vitamine C stabilisée et acide hyaluronique pour estomper les taches."
+      },
+      "prod-cos-02": {
+        "title": "Écran Solaire Invisible SPF 50+ Sans Traces",
+        "desc": "Crème gel solaire SPF 50+ ultra-légère conçue pour les peaux noires et métissées. Zéro trace blanche avec fini mat velouté."
+      },
+      "prod-cos-03": {
+        "title": "Gommage Visage Exfoliant Botanique Purifiant",
+        "desc": "Gommage micro-polissant doux enrichi en acide salicylique (BHA), perles de jojoba et huile d'arbre à thé pour purifier les pores."
+      },
+      "prod-cos-04": {
+        "title": "Beurre Corporel Fouetté Karité & Cacao Pur",
+        "desc": "Soin corporel onctueux fouetté à la main avec du beurre de karité brut d'Afrique de l'Ouest, cacao pur et huile d'amande douce."
+      },
+      "prod-cos-05": {
+        "title": "Duo Rouge à Lèvres Mat Longue Tenue & Huile à Lèvres",
+        "desc": "Coffret lèvres double embout composé d'un rouge à lèvres mat sans transfert et d'une huile à lèvres brillante nourrissante."
+      },
+      "prod-cos-06": {
+        "title": "Brume Botanique Aromathérapie & Eau de Rose Pure",
+        "desc": "Hydrolat pur de pétales de rose de Damas distillé combiné à l'aloe vera et à la camomille pour rafraîchir le teint et rééquilibrer le pH."
+      },
+      "prod-tec-01": {
+        "title": "Écouteurs Sans Fil Pro ANC avec Réduction de Bruit",
+        "desc": "Écouteurs sans fil avec réduction active du bruit 35dB, mode transparence, basses 10mm et 32h d'autonomie totale."
+      },
+      "prod-tec-02": {
+        "title": "Batterie Externe 20 000mAh Charge Rapide Double USB-C",
+        "desc": "Batterie portable haute capacité équipée de deux ports Power Delivery USB-C 22,5W et d'un écran LED numérique de pourcentage."
+      },
+      "prod-tec-03": {
+        "title": "Enceinte Bluetooth Portable Étanche Bass Boost",
+        "desc": "Enceinte d'extérieur robuste avec son surround 360°, basses percutantes et étanchéité totale IPX7 submersible."
+      },
+      "prod-tec-04": {
+        "title": "Montre Connectée Fitness AMOLED avec Suivi Cardiaque",
+        "desc": "Montre intelligente tactile AMOLED avec suivi continu du rythme cardiaque et SpO2, plus de 100 modes de sport et 7 jours d'autonomie."
+      },
+      "prod-tec-05": {
+        "title": "Support de Téléphone MagSafe Inclinable avec Charge Sans Fil",
+        "desc": "Support de bureau en aluminium robuste avec chargeur rapide sans fil 15W magnétique pour appels mains libres et bureau organisé."
+      },
+      "prod-tec-06": {
+        "title": "Pack de 3 Câbles Tressés en Nylon 100W Charge Rapide",
+        "desc": "Pack de 3 câbles ultra-résistants en nylon tressé (1m, 2m, 3m) supportant jusqu'à 100W Power Delivery pour téléphones et ordinateurs."
+      },
+      "prod-prd-01": {
+        "title": "Panier de Fruits Frais & Légumes Bio du Terroir",
+        "desc": "Panier de produits frais de la ferme comprenant pommes croquantes, bananes douces, oranges de saison, avocats et légumes frais."
+      },
+      "prod-prd-02": {
+        "title": "Coffret Chocolats Artisans & Friandises Gourmandes",
+        "desc": "Boîte gourmande variée contenant chocolats au lait et noirs, gaufrettes croustillantes aux noisettes et biscuits savoureux."
+      },
+      "prod-prd-03": {
+        "title": "Mix Noix de Cajou Grillées & Chips de Banane Plantain",
+        "desc": "Noix de cajou dorées croquantes légèrement salées accompagnées de chips artisanales de bananes plantains croustillantes."
+      },
+      "prod-prd-04": {
+        "title": "Plateau d'Œufs Frais Fermiers Bio & Lait Entier",
+        "desc": "Plateau de 30 œufs bruns extra-frais bio de poules élevées en plein air avec bouteille de lait entier pasteurisé."
+      },
+      "prod-prd-05": {
+        "title": "Boîte de Biscuits Fins & Gaufres Caramélisées",
+        "desc": "Sélection de biscuits pur beurre européens, sablés au chocolat et fines gaufres croustillantes caramélisées."
+      },
+      "prod-prd-06": {
+        "title": "Cagette d'Agrumes Tropicaux Frais (Oranges & Citrons)",
+        "desc": "Cagette de 5 kg d'oranges douces gorgées de soleil, pamplemousses juteux et citrons verts parfumés récoltés en verger."
       }
     },
     "productsFound": "articles disponibles",
