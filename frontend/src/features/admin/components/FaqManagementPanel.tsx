@@ -31,6 +31,7 @@ import { getItemId, formatShortId } from '../../../utils/idHelper';
 import { HasPermission } from '../../../components/ui/HasPermission';
 
 import { useToast } from '../../../context/useToast';
+import { RichHtmlEditor } from '../../../components/ui/RichHtmlEditor';
 
 export function FaqManagementPanel() {
   const { t } = useTranslation();
@@ -530,15 +531,12 @@ export function FaqManagementPanel() {
               </Grid>
 
               <Grid size={{ xs: 12 }}>
-                <TextField
-                  fullWidth
-                  multiline
-                  rows={4}
-                  label={t('admin.answerLabel', 'Answer (English / Default)')}
-                  placeholder="Provide clear, concise instructions or explanation for customers..."
-                  size="small"
+                <RichHtmlEditor
+                  label={t('admin.answerLabel', 'Answer (HTML Supported)')}
                   value={formAnswer}
-                  onChange={(e) => setFormAnswer(e.target.value)}
+                  onChange={setFormAnswer}
+                  placeholder="Provide clear, concise instructions, links, or bullet points in HTML..."
+                  minRows={4}
                   required
                 />
               </Grid>

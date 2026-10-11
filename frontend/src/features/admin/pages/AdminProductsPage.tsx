@@ -23,6 +23,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import api from '../../../api/client';
 import type { ProductItem } from '../../../context/CartContext';
 import { ReusableDataTable, type ColumnDef } from '../../../components/ui/ReusableDataTable';
+import { RichHtmlEditor } from '../../../components/ui/RichHtmlEditor';
 
 const STORE_CATEGORIES = [
   'Apparel & Fashion',
@@ -446,14 +447,13 @@ export const AdminProductsPage: React.FC = () => {
               </Box>
 
               <Box sx={{ gridColumn: { xs: 'span 1', sm: 'span 2' } }}>
-                <TextField
-                  required
-                  fullWidth
-                  multiline
-                  rows={3}
-                  label="Description"
+                <RichHtmlEditor
+                  label="Product Description (HTML Supported)"
                   value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  onChange={(val) => setFormData({ ...formData, description: val })}
+                  placeholder="Enter detailed product description or HTML tags (<p>, <strong>, <ul>, etc.)..."
+                  minRows={4}
+                  required
                 />
               </Box>
 

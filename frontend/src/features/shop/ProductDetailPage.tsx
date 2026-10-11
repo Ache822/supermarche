@@ -26,6 +26,7 @@ import api from '../../api/client';
 import { useCart } from '../../context/CartContext';
 import type { ProductItem } from '../../context/CartContext';
 import { useTranslation } from 'react-i18next';
+import { HtmlContent } from '../../components/ui/HtmlContent';
 
 export const ProductDetailPage: React.FC = () => {
   const { identifier } = useParams<{ identifier: string }>();
@@ -204,9 +205,7 @@ export const ProductDetailPage: React.FC = () => {
             )}
           </Stack>
 
-          <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7, mb: 4 }}>
-            {localized.description}
-          </Typography>
+          <HtmlContent content={localized.description} variant="body1" sx={{ lineHeight: 1.7, mb: 4 }} />
 
           <Divider sx={{ my: 3 }} />
 

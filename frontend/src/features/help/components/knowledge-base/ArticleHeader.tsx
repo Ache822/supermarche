@@ -5,6 +5,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { useTranslation } from 'react-i18next';
 import type { KBArticle } from '../../types/knowledgeBase.types';
+import { HtmlContent } from '../../../../components/ui/HtmlContent';
 
 interface ArticleHeaderProps {
   article: KBArticle;
@@ -84,15 +85,14 @@ export const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article }) => {
             mb: 2,
           }}
         >
-          <Typography
+          <HtmlContent
+            content={article.summary}
             sx={{
               fontSize: '14.5px',
               color: isDark ? '#cbd5e1' : '#334155',
               lineHeight: 1.65,
             }}
-          >
-            {article.summary}
-          </Typography>
+          />
         </Box>
       )}
 

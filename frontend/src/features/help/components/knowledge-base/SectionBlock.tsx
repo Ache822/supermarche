@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
 import type { ArticleSection } from '../../types/knowledgeBase.types';
+import { HtmlContent } from '../../../../components/ui/HtmlContent';
 
 interface SectionBlockProps {
   section: ArticleSection;
@@ -39,7 +40,7 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({ section }) => {
         </Typography>
       </Box>
 
-      {/* SectionBody: Paragraph with border-left accent */}
+      {/* SectionBody: Paragraph with border-left accent and HTML support */}
       <Box
         sx={{
           ml: 0.5,
@@ -47,15 +48,14 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({ section }) => {
           borderLeft: '2px solid #FF6B00',
         }}
       >
-        <Typography
+        <HtmlContent
+          content={section.body}
           sx={{
             fontSize: '14.5px',
             color: isDark ? '#cbd5e1' : '#334155',
             lineHeight: 1.7,
           }}
-        >
-          {section.body}
-        </Typography>
+        />
       </Box>
     </Box>
   );

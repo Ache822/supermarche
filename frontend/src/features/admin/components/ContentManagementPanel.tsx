@@ -36,6 +36,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import QuizIcon from '@mui/icons-material/Quiz';
 import { FaqManagementPanel } from './FaqManagementPanel';
+import { RichHtmlEditor } from '../../../components/ui/RichHtmlEditor';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import {
   addCategory,
@@ -1019,15 +1020,12 @@ export function ContentManagementPanel() {
               onChange={(e) => setArtSummary(e.target.value)}
             />
 
-            <TextField
-              label="Detailed Guide Body / Instructions"
-              multiline
-              rows={5}
-              fullWidth
-              size="small"
-              placeholder="Step-by-step instructions for the user..."
+            <RichHtmlEditor
+              label="Detailed Guide Body / Instructions (HTML Supported)"
               value={artBody}
-              onChange={(e) => setArtBody(e.target.value)}
+              onChange={setArtBody}
+              placeholder="Step-by-step instructions or HTML markup (<p>, <strong>, <ul>, etc.)..."
+              minRows={5}
             />
 
             <FormControlLabel
@@ -1094,14 +1092,12 @@ export function ContentManagementPanel() {
               onChange={(e) => setArtSummary(e.target.value)}
             />
 
-            <TextField
-              label="Detailed Guide Body / Instructions"
-              multiline
-              rows={5}
-              fullWidth
-              size="small"
+            <RichHtmlEditor
+              label="Detailed Guide Body / Instructions (HTML Supported)"
               value={artBody}
-              onChange={(e) => setArtBody(e.target.value)}
+              onChange={setArtBody}
+              placeholder="Step-by-step instructions or HTML markup (<p>, <strong>, <ul>, etc.)..."
+              minRows={5}
             />
 
             <FormControlLabel
@@ -1231,15 +1227,13 @@ export function ContentManagementPanel() {
               />
             </Box>
 
-            <TextField
-              label="Description"
-              required
-              multiline
-              rows={3}
-              fullWidth
-              size="small"
+            <RichHtmlEditor
+              label="Service Description (HTML Supported)"
               value={srvDescription}
-              onChange={(e) => setSrvDescription(e.target.value)}
+              onChange={setSrvDescription}
+              placeholder="Enter service overview or HTML markup (<p>, <strong>, <ul>, etc.)..."
+              minRows={3}
+              required
             />
           </DialogContent>
           <DialogActions sx={{ p: 2 }}>
