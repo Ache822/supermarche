@@ -155,11 +155,11 @@ export const ProductDetailPage: React.FC = () => {
 
           <Stack direction="row" sx={{ alignItems: 'baseline', gap: 2, mb: 3 }}>
             <Typography variant="h3" color="primary.main" sx={{ fontWeight: 800 }}>
-              ${product.price.toFixed(2)}
+              XAF {product.price.toLocaleString()}
             </Typography>
             {product.compareAtPrice && (
               <Typography variant="h5" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                ${product.compareAtPrice.toFixed(2)}
+                XAF {product.compareAtPrice.toLocaleString()}
               </Typography>
             )}
           </Stack>

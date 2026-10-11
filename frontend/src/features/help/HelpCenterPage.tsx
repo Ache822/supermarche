@@ -29,7 +29,6 @@ import EngineeringIcon from '@mui/icons-material/Engineering';
 import SecurityIcon from '@mui/icons-material/Security';
 import ChatIcon from '@mui/icons-material/Chat';
 import EmailIcon from '@mui/icons-material/Email';
-import SmartphoneIcon from '@mui/icons-material/Smartphone';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import CloseIcon from '@mui/icons-material/Close';
@@ -1055,7 +1054,7 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
             <Button
               variant="outlined"
               onClick={onOpenBooking}
-              startIcon={<SmartphoneIcon />}
+              startIcon={<StorefrontIcon />}
               sx={{
                 borderColor: '#FF6B00',
                 color: '#FF6B00',
@@ -1067,7 +1066,7 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
                 '&:hover': { bgcolor: 'rgba(255, 107, 0, 0.1)', borderColor: '#E05D00' },
               }}
             >
-              {t('help.downloadAppBtn', 'Download App')}
+              {t('help.bookServiceBtn', 'Book a Service / Delivery')}
             </Button>
           </Box>
         </Paper>

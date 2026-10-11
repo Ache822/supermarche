@@ -9,7 +9,7 @@ import {
   IconButton,
 } from '@mui/material';
 import type { Theme } from '@mui/material';
-import SmartphoneIcon from '@mui/icons-material/Smartphone';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -567,7 +567,7 @@ export function ServicesPage({ onOpenBooking }: ServicesPageProps) {
                         e.stopPropagation();
                         onOpenBooking(srv.id);
                       }}
-                      startIcon={srv.isLive ? <SmartphoneIcon /> : undefined}
+                      startIcon={srv.isLive ? <ShoppingBagIcon /> : undefined}
                       sx={{
                         bgcolor: srv.isLive ? '#FF6B00' : 'transparent',
                         color: srv.isLive ? '#FFFFFF' : 'text.disabled',
@@ -578,7 +578,7 @@ export function ServicesPage({ onOpenBooking }: ServicesPageProps) {
                         '&:hover': { bgcolor: '#E05D00' },
                       }}
                     >
-                      {srv.isLive ? 'Try App / Book Now' : 'Notify Me'}
+                      {srv.isLive ? 'Book Now' : 'Notify Me'}
                     </Button>
                   </Box>
                 </Box>
