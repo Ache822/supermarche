@@ -22,31 +22,32 @@ export const SectionBadge: React.FC<SectionBadgeProps> = ({
       sx={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: 1.25,
-        py: 0.65,
-        px: 1.75,
+        gap: 1,
+        py: 0.35,
+        px: 1.2,
         borderRadius: '9999px',
-        bgcolor: (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.08)' : 'rgba(255, 107, 0, 0.06)'),
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.08)' : 'rgba(255, 107, 0, 0.05)'),
         border: '1px solid',
-        borderColor: (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.28)' : 'rgba(255, 107, 0, 0.22)'),
+        borderColor: (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.28)' : 'rgba(255, 107, 0, 0.18)'),
         backdropFilter: 'blur(8px)',
-        mb: 2.5,
-        transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+        mb: 2,
+        whiteSpace: 'nowrap',
+        maxWidth: 'max-content',
+        transition: 'all 0.2s ease',
         '&:hover': {
           borderColor: '#FF6B00',
-          boxShadow: '0 0 16px rgba(255, 107, 0, 0.22)',
-          transform: 'translateY(-1px)',
+          boxShadow: '0 0 14px rgba(255, 107, 0, 0.2)',
         },
       }}
     >
       {pulse && (
         <Box
           sx={{
-            width: 7,
-            height: 7,
+            width: 6,
+            height: 6,
             borderRadius: '50%',
             bgcolor: '#FF6B00',
-            boxShadow: '0 0 8px #FF6B00',
+            boxShadow: '0 0 6px #FF6B00',
             flexShrink: 0,
             animation: 'bbPulse 2s infinite ease-in-out',
             '@keyframes bbPulse': {
@@ -57,20 +58,21 @@ export const SectionBadge: React.FC<SectionBadgeProps> = ({
         />
       )}
       {icon && !pulse && (
-        <Box sx={{ display: 'flex', alignItems: 'center', color: '#FF6B00', fontSize: 13, flexShrink: 0 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', color: '#FF6B00', fontSize: 12, flexShrink: 0 }}>
           {icon}
         </Box>
       )}
       <Typography
         component="span"
         sx={{
-          fontFamily: "'Space Grotesk', 'Outfit', sans-serif",
-          fontSize: '0.72rem',
+          fontFamily: "'Space Grotesk', -apple-system, sans-serif",
+          fontSize: '0.66rem',
           fontWeight: 700,
           letterSpacing: '0.12em',
           textTransform: 'uppercase',
           color: (theme) => (theme.palette.mode === 'dark' ? '#FFB28A' : '#C24A00'),
-          lineHeight: 1.2,
+          lineHeight: 1,
+          whiteSpace: 'nowrap',
         }}
       >
         {label}
