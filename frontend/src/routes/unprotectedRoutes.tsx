@@ -87,12 +87,19 @@ export function UnprotectedRoutes(props: UnprotectedRoutesProps) {
       <Route element={<UnprotectedLayout {...props} />}>
         <Route
           path="/"
-          element={<LandingPage onOpenBookingWithService={(serviceId) => handleOpenBooking(serviceId)} />}
+          element={
+            <LandingPage
+              onOpenBookingWithService={(serviceId) => handleOpenBooking(serviceId)}
+              onOpenLiveChat={() => setChatOpen(true)}
+            />
+          }
         />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/shop/product/:identifier" element={<ProductDetailPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/order-status/:orderNumber" element={<OrderSuccessPage />} />
+        <Route path="/track/:orderNumber" element={<OrderSuccessPage />} />
+        <Route path="/track" element={<OrderSuccessPage />} />
         <Route path="/about" element={<AboutPage onOpenBooking={() => handleOpenBooking()} />} />
         <Route
           path="/help"

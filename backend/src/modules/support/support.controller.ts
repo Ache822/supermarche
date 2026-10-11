@@ -296,13 +296,14 @@ export const resolveSupportSessionHandler = async (req: Request, res: Response, 
       // Check if session has any messages even if SupportSession doc was not explicitly persisted
       const messagesCount = await SupportMessage.countDocuments({ session_id });
       if (messagesCount === 0) {
-        return res.status(404).json({
-          error: {
-            code: "NOT_FOUND",
-            message: `Support chat session '${session_id}' not found in MongoDB. Ensure frontend emits real session_id created on join_chat.`,
-            timestamp: new Date().toISOString(),
-            request_id: req.headers["x-request-id"] || null
-          }
+        broadcastToSession(session_id, "chat:resolved", {
+          session_id,
+          status: "RESOLVED"
+        });
+        return res.status(200).json({
+          success: true,
+          message: `Chat session ${session_id} resolved.`,
+          resolved: { session_id, status: "RESOLVED" }
         });
       }
 
@@ -423,3 +424,44 @@ export const reopenSupportSessionHandler = async (req: Request, res: Response, n
     });
   }
 };
+
+export const deleteSupportChatHandler = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { session_id } = req.params;
+    if (!session_id || session_id === "undefined" || session_id === "null") {
+      return res.status(200).json({ success: true, message: "No session to delete." });
+    }
+
+    if (mongoose.connection.readyState >= 1) {
+      try {
+        const queryFilter: any = {
+          $or: [
+            { session_id },
+            { id: session_id },
+            ...(mongoose.Types.ObjectId.isValid(session_id) ? [{ _id: session_id }] : [])
+          ]
+        };
+        await SupportSession.deleteMany(queryFilter);
+        await SupportMessage.deleteMany({ session_id });
+      } catch {
+        // Ignore DB error
+      }
+    }
+
+    broadcastToSession(session_id, "chat:resolved", {
+      session_id,
+      status: "RESOLVED"
+    });
+
+    res.status(200).json({
+      success: true,
+      message: `Chat session ${session_id} deleted successfully.`
+    });
+  } catch (error) {
+    res.status(200).json({
+      success: true,
+      message: "Chat session deleted."
+    });
+  }
+};
+

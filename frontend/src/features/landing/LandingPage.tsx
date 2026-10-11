@@ -13,6 +13,12 @@ import {
   IconButton,
   Paper,
   Rating,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  InputAdornment,
 } from '@mui/material';
 import type { Theme } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -20,12 +26,14 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from '@mui/icons-material/Explore';
 import SmartphoneIcon from '@mui/icons-material/Smartphone';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
-import GetAppIcon from '@mui/icons-material/GetApp';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import SwipeIcon from '@mui/icons-material/Swipe';
 import RateReviewIcon from '@mui/icons-material/RateReview';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { DEFAULT_SERVICES } from '../../store/servicesSlice';
@@ -51,6 +59,7 @@ import { HeroDepartmentShowcase } from './components/HeroDepartmentShowcase';
 
 interface LandingPageProps {
   onOpenBookingWithService: (serviceId?: string) => void;
+  onOpenLiveChat?: () => void;
 }
 
 const partnerLogos = [
@@ -68,7 +77,10 @@ const partnerLogos = [
   'DHL Express CM',
 ];
 
-export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
+export function LandingPage({ onOpenBookingWithService, onOpenLiveChat }: LandingPageProps) {
+  const navigate = useNavigate();
+  const [trackOrderModalOpen, setTrackOrderModalOpen] = useState(false);
+  const [trackOrderInput, setTrackOrderInput] = useState('');
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const { addToCart } = useCart();
@@ -1672,7 +1684,7 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
               </Box>
 
               <Box
-                onClick={() => onOpenBookingWithService()}
+                onClick={() => setTrackOrderModalOpen(true)}
                 sx={{
                   p: 2.5,
                   borderRadius: '14px',
@@ -1689,11 +1701,11 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                 }}
               >
                 <Typography sx={{ fontWeight: 700, fontSize: 16, fontFamily: 'Space Grotesk, sans-serif', color: '#FF6B00', mb: 0.5, display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <GetAppIcon sx={{ color: '#FF6B00', fontSize: 20 }} />
-                  {t('liveSupport.appTitle', 'Mobile App Quick Support')} →
+                  <LocalShippingIcon sx={{ color: '#FF6B00', fontSize: 20 }} />
+                  {t('liveSupport.appTitle', 'Live Order Tracking')} →
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: 13, lineHeight: 1.45 }}>
-                  {t('liveSupport.appSub', 'Get real-time push updates for delivery arrival times on Google Play Store & Apple App Store.')}
+                  {t('liveSupport.appSub', 'Track your delivery runner status directly on the live web tracking dashboard.')}
                 </Typography>
               </Box>
             </Box>
@@ -1827,6 +1839,185 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
         open={reviewModalOpen}
         onClose={() => setReviewModalOpen(false)}
       />
+
+      {/* Live Order Tracking Modal */}
+      <Dialog
+        open={trackOrderModalOpen}
+        onClose={() => setTrackOrderModalOpen(false)}
+        maxWidth="sm"
+        fullWidth
+        slotProps={{
+          paper: {
+            sx: {
+              borderRadius: '20px',
+              p: 1,
+              bgcolor: (theme: Theme) => (theme.palette.mode === 'dark' ? '#1A110A' : '#FFFFFF'),
+              border: '1px solid',
+              borderColor: (theme: Theme) => (theme.palette.mode === 'dark' ? '#3A2316' : '#FFD5BD'),
+            },
+          },
+        }}
+      >
+        <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+            <Box
+              sx={{
+                width: 42,
+                height: 42,
+                borderRadius: '12px',
+                bgcolor: 'rgba(255, 107, 0, 0.12)',
+                color: '#FF6B00',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <LocalShippingIcon />
+            </Box>
+            <Box>
+              <Typography sx={{ fontWeight: 700, fontSize: 18, fontFamily: 'Space Grotesk, sans-serif' }}>
+                Live Order & Courier Tracking
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: 12 }}>
+                Real-time express dispatch monitoring • Cameroon Hub
+              </Typography>
+            </Box>
+          </Box>
+          <IconButton size="small" onClick={() => setTrackOrderModalOpen(false)}>
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </DialogTitle>
+
+        <DialogContent sx={{ pt: 2, pb: 1 }}>
+          <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2.5, lineHeight: 1.6 }}>
+            Enter your Kim&apos;s Store Order Number (from your checkout confirmation or SMS receipt) to track runner status and delivery progress.
+          </Typography>
+
+          <TextField
+            fullWidth
+            autoFocus
+            label="Order Number"
+            placeholder="e.g. ORD-984210 or KS-2026-001"
+            value={trackOrderInput}
+            onChange={(e) => setTrackOrderInput(e.target.value.toUpperCase())}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && trackOrderInput.trim()) {
+                setTrackOrderModalOpen(false);
+                navigate(`/order-status/${encodeURIComponent(trackOrderInput.trim())}`);
+              }
+            }}
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon sx={{ color: '#FF6B00' }} />
+                  </InputAdornment>
+                ),
+              },
+            }}
+            sx={{
+              mb: 2,
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '12px',
+                '&.Mui-focused fieldset': { borderColor: '#FF6B00' },
+              },
+            }}
+          />
+
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap', mb: 2 }}>
+            <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600 }}>
+              Quick Demo:
+            </Typography>
+            <Chip
+              label="ORD-DEMO-2026"
+              size="small"
+              onClick={() => setTrackOrderInput('ORD-DEMO-2026')}
+              sx={{
+                bgcolor: 'rgba(255, 107, 0, 0.1)',
+                color: '#FF6B00',
+                fontWeight: 700,
+                fontSize: 11,
+                cursor: 'pointer',
+                '&:hover': { bgcolor: 'rgba(255, 107, 0, 0.2)' },
+              }}
+            />
+          </Box>
+
+          <Box
+            sx={{
+              p: 2,
+              borderRadius: '12px',
+              bgcolor: (theme: Theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.08)' : '#FFF7F2'),
+              border: '1px dashed rgba(255, 107, 0, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 2,
+            }}
+          >
+            <Box>
+              <Typography sx={{ fontWeight: 700, fontSize: 13, color: '#FF6B00' }}>
+                Lost your order number?
+              </Typography>
+              <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                Kimzy can look up orders by your phone number or email in real-time.
+              </Typography>
+            </Box>
+            {onOpenLiveChat && (
+              <Button
+                size="small"
+                variant="outlined"
+                startIcon={<SupportAgentIcon fontSize="small" />}
+                onClick={() => {
+                  setTrackOrderModalOpen(false);
+                  onOpenLiveChat();
+                }}
+                sx={{
+                  borderColor: '#FF6B00',
+                  color: '#FF6B00',
+                  fontWeight: 700,
+                  textTransform: 'none',
+                  fontSize: 12,
+                  whiteSpace: 'nowrap',
+                  '&:hover': { bgcolor: 'rgba(255, 107, 0, 0.1)' },
+                }}
+              >
+                Ask Kimzy
+              </Button>
+            )}
+          </Box>
+        </DialogContent>
+
+        <DialogActions sx={{ px: 3, pb: 2.5, pt: 1, justifyContent: 'space-between' }}>
+          <Button
+            onClick={() => setTrackOrderModalOpen(false)}
+            sx={{ color: 'text.secondary', fontWeight: 600, textTransform: 'none' }}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            disabled={!trackOrderInput.trim()}
+            onClick={() => {
+              if (trackOrderInput.trim()) {
+                setTrackOrderModalOpen(false);
+                navigate(`/order-status/${encodeURIComponent(trackOrderInput.trim())}`);
+              }
+            }}
+            sx={{
+              bgcolor: '#FF6B00',
+              color: '#FFFFFF',
+              fontWeight: 700,
+              textTransform: 'none',
+              borderRadius: '10px',
+              px: 3,
+              '&:hover': { bgcolor: '#E05D00' },
+            }}
+          >
+            Track Order Status →
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

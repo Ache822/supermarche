@@ -14,11 +14,14 @@ import {
   ListItem,
   Avatar,
   Chip,
-  CircularProgress
+  CircularProgress,
+  TextField,
+  InputAdornment,
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import SearchIcon from '@mui/icons-material/Search';
 import api from '../../api/client';
 
 const orderSteps = ['Order Placed', 'Processing', 'Shipped', 'Delivered'];
@@ -28,19 +31,69 @@ export const OrderSuccessPage: React.FC = () => {
   const navigate = useNavigate();
 
   const [order, setOrder] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(Boolean(orderNumber));
+  const [searchInput, setSearchInput] = useState(orderNumber || '');
 
   useEffect(() => {
-    if (!orderNumber) return;
+    if (!orderNumber) {
+      setLoading(false);
+      return;
+    }
+
     setLoading(true);
+
+    if (orderNumber.toUpperCase().includes('DEMO')) {
+      setOrder({
+        orderNumber: orderNumber.toUpperCase(),
+        orderStatus: 'shipped',
+        customer: {
+          name: 'Sandrine Ngono',
+          email: 'sandrine.ngono@gmail.com',
+          phone: '+237 677 822 100',
+        },
+        shippingAddress: {
+          street: 'Avenue de Gaulle, Bonapriso',
+          city: 'Douala',
+          postalCode: 'BP 1024',
+          country: 'Cameroon',
+        },
+        items: [
+          {
+            title: 'Retro High Urban Streetwear Sneakers (Size 42)',
+            price: 42.0,
+            quantity: 1,
+            image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=400&q=80',
+          },
+          {
+            title: 'Hydrating Botanical Glow Facial Cleanser',
+            price: 18.0,
+            quantity: 2,
+            image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80',
+          },
+        ],
+        subtotal: 78.0,
+        shippingFee: 0,
+        totalAmount: 78.0,
+        paymentMethod: 'mtn_momo',
+        paymentStatus: 'paid',
+        notes: 'Express courier runner Jean-Paul assigned (Motorbike CM-LT-842)',
+      });
+      setLoading(false);
+      return;
+    }
+
     api.orders
       .track<{ success: boolean; data: any }>(orderNumber)
       .then((res) => {
         if (res?.success && res.data) {
           setOrder(res.data);
+        } else {
+          setOrder(null);
         }
       })
-      .catch((err) => console.error('Failed to load order details:', err))
+      .catch(() => {
+        setOrder(null);
+      })
       .finally(() => setLoading(false));
   }, [orderNumber]);
 
@@ -69,11 +122,125 @@ export const OrderSuccessPage: React.FC = () => {
 
   if (!order) {
     return (
-      <Container maxWidth="md" sx={{ py: 10, textAlign: 'center' }}>
-        <Typography variant="h5" sx={{ mb: 2 }}>
-          Order Not Found
-        </Typography>
-        <Button onClick={() => navigate('/shop')}>Back to Shop</Button>
+      <Container maxWidth="sm" sx={{ py: 10, textAlign: 'center' }}>
+        <Paper
+          elevation={0}
+          sx={{
+            p: { xs: 3, md: 5 },
+            borderRadius: 4,
+            border: '1px solid',
+            borderColor: (theme) => (theme.palette.mode === 'dark' ? '#3A2316' : '#E2E8F0'),
+            bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#1A110A' : '#FFFFFF'),
+          }}
+        >
+          <Box
+            sx={{
+              width: 56,
+              height: 56,
+              borderRadius: '16px',
+              bgcolor: 'rgba(255, 107, 0, 0.12)',
+              color: '#FF6B00',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              mx: 'auto',
+              mb: 2,
+            }}
+          >
+            <LocalShippingOutlinedIcon sx={{ fontSize: 32 }} />
+          </Box>
+          <Typography variant="h5" sx={{ fontWeight: 800, mb: 1, fontFamily: 'Space Grotesk, sans-serif' }}>
+            Live Order & Runner Tracking
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+            {orderNumber
+              ? `Order "${orderNumber}" was not found. Please double-check your order number or try the demo.`
+              : 'Enter your Kim’s Store order number to track your express courier runner in real-time.'}
+          </Typography>
+
+          <Box
+            component="form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (searchInput.trim()) {
+                navigate(`/order-status/${encodeURIComponent(searchInput.trim())}`);
+              }
+            }}
+            sx={{ display: 'flex', gap: 1.5, mb: 2 }}
+          >
+            <TextField
+              fullWidth
+              size="medium"
+              placeholder="e.g. ORD-984210 or ORD-DEMO-2026"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value.toUpperCase())}
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon sx={{ color: '#FF6B00' }} />
+                    </InputAdornment>
+                  ),
+                },
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '12px',
+                  '&.Mui-focused fieldset': { borderColor: '#FF6B00' },
+                },
+              }}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={!searchInput.trim()}
+              sx={{
+                bgcolor: '#FF6B00',
+                color: '#FFFFFF',
+                fontWeight: 700,
+                borderRadius: '12px',
+                px: 3,
+                textTransform: 'none',
+                whiteSpace: 'nowrap',
+                '&:hover': { bgcolor: '#E05D00' },
+              }}
+            >
+              Track
+            </Button>
+          </Box>
+
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1, mb: 4 }}>
+            <Typography variant="caption" color="text.secondary">
+              Try Demo:
+            </Typography>
+            <Chip
+              label="ORD-DEMO-2026"
+              size="small"
+              onClick={() => navigate('/order-status/ORD-DEMO-2026')}
+              sx={{
+                bgcolor: 'rgba(255, 107, 0, 0.1)',
+                color: '#FF6B00',
+                fontWeight: 700,
+                cursor: 'pointer',
+                '&:hover': { bgcolor: 'rgba(255, 107, 0, 0.2)' },
+              }}
+            />
+          </Box>
+
+          <Button
+            variant="outlined"
+            onClick={() => navigate('/shop')}
+            sx={{
+              borderColor: 'divider',
+              color: 'text.secondary',
+              textTransform: 'none',
+              fontWeight: 600,
+              borderRadius: '10px',
+            }}
+          >
+            ← Back to Shop
+          </Button>
+        </Paper>
       </Container>
     );
   }
