@@ -348,13 +348,30 @@ export function AdminDashboardPage({ mode = 'dark', onToggleTheme, initialTab }:
         {/* Scrollable Main Body (Independent Scroll Area) */}
         <Box
           component="main"
+          id="admin-main-scroll-container"
           sx={{
             flex: 1,
             display: 'flex',
             flexDirection: 'column',
-            overflow: 'hidden',
+            overflowY: 'auto',
+            overflowX: 'hidden',
             p: { xs: 2, md: 3 },
             minHeight: 0,
+            WebkitOverflowScrolling: 'touch',
+            '&::-webkit-scrollbar': {
+              width: '8px',
+              height: '8px',
+            },
+            '&::-webkit-scrollbar-track': {
+              background: (theme) => (theme.palette.mode === 'dark' ? '#140C07' : '#F8FAFC'),
+            },
+            '&::-webkit-scrollbar-thumb': {
+              background: (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.4)' : 'rgba(255, 107, 0, 0.6)'),
+              borderRadius: '4px',
+              '&:hover': {
+                background: '#FF6B00',
+              },
+            },
           }}
         >
           <Box
@@ -362,12 +379,11 @@ export function AdminDashboardPage({ mode = 'dark', onToggleTheme, initialTab }:
             className="bb-panel-enter"
             sx={{
               flex: 1,
-              height: '100%',
-              minHeight: 0,
+              minHeight: 'min-content',
               display: 'flex',
               flexDirection: 'column',
-              overflow: currentTab === 0 ? 'auto' : 'hidden',
-              pr: currentTab === 0 ? 0.5 : 0,
+              overflow: 'visible',
+              pb: 4,
             }}
           >
             {currentTab === 0 && (

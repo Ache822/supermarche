@@ -2,13 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   Box,
   Typography,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Chip,
   Dialog,
   DialogTitle,
@@ -20,22 +13,24 @@ import {
   FormControl,
   InputLabel,
   Stack,
-  CircularProgress,
   List,
   ListItem,
   Avatar,
   Divider,
   TextField
 } from '@mui/material';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import api from '../../../api/client';
+import { ReusableDataTable, type ColumnDef } from '../../../components/ui/ReusableDataTable';
+
+const ORDER_STATUSES = ['all', 'pending', 'processing', 'shipped', 'delivered', 'cancelled'];
 
 export const AdminOrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedOrder, setSelectedOrder] = useState<any | null>(null);
   const [openModal, setOpenModal] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState<string>('all');
 
   const [newStatus, setNewStatus] = useState<string>('pending');
   const [newPaymentStatus, setNewPaymentStatus] = useState<string>('pending');
@@ -99,102 +94,151 @@ export const AdminOrdersPage: React.FC = () => {
     }
   };
 
-  return (
-    <Box sx={{ p: 4 }}>
-      <Typography variant="h4" sx={{ fontWeight: 800, display: 'flex', alignItems: 'center', gap: 1.5, mb: 1 }}>
-        <LocalShippingIcon color="primary" fontSize="large" /> Store Customer Orders
-      </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 4 }}>
-        View incoming purchase orders, update shipping status, and manage payments.
-      </Typography>
+  const filteredOrders = orders.filter((ord) => {
+    if (selectedStatus === 'all') return true;
+    return ord.orderStatus?.toLowerCase() === selectedStatus.toLowerCase();
+  });
 
-      {loading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
-          <CircularProgress />
+  const columns: ColumnDef<any>[] = [
+    {
+      id: 'orderNumber',
+      label: 'ORDER #',
+      minWidth: 160,
+      render: (ord) => (
+        <Box>
+          <Typography variant="subtitle2" sx={{ fontWeight: 700, fontFamily: 'IBM Plex Mono, monospace' }}>
+            {ord.orderNumber}
+          </Typography>
+          <Typography variant="caption" color="text.secondary">
+            {ord.items?.length || 0} items
+          </Typography>
         </Box>
-      ) : orders.length === 0 ? (
-        <Paper sx={{ p: 6, textAlign: 'center', borderRadius: 3 }}>
-          <Typography color="text.secondary">No customer orders recorded yet.</Typography>
-        </Paper>
-      ) : (
-        <TableContainer component={Paper} variant="outlined" sx={{ borderRadius: 3 }}>
-          <Table>
-            <TableHead sx={{ bgcolor: 'rgba(255, 255, 255, 0.04)' }}>
-              <TableRow>
-                <TableCell sx={{ fontWeight: 700 }}>Order #</TableCell>
-                <TableCell sx={{ fontWeight: 700 }}>Customer</TableCell>
-                <TableCell sx={{ fontWeight: 700 }}>Date</TableCell>
-                <TableCell sx={{ fontWeight: 700 }}>Total</TableCell>
-                <TableCell sx={{ fontWeight: 700 }}>Payment</TableCell>
-                <TableCell sx={{ fontWeight: 700 }}>Order Status</TableCell>
-                <TableCell align="right" sx={{ fontWeight: 700 }}>Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {orders.map((ord) => (
-                <TableRow key={ord._id} hover>
-                  <TableCell>
-                    <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
-                      {ord.orderNumber}
-                    </Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      {ord.items?.length || 0} items
-                    </Typography>
-                  </TableCell>
+      ),
+    },
+    {
+      id: 'customer',
+      label: 'CUSTOMER',
+      minWidth: 200,
+      render: (ord) => (
+        <Box>
+          <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>{ord.customer?.name}</Typography>
+          <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
+            {ord.customer?.email}
+          </Typography>
+        </Box>
+      ),
+    },
+    {
+      id: 'date',
+      label: 'DATE',
+      minWidth: 130,
+      render: (ord) => (
+        <Typography variant="body2" color="text.secondary">
+          {ord.createdAt ? new Date(ord.createdAt).toLocaleDateString() : 'N/A'}
+        </Typography>
+      ),
+    },
+    {
+      id: 'total',
+      label: 'TOTAL',
+      minWidth: 140,
+      render: (ord) => (
+        <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#FF6B00' }}>
+          XAF {(ord.totalAmount || 0).toLocaleString()}
+        </Typography>
+      ),
+    },
+    {
+      id: 'payment',
+      label: 'PAYMENT',
+      minWidth: 160,
+      render: (ord) => (
+        <Chip
+          label={`${(ord.paymentMethod || 'card').replace(/_/g, ' ')} (${ord.paymentStatus || 'pending'})`}
+          size="small"
+          color={ord.paymentStatus === 'paid' ? 'success' : 'warning'}
+          variant="outlined"
+          sx={{ fontWeight: 600, fontSize: 11 }}
+        />
+      ),
+    },
+    {
+      id: 'status',
+      label: 'STATUS',
+      minWidth: 120,
+      render: (ord) => (
+        <Chip
+          label={(ord.orderStatus || 'pending').toUpperCase()}
+          size="small"
+          color={getStatusChipColor(ord.orderStatus) as any}
+          sx={{ fontWeight: 700, fontSize: 11 }}
+        />
+      ),
+    },
+    {
+      id: 'actions',
+      label: 'ACTIONS',
+      align: 'right',
+      minWidth: 110,
+      render: (ord) => (
+        <Button
+          size="small"
+          variant="outlined"
+          startIcon={<VisibilityIcon />}
+          onClick={() => handleOpenDetail(ord)}
+          sx={{
+            borderRadius: '8px',
+            textTransform: 'none',
+            fontWeight: 700,
+            borderColor: 'rgba(255, 107, 0, 0.4)',
+            color: '#FF6B00',
+            '&:hover': {
+              borderColor: '#FF6B00',
+              bgcolor: 'rgba(255, 107, 0, 0.08)',
+            },
+          }}
+        >
+          Manage
+        </Button>
+      ),
+    },
+  ];
 
-                  <TableCell>
-                    <Typography variant="subtitle2">{ord.customer?.name}</Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      {ord.customer?.email}
-                    </Typography>
-                  </TableCell>
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5, width: '100%' }}>
+      {/* Status Filter Chips */}
+      <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', alignItems: 'center' }}>
+        <Typography variant="caption" sx={{ fontWeight: 700, color: 'text.secondary', mr: 0.5, fontFamily: 'IBM Plex Mono, monospace' }}>
+          FILTER STATUS:
+        </Typography>
+        {ORDER_STATUSES.map((st) => (
+          <Chip
+            key={st}
+            label={st === 'all' ? `All (${orders.length})` : st.toUpperCase()}
+            onClick={() => setSelectedStatus(st)}
+            color={selectedStatus === st ? 'primary' : 'default'}
+            variant={selectedStatus === st ? 'filled' : 'outlined'}
+            sx={{
+              fontWeight: selectedStatus === st ? 700 : 500,
+              cursor: 'pointer',
+              bgcolor: selectedStatus === st ? '#FF6B00' : undefined,
+              '&:hover': { bgcolor: selectedStatus === st ? '#E05D00' : 'rgba(255, 107, 0, 0.08)' },
+            }}
+          />
+        ))}
+      </Box>
 
-                  <TableCell>
-                    <Typography variant="caption" color="text.secondary">
-                      {new Date(ord.createdAt).toLocaleDateString()}
-                    </Typography>
-                  </TableCell>
-
-                  <TableCell>
-                    <Typography variant="subtitle2" color="primary.main" sx={{ fontWeight: 700 }}>
-                      ${ord.totalAmount?.toFixed(2)}
-                    </Typography>
-                  </TableCell>
-
-                  <TableCell>
-                    <Chip
-                      label={`${ord.paymentMethod.replace(/_/g, ' ')} (${ord.paymentStatus})`}
-                      size="small"
-                      color={ord.paymentStatus === 'paid' ? 'success' : 'warning'}
-                      variant="outlined"
-                    />
-                  </TableCell>
-
-                  <TableCell>
-                    <Chip
-                      label={ord.orderStatus.toUpperCase()}
-                      size="small"
-                      color={getStatusChipColor(ord.orderStatus) as any}
-                    />
-                  </TableCell>
-
-                  <TableCell align="right">
-                    <Button
-                      size="small"
-                      variant="outlined"
-                      startIcon={<VisibilityIcon />}
-                      onClick={() => handleOpenDetail(ord)}
-                      sx={{ borderRadius: 2 }}
-                    >
-                      Manage
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+      {/* Infinite Scroll Reusable Data Table */}
+      <ReusableDataTable
+        title="Store Customer Orders"
+        subtitle="View incoming purchase orders, update shipping status, and manage payments."
+        columns={columns}
+        data={filteredOrders}
+        keyExtractor={(ord) => ord._id}
+        searchPlaceholder="Search orders by order #, customer name, email, tracking..."
+        enableInfiniteScroll={true}
+        isLoading={loading}
+      />
 
       {/* Order Details & Status Modal */}
       {selectedOrder && (

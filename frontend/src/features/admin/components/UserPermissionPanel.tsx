@@ -267,7 +267,7 @@ export function UserPermissionPanel() {
   ];
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, width: '100%', maxHeight: 'calc(100vh - 160px)', minHeight: 0 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, width: '100%' }}>
       <ReusableDataTable
         title={t('admin.userPermissionTitle', 'Admin & Operations User Permission Control')}
         subtitle={t('admin.userPermissionSub', 'Manage operational staff, assign access rights, and create system operator accounts')}

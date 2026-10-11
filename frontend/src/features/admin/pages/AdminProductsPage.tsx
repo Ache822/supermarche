@@ -2,14 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Box,
   Typography,
-  Paper,
   Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Chip,
   IconButton,
   Dialog,
@@ -26,10 +19,10 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import api from '../../../api/client';
 import type { ProductItem } from '../../../context/CartContext';
+import { ReusableDataTable, type ColumnDef } from '../../../components/ui/ReusableDataTable';
 
 const STORE_CATEGORIES = [
   'Apparel & Fashion',
@@ -45,6 +38,7 @@ export const AdminProductsPage: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   const [formData, setFormData] = useState({
     title: '',
@@ -178,115 +172,184 @@ export const AdminProductsPage: React.FC = () => {
     }
   };
 
-  return (
-    <Box sx={{ p: 4 }}>
-      <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+  const filteredProducts = products.filter((prod) => {
+    if (selectedCategory === 'All') return true;
+    const catName =
+      typeof prod.category === 'object' && prod.category !== null
+        ? (prod.category as any).name || ''
+        : prod.categoryLabel || prod.category || '';
+    return catName.toLowerCase() === selectedCategory.toLowerCase();
+  });
+
+  const columns: ColumnDef<ProductItem>[] = [
+    {
+      id: 'product',
+      label: 'PRODUCT',
+      minWidth: 260,
+      render: (prod) => (
+        <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
+          <Box
+            component="img"
+            src={prod.images?.[0] || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80'}
+            alt={prod.title}
+            sx={{
+              width: 48,
+              height: 48,
+              borderRadius: 2,
+              objectFit: 'cover',
+              border: '1px solid rgba(255, 107, 0, 0.25)',
+              bgcolor: 'background.paper',
+            }}
+          />
+          <Box sx={{ minWidth: 0 }}>
+            <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: 13 }} noWrap>
+              {prod.title}
+            </Typography>
+            <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'IBM Plex Mono, monospace' }}>
+              SKU: {prod.sku || 'N/A'}
+            </Typography>
+          </Box>
+        </Stack>
+      ),
+    },
+    {
+      id: 'category',
+      label: 'CATEGORY',
+      minWidth: 160,
+      render: (prod) => {
+        const catLabel =
+          typeof prod.category === 'object' && prod.category !== null
+            ? (prod.category as any).name || 'General'
+            : prod.categoryLabel || prod.category || 'General';
+        return (
+          <Chip
+            label={catLabel}
+            size="small"
+            sx={{
+              fontWeight: 600,
+              fontSize: 11,
+              bgcolor: 'rgba(255, 107, 0, 0.1)',
+              color: '#FF6B00',
+              border: '1px solid rgba(255, 107, 0, 0.25)',
+            }}
+          />
+        );
+      },
+    },
+    {
+      id: 'price',
+      label: 'PRICE (FCFA)',
+      minWidth: 140,
+      render: (prod) => (
         <Box>
-          <Typography variant="h4" sx={{ fontWeight: 800, display: 'flex', alignItems: 'center', gap: 1.5, mb: 1 }}>
-            <Inventory2OutlinedIcon color="primary" fontSize="large" /> Store Product Catalog
+          <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#FF6B00' }}>
+            XAF {prod.price.toLocaleString()}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Manage store inventory, update prices (FCFA), stock levels, and upload product images.
-          </Typography>
+          {prod.compareAtPrice && (
+            <Typography variant="caption" color="text.secondary" sx={{ textDecoration: 'line-through', fontSize: 11 }}>
+              XAF {prod.compareAtPrice.toLocaleString()}
+            </Typography>
+          )}
         </Box>
+      ),
+    },
+    {
+      id: 'stock',
+      label: 'STOCK LEVEL',
+      minWidth: 130,
+      render: (prod) => (
+        <Chip
+          label={`${prod.stockQuantity} units`}
+          size="small"
+          color={prod.stockQuantity > 10 ? 'success' : prod.stockQuantity > 0 ? 'warning' : 'error'}
+          sx={{ fontWeight: 700, fontSize: 11 }}
+        />
+      ),
+    },
+    {
+      id: 'status',
+      label: 'STATUS',
+      minWidth: 110,
+      render: (prod) => (
+        <Chip
+          label={prod.inStock ? 'Available' : 'Sold Out'}
+          color={prod.inStock ? 'success' : 'default'}
+          variant={prod.inStock ? 'filled' : 'outlined'}
+          size="small"
+          sx={{ fontWeight: 700, fontSize: 11 }}
+        />
+      ),
+    },
+    {
+      id: 'actions',
+      label: 'ACTIONS',
+      align: 'right',
+      minWidth: 110,
+      render: (prod) => (
+        <Stack direction="row" spacing={0.5} sx={{ justifyContent: 'flex-end' }}>
+          <IconButton size="small" onClick={() => handleOpenEdit(prod)} sx={{ color: '#FF6B00' }}>
+            <EditIcon fontSize="small" />
+          </IconButton>
+          <IconButton size="small" onClick={() => handleDelete(prod._id)} color="error">
+            <DeleteIcon fontSize="small" />
+          </IconButton>
+        </Stack>
+      ),
+    },
+  ];
 
-        <Button variant="contained" startIcon={<AddIcon />} onClick={handleOpenAdd} sx={{ borderRadius: 2, px: 3, fontWeight: 700 }}>
-          Add New Product
-        </Button>
-      </Stack>
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5, width: '100%' }}>
+      {/* Category Filter Chips */}
+      <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', alignItems: 'center' }}>
+        <Typography variant="caption" sx={{ fontWeight: 700, color: 'text.secondary', mr: 0.5, fontFamily: 'IBM Plex Mono, monospace' }}>
+          DEPARTMENTS:
+        </Typography>
+        {['All', ...STORE_CATEGORIES].map((cat) => (
+          <Chip
+            key={cat}
+            label={cat === 'All' ? `All (${products.length})` : cat}
+            onClick={() => setSelectedCategory(cat)}
+            color={selectedCategory === cat ? 'primary' : 'default'}
+            variant={selectedCategory === cat ? 'filled' : 'outlined'}
+            sx={{
+              fontWeight: selectedCategory === cat ? 700 : 500,
+              cursor: 'pointer',
+              bgcolor: selectedCategory === cat ? '#FF6B00' : undefined,
+              '&:hover': { bgcolor: selectedCategory === cat ? '#E05D00' : 'rgba(255, 107, 0, 0.08)' },
+            }}
+          />
+        ))}
+      </Box>
 
-      {loading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
-          <CircularProgress />
-        </Box>
-      ) : (
-        <TableContainer component={Paper} variant="outlined" sx={{ borderRadius: 3 }}>
-          <Table>
-            <TableHead sx={{ bgcolor: 'rgba(255, 255, 255, 0.04)' }}>
-              <TableRow>
-                <TableCell sx={{ fontWeight: 700 }}>Product</TableCell>
-                <TableCell sx={{ fontWeight: 700 }}>Category</TableCell>
-                <TableCell sx={{ fontWeight: 700 }}>Price (FCFA)</TableCell>
-                <TableCell sx={{ fontWeight: 700 }}>Stock Level</TableCell>
-                <TableCell sx={{ fontWeight: 700 }}>Status</TableCell>
-                <TableCell align="right" sx={{ fontWeight: 700 }}>Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {products.map((prod) => (
-                <TableRow key={prod._id} hover>
-                  <TableCell>
-                    <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
-                      <Box
-                        component="img"
-                        src={prod.images?.[0] || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80'}
-                        alt={prod.title}
-                        sx={{ width: 48, height: 48, borderRadius: 2, objectFit: 'cover' }}
-                      />
-                      <Box>
-                        <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
-                          {prod.title}
-                        </Typography>
-                        <Typography variant="caption" color="text.secondary">
-                          SKU: {prod.sku || 'N/A'}
-                        </Typography>
-                      </Box>
-                    </Stack>
-                  </TableCell>
-
-                  <TableCell>
-                    <Chip
-                      label={
-                        typeof prod.category === 'object' && prod.category !== null
-                          ? (prod.category as any).name || 'General'
-                          : prod.categoryLabel || prod.category || 'General'
-                      }
-                      size="small"
-                      variant="outlined"
-                    />
-                  </TableCell>
-
-                  <TableCell>
-                    <Typography variant="subtitle2" color="primary.main" sx={{ fontWeight: 700 }}>
-                      XAF {prod.price.toLocaleString()}
-                    </Typography>
-                    {prod.compareAtPrice && (
-                      <Typography variant="caption" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                        XAF {prod.compareAtPrice.toLocaleString()}
-                      </Typography>
-                    )}
-                  </TableCell>
-
-                  <TableCell>
-                    <Chip
-                      label={`${prod.stockQuantity} units`}
-                      size="small"
-                      color={prod.stockQuantity > 10 ? 'success' : prod.stockQuantity > 0 ? 'warning' : 'error'}
-                    />
-                  </TableCell>
-
-                  <TableCell>
-                    <Chip
-                      label={prod.inStock ? 'Available' : 'Sold Out'}
-                      color={prod.inStock ? 'success' : 'default'}
-                      size="small"
-                    />
-                  </TableCell>
-
-                  <TableCell align="right">
-                    <IconButton size="small" onClick={() => handleOpenEdit(prod)} color="primary">
-                      <EditIcon fontSize="small" />
-                    </IconButton>
-                    <IconButton size="small" onClick={() => handleDelete(prod._id)} color="error">
-                      <DeleteIcon fontSize="small" />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+      {/* Infinite Scroll Reusable Data Table */}
+      <ReusableDataTable
+        title="Store Product Catalog"
+        subtitle="Manage store inventory, update prices (FCFA), stock levels, and upload product images."
+        columns={columns}
+        data={filteredProducts}
+        keyExtractor={(p) => p._id}
+        searchPlaceholder="Search products by title, SKU, category, or price..."
+        enableInfiniteScroll={true}
+        isLoading={loading}
+        headerActions={
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={handleOpenAdd}
+            sx={{
+              borderRadius: '10px',
+              px: 2.5,
+              fontWeight: 700,
+              bgcolor: '#FF6B00',
+              '&:hover': { bgcolor: '#E05D00' },
+              textTransform: 'none',
+            }}
+          >
+            Add New Product
+          </Button>
+        }
+      />
 
       {/* Add / Edit Product Modal */}
       <Dialog open={openModal} onClose={() => setOpenModal(false)} maxWidth="sm" fullWidth>
