@@ -13,6 +13,7 @@ export interface ProductItem {
   stockQuantity: number;
   inStock: boolean;
   sku?: string;
+  categoryLabel?: string;
   attributes?: Record<string, any>;
 }
 

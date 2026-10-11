@@ -102,7 +102,10 @@ export const AdminProductsPage: React.FC = () => {
       shortDescription: product.shortDescription || '',
       price: String(product.price),
       compareAtPrice: product.compareAtPrice ? String(product.compareAtPrice) : '',
-      category: product.category || STORE_CATEGORIES[0],
+      category:
+        typeof product.category === 'object' && product.category !== null
+          ? (product.category as any).name || STORE_CATEGORIES[0]
+          : product.categoryLabel || product.category || STORE_CATEGORIES[0],
       stockQuantity: String(product.stockQuantity),
       imageUrl: product.images?.[0] || '',
       sku: product.sku || '',
@@ -232,7 +235,15 @@ export const AdminProductsPage: React.FC = () => {
                   </TableCell>
 
                   <TableCell>
-                    <Chip label={prod.category} size="small" variant="outlined" />
+                    <Chip
+                      label={
+                        typeof prod.category === 'object' && prod.category !== null
+                          ? (prod.category as any).name || 'General'
+                          : prod.categoryLabel || prod.category || 'General'
+                      }
+                      size="small"
+                      variant="outlined"
+                    />
                   </TableCell>
 
                   <TableCell>
