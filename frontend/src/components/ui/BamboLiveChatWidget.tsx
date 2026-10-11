@@ -60,6 +60,26 @@ const generateMsgId = (prefix: string) => {
   return `msg-${prefix}-${msgSequence}`;
 };
 
+const formatChatTime = (val?: string | number | Date): string => {
+  if (!val) return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const str = String(val).trim();
+  if (!str.includes('T') && !str.includes('-') && (str.includes('AM') || str.includes('PM') || str.length <= 8)) {
+    return str;
+  }
+  const date = new Date(str);
+  if (isNaN(date.getTime())) return str;
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+};
+
+const isMsgDuplicate = (list: Message[], newMsg: { id?: string; sender?: string; text?: string }): boolean => {
+  if (newMsg.id && list.some((m) => m.id === newMsg.id)) return true;
+  return list.some(
+    (m) =>
+      m.sender === newMsg.sender &&
+      m.text.trim().toLowerCase() === (newMsg.text || '').trim().toLowerCase()
+  );
+};
+
 export function BamboLiveChatWidget({
   onOpenBooking,
   onOpenTracking,
@@ -121,15 +141,30 @@ export function BamboLiveChatWidget({
     api.support
       .getMessages(sessionId)
       .then((res: unknown) => {
-        const data = (Array.isArray(res) ? res : (res as { data?: Array<{ message_id?: string; body?: string; text?: string; sender?: string; sent_at?: string }> })?.data || []);
+        const data = (Array.isArray(res) ? res : (res as { data?: Array<{ message_id?: string; body?: string; text?: string; message?: string; sender?: string; sent_at?: string }> })?.data || []);
         if (data.length > 0) {
-          const loadedMsgs: Message[] = data.map((m, idx) => ({
-            id: m.message_id || `hist-${idx}`,
-            sender: m.sender === 'CUSTOMER' ? 'user' : 'supermarche',
-            text: m.body || m.text || '',
-            timestamp: m.sent_at ? new Date(m.sent_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          }));
-          setMessages(loadedMsgs);
+          const loadedMsgs: Message[] = [];
+          data.forEach((m, idx) => {
+            const item: Message = {
+              id: m.message_id || `hist-${idx}`,
+              sender: m.sender === 'CUSTOMER' ? 'user' : 'supermarche',
+              text: m.body || m.text || m.message || '',
+              timestamp: formatChatTime(m.sent_at),
+            };
+            if (!isMsgDuplicate(loadedMsgs, item)) {
+              loadedMsgs.push(item);
+            }
+          });
+
+          setMessages((prev) => {
+            const merged = [...prev];
+            loadedMsgs.forEach((lm) => {
+              if (!isMsgDuplicate(merged, lm)) {
+                merged.push(lm);
+              }
+            });
+            return merged;
+          });
         }
       })
       .catch(() => {});
@@ -138,15 +173,18 @@ export function BamboLiveChatWidget({
       if (payload.sessionId === sessionId && (payload.sender === 'admin' || payload.sender === 'supermarche')) {
         const msgId = payload.id || `msg-admin-${Date.now()}`;
         const msgText = payload.message || payload.text || payload.body || '';
+        if (!msgText && !payload.attachment) return;
+
         setMessages((prev) => {
-          const isDuplicate = prev.some((m) => m.id === msgId);
-          if (isDuplicate) return prev;
+          if (isMsgDuplicate(prev, { id: msgId, sender: 'supermarche', text: msgText })) {
+            return prev;
+          }
 
           const newMsg: Message = {
             id: msgId,
             sender: 'supermarche',
             text: msgText,
-            timestamp: payload.timestamp || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            timestamp: formatChatTime(payload.timestamp),
             attachment: payload.attachment,
           };
           return [...prev, newMsg];
@@ -544,7 +582,7 @@ export function BamboLiveChatWidget({
                   </Box>
 
                   <Typography sx={{ fontSize: 10, color: 'text.disabled', mt: 0.5, px: 0.5, fontFamily: 'IBM Plex Mono, monospace' }}>
-                    {msg.timestamp}
+                    {formatChatTime(msg.timestamp)}
                   </Typography>
                 </Box>
               );
