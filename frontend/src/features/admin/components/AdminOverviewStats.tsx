@@ -1,56 +1,60 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box, Paper, Typography, Grid } from '@mui/material';
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import CategoryIcon from '@mui/icons-material/Category';
+import Inventory2Icon from '@mui/icons-material/Inventory2';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
-import { useAppSelector } from '../../../store/hooks';
 import adminService from '../../../services/adminService';
 import api from '../../../api/client';
-import type { ServiceItem } from '../../../types';
 
 export function AdminOverviewStats() {
   const { t } = useTranslation();
-  const { applications } = useAppSelector((state) => state.admin);
-  const [servicesCount, setServicesCount] = useState<number>(0);
+  const [productsCount, setProductsCount] = useState<number>(0);
+  const [ordersCount, setOrdersCount] = useState<number>(0);
   const [activeChatsCount, setActiveChatsCount] = useState<number>(0);
 
-  useEffect(() => {
-    let isMounted = true;
+  const loadData = () => {
+    api.products.list().then((res: any) => {
+      const list = res?.data || (Array.isArray(res) ? res : []);
+      setProductsCount(list.length);
+    }).catch(() => {});
 
-    api.services.getPaginatedServices(1, 100).then((res: unknown) => {
-      if (!isMounted) return;
-      const list = (Array.isArray(res) ? res : (res as { data?: ServiceItem[] })?.data || []) as ServiceItem[];
-      setServicesCount(list.length);
+    api.orders.getAdminList().then((res: any) => {
+      const list = res?.data || (Array.isArray(res) ? res : []);
+      setOrdersCount(list.length);
     }).catch(() => {});
 
     adminService.getActiveChats().then((chats) => {
-      if (!isMounted) return;
       setActiveChatsCount(chats.length);
     }).catch(() => {});
+  };
 
-    return () => { isMounted = false; };
+  useEffect(() => {
+    loadData();
+    // Auto-refresh every 20 seconds for real-time dashboard accuracy
+    const timer = setInterval(loadData, 20000);
+    return () => clearInterval(timer);
   }, []);
 
   const statCards = [
     {
-      title: t('admin.proApplications', 'Pro Provider Applications'),
-      value: `${applications.length} ${applications.length === 1 ? t('admin.applicationUnit', 'Application') : t('admin.applicationsUnit', 'Applications')}`,
-      subtext: t('admin.vettingQueue', 'Vetting & Identity Check Queue'),
-      icon: <AssignmentIndIcon sx={{ fontSize: 26, color: '#FF6B00' }} />,
+      title: "Store Catalog Products",
+      value: `${productsCount} ${productsCount === 1 ? 'Live Product' : 'Live Products'}`,
+      subtext: 'Across 5 Departments • Kim\'s Store Catalog',
+      icon: <Inventory2Icon sx={{ fontSize: 26, color: '#FF6B00' }} />,
       bgColor: 'rgba(255, 107, 0, 0.12)',
     },
     {
-      title: t('admin.serviceCatalogItems', 'Service Catalog Items'),
-      value: `${servicesCount} ${servicesCount === 1 ? t('admin.activeServiceUnit', 'Active Service') : t('admin.activeServicesUnit', 'Active Services')}`,
-      subtext: t('admin.acrossCities', 'Across Douala, Yaoundé, Bamenda & Buea'),
-      icon: <CategoryIcon sx={{ fontSize: 26, color: '#2563EB' }} />,
+      title: "Customer Purchase Orders",
+      value: `${ordersCount} ${ordersCount === 1 ? 'Order Placed' : 'Orders Placed'}`,
+      subtext: 'Purchases, Shipping & Delivery Pipeline',
+      icon: <LocalShippingIcon sx={{ fontSize: 26, color: '#2563EB' }} />,
       bgColor: 'rgba(37, 99, 235, 0.12)',
     },
     {
       title: t('admin.supportDeskTickets', 'Support Desk Tickets'),
-      value: `${activeChatsCount} ${activeChatsCount === 1 ? t('admin.liveChatActive', 'Live Chat Active') : t('admin.liveChatsActive', 'Live Chats Active')}`,
-      subtext: t('admin.supportInquiriesSub', 'User & Provider Support Inquiries'),
+      value: `${activeChatsCount} ${activeChatsCount === 1 ? 'Live Chat Active' : 'Live Chats Active'}`,
+      subtext: 'Real-time Customer Care & Inquiries',
       icon: <SupportAgentIcon sx={{ fontSize: 26, color: '#D97706' }} />,
       bgColor: 'rgba(217, 119, 6, 0.12)',
     },
