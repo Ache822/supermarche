@@ -49,48 +49,134 @@ export const getPublicFaqsHandler = async (req: Request, res: Response, next: Ne
 
     if (faqs.length === 0) {
       faqs = [
+        // Customers
         {
           id: "faq-1",
-          category: "Delivery",
-          question: "How fast is cooking gas delivered to my home?",
-          answer: "Gas cylinders are delivered and safety installed within 30 to 45 minutes of order placement.",
+          category: "customers",
+          subCategory: "Orders & Shopping",
+          question: "How do I place an order on Kim's Store?",
+          answer: "Browse our collections (Fashion, Sneakers, Cosmetics, Tech, or Supermarket Pantry), add items to your shopping bag, and proceed to checkout with delivery across Douala, Yaoundé, Buea, or Bamenda.",
           display_order: 1,
           is_published: true,
           is_featured: true,
           translations: {
             fr: {
-              question: "À quelle vitesse le gaz de cuisine est-il livré ?",
-              answer: "Les bouteilles de gaz sont livrées et installées en toute sécurité dans un délai de 30 à 45 minutes."
+              question: "Comment passer une commande sur Kim's Store ?",
+              answer: "Parcourez nos rayons (Mode, Sneakers, Cosmétiques, Tech ou Supermarché), ajoutez vos articles au panier et validez la commande avec livraison à Douala, Yaoundé, Buea ou Bamenda."
             }
           }
         },
         {
           id: "faq-2",
-          category: "Services",
-          question: "Can I become a Supermarche service provider?",
-          answer: "Yes! Fill out our online Provider Application form under 'Become a Partner' and our team will contact you via WhatsApp or Email.",
+          category: "customers",
+          subCategory: "Delivery & Timelines",
+          question: "How fast is delivery and can I track my order?",
+          answer: "Supermarket pantry essentials are delivered within 45 to 90 minutes. Fashion, sneakers, and tech products are delivered same-day or next-day with live SMS tracking.",
           display_order: 2,
           is_published: true,
           is_featured: true,
           translations: {
             fr: {
-              question: "Puis-je devenir un prestataire de services Supermarche ?",
-              answer: "Oui ! Remplissez notre formulaire de candidature en ligne et notre équipe vous contactera via WhatsApp ou Email."
+              question: "Quels sont les délais de livraison et puis-je suivre ma commande ?",
+              answer: "Les essentiels du supermarché sont livrés en 45 à 90 minutes. La mode et les produits tech sont livrés le jour même ou le lendemain avec suivi GPS en direct."
             }
           }
         },
         {
           id: "faq-3",
-          category: "Payment",
-          question: "What payment methods are accepted?",
-          answer: "We accept Mobile Money (MTN MoMo, Orange Money) and Cash on Delivery.",
+          category: "customers",
+          subCategory: "Payments & Mobile Money",
+          question: "What payment methods are supported on Kim's Store?",
+          answer: "We support MTN Mobile Money, Orange Money, Visa/Mastercard debit and credit cards, as well as Cash on Delivery with instant digital receipts.",
           display_order: 3,
           is_published: true,
           is_featured: true,
           translations: {
             fr: {
-              question: "Quels modes de paiement sont acceptés ?",
-              answer: "Nous acceptons Mobile Money (MTN MoMo, Orange Money) et le paiement en espèces à la livraison."
+              question: "Quels modes de paiement sont acceptés sur Kim's Store ?",
+              answer: "Nous acceptons MTN Mobile Money, Orange Money, les cartes bancaires Visa/Mastercard ainsi que le paiement en espèces à la livraison."
+            }
+          }
+        },
+        {
+          id: "faq-4",
+          category: "customers",
+          subCategory: "Returns & Exchanges",
+          question: "What if a shoe or clothing item does not fit my size?",
+          answer: "We provide a hassle-free 7-day size exchange guarantee. Request a swap in your order history or chat with Kimzy, and our courier brings the right size.",
+          display_order: 4,
+          is_published: true,
+          is_featured: true,
+          translations: {
+            fr: {
+              question: "Que faire si la pointure ou la taille ne me convient pas ?",
+              answer: "Nous offrons une garantie d'échange sous 7 jours. Demandez un échange via votre compte ou Kimzy, et notre livreur vous apporte la bonne taille."
+            }
+          }
+        },
+        // Pros (Merchants)
+        {
+          id: "faq-5",
+          category: "pros",
+          subCategory: "Merchant Onboarding",
+          question: "How can local boutiques or fashion creators sell on Kim's Store?",
+          answer: "Apply through our Merchant Partner portal. Submit your catalog, business registration or CNI, and start selling after a swift 48-hour onboarding review.",
+          display_order: 5,
+          is_published: true,
+          is_featured: true,
+          translations: {
+            fr: {
+              question: "Comment vendre mes créations ou ma boutique sur Kim's Store ?",
+              answer: "Postulez via notre portail Partenaires Marchands. Soumettez votre catalogue pour vérification sous 48h."
+            }
+          }
+        },
+        {
+          id: "faq-6",
+          category: "pros",
+          subCategory: "Payouts & Logistics",
+          question: "When and how do Kim's Store partners receive payouts?",
+          answer: "Sales revenue is automatically disbursed every Monday directly to your MTN Mobile Money or Orange Money merchant account with zero processing deductions.",
+          display_order: 6,
+          is_published: true,
+          is_featured: true,
+          translations: {
+            fr: {
+              question: "Quand et comment les vendeurs partenaires reçoivent-ils leurs paiements ?",
+              answer: "Les revenus des ventes sont versés automatiquement chaque lundi directement sur votre compte MTN MoMo ou Orange Money."
+            }
+          }
+        },
+        // Account & Security
+        {
+          id: "faq-7",
+          category: "account",
+          subCategory: "Payment & MoMo Security",
+          question: "How is my phone number and Mobile Money payment info protected?",
+          answer: "Transactions are processed over encrypted banking tunnels with zero storage of your Mobile Money PIN. All OTP prompts are generated directly by MTN or Orange.",
+          display_order: 7,
+          is_published: true,
+          is_featured: true,
+          translations: {
+            fr: {
+              question: "Comment mon numéro et mes paiements Mobile Money sont-ils protégés ?",
+              answer: "Les transactions sont traitées via des tunnels bancaires sécurisés sans enregistrement de code PIN. Les invites OTP proviennent directement de votre opérateur."
+            }
+          }
+        },
+        {
+          id: "faq-8",
+          category: "account",
+          subCategory: "Password & Sign-In",
+          question: "How do I reset my password or update my login credentials?",
+          answer: "Click 'Forgot Password' on the login screen or access your Account Profile to receive an instant verification link or SMS OTP to reset your password.",
+          display_order: 8,
+          is_published: true,
+          is_featured: true,
+          translations: {
+            fr: {
+              question: "Comment réinitialiser mon mot de passe ou modifier mes identifiants ?",
+              answer: "Cliquez sur 'Mot de passe oublié' sur l'écran de connexion ou accédez à votre profil pour recevoir un lien de réinitialisation sécurisé par SMS ou email."
             }
           }
         }
