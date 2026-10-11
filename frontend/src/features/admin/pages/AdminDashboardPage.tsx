@@ -110,16 +110,33 @@ export function AdminDashboardPage({ mode = 'dark', onToggleTheme, initialTab }:
     <Box
       sx={{
         height: '100%',
+        maxHeight: '100%',
         display: 'flex',
         flexDirection: 'column',
         bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#111B15' : '#FFFFFF'),
         borderRight: '1px solid',
         borderColor: (theme) => (theme.palette.mode === 'dark' ? '#3A2316' : '#E2E8F0'),
-        p: 2.5,
+        p: { xs: 2, sm: 2.5 },
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        WebkitOverflowScrolling: 'touch',
+        '&::-webkit-scrollbar': {
+          width: '5px',
+        },
+        '&::-webkit-scrollbar-track': {
+          background: 'transparent',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.3)' : 'rgba(255, 107, 0, 0.4)'),
+          borderRadius: '4px',
+          '&:hover': {
+            background: '#FF6B00',
+          },
+        },
       }}
     >
       {/* Sidebar Header */}
-      <Box sx={{ mb: 3.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1.5 }}>
+      <Box sx={{ mb: 2.5, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1.5 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           <SupermarcheLogo size={36} showText={true} />
           <Chip
@@ -152,12 +169,29 @@ export function AdminDashboardPage({ mode = 'dark', onToggleTheme, initialTab }:
           fontFamily: 'IBM Plex Mono, monospace',
           mb: 1.5,
           px: 1,
+          flexShrink: 0,
         }}
       >
         {t('admin.managementMenu', 'MANAGEMENT MENU')}
       </Typography>
 
-      <List disablePadding sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 0.8 }}>
+      <List
+        disablePadding
+        sx={{
+          flex: 1,
+          minHeight: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 0.8,
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          pr: 0.5,
+          '&::-webkit-scrollbar': { width: '4px' },
+          '&::-webkit-scrollbar-track': { background: 'transparent' },
+          '&::-webkit-scrollbar-thumb': { bgcolor: 'rgba(255, 107, 0, 0.25)', borderRadius: '4px' },
+          '&::-webkit-scrollbar-thumb:hover': { bgcolor: '#FF6B00' },
+        }}
+      >
         {visibleMenuItems.map((item) => {
           const isSelected = currentTab === item.id;
           return (
@@ -206,7 +240,7 @@ export function AdminDashboardPage({ mode = 'dark', onToggleTheme, initialTab }:
       </List>
 
       {/* Sidebar Footer: User Card & Logout */}
-      <Box sx={{ pt: 2, borderTop: '1px solid', borderColor: 'divider', display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+      <Box sx={{ pt: 2, mt: 'auto', flexShrink: 0, borderTop: '1px solid', borderColor: 'divider', display: 'flex', flexDirection: 'column', gap: 1.5 }}>
         <Paper
           variant="outlined"
           sx={{
@@ -241,7 +275,7 @@ export function AdminDashboardPage({ mode = 'dark', onToggleTheme, initialTab }:
               <VerifiedBadge size={15} title="Verified Admin / System Operator" />
             </Box>
             <Typography noWrap sx={{ fontSize: 10.5, color: 'text.secondary', fontFamily: 'IBM Plex Mono, monospace' }}>
-              {user?.email || 'admin@supermarche.cm'}
+              {user?.email || 'admin@kimsstore.cm'}
             </Typography>
           </Box>
         </Paper>
