@@ -40,8 +40,8 @@ export function AboutPage({ onOpenBooking }: AboutPageProps) {
   return (
     <Box sx={{ pb: 8 }}>
       <SEO
-        title="About Supermarche - Everyday Service Dispatch & Errand Platform"
-        description="Learn about Supermarche's mission to make daily household chores, cooking gas refills, and market shopping effortless with verified providers across Cameroon."
+        title="About Kim's Store - Online Supermarket & Express Department Store"
+        description="Learn about Kim's Store: Cameroon's premier online lifestyle & express department store for trending streetwear, sneakers, beauty cosmetics, electronics, and daily essentials."
         canonicalPath="/about"
         jsonLd={[orgSchema, breadcrumbSchema]}
       />

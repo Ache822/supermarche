@@ -467,8 +467,8 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
               >
                 <Box
                   component="img"
-                  src="/images/hero_banner.png"
-                  alt="Supermarche Cameroonian Verified Dispatch Technician"
+                  src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=80"
+                  alt="Kim's Store Modern Department Store & Express Shopping"
                   sx={{
                     width: '100%',
                     height: '100%',
@@ -531,19 +531,19 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                 </Typography>
 
                 <ServiceTicketCard
-                  jobId={activeTickets[0]?.id || 'BB-8492-CM'}
+                  jobId={activeTickets[0]?.id || 'KS-9240-CM'}
                   service={
-                    activeTickets[0]?.id === 'BB-8492-CM'
+                    activeTickets[0]?.id === 'KS-9240-CM' || !activeTickets[0]
                       ? t('hero.previewGasRefill')
                       : activeTickets[0]?.serviceName || t('hero.previewGasRefill')
                   }
                   status={activeTickets[0]?.status || 'in_progress'}
                   eta={
-                    activeTickets[0]?.id === 'BB-8492-CM'
+                    activeTickets[0]?.id === 'KS-9240-CM' || !activeTickets[0]
                       ? t('hero.previewTodayEta')
                       : activeTickets[0]?.eta || t('hero.previewTodayEta')
                   }
-                  price={activeTickets[0]?.price || 'XAF 6,500'}
+                  price={activeTickets[0]?.price || 'XAF 46,500'}
                   technician={
                     <VerifiedBadge
                       name={activeTickets[0]?.technicianName || 'Emmanuel Ndomo'}
@@ -746,7 +746,7 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                     '&:hover': { bgcolor: '#E05D00' },
                   }}
                 >
-                  Start Web Shopping
+                  Shop Kim's Store
                 </Button>
               </Box>
             </Box>
@@ -799,31 +799,64 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                   />
                 </Box>
 
-                {/* Showcase Category Pills */}
+                {/* Showcase Category Pills with Real Photography Images */}
                 <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 2, mb: 3 }}>
                   {[
-                    { label: 'Trending Apparel', icon: '👕', desc: 'Hoodies, Denim & Wear' },
-                    { label: 'Sneakers & Kicks', icon: '👟', desc: 'Urban Retro Footwear' },
-                    { label: 'Cosmetics & Glow', icon: '✨', desc: 'Skincare & Sunscreen' },
-                    { label: 'Tech Accessories', icon: '🎧', desc: 'ANC Earbuds & Chargers' },
+                    {
+                      label: 'Trending Apparel',
+                      image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=400&q=80',
+                      desc: 'Hoodies, Denim & Wear'
+                    },
+                    {
+                      label: 'Sneakers & Kicks',
+                      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80',
+                      desc: 'Urban Retro Footwear'
+                    },
+                    {
+                      label: 'Cosmetics & Glow',
+                      image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=400&q=80',
+                      desc: 'Skincare & Sunscreen'
+                    },
+                    {
+                      label: 'Tech Accessories',
+                      image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80',
+                      desc: 'ANC Earbuds & Chargers'
+                    },
                   ].map((cat, idx) => (
                     <Box
                       key={idx}
+                      component={Link}
+                      to="/shop"
                       sx={{
-                        p: 2,
-                        borderRadius: '14px',
+                        display: 'block',
+                        textDecoration: 'none',
+                        p: 1.5,
+                        borderRadius: '16px',
                         bgcolor: (theme: Theme) => (theme.palette.mode === 'dark' ? '#251F30' : '#FFF9F5'),
                         border: '1px solid',
                         borderColor: (theme: Theme) => (theme.palette.mode === 'dark' ? '#362C44' : '#FFEBE0'),
-                        transition: 'transform 0.2s ease, border-color 0.2s ease',
+                        transition: 'all 0.25s ease',
                         '&:hover': {
-                          transform: 'translateY(-2px)',
+                          transform: 'translateY(-3px)',
                           borderColor: '#FF6B00',
+                          boxShadow: '0 8px 24px rgba(255, 107, 0, 0.18)',
                         },
                       }}
                     >
-                      <Typography sx={{ fontSize: 22, mb: 0.5 }}>{cat.icon}</Typography>
-                      <Typography sx={{ fontWeight: 700, fontSize: 13, color: 'text.primary' }}>
+                      <Box
+                        component="img"
+                        src={cat.image}
+                        alt={cat.label}
+                        sx={{
+                          width: '100%',
+                          height: 96,
+                          borderRadius: '10px',
+                          objectFit: 'cover',
+                          mb: 1.25,
+                          display: 'block',
+                        }}
+                      />
+                      <Typography sx={{ fontWeight: 700, fontSize: 13, color: 'text.primary', mb: 0.25 }}>
                         {cat.label}
                       </Typography>
                       <Typography sx={{ fontSize: 11, color: 'text.secondary' }}>
