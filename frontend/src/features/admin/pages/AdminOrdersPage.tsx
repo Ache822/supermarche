@@ -313,11 +313,11 @@ export const AdminOrdersPage: React.FC = () => {
                           {item.title}
                         </Typography>
                         <Typography variant="caption" color="text.secondary">
-                          {item.quantity} × ${item.price.toFixed(2)}
+                          {item.quantity} × XAF {(item.price || 0).toLocaleString()}
                         </Typography>
                       </Box>
-                      <Typography variant="body2" sx={{ fontWeight: 700 }}>
-                        ${(item.price * item.quantity).toFixed(2)}
+                      <Typography variant="body2" sx={{ fontWeight: 700, color: '#FF6B00' }}>
+                        XAF {((item.price || 0) * item.quantity).toLocaleString()}
                       </Typography>
                     </ListItem>
                   ))}

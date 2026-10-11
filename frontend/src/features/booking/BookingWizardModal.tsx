@@ -91,15 +91,15 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim()) {
-      setErrorMsg('Please enter your full name');
+      setErrorMsg(t('bookingModal.errorName'));
       return;
     }
     if (!phone.trim() || phone.trim().length < 8) {
-      setErrorMsg('Please provide a valid WhatsApp / Mobile phone number (e.g. 670000000)');
+      setErrorMsg(t('bookingModal.errorPhone'));
       return;
     }
     if (!quarter.trim()) {
-      setErrorMsg('Please enter your quarter / neighborhood landmark (e.g. Akwa, Bastos, Molyko)');
+      setErrorMsg(t('bookingModal.quarterPlaceholder'));
       return;
     }
 
@@ -170,18 +170,18 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
           <Box>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
               <Typography variant="h6" sx={{ fontWeight: 800, fontSize: { xs: 15, sm: 17 }, fontFamily: 'Space Grotesk, sans-serif' }}>
-                {bookingRef ? 'Booking Confirmed' : 'Book Doorstep Service'}
+                {bookingRef ? t('bookingModal.placedTitle') : t('bookingModal.title')}
               </Typography>
               <Chip
-                label="Direct Booking"
+                label={t('bookingModal.verifiedBadge')}
                 size="small"
                 sx={{ bgcolor: '#FF6B00', color: '#FFFFFF', fontWeight: 700, fontSize: 10, height: 20 }}
               />
             </Box>
             <Typography variant="body2" sx={{ fontSize: 12, color: 'text.secondary' }}>
               {bookingRef
-                ? 'Your runner request has been dispatched.'
-                : 'Fast courier & runner dispatch across Cameroon'}
+                ? t('bookingModal.dispatchDetails')
+                : t('bookingModal.subtitle')}
             </Typography>
           </Box>
         </Box>
@@ -214,11 +214,11 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
             </Box>
 
             <Typography variant="h5" sx={{ fontWeight: 800, fontFamily: 'Space Grotesk, sans-serif', mb: 1, color: 'text.primary' }}>
-              Runner Request Placed!
+              {t('bookingModal.placedTitle')}
             </Typography>
 
             <Chip
-              label={`Reference: ${bookingRef}`}
+              label={t('bookingModal.refLabel', { ref: bookingRef })}
               sx={{
                 bgcolor: '#FF6B00',
                 color: '#FFFFFF',
@@ -243,19 +243,19 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
               }}
             >
               <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#FF6B00', mb: 1 }}>
-                Order Dispatch Details
+                {t('bookingModal.dispatchDetails')}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.primary', mb: 0.5 }}>
-                <strong>Service:</strong> {getLocalizedServiceTitle(currentService?.id, currentService?.title)}
+                <strong>{t('bookingModal.serviceLabel')}:</strong> {getLocalizedServiceTitle(currentService?.id, currentService?.title)}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.primary', mb: 0.5 }}>
-                <strong>Recipient:</strong> {fullName} ({phone})
+                <strong>{t('bookingModal.recipientLabel')}:</strong> {fullName} ({phone})
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.primary', mb: 0.5 }}>
-                <strong>Destination:</strong> {quarter}, {city}
+                <strong>{t('bookingModal.destinationLabel')}:</strong> {quarter}, {city}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: 13, mt: 1 }}>
-                🛵 Our verified runner will contact you via phone / WhatsApp at <strong>{phone}</strong> to confirm your pickup and delivery timing.
+                {t('bookingModal.runnerContactNotice', { phone })}
               </Typography>
             </Box>
 
@@ -273,7 +273,7 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
                   '&:hover': { bgcolor: '#E05D00' },
                 }}
               >
-                Done
+                {t('bookingModal.doneBtn')}
               </Button>
               {onOpenLiveChat && (
                 <Button
@@ -292,7 +292,7 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
                     '&:hover': { bgcolor: 'rgba(255, 107, 0, 0.08)' },
                   }}
                 >
-                  Live Chat with Kimzy
+                  {t('bookingModal.liveChatBtn')}
                 </Button>
               )}
             </Box>
@@ -323,7 +323,7 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
                   {getLocalizedServiceDesc(currentService?.id, currentService?.description)}
                 </Typography>
                 <Typography variant="caption" sx={{ color: '#FF6B00', fontWeight: 700, display: 'block', mt: 0.5 }}>
-                  Courier Runner Fee: XAF 1,500 (Pay on Delivery or Mobile Money)
+                  {t('bookingModal.runnerFeeNotice')}
                 </Typography>
               </Box>
             </Box>
@@ -336,8 +336,8 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
 
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <TextField
-                label="Full Name"
-                placeholder="e.g. Brenda T."
+                label={t('bookingModal.fullName')}
+                placeholder={t('bookingModal.fullNamePlaceholder')}
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 required
@@ -346,21 +346,21 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
               />
 
               <TextField
-                label="Phone / WhatsApp Number"
-                placeholder="e.g. +237 670 123 456"
+                label={t('bookingModal.phone')}
+                placeholder={t('bookingModal.phonePlaceholder')}
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 required
                 fullWidth
                 size="small"
-                helperText="We will call or WhatsApp this number to confirm delivery"
+                helperText={t('bookingModal.phoneHelper')}
               />
 
               <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2 }}>
                 <TextField
                   id={citySelectId}
                   select
-                  label="City / Region"
+                  label={t('bookingModal.city')}
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   fullWidth
@@ -374,8 +374,8 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
                 </TextField>
 
                 <TextField
-                  label="Quarter / Landmark"
-                  placeholder="e.g. Akwa, Bastos, Molyko"
+                  label={t('bookingModal.quarter')}
+                  placeholder={t('bookingModal.quarterPlaceholder')}
                   value={quarter}
                   onChange={(e) => setQuarter(e.target.value)}
                   required
@@ -385,8 +385,8 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
               </Box>
 
               <TextField
-                label="Booking Instructions / Items to Pick Up (Optional)"
-                placeholder="Describe items, sizes, or specific seller/pickup location..."
+                label={t('bookingModal.instructions')}
+                placeholder={t('bookingModal.instructionsPlaceholder')}
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 multiline
@@ -400,12 +400,12 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
 
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1.5 }}>
               <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                💳 Pay on delivery via Cash, MTN MoMo, or Orange Money.
+                {t('bookingModal.payNotice')}
               </Typography>
 
               <Box sx={{ display: 'flex', gap: 1 }}>
                 <Button onClick={handleReset} sx={{ color: 'text.secondary', fontWeight: 600 }}>
-                  Cancel
+                  {t('bookingModal.cancel')}
                 </Button>
                 <Button
                   type="submit"
@@ -422,7 +422,7 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
                     '&:hover': { bgcolor: '#E05D00' },
                   }}
                 >
-                  {isSubmitting ? 'Booking...' : 'Book Now'}
+                  {isSubmitting ? t('bookingModal.booking') : t('bookingModal.bookNow')}
                 </Button>
               </Box>
             </Box>

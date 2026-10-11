@@ -31,10 +31,12 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import SecurityIcon from '@mui/icons-material/Security';
 import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import api from '../../api/client';
 import { PaymentGatewayModal } from './components/PaymentGatewayModal';
 
 export const CheckoutPage: React.FC = () => {
+  const { t } = useTranslation();
   const { cart, cartTotal, clearCart } = useCart();
   const navigate = useNavigate();
 
@@ -162,17 +164,17 @@ export const CheckoutPage: React.FC = () => {
     return (
       <Container maxWidth="md" sx={{ py: 10, textAlign: 'center' }}>
         <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
-          Your Cart is Empty
+          {t('checkout.emptyCartTitle')}
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-          You must have items in your shopping cart to complete checkout.
+          {t('checkout.emptyCartSub')}
         </Typography>
         <Button
           variant="contained"
           onClick={() => navigate('/shop')}
           sx={{ bgcolor: '#FF6B00', color: '#FFFFFF', fontWeight: 700, px: 4, py: 1.5, borderRadius: 2 }}
         >
-          Return to Store
+          {t('checkout.browseCatalog')}
         </Button>
       </Container>
     );
@@ -181,10 +183,10 @@ export const CheckoutPage: React.FC = () => {
   return (
     <Container maxWidth="lg" sx={{ py: 5 }}>
       <Typography variant="h4" sx={{ fontWeight: 800, mb: 1, fontFamily: 'Space Grotesk, sans-serif' }}>
-        Checkout & Complete Order
+        {t('checkout.title')}
       </Typography>
       <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-        Fast, secure delivery across Cameroon with automated Mobile Money & Card checkouts.
+        {t('checkout.subtitle')}
       </Typography>
 
       {errorMsg && (
@@ -200,7 +202,7 @@ export const CheckoutPage: React.FC = () => {
             {/* Contact Information */}
             <Paper variant="outlined" sx={{ p: 3, borderRadius: 3 }}>
               <Typography variant="h6" sx={{ fontWeight: 700, mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
-                <LockOutlinedIcon sx={{ color: '#FF6B00' }} /> Contact Details
+                <LockOutlinedIcon sx={{ color: '#FF6B00' }} /> {t('checkout.contactDetails')}
               </Typography>
               <Divider sx={{ mb: 3 }} />
               <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2 }}>
@@ -208,18 +210,18 @@ export const CheckoutPage: React.FC = () => {
                   <TextField
                     required
                     fullWidth
-                    label="Full Name"
+                    label={t('checkout.fullName')}
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="e.g. Brenda Tanyi"
+                    placeholder={t('checkout.fullNamePlaceholder')}
                   />
                 </Box>
                 <TextField
                   required
                   fullWidth
                   type="email"
-                  label="Email Address"
+                  label={t('checkout.email')}
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
@@ -228,12 +230,12 @@ export const CheckoutPage: React.FC = () => {
                 <TextField
                   required
                   fullWidth
-                  label="Phone / WhatsApp Number"
+                  label={t('checkout.phone')}
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder="e.g. +237 670 123 456"
-                  helperText="Primary contact for runner dispatch"
+                  helperText={t('checkout.phoneHelper')}
                 />
               </Box>
             </Paper>
@@ -241,7 +243,7 @@ export const CheckoutPage: React.FC = () => {
             {/* Shipping Address */}
             <Paper variant="outlined" sx={{ p: 3, borderRadius: 3 }}>
               <Typography variant="h6" sx={{ fontWeight: 700, mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
-                <LocalShippingOutlinedIcon sx={{ color: '#FF6B00' }} /> Delivery Shipping Address
+                <LocalShippingOutlinedIcon sx={{ color: '#FF6B00' }} /> {t('checkout.deliveryAddress')}
               </Typography>
               <Divider sx={{ mb: 3 }} />
               <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2 }}>
@@ -249,34 +251,34 @@ export const CheckoutPage: React.FC = () => {
                   <TextField
                     required
                     fullWidth
-                    label="Street / Quarter / Landmark"
+                    label={t('checkout.street')}
                     name="street"
                     value={formData.street}
                     onChange={handleChange}
-                    placeholder="e.g. Akwa, Behind Super U / Bastos Rue 1204"
+                    placeholder={t('checkout.streetPlaceholder')}
                   />
                 </Box>
                 <TextField
                   required
                   fullWidth
-                  label="City"
+                  label={t('checkout.city')}
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
-                  placeholder="Douala or Yaoundé"
+                  placeholder={t('checkout.cityPlaceholder')}
                 />
                 <TextField
                   fullWidth
-                  label="Region / Province"
+                  label={t('checkout.region')}
                   name="state"
                   value={formData.state}
                   onChange={handleChange}
-                  placeholder="Littoral, Centre, South-West..."
+                  placeholder={t('checkout.regionPlaceholder')}
                 />
                 <TextField
                   required
                   fullWidth
-                  label="Postal / Quarter Code"
+                  label={t('checkout.postalCode')}
                   name="postalCode"
                   value={formData.postalCode}
                   onChange={handleChange}
@@ -284,7 +286,7 @@ export const CheckoutPage: React.FC = () => {
                 <TextField
                   required
                   fullWidth
-                  label="Country"
+                  label={t('checkout.country')}
                   name="country"
                   value={formData.country}
                   onChange={handleChange}
@@ -296,11 +298,11 @@ export const CheckoutPage: React.FC = () => {
             <Paper variant="outlined" sx={{ p: 3, borderRadius: 3 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
                 <Typography variant="h6" sx={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <PaymentOutlinedIcon sx={{ color: '#FF6B00' }} /> Choose Payment Method
+                  <PaymentOutlinedIcon sx={{ color: '#FF6B00' }} /> {t('checkout.choosePayment')}
                 </Typography>
                 <Chip
                   icon={<SecurityIcon sx={{ fontSize: '14px !important', color: '#16A34A !important' }} />}
-                  label="Automated & Secure"
+                  label={t('checkout.automatedSecure')}
                   size="small"
                   sx={{ bgcolor: 'rgba(22, 163, 74, 0.1)', color: '#16A34A', fontWeight: 700, fontSize: 11 }}
                 />
@@ -309,7 +311,7 @@ export const CheckoutPage: React.FC = () => {
 
               <FormControl component="fieldset" fullWidth>
                 <FormLabel component="legend" sx={{ mb: 1, fontSize: 13, fontWeight: 600 }}>
-                  Select your preferred payment channel:
+                  {t('checkout.selectChannel')}
                 </FormLabel>
                 <RadioGroup name="paymentMethod" value={formData.paymentMethod} onChange={handleChange}>
                   {/* 1. MTN Mobile Money */}
@@ -351,16 +353,16 @@ export const CheckoutPage: React.FC = () => {
                           <Box>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                               <Typography variant="body1" sx={{ fontWeight: 700 }}>
-                                MTN Mobile Money (MoMo)
+                                {t('checkout.mtnMomo')}
                               </Typography>
                               <Chip
-                                label="Instant USSD Push"
+                                label={t('checkout.instantUssd')}
                                 size="small"
                                 sx={{ bgcolor: '#FFCC00', color: '#000000', fontWeight: 800, fontSize: 10, height: 18 }}
                               />
                             </Box>
                             <Typography variant="caption" color="text.secondary">
-                              Automated prompt sent directly to your MTN phone for PIN approval.
+                              {t('checkout.mtnSubtitle')}
                             </Typography>
                           </Box>
                         </Box>
@@ -373,7 +375,7 @@ export const CheckoutPage: React.FC = () => {
                         <TextField
                           fullWidth
                           size="small"
-                          label="MTN Phone Number"
+                          label={t('checkout.mtnPhone')}
                           name="momoPhone"
                           value={formData.momoPhone || formData.phone}
                           onChange={handleChange}
@@ -383,7 +385,7 @@ export const CheckoutPage: React.FC = () => {
                               startAdornment: <InputAdornment position="start">+237</InputAdornment>,
                             },
                           }}
-                          helperText="A USSD push notification will be sent to this number to enter your PIN"
+                          helperText={t('checkout.mtnHelper')}
                         />
                       </Box>
                     )}
@@ -428,16 +430,16 @@ export const CheckoutPage: React.FC = () => {
                           <Box>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                               <Typography variant="body1" sx={{ fontWeight: 700 }}>
-                                Orange Money (OM)
+                                {t('checkout.orangeMoney')}
                               </Typography>
                               <Chip
-                                label="Instant Authorization"
+                                label={t('checkout.instantAuth')}
                                 size="small"
                                 sx={{ bgcolor: '#FF7900', color: '#FFFFFF', fontWeight: 800, fontSize: 10, height: 18 }}
                               />
                             </Box>
                             <Typography variant="caption" color="text.secondary">
-                              Automated prompt or code generation via #150# on your Orange phone.
+                              {t('checkout.orangeSubtitle')}
                             </Typography>
                           </Box>
                         </Box>
@@ -450,7 +452,7 @@ export const CheckoutPage: React.FC = () => {
                         <TextField
                           fullWidth
                           size="small"
-                          label="Orange Phone Number"
+                          label={t('checkout.orangePhone')}
                           name="orangePhone"
                           value={formData.orangePhone || formData.phone}
                           onChange={handleChange}
@@ -460,7 +462,7 @@ export const CheckoutPage: React.FC = () => {
                               startAdornment: <InputAdornment position="start">+237</InputAdornment>,
                             },
                           }}
-                          helperText="An authorization prompt will be triggered for this Orange number"
+                          helperText={t('checkout.orangeHelper')}
                         />
                       </Box>
                     )}
@@ -505,16 +507,16 @@ export const CheckoutPage: React.FC = () => {
                           <Box>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                               <Typography variant="body1" sx={{ fontWeight: 700 }}>
-                                Credit / Debit Card
+                                {t('checkout.card')}
                               </Typography>
                               <Chip
-                                label="Visa & Mastercard"
+                                label={t('checkout.cardBadge')}
                                 size="small"
                                 sx={{ bgcolor: '#1E293B', color: '#FFFFFF', fontWeight: 800, fontSize: 10, height: 18 }}
                               />
                             </Box>
                             <Typography variant="caption" color="text.secondary">
-                              Instant card checkout with 3D Secure bank SMS verification.
+                              {t('checkout.cardSubtitle')}
                             </Typography>
                           </Box>
                         </Box>
@@ -528,16 +530,16 @@ export const CheckoutPage: React.FC = () => {
                           <TextField
                             fullWidth
                             size="small"
-                            label="Cardholder Name"
+                            label={t('checkout.cardHolder')}
                             name="cardHolder"
                             value={formData.cardHolder || formData.name}
                             onChange={handleChange}
-                            placeholder="Full name as printed on card"
+                            placeholder={t('checkout.cardHolderPlaceholder')}
                           />
                           <TextField
                             fullWidth
                             size="small"
-                            label="Card Number"
+                            label={t('checkout.cardNumber')}
                             value={formData.cardNumber}
                             onChange={handleCardNumberChange}
                             placeholder="4242 •••• •••• 4242"
@@ -554,14 +556,14 @@ export const CheckoutPage: React.FC = () => {
                           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1.5 }}>
                             <TextField
                               size="small"
-                              label="Expires (MM/YY)"
+                              label={t('checkout.cardExpiry')}
                               value={formData.cardExpiry}
                               onChange={handleCardExpiryChange}
                               placeholder="12/28"
                             />
                             <TextField
                               size="small"
-                              label="CVV / CVC"
+                              label={t('checkout.cardCvv')}
                               name="cardCvv"
                               type="password"
                               value={formData.cardCvv}
@@ -614,10 +616,10 @@ export const CheckoutPage: React.FC = () => {
                           </Box>
                           <Box>
                             <Typography variant="body1" sx={{ fontWeight: 700 }}>
-                              Cash on Delivery (Doorstep Payment)
+                              {t('checkout.cod')}
                             </Typography>
                             <Typography variant="caption" color="text.secondary">
-                              Pay cash directly to the runner when your package arrives at your doorstep.
+                              {t('checkout.codSubtitle')}
                             </Typography>
                           </Box>
                         </Box>
@@ -634,7 +636,7 @@ export const CheckoutPage: React.FC = () => {
           <Box>
             <Paper variant="outlined" sx={{ p: 3, borderRadius: 3, position: 'sticky', top: 90 }}>
               <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-                Order Summary ({cart.length} items)
+                {t('checkout.orderSummary', { count: cart.length })}
               </Typography>
               <Divider sx={{ my: 2 }} />
 
@@ -652,7 +654,7 @@ export const CheckoutPage: React.FC = () => {
                         {product.title}
                       </Typography>
                       <Typography variant="caption" color="text.secondary">
-                        Qty: {quantity} × XAF {product.price.toLocaleString()}
+                        {t('checkout.qty')}: {quantity} × XAF {product.price.toLocaleString()}
                       </Typography>
                     </Box>
                     <Typography variant="body2" sx={{ fontWeight: 700, whiteSpace: 'nowrap', flexShrink: 0 }}>
@@ -667,7 +669,7 @@ export const CheckoutPage: React.FC = () => {
               <Stack spacing={1.5} sx={{ mb: 3 }}>
                 <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
                   <Typography variant="body2" color="text.secondary">
-                    Subtotal
+                    {t('checkout.subtotal')}
                   </Typography>
                   <Typography variant="body2" sx={{ fontWeight: 600 }}>
                     XAF {cartTotal.toLocaleString()}
@@ -675,16 +677,16 @@ export const CheckoutPage: React.FC = () => {
                 </Stack>
                 <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
                   <Typography variant="body2" color="text.secondary">
-                    Delivery Shipping
+                    {t('checkout.shipping')}
                   </Typography>
                   <Typography variant="body2" color="success.main" sx={{ fontWeight: 600 }}>
-                    {shippingFee === 0 ? 'FREE' : `XAF ${shippingFee.toLocaleString()}`}
+                    {shippingFee === 0 ? t('checkout.free') : `XAF ${shippingFee.toLocaleString()}`}
                   </Typography>
                 </Stack>
                 <Divider />
                 <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
                   <Typography variant="subtitle1" sx={{ fontWeight: 800 }}>
-                    Total Amount
+                    {t('checkout.totalAmount')}
                   </Typography>
                   <Typography variant="h5" sx={{ fontWeight: 800, color: '#FF6B00' }}>
                     XAF {grandTotal.toLocaleString()}
@@ -711,10 +713,10 @@ export const CheckoutPage: React.FC = () => {
                 }}
               >
                 {loading
-                  ? 'Processing Order...'
+                  ? t('checkout.processingOrder')
                   : formData.paymentMethod === 'cash_on_delivery'
-                  ? `Place Order (COD - XAF ${grandTotal.toLocaleString()})`
-                  : `Pay XAF ${grandTotal.toLocaleString()} Now`}
+                  ? t('checkout.placeOrderCod', { amount: grandTotal.toLocaleString() })
+                  : t('checkout.payNow', { amount: grandTotal.toLocaleString() })}
               </Button>
             </Paper>
           </Box>
