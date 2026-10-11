@@ -801,7 +801,17 @@
     "paid": "PAYÉ",
     "pending": "EN ATTENTE",
     "continueShopping": "Continuer les Achats",
-    "supportNote": "Besoin de modifier votre livraison ou d'assistance ? Échangez avec Kimzy sur le chat en direct."
+    "supportNote": "Besoin de modifier votre livraison ou d'assistance ? Échangez avec Kimzy sur le chat en direct.",
+    "smsSentNotice": "Notification SMS & WhatsApp envoyée au {{phone}} avec votre référence de commande.",
+    "printReceipt": "Imprimer / Télécharger le Reçu",
+    "shareWhatsApp": "Partager sur WhatsApp",
+    "refreshStatus": "Actualiser le Statut",
+    "recentOrdersTitle": "Mes Commandes Récentes",
+    "recentOrdersSub": "Retrouvez et suivez facilement les commandes passées sur cet appareil",
+    "viewOrder": "Suivre la Commande",
+    "orderDate": "Date",
+    "orderTotal": "Total",
+    "noRecentOrders": "Aucune commande récente enregistrée sur cet appareil."
   },
   "shop": {
     "marketplaceChip": "Place de Marché Kim's Store",
@@ -863,7 +873,13 @@
         "title": "Chocolats Artisanaux & Pack Snacks Gourmands",
         "desc": "Assortiment gourmand de chocolats importés, biscuits croquants, gaufrettes et en-cas."
       }
-    }
+    },
+    "productsFound": "articles disponibles",
+    "inStockOnly": "En Stock Uniquement",
+    "sortFeatured": "Sélection Vedette",
+    "sortPriceLow": "Prix : Croissant",
+    "sortPriceHigh": "Prix : Décroissant",
+    "sortNewest": "Nouveautés"
   },
   "cartDrawer": {
     "title": "Panier d'Achats",
