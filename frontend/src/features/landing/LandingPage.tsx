@@ -16,7 +16,6 @@ import {
 } from '@mui/material';
 import type { Theme } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import VerifiedIcon from '@mui/icons-material/Verified';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from '@mui/icons-material/Explore';
 import SmartphoneIcon from '@mui/icons-material/Smartphone';
@@ -39,8 +38,6 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useCart } from '../../context/CartContext';
 import { useToast } from '../../context/useToast';
-import { ServiceTicketCard } from '../../components/ui/ServiceTicketCard';
-import { VerifiedBadge } from '../../components/ui/VerifiedBadge';
 import { BamboGuide } from '../../components/ui/BamboGuide';
 import { SupermarcheIcon } from '../../components/ui/SupermarcheLogo';
 import { ServiceDetailModal } from '../../components/ui/ServiceDetailModal';
@@ -49,16 +46,26 @@ import { SEO } from '../../components/seo/SEO';
 import { getLocalBusinessSchema, getOrganizationSchema, getWebSiteSchema } from '../../components/seo/schemas';
 
 
+import { SectionBadge } from '../../components/ui/SectionBadge';
+import { HeroDepartmentShowcase } from './components/HeroDepartmentShowcase';
+
 interface LandingPageProps {
   onOpenBookingWithService: (serviceId?: string) => void;
 }
 
 const partnerLogos = [
-  'Sonara Gas',
-  'CleanPro CM',
-  'BeautyHub 237',
-  'SecureNet',
-  'MarketFresh',
+  'Nike',
+  'Zara',
+  'Apple',
+  'Samsung',
+  'CeraVe',
+  "L'Oréal Paris",
+  'Adidas',
+  'The Ordinary',
+  'Sony',
+  'MTN MoMo',
+  'Orange Money',
+  'DHL Express CM',
 ];
 
 export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
@@ -67,7 +74,6 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
   const { addToCart } = useCart();
   const toast = useToast();
   const { items: services } = useAppSelector((state) => state.services);
-  const activeTickets = useAppSelector((state) => state.tickets.activeTickets);
 
   const getLocalizedService = (srv: ServiceItem) => {
     switch (srv.id) {
@@ -321,22 +327,7 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
             {/* Hero Left Column */}
             <Box>
               <Box className="bb-hero-chip" sx={{ mb: 2 }}>
-                <Chip
-                  icon={<VerifiedIcon sx={{ color: '#FF6B00 !important', fontSize: '14px !important' }} />}
-                  label={t('hero.chip')}
-                  sx={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: 11,
-                    fontWeight: 700,
-                    bgcolor: (theme: Theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.18)' : 'rgba(255, 107, 0, 0.1)'),
-                    color: (theme: Theme) => (theme.palette.mode === 'dark' ? '#FFC4A8' : '#8F3800'),
-                    border: '1px solid',
-                    borderColor: 'primary.main',
-                    px: 1,
-                    py: 2,
-                    borderRadius: '20px',
-                  }}
-                />
+                <SectionBadge label={t('hero.chip')} />
               </Box>
 
               <Typography
@@ -439,125 +430,9 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
               </Box>
             </Box>
 
-            {/* Hero Right Column: Mascot Supermarche Bot + Hero Photo Banner + Signature Ticket Showcase Card */}
-            <Box className="bb-hero-right" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2.5 }}>
-              {/* Supermarche Bot Mascot Pointing Guide */}
-              <BamboGuide
-                pointingDirection="down"
-                text={t('hero.bamboText')}
-                subtext={t('hero.bamboSubtext')}
-                height={150}
-                width={120}
-              />
-
-              {/* Theme-blended Hero Dispatch Photo Showcase */}
-              <Box
-                sx={{
-                  position: 'relative',
-                  width: '100%',
-                  height: 220,
-                  borderRadius: '16px',
-                  overflow: 'hidden',
-                  border: (theme: Theme) => `1px solid ${theme.palette.mode === 'dark' ? '#3A2316' : '#FFE4D4'}`,
-                  boxShadow: (theme: Theme) =>
-                    theme.palette.mode === 'dark'
-                      ? '0 12px 32px rgba(0, 0, 0, 0.5)'
-                      : '0 12px 32px rgba(255, 107, 0, 0.15)',
-                }}
-              >
-                <Box
-                  component="img"
-                  src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=80"
-                  alt="Kim's Store Modern Department Store & Express Shopping"
-                  sx={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    transition: 'transform 0.5s ease',
-                    '&:hover': { transform: 'scale(1.04)' },
-                  }}
-                />
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: (theme: Theme) =>
-                      theme.palette.mode === 'dark'
-                        ? 'linear-gradient(180deg, rgba(20, 12, 7,0.1) 0%, rgba(20, 12, 7,0.85) 100%)'
-                        : 'linear-gradient(180deg, rgba(255, 244, 237,0.1) 0%, rgba(255, 244, 237,0.9) 100%)',
-                  }}
-                />
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    bottom: 12,
-                    left: 16,
-                    right: 16,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justify: 'space-between',
-                  }}
-                >
-                  <Chip
-                    icon={<VerifiedIcon sx={{ color: '#FF6B00 !important', fontSize: '16px !important' }} />}
-                    label={t('hero.previewLogistics')}
-                    size="small"
-                    sx={{
-                      fontFamily: 'Inter, sans-serif',
-                      bgcolor: (theme: Theme) =>
-                        theme.palette.mode === 'dark' ? 'rgba(31, 20, 12, 0.9)' : 'rgba(255, 255, 255, 0.92)',
-                      backdropFilter: 'blur(8px)',
-                      fontWeight: 600,
-                      fontSize: 11,
-                      color: 'text.primary',
-                      border: '1px solid rgba(255, 107, 0, 0.3)',
-                    }}
-                  />
-                </Box>
-              </Box>
-
-              <Box sx={{ width: '100%' }}>
-                <Typography
-                  sx={{
-                    fontFamily: 'IBM Plex Mono, monospace',
-                    fontSize: 11,
-                    color: 'text.disabled',
-                    mb: 1,
-                    letterSpacing: '0.06em',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {t('hero.previewTitle')}
-                </Typography>
-
-                <ServiceTicketCard
-                  jobId={activeTickets[0]?.id || 'KS-9240-CM'}
-                  service={
-                    activeTickets[0]?.id === 'KS-9240-CM' || !activeTickets[0]
-                      ? t('hero.previewGasRefill')
-                      : activeTickets[0]?.serviceName || t('hero.previewGasRefill')
-                  }
-                  status={activeTickets[0]?.status || 'in_progress'}
-                  eta={
-                    activeTickets[0]?.id === 'KS-9240-CM' || !activeTickets[0]
-                      ? t('hero.previewTodayEta')
-                      : activeTickets[0]?.eta || t('hero.previewTodayEta')
-                  }
-                  price={activeTickets[0]?.price || 'XAF 46,500'}
-                  technician={
-                    <VerifiedBadge
-                      name={activeTickets[0]?.technicianName || 'Emmanuel Ndomo'}
-                      role={
-                        activeTickets[0]?.id === 'BB-8492-CM'
-                          ? t('hero.previewSpecialist')
-                          : activeTickets[0]?.technicianRole || t('hero.previewSpecialist')
-                      }
-                      verified={true}
-                      avatarUrl="/images/avatar_emmanuel.png"
-                    />
-                  }
-                />
-              </Box>
+            {/* Hero Right Column: Flagship Department Interactive Showcase */}
+            <Box className="bb-hero-right" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+              <HeroDepartmentShowcase />
             </Box>
           </Box>
         </Container>
@@ -580,7 +455,7 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
           {/* Fixed Label on Left */}
           <Typography
             sx={{
-              fontFamily: 'IBM Plex Mono, monospace',
+              fontFamily: 'Space Grotesk, sans-serif',
               fontSize: 11,
               fontWeight: 700,
               color: 'text.disabled',
@@ -594,7 +469,7 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
               borderRight: (theme: Theme) => `1px solid ${theme.palette.mode === 'dark' ? 'rgba(58, 35, 22, 0.7)' : '#E2E8F0'}`,
             }}
           >
-            Providers & Partners On Supermarche:
+            Curated Brands & Express Rails:
           </Typography>
 
           {/* Continuous Moving Infinite Marquee */}
@@ -682,24 +557,9 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
           >
             {/* Left Column Copy */}
             <Box sx={{ zIndex: 4, position: 'relative' }}>
-              <Chip
-                icon={<VerifiedIcon sx={{ color: '#FF6B00 !important', fontSize: '14px !important' }} />}
-                label={t('showcase.chip')}
-                sx={{
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: 11,
-                  fontWeight: 700,
-                  bgcolor: (theme: Theme) =>
-                    theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.18)' : 'rgba(255, 107, 0, 0.12)',
-                  color: (theme: Theme) => (theme.palette.mode === 'dark' ? '#FFC4A8' : '#8F3800'),
-                  border: '1px solid',
-                  borderColor: 'primary.main',
-                  px: 1,
-                  py: 1.8,
-                  borderRadius: '20px',
-                  mb: 2.5,
-                }}
-              />
+              <Box sx={{ mb: 2.5 }}>
+                <SectionBadge label={t('showcase.chip')} />
+              </Box>
 
               <Typography
                 variant="h2"
@@ -784,19 +644,7 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                       Kim's Store Express
                     </Typography>
                   </Box>
-                  <Chip
-                    icon={<VerifiedIcon sx={{ color: '#FF6B00 !important', fontSize: '14px !important' }} />}
-                    label="EXPRESS DISPATCH"
-                    size="small"
-                    sx={{
-                      fontFamily: 'IBM Plex Mono, monospace',
-                      fontSize: 10,
-                      fontWeight: 700,
-                      bgcolor: 'rgba(255, 107, 0, 0.12)',
-                      color: '#FF6B00',
-                      border: '1px solid #FF6B00',
-                    }}
-                  />
+                  <SectionBadge label="EXPRESS DISPATCH" />
                 </Box>
 
                 {/* Showcase Category Pills with Real Photography Images */}
@@ -943,19 +791,7 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                 </Box>
               </Box>
 
-              <Chip
-                icon={<VerifiedIcon sx={{ color: '#FF6B00 !important', fontSize: '14px !important' }} />}
-                label={t('regions.chip')}
-                sx={{
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: 11,
-                  fontWeight: 700,
-                  bgcolor: (theme: Theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.18)' : 'rgba(255, 107, 0, 0.1)'),
-                  color: '#FF6B00',
-                  border: '1px solid rgba(255, 107, 0, 0.3)',
-                  py: 0.5,
-                }}
-              />
+              <SectionBadge label={t('regions.chip')} />
             </Box>
 
             {/* 2-Column Interactive Swapper Layout */}
@@ -1708,19 +1544,9 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
         <Container maxWidth="lg">
           {/* Header Banner */}
           <Box sx={{ textAlign: 'center', mb: 5 }}>
-            <Chip
-              icon={<VerifiedIcon sx={{ color: '#FF6B00 !important', fontSize: '14px !important' }} />}
-              label={t('liveSupport.chip', '24/7 VERIFIED CUSTOMER SERVICE DESK')}
-              sx={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: 11,
-                fontWeight: 700,
-                bgcolor: (theme: Theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.18)' : 'rgba(255, 107, 0, 0.1)'),
-                color: '#FF6B00',
-                border: '1px solid rgba(255, 107, 0, 0.3)',
-                mb: 1.5,
-              }}
-            />
+            <Box sx={{ display: 'inline-flex', mb: 1.5 }}>
+              <SectionBadge label={t('liveSupport.chip', '24/7 VERIFIED CUSTOMER SERVICE DESK')} />
+            </Box>
             <Typography variant="h2" sx={{ fontSize: { xs: 26, md: 32 }, fontWeight: 700, fontFamily: 'Space Grotesk, sans-serif', mb: 1 }}>
               {t('liveSupport.title', 'Kimzy Live Customer Service')}
             </Typography>
