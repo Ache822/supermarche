@@ -88,16 +88,13 @@ export function BamboLiveChatWidget({
   };
 
   const quickTopics = [
-    { id: 'gas', key: 'chatWidget.topicGas', serviceId: 'gas', icon: <LocalGasStationIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
-    { id: 'market', key: 'chatWidget.topicMarket', serviceId: 'market', icon: <ShoppingBagIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
-    { id: 'plumbing', key: 'chatWidget.topicPlumbing', serviceId: 'plumbing', icon: <BuildIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
-    { id: 'electricity', key: 'chatWidget.topicElectricity', serviceId: 'electricity', icon: <ElectricalServicesIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
-    { id: 'school', key: 'chatWidget.topicSchool', serviceId: 'school', icon: <SchoolIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
-    { id: 'cleaning', key: 'chatWidget.topicCleaning', serviceId: 'cleaning', icon: <CleaningServicesIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
-    { id: 'become_pro', key: 'chatWidget.topicBecomePro', serviceId: 'become_pro', icon: <HandymanIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
-    { id: 'human_agent', key: 'chatWidget.topicHumanAgent', serviceId: 'human_agent', icon: <SupportAgentIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
+    { id: 'apparel', key: 'chatWidget.topicApparel', serviceId: 'apparel', icon: <ShoppingBagIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
+    { id: 'footwear', key: 'chatWidget.topicFootwear', serviceId: 'footwear', icon: <ShoppingBagIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
+    { id: 'cosmetics', key: 'chatWidget.topicCosmetics', serviceId: 'cosmetics', icon: <StarIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
+    { id: 'tech', key: 'chatWidget.topicTech', serviceId: 'tech', icon: <SmartphoneIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
+    { id: 'produce', key: 'chatWidget.topicProduce', serviceId: 'produce', icon: <ShoppingBagIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
     { id: 'track', key: 'chatWidget.topicTrack', actionType: 'open_tracking', icon: <ConfirmationNumberIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
-    { id: 'app', key: 'chatWidget.topicApp', actionType: 'playstore', icon: <SmartphoneIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
+    { id: 'human_agent', key: 'chatWidget.topicHumanAgent', serviceId: 'human_agent', icon: <SupportAgentIcon sx={{ fontSize: '15px !important', color: '#FF6B00 !important' }} /> },
   ];
 
   const [sessionId] = useState(() => socketClient.getOrCreateSessionId());
@@ -278,7 +275,7 @@ export function BamboLiveChatWidget({
     <>
       {/* Floating Trigger Button (Bottom Right) */}
       {!isOpen && (
-        <Tooltip title={t('chatWidget.fabTooltip', 'Chat with Supermarche Bot Customer Service')} placement="left" arrow>
+        <Tooltip title={t('chatWidget.fabTooltip', "Chat with Kimzy Bot Customer Service")} placement="left" arrow>
           <Fab
             onClick={() => setIsOpen(true)}
             sx={{
@@ -599,7 +596,7 @@ export function BamboLiveChatWidget({
             <TextField
               fullWidth
               size="small"
-              placeholder={t('chatWidget.inputPlaceholder', 'Type your message to Supermarche Bot...')}
+              placeholder={t('chatWidget.inputPlaceholder', "Type your message to Kimzy Bot...")}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {
