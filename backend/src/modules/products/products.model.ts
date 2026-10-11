@@ -70,7 +70,7 @@ const productSchema = new Schema<IProduct>(
     id: { type: String, required: true, unique: true },
     title: { type: String, required: true },
     category: {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.Mixed,
       ref: "Category",
       required: true
     },
