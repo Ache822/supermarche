@@ -81,13 +81,18 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
         selectedAttributes: item.selectedAttributes
       });
 
-      // Deduct stock quantity
+      // Deduct stock quantity safely without triggering unrelated validation errors
       if (typeof product.stockQuantity === "number") {
-        product.stockQuantity = Math.max(0, product.stockQuantity - item.quantity);
-        if (product.stockQuantity <= 0) {
-          product.inStock = false;
-        }
-        await product.save();
+        const newStock = Math.max(0, product.stockQuantity - item.quantity);
+        await ProductModel.updateOne(
+          { _id: product._id },
+          {
+            $set: {
+              stockQuantity: newStock,
+              inStock: newStock > 0
+            }
+          }
+        );
       }
     }
 
