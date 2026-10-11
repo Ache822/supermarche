@@ -39,8 +39,10 @@ export const CartDrawer: React.FC = () => {
         paper: {
           sx: {
             width: { xs: '100%', sm: 420 },
-            background: 'var(--bg-paper, #121827)',
-            color: 'var(--text-primary, #ffffff)',
+            bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#1A110A' : '#FFFFFF'),
+            color: 'text.primary',
+            borderLeft: '1px solid',
+            borderColor: (theme) => (theme.palette.mode === 'dark' ? '#3A2316' : '#E2E8F0'),
             display: 'flex',
             flexDirection: 'column'
           }
@@ -48,13 +50,26 @@ export const CartDrawer: React.FC = () => {
       }}
     >
       {/* Header */}
-      <Box sx={{ p: 2.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
+      <Box
+        sx={{
+          p: 2.5,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          borderBottom: '1px solid',
+          borderColor: (theme) => (theme.palette.mode === 'dark' ? '#3A2316' : '#E2E8F0')
+        }}
+      >
         <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
-          <ShoppingBagOutlinedIcon sx={{ color: '#6366f1' }} />
-          <Typography variant="h6" sx={{ fontWeight: 700 }}>
+          <ShoppingBagOutlinedIcon sx={{ color: '#FF6B00' }} />
+          <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: 'Space Grotesk, sans-serif' }}>
             Shopping Cart
           </Typography>
-          <Chip label={`${cart.length} items`} size="small" color="primary" sx={{ height: 22, fontSize: '0.75rem' }} />
+          <Chip
+            label={`${cart.length} items`}
+            size="small"
+            sx={{ height: 22, fontSize: '0.75rem', bgcolor: '#FF6B00', color: '#FFFFFF', fontWeight: 700 }}
+          />
         </Stack>
         <IconButton onClick={() => setIsCartOpen(false)} sx={{ color: 'text.secondary' }}>
           <CloseIcon />
@@ -86,7 +101,8 @@ export const CartDrawer: React.FC = () => {
                   gap: 2,
                   py: 2,
                   px: 1,
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.06)'
+                  borderBottom: '1px solid',
+                  borderColor: (theme) => (theme.palette.mode === 'dark' ? '#2A180E' : '#F1F5F9')
                 }}
               >
                 <Avatar
@@ -100,7 +116,7 @@ export const CartDrawer: React.FC = () => {
                     {product.title}
                   </Typography>
                   <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
-                    ${product.price.toFixed(2)} each
+                    XAF {product.price.toLocaleString()} each
                   </Typography>
 
                   <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mt: 1 }}>
@@ -108,7 +124,8 @@ export const CartDrawer: React.FC = () => {
                       sx={{
                         display: 'flex',
                         alignItems: 'center',
-                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                        border: '1px solid',
+                        borderColor: (theme) => (theme.palette.mode === 'dark' ? '#3A2316' : '#CBD5E1'),
                         borderRadius: 1.5,
                         px: 0.5
                       }}
@@ -138,7 +155,7 @@ export const CartDrawer: React.FC = () => {
                 </Box>
 
                 <Typography variant="subtitle2" sx={{ fontWeight: 700, alignSelf: 'flex-start', mt: 0.5 }}>
-                  ${(product.price * quantity).toFixed(2)}
+                  XAF {(product.price * quantity).toLocaleString()}
                 </Typography>
               </ListItem>
             ))}
@@ -148,14 +165,21 @@ export const CartDrawer: React.FC = () => {
 
       {/* Footer / Summary */}
       {cart.length > 0 && (
-        <Box sx={{ p: 2.5, borderTop: '1px solid rgba(255, 255, 255, 0.1)', bgcolor: 'rgba(0, 0, 0, 0.2)' }}>
+        <Box
+          sx={{
+            p: 2.5,
+            borderTop: '1px solid',
+            borderColor: (theme) => (theme.palette.mode === 'dark' ? '#3A2316' : '#E2E8F0'),
+            bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#140C07' : '#F8FAFC')
+          }}
+        >
           <Stack spacing={1} sx={{ mb: 2.5 }}>
             <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
               <Typography variant="body2" color="text.secondary">
                 Subtotal
               </Typography>
               <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
-                ${cartTotal.toFixed(2)}
+                XAF {cartTotal.toLocaleString()}
               </Typography>
             </Stack>
             <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
@@ -163,16 +187,16 @@ export const CartDrawer: React.FC = () => {
                 Estimated Shipping
               </Typography>
               <Typography variant="caption" color="success.main" sx={{ fontWeight: 600 }}>
-                {cartTotal > 50 ? 'FREE' : '$5.99'}
+                {cartTotal >= 25000 ? 'FREE' : 'XAF 1,500'}
               </Typography>
             </Stack>
-            <Divider sx={{ my: 1, borderColor: 'rgba(255, 255, 255, 0.08)' }} />
+            <Divider sx={{ my: 1 }} />
             <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
               <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
                 Total
               </Typography>
-              <Typography variant="subtitle1" color="primary.main" sx={{ fontWeight: 800, fontSize: '1.25rem' }}>
-                ${(cartTotal + (cartTotal > 50 ? 0 : 5.99)).toFixed(2)}
+              <Typography variant="subtitle1" sx={{ fontWeight: 800, fontSize: '1.25rem', color: '#FF6B00' }}>
+                XAF {(cartTotal + (cartTotal >= 25000 ? 0 : 1500)).toLocaleString()}
               </Typography>
             </Stack>
           </Stack>
@@ -186,8 +210,13 @@ export const CartDrawer: React.FC = () => {
             sx={{
               py: 1.5,
               borderRadius: 2,
-              background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
-              fontWeight: 700
+              bgcolor: '#FF6B00',
+              color: '#FFFFFF',
+              fontWeight: 700,
+              boxShadow: '0 4px 14px rgba(255, 107, 0, 0.4)',
+              '&:hover': {
+                bgcolor: '#E05D00'
+              }
             }}
           >
             Checkout Now

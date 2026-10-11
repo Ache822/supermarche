@@ -1675,11 +1675,11 @@ export function LandingPage({ onOpenBookingWithService, onOpenLiveChat }: Landin
                 }}
               >
                 <Typography sx={{ fontWeight: 700, fontSize: 16, fontFamily: 'Space Grotesk, sans-serif', color: '#FF6B00', mb: 0.5, display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <SmartphoneIcon sx={{ color: '#FF6B00', fontSize: 20 }} />
-                  {t('liveSupport.ticketTitle', 'Download App to Order')} →
+                  <ShoppingBagIcon sx={{ color: '#FF6B00', fontSize: 20 }} />
+                  {t('liveSupport.ticketTitle', 'Book a Delivery / Runner Service')} →
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: 13, lineHeight: 1.45 }}>
-                  {t('liveSupport.ticketSub', "Need trending fashion, skincare, gadgets, or groceries dispatched? Order on Kim's Store Mobile App on iOS & Android.")}
+                  {t('liveSupport.ticketSub', 'Need trending fashion, skincare, gadgets, or groceries dispatched? Book doorstep runner delivery across Cameroon in minutes.')}
                 </Typography>
               </Box>
 

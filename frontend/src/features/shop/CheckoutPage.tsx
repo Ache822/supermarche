@@ -39,10 +39,10 @@ export const CheckoutPage: React.FC = () => {
     email: '',
     phone: '',
     street: '',
-    city: '',
-    state: '',
-    postalCode: '',
-    country: 'United States',
+    city: 'Douala',
+    state: 'Littoral',
+    postalCode: 'BP 1024',
+    country: 'Cameroon',
     paymentMethod: 'cash_on_delivery',
     notes: ''
   });
@@ -51,7 +51,7 @@ export const CheckoutPage: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const shippingFee = cartTotal > 50 ? 0 : 5.99;
+  const shippingFee = cartTotal >= 25000 ? 0 : 1500;
   const grandTotal = cartTotal + shippingFee;
 
   const handleSubmitOrder = async (e: React.FormEvent) => {
@@ -301,11 +301,11 @@ export const CheckoutPage: React.FC = () => {
                         {product.title}
                       </Typography>
                       <Typography variant="caption" color="text.secondary">
-                        Qty: {quantity} × ${product.price.toFixed(2)}
+                        Qty: {quantity} × XAF {product.price.toLocaleString()}
                       </Typography>
                     </Box>
                     <Typography variant="body2" sx={{ fontWeight: 700 }}>
-                      ${(product.price * quantity).toFixed(2)}
+                      XAF {(product.price * quantity).toLocaleString()}
                     </Typography>
                   </ListItem>
                 ))}
@@ -319,7 +319,7 @@ export const CheckoutPage: React.FC = () => {
                     Subtotal
                   </Typography>
                   <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-                    ${cartTotal.toFixed(2)}
+                    XAF {cartTotal.toLocaleString()}
                   </Typography>
                 </Stack>
                 <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
@@ -327,7 +327,7 @@ export const CheckoutPage: React.FC = () => {
                     Shipping
                   </Typography>
                   <Typography variant="subtitle2" color={shippingFee === 0 ? 'success.main' : 'text.primary'}>
-                    {shippingFee === 0 ? 'FREE' : `$${shippingFee.toFixed(2)}`}
+                    {shippingFee === 0 ? 'FREE' : `XAF ${shippingFee.toLocaleString()}`}
                   </Typography>
                 </Stack>
                 <Divider />
@@ -336,7 +336,7 @@ export const CheckoutPage: React.FC = () => {
                     Total Amount
                   </Typography>
                   <Typography variant="h5" color="primary.main" sx={{ fontWeight: 800 }}>
-                    ${grandTotal.toFixed(2)}
+                    XAF {grandTotal.toLocaleString()}
                   </Typography>
                 </Stack>
               </Stack>
@@ -353,10 +353,11 @@ export const CheckoutPage: React.FC = () => {
                   borderRadius: 2,
                   fontSize: '1.05rem',
                   fontWeight: 700,
-                  background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)'
+                  bgcolor: '#FF6B00',
+                  '&:hover': { bgcolor: '#E05D00' },
                 }}
               >
-                {loading ? 'Processing Order...' : `Place Order ($${grandTotal.toFixed(2)})`}
+                {loading ? 'Processing Order...' : `Place Order (XAF ${grandTotal.toLocaleString()})`}
               </Button>
             </Paper>
           </Box>

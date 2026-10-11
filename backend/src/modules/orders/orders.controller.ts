@@ -73,8 +73,8 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
       await product.save();
     }
 
-    const shippingFee = subtotal > 50 ? 0 : 5.99; // Free shipping over $50
-    const totalAmount = Number((subtotal + shippingFee).toFixed(2));
+    const shippingFee = subtotal >= 25000 ? 0 : 1500; // Free courier dispatch over 25,000 XAF
+    const totalAmount = Math.round(subtotal + shippingFee);
 
     const orderNumber = `ORD-${Date.now().toString().slice(-6)}-${Math.floor(100 + Math.random() * 900)}`;
 

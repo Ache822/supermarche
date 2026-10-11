@@ -254,24 +254,37 @@ export const OrderSuccessPage: React.FC = () => {
         sx={{
           p: { xs: 3, md: 5 },
           borderRadius: 4,
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          background: 'var(--bg-paper, #121827)'
+          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#1A110A' : '#FFFFFF'),
+          border: '1px solid',
+          borderColor: (theme) => (theme.palette.mode === 'dark' ? '#3A2316' : '#E2E8F0'),
+          boxShadow: (theme) =>
+            theme.palette.mode === 'dark'
+              ? '0 8px 32px rgba(0, 0, 0, 0.5)'
+              : '0 8px 32px rgba(255, 107, 0, 0.08)',
         }}
       >
         {/* Success Header */}
         <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <CheckCircleIcon sx={{ fontSize: 72, color: 'success.main', mb: 2 }} />
-          <Typography variant="h4" sx={{ fontWeight: 800, mb: 1 }}>
+          <CheckCircleIcon sx={{ fontSize: 72, color: '#16A34A', mb: 2 }} />
+          <Typography variant="h4" sx={{ fontWeight: 800, mb: 1, fontFamily: 'Space Grotesk, sans-serif', color: 'text.primary' }}>
             Thank You For Your Order!
           </Typography>
           <Typography variant="body1" color="text.secondary">
             Your order has been placed and is currently being processed.
           </Typography>
           <Chip
-            icon={<ShoppingBagOutlinedIcon />}
+            icon={<ShoppingBagOutlinedIcon sx={{ color: '#FFFFFF !important' }} />}
             label={`Order #: ${order.orderNumber}`}
-            color="primary"
-            sx={{ mt: 2, px: 1, py: 2, fontWeight: 700, fontSize: '0.95rem' }}
+            sx={{
+              mt: 2,
+              px: 1.5,
+              py: 2.2,
+              fontWeight: 700,
+              fontSize: '0.95rem',
+              bgcolor: '#FF6B00',
+              color: '#FFFFFF',
+              boxShadow: '0 4px 14px rgba(255, 107, 0, 0.35)',
+            }}
           />
         </Box>
 
@@ -279,10 +292,27 @@ export const OrderSuccessPage: React.FC = () => {
 
         {/* Order Status Stepper */}
         <Box sx={{ mb: 5 }}>
-          <Typography variant="h6" sx={{ fontWeight: 700, mb: 3 }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, fontFamily: 'Space Grotesk, sans-serif', color: 'text.primary' }}>
             Order Tracking Status
           </Typography>
-          <Stepper activeStep={activeStep} alternativeLabel>
+          <Stepper
+            activeStep={activeStep}
+            alternativeLabel
+            sx={{
+              '& .MuiStepLabel-label': {
+                color: 'text.secondary',
+                fontWeight: 600,
+                fontSize: 13,
+                '&.Mui-active': { color: '#FF6B00', fontWeight: 700 },
+                '&.Mui-completed': { color: '#16A34A', fontWeight: 700 },
+              },
+              '& .MuiStepIcon-root': {
+                color: 'rgba(255, 107, 0, 0.25)',
+                '&.Mui-active': { color: '#FF6B00' },
+                '&.Mui-completed': { color: '#16A34A' },
+              },
+            }}
+          >
             {orderSteps.map((label) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
@@ -296,10 +326,10 @@ export const OrderSuccessPage: React.FC = () => {
         {/* Order Summary Details */}
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 4, mb: 4 }}>
           <Box>
-            <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
+            <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#FF6B00', mb: 1, textTransform: 'uppercase', fontSize: 12 }}>
               Customer Info
             </Typography>
-            <Typography variant="body1" sx={{ fontWeight: 700 }}>
+            <Typography variant="body1" sx={{ fontWeight: 700, color: 'text.primary' }}>
               {order.customer.name}
             </Typography>
             <Typography variant="body2" color="text.secondary">
@@ -311,10 +341,10 @@ export const OrderSuccessPage: React.FC = () => {
           </Box>
 
           <Box>
-            <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
+            <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#FF6B00', mb: 1, textTransform: 'uppercase', fontSize: 12 }}>
               Delivery Shipping Address
             </Typography>
-            <Typography variant="body2" sx={{ fontWeight: 600 }}>
+            <Typography variant="body2" sx={{ fontWeight: 600, color: 'text.primary' }}>
               {order.shippingAddress.street}
             </Typography>
             <Typography variant="body2" color="text.secondary">
@@ -327,54 +357,63 @@ export const OrderSuccessPage: React.FC = () => {
         </Box>
 
         {/* Purchased Items List */}
-        <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1 }}>
+        <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
           Items Purchased ({order.items.length})
         </Typography>
         <List disablePadding sx={{ mb: 4 }}>
           {order.items.map((item: any, idx: number) => (
-            <ListItem key={idx} disableGutters sx={{ py: 1.5, borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
+            <ListItem key={idx} disableGutters sx={{ py: 1.5, borderBottom: '1px solid', borderColor: 'divider' }}>
               <Avatar variant="rounded" src={item.image} alt={item.title} sx={{ width: 48, height: 48, mr: 2 }} />
               <Box sx={{ flex: 1 }}>
-                <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                <Typography variant="body2" sx={{ fontWeight: 600, color: 'text.primary' }}>
                   {item.title}
                 </Typography>
                 <Typography variant="caption" color="text.secondary">
-                  Qty: {item.quantity} × ${item.price.toFixed(2)}
+                  Qty: {item.quantity} × XAF {item.price.toLocaleString()}
                 </Typography>
               </Box>
-              <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
-                ${(item.price * item.quantity).toFixed(2)}
+              <Typography variant="subtitle2" sx={{ fontWeight: 700, color: 'text.primary' }}>
+                XAF {(item.price * item.quantity).toLocaleString()}
               </Typography>
             </ListItem>
           ))}
         </List>
 
         {/* Pricing Totals */}
-        <Box sx={{ p: 2.5, borderRadius: 3, bgcolor: 'rgba(255, 255, 255, 0.03)', mb: 4 }}>
+        <Box
+          sx={{
+            p: 2.5,
+            borderRadius: 3,
+            bgcolor: (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.08)' : '#FFF7F2'),
+            border: '1px solid',
+            borderColor: (theme) => (theme.palette.mode === 'dark' ? '#3A2316' : '#FFE4D4'),
+            mb: 4,
+          }}
+        >
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1 }}>
             <Typography variant="body2" color="text.secondary">
               Subtotal:
             </Typography>
-            <Typography variant="body2" sx={{ fontWeight: 600, textAlign: 'right' }}>
-              ${order.subtotal.toFixed(2)}
+            <Typography variant="body2" sx={{ fontWeight: 600, textAlign: 'right', color: 'text.primary' }}>
+              XAF {order.subtotal.toLocaleString()}
             </Typography>
 
             <Typography variant="body2" color="text.secondary">
               Shipping Fee:
             </Typography>
-            <Typography variant="body2" sx={{ fontWeight: 600, textAlign: 'right' }}>
-              {order.shippingFee === 0 ? 'FREE' : `$${order.shippingFee.toFixed(2)}`}
+            <Typography variant="body2" sx={{ fontWeight: 600, textAlign: 'right', color: order.shippingFee === 0 ? 'success.main' : 'text.primary' }}>
+              {order.shippingFee === 0 ? 'FREE' : `XAF ${order.shippingFee.toLocaleString()}`}
             </Typography>
 
             <Box sx={{ gridColumn: 'span 2', my: 1 }}>
               <Divider />
             </Box>
 
-            <Typography variant="subtitle1" sx={{ fontWeight: 800 }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: 800, color: 'text.primary' }}>
               Total Paid / Due:
             </Typography>
-            <Typography variant="h6" color="primary.main" sx={{ fontWeight: 800, textAlign: 'right' }}>
-              ${order.totalAmount.toFixed(2)}
+            <Typography variant="h6" sx={{ fontWeight: 800, textAlign: 'right', color: '#FF6B00' }}>
+              XAF {order.totalAmount.toLocaleString()}
             </Typography>
           </Box>
         </Box>
@@ -385,7 +424,15 @@ export const OrderSuccessPage: React.FC = () => {
             size="large"
             startIcon={<LocalShippingOutlinedIcon />}
             onClick={() => navigate('/shop')}
-            sx={{ px: 4, py: 1.5, borderRadius: 2, fontWeight: 700 }}
+            sx={{
+              px: 4,
+              py: 1.5,
+              borderRadius: 2,
+              fontWeight: 700,
+              bgcolor: '#FF6B00',
+              color: '#FFFFFF',
+              '&:hover': { bgcolor: '#E05D00' },
+            }}
           >
             Continue Shopping
           </Button>
