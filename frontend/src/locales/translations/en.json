@@ -811,5 +811,95 @@
     "pending": "PENDING",
     "continueShopping": "Continue Shopping",
     "supportNote": "Need to modify your delivery or speak with support? Connect with Kimzy via live chat."
+  },
+  "shop": {
+    "marketplaceChip": "Kim's Store Marketplace",
+    "heroTitle": "Trending Fashion, Footwear, Beauty & Everyday Essentials",
+    "heroSubtitle": "Discover high-quality apparel, sneakers, cosmetics glow kits, electronics, fresh produce, and dorm snacks delivered fast.",
+    "searchPlaceholder": "Search fashion, sneakers, skincare, electronics, snacks...",
+    "searchBtn": "Search",
+    "noProducts": "No products found matching your search.",
+    "resetFilters": "Reset Filters",
+    "quickView": "Quick View",
+    "add": "Add",
+    "sale": "SALE",
+    "categories": {
+      "all": "All",
+      "apparel": "Apparel & Fashion",
+      "footwear": "Footwear & Shoes",
+      "cosmetics": "Cosmetics & Beauty",
+      "electronics": "Electronics & Tech",
+      "fresh": "Fresh Produce & Snacks"
+    },
+    "products": {
+      "prod-hoodie-01": {
+        "title": "Oversized Vintage Graphic Hoodie",
+        "desc": "Heavyweight premium cotton oversized hoodie with vintage graphic print. Ultra-comfortable for campus and everyday wear."
+      },
+      "prod-tee-02": {
+        "title": "Minimalist Streetwear Heavyweight Tee",
+        "desc": "Relaxed fit 240GSM cotton graphic t-shirt. Breathable, durable, and stylish."
+      },
+      "prod-sneakers-01": {
+        "title": "Retro High-Top Campus Kicks",
+        "desc": "Classic high-top retro basketball sneakers with cushioned insoles and durable rubber outsole."
+      },
+      "prod-running-02": {
+        "title": "Breathable Lightweight Running Shoes",
+        "desc": "Mesh upper sports running shoes designed for ultimate comfort during long walks or campus commutes."
+      },
+      "prod-serum-01": {
+        "title": "Hydrating Glow Vitamin C Face Serum",
+        "desc": "Nourishing facial serum infused with Hyaluronic Acid and Vitamin C for glowing, hydrated skin."
+      },
+      "prod-sunscreen-02": {
+        "title": "SPF 50+ Invisible Shield Sunscreen",
+        "desc": "Non-greasy, zero white-cast broad-spectrum SPF 50+ facial sunscreen lotion."
+      },
+      "prod-earbuds-01": {
+        "title": "Pro ANC Wireless Bluetooth Earbuds",
+        "desc": "Active Noise-Canceling wireless earbuds with 30-hour total battery life and deep bass HD audio."
+      },
+      "prod-powerbank-02": {
+        "title": "20,000mAh Ultra Fast Power Bank",
+        "desc": "22.5W dual USB-C fast charging powerbank. Compact power unit for phones, tablets, and laptops."
+      },
+      "prod-fruits-01": {
+        "title": "Fresh Organic Fruit & Grocery Basket",
+        "desc": "Hand-picked organic apples, bananas, oranges, and fresh market produce delivered to your doorstep."
+      },
+      "prod-snacks-02": {
+        "title": "Artisan Chocolates & Dorm Snack Pack",
+        "desc": "Curated mix of imported chocolates, crunchy biscuits, wafer sticks, and late-night snacks."
+      }
+    }
+  },
+  "cartDrawer": {
+    "title": "Shopping Cart",
+    "itemCount": "{{count}} items",
+    "emptyTitle": "Your cart is empty",
+    "emptySub": "Browse our fresh products and add your favorite items to get started!",
+    "startShopping": "Start Shopping",
+    "each": "each",
+    "subtotal": "Subtotal",
+    "estimatedShipping": "Estimated Shipping",
+    "free": "FREE",
+    "total": "Total",
+    "checkoutNow": "Checkout Now"
+  },
+  "productDetail": {
+    "notFound": "Product Not Found",
+    "backToStore": "Back to Store",
+    "store": "Store",
+    "reviews": "4.5 (28 customer reviews)",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "addToCart": "Add to Shopping Cart",
+    "freeShippingTitle": "Free Shipping",
+    "freeShippingSub": "On orders over XAF 25,000",
+    "qualityTitle": "Quality Guaranteed",
+    "qualitySub": "100% Authentic & Verified",
+    "returnsTitle": "Easy Returns",
+    "returnsSub": "7-day exchange guarantee"
   }
 }

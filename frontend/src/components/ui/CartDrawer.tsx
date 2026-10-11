@@ -20,10 +20,17 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export const CartDrawer: React.FC = () => {
   const { cart, removeFromCart, updateQuantity, cartTotal, isCartOpen, setIsCartOpen } = useCart();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+
+  const getProductTitle = (product: any) => {
+    const key = `shop.products.${product._id}.title`;
+    return i18n.exists(key) ? t(key) : product.title;
+  };
 
   const handleCheckout = () => {
     setIsCartOpen(false);
@@ -63,10 +70,10 @@ export const CartDrawer: React.FC = () => {
         <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
           <ShoppingBagOutlinedIcon sx={{ color: '#FF6B00' }} />
           <Typography variant="h6" sx={{ fontWeight: 700, fontFamily: 'Space Grotesk, sans-serif' }}>
-            Shopping Cart
+            {t('cartDrawer.title', 'Shopping Cart')}
           </Typography>
           <Chip
-            label={`${cart.length} items`}
+            label={t('cartDrawer.itemCount', { count: cart.length, defaultValue: `${cart.length} items` })}
             size="small"
             sx={{ height: 22, fontSize: '0.75rem', bgcolor: '#FF6B00', color: '#FFFFFF', fontWeight: 700 }}
           />
@@ -82,13 +89,13 @@ export const CartDrawer: React.FC = () => {
           <Box sx={{ textAlign: 'center', py: 8, px: 2 }}>
             <ShoppingBagOutlinedIcon sx={{ fontSize: 64, color: 'text.secondary', opacity: 0.4, mb: 2 }} />
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
-              Your cart is empty
+              {t('cartDrawer.emptyTitle', 'Your cart is empty')}
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-              Browse our fresh products and add your favorite items to get started!
+              {t('cartDrawer.emptySub', 'Browse our fresh products and add your favorite items to get started!')}
             </Typography>
             <Button variant="contained" onClick={() => setIsCartOpen(false)}>
-              Start Shopping
+              {t('cartDrawer.startShopping', 'Start Shopping')}
             </Button>
           </Box>
         ) : (
@@ -108,15 +115,15 @@ export const CartDrawer: React.FC = () => {
                 <Avatar
                   variant="rounded"
                   src={product.images?.[0]}
-                  alt={product.title}
+                  alt={getProductTitle(product)}
                   sx={{ width: 64, height: 64, borderRadius: 2, bgcolor: 'background.neutral' }}
                 />
                 <Box sx={{ flex: 1, minWidth: 0 }}>
                   <Typography variant="subtitle2" sx={{ fontWeight: 600 }} noWrap>
-                    {product.title}
+                    {getProductTitle(product)}
                   </Typography>
                   <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
-                    XAF {product.price.toLocaleString()} each
+                    XAF {product.price.toLocaleString()} {t('cartDrawer.each', 'each')}
                   </Typography>
 
                   <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mt: 1 }}>
@@ -176,7 +183,7 @@ export const CartDrawer: React.FC = () => {
           <Stack spacing={1} sx={{ mb: 2.5 }}>
             <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
               <Typography variant="body2" color="text.secondary">
-                Subtotal
+                {t('cartDrawer.subtotal', 'Subtotal')}
               </Typography>
               <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
                 XAF {cartTotal.toLocaleString()}
@@ -184,16 +191,16 @@ export const CartDrawer: React.FC = () => {
             </Stack>
             <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
               <Typography variant="body2" color="text.secondary">
-                Estimated Shipping
+                {t('cartDrawer.estimatedShipping', 'Estimated Shipping')}
               </Typography>
               <Typography variant="caption" color="success.main" sx={{ fontWeight: 600 }}>
-                {cartTotal >= 25000 ? 'FREE' : 'XAF 1,500'}
+                {cartTotal >= 25000 ? t('cartDrawer.free', 'FREE') : 'XAF 1,500'}
               </Typography>
             </Stack>
             <Divider sx={{ my: 1 }} />
             <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
               <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-                Total
+                {t('cartDrawer.total', 'Total')}
               </Typography>
               <Typography variant="subtitle1" sx={{ fontWeight: 800, fontSize: '1.25rem', color: '#FF6B00' }}>
                 XAF {(cartTotal + (cartTotal >= 25000 ? 0 : 1500)).toLocaleString()}
@@ -219,7 +226,7 @@ export const CartDrawer: React.FC = () => {
               }
             }}
           >
-            Checkout Now
+            {t('cartDrawer.checkoutNow', 'Checkout Now')}
           </Button>
         </Box>
       )}

@@ -25,16 +25,53 @@ import ReplayOutlinedIcon from '@mui/icons-material/ReplayOutlined';
 import api from '../../api/client';
 import { useCart } from '../../context/CartContext';
 import type { ProductItem } from '../../context/CartContext';
+import { useTranslation } from 'react-i18next';
 
 export const ProductDetailPage: React.FC = () => {
   const { identifier } = useParams<{ identifier: string }>();
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const { t, i18n } = useTranslation();
 
   const [product, setProduct] = useState<ProductItem | null>(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState<string>('');
+
+  const getLocalizedCategoryName = (cat: string) => {
+    switch (cat) {
+      case 'All':
+      case 'Tout':
+        return t('shop.categories.all', 'All');
+      case 'Apparel & Fashion':
+      case 'Vêtements & Mode':
+        return t('shop.categories.apparel', 'Apparel & Fashion');
+      case 'Footwear & Shoes':
+      case 'Chaussures & Baskets':
+        return t('shop.categories.footwear', 'Footwear & Shoes');
+      case 'Cosmetics & Beauty':
+      case 'Cosmétiques & Beauté':
+        return t('shop.categories.cosmetics', 'Cosmetics & Beauty');
+      case 'Electronics & Tech':
+      case 'Électronique & High-Tech':
+        return t('shop.categories.electronics', 'Electronics & Tech');
+      case 'Fresh Produce & Snacks':
+      case 'Produits Frais & Snacks':
+        return t('shop.categories.fresh', 'Fresh Produce & Snacks');
+      default:
+        return cat;
+    }
+  };
+
+  const getLocalizedProduct = (p: ProductItem) => {
+    const titleKey = `shop.products.${p._id}.title`;
+    const descKey = `shop.products.${p._id}.desc`;
+    const hasTranslation = i18n.exists(titleKey);
+    return {
+      title: hasTranslation ? t(titleKey) : p.title,
+      description: hasTranslation ? t(descKey) : p.description,
+    };
+  };
 
   useEffect(() => {
     if (!identifier) return;
@@ -65,27 +102,30 @@ export const ProductDetailPage: React.FC = () => {
     return (
       <Container maxWidth="md" sx={{ py: 8, textAlign: 'center' }}>
         <Typography variant="h5" sx={{ mb: 2 }}>
-          Product Not Found
+          {t('productDetail.notFound', 'Product Not Found')}
         </Typography>
         <Button startIcon={<ArrowBackIcon />} onClick={() => navigate('/shop')}>
-          Back to Store
+          {t('productDetail.backToStore', 'Back to Store')}
         </Button>
       </Container>
     );
   }
+
+  const localized = getLocalizedProduct(product);
+  const localizedCat = getLocalizedCategoryName(product.category);
 
   return (
     <Container maxWidth="lg" sx={{ py: 5 }}>
       {/* Breadcrumbs */}
       <Breadcrumbs sx={{ mb: 4, color: 'text.secondary' }}>
         <MuiLink color="inherit" underline="hover" sx={{ cursor: 'pointer' }} onClick={() => navigate('/shop')}>
-          Store
+          {t('productDetail.store', 'Store')}
         </MuiLink>
         <MuiLink color="inherit" underline="hover" sx={{ cursor: 'pointer' }} onClick={() => navigate(`/shop?category=${product.category}`)}>
-          {product.category}
+          {localizedCat}
         </MuiLink>
         <Typography color="text.primary" sx={{ fontWeight: 600 }}>
-          {product.title}
+          {localized.title}
         </Typography>
       </Breadcrumbs>
 
@@ -105,7 +145,7 @@ export const ProductDetailPage: React.FC = () => {
             <Box
               component="img"
               src={selectedImage || product.images?.[0] || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80'}
-              alt={product.title}
+              alt={localized.title}
               sx={{ width: '100%', height: 420, objectFit: 'cover' }}
             />
           </Paper>
@@ -135,18 +175,18 @@ export const ProductDetailPage: React.FC = () => {
 
         {/* Product Information */}
         <Box>
-          <Chip label={product.category} color="primary" size="small" sx={{ mb: 1.5, fontWeight: 700 }} />
+          <Chip label={localizedCat} color="primary" size="small" sx={{ mb: 1.5, fontWeight: 700 }} />
           <Typography variant="h4" sx={{ fontWeight: 800, mb: 2 }}>
-            {product.title}
+            {localized.title}
           </Typography>
 
           <Stack direction="row" sx={{ alignItems: 'center', gap: 2, mb: 2 }}>
             <Rating value={4.5} precision={0.5} readOnly size="small" />
             <Typography variant="body2" color="text.secondary">
-              4.5 (28 customer reviews)
+              {t('productDetail.reviews', '4.5 (28 customer reviews)')}
             </Typography>
             <Chip
-              label={product.inStock ? 'In Stock' : 'Out of Stock'}
+              label={product.inStock ? t('productDetail.inStock', 'In Stock') : t('productDetail.outOfStock', 'Out of Stock')}
               color={product.inStock ? 'success' : 'error'}
               size="small"
               variant="outlined"
@@ -165,7 +205,7 @@ export const ProductDetailPage: React.FC = () => {
           </Stack>
 
           <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7, mb: 4 }}>
-            {product.description}
+            {localized.description}
           </Typography>
 
           <Divider sx={{ my: 3 }} />
@@ -207,7 +247,7 @@ export const ProductDetailPage: React.FC = () => {
                 background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)'
               }}
             >
-              Add to Shopping Cart
+              {t('productDetail.addToCart', 'Add to Shopping Cart')}
             </Button>
           </Stack>
 
@@ -218,10 +258,10 @@ export const ProductDetailPage: React.FC = () => {
                 <LocalShippingOutlinedIcon color="primary" />
                 <Box>
                   <Typography variant="caption" sx={{ fontWeight: 700, display: 'block' }}>
-                    Free Shipping
+                    {t('productDetail.freeShippingTitle', 'Free Shipping')}
                   </Typography>
                   <Typography variant="caption" color="text.secondary">
-                    On orders over $50
+                    {t('productDetail.freeShippingSub', 'On orders over XAF 25,000')}
                   </Typography>
                 </Box>
               </Stack>
@@ -229,10 +269,10 @@ export const ProductDetailPage: React.FC = () => {
                 <VerifiedUserOutlinedIcon color="primary" />
                 <Box>
                   <Typography variant="caption" sx={{ fontWeight: 700, display: 'block' }}>
-                    Freshness Guaranteed
+                    {t('productDetail.qualityTitle', 'Quality Guaranteed')}
                   </Typography>
                   <Typography variant="caption" color="text.secondary">
-                    100% Organic & Local
+                    {t('productDetail.qualitySub', '100% Authentic & Verified')}
                   </Typography>
                 </Box>
               </Stack>
@@ -240,10 +280,10 @@ export const ProductDetailPage: React.FC = () => {
                 <ReplayOutlinedIcon color="primary" />
                 <Box>
                   <Typography variant="caption" sx={{ fontWeight: 700, display: 'block' }}>
-                    Easy Returns
+                    {t('productDetail.returnsTitle', 'Easy Returns')}
                   </Typography>
                   <Typography variant="caption" color="text.secondary">
-                    Hassle-free guarantee
+                    {t('productDetail.returnsSub', '7-day exchange guarantee')}
                   </Typography>
                 </Box>
               </Stack>
