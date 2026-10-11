@@ -5,7 +5,11 @@
  */
 
 const envObj = (import.meta as unknown as { env?: Record<string, string> }).env;
-const API_BASE_URL = envObj?.VITE_API_BASE_URL || 'http://192.168.100.125:3000/api/v1';
+const API_BASE_URL =
+  envObj?.VITE_API_BASE_URL ||
+  (typeof window !== 'undefined'
+    ? `${window.location.protocol}//${window.location.hostname}:3001/api/v1`
+    : 'http://localhost:3001/api/v1');
 
 export interface RequestOptions extends RequestInit {
   params?: Record<string, string | number | boolean | null | undefined>;
