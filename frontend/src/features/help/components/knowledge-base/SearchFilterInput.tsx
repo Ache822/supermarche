@@ -34,7 +34,7 @@ export const SearchFilterInput: React.FC<SearchFilterInputProps> = ({
           input: {
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon sx={{ color: '#16a34a', fontSize: 20 }} />
+                <SearchIcon sx={{ color: '#FF6B00', fontSize: 20 }} />
               </InputAdornment>
             ),
             endAdornment: value ? (
@@ -45,13 +45,13 @@ export const SearchFilterInput: React.FC<SearchFilterInputProps> = ({
               </InputAdornment>
             ) : null,
             sx: {
-              bgcolor: isDark ? '#070b09' : '#f8fafc',
+              bgcolor: isDark ? '#140C07' : '#FFFFFF',
               color: isDark ? '#f8fafc' : '#0f172a',
               borderRadius: '10px',
               fontSize: '14px',
-              '& fieldset': { borderColor: isDark ? '#1e2a22' : '#cbd5e1' },
-              '&:hover fieldset': { borderColor: '#16a34a' },
-              '&.Mui-focused fieldset': { borderColor: '#16a34a' },
+              '& fieldset': { borderColor: isDark ? '#3A2316' : '#E2E8F0' },
+              '&:hover fieldset': { borderColor: '#FF6B00' },
+              '&.Mui-focused fieldset': { borderColor: '#FF6B00' },
             },
           },
         }}

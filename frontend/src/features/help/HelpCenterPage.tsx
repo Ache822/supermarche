@@ -58,13 +58,94 @@ interface FAQItem {
   trending?: boolean;
 }
 
-
+const DEFAULT_HELP_ARTICLES: HelpArticleItem[] = [
+  {
+    id: 'art-about-kims-store',
+    title: "About Kim's Store — Cameroon's Modern Lifestyle & Express Shopping Destination",
+    summary: "Discover our curated departments: trending streetwear, genuine sneakers, beauty cosmetics, tech accessories, and express supermarket essentials.",
+    category: "About Kim's Store",
+    slug: "about-kims-store",
+    content: "Kim's Store is Cameroon's premier multi-department retail and express supermarket platform operating across Douala, Yaoundé, Buea, and Bamenda. We offer carefully curated streetwear fashion, brand-name sneakers, premium skincare & cosmetics, smartphones and smart tech accessories, plus fresh pantry groceries. Every item undergoes a strict authenticity inspection before dispatch. Kimzy, our virtual shopping assistant, is available 24/7 in the chat to answer sizing questions and check order statuses.",
+    author: "Kim's Store Team",
+    createdAt: new Date().toISOString(),
+    views: 1420,
+    helpfulCount: 238,
+    featured: true,
+  },
+  {
+    id: 'art-delivery-guide',
+    title: "Express Doorstep Delivery Across Cameroon — Timelines & Tracking",
+    summary: "Learn how delivery works in Douala, Yaoundé, Buea & Bamenda with real-time runner tracking and 45-minute express grocery options.",
+    category: "Orders & Delivery",
+    slug: "kims-store-delivery-guide",
+    content: "We operate local fulfillment and delivery hubs in Douala, Yaoundé, Buea, and Bamenda. Everyday groceries and pantry items arrive in 45–90 minutes. Fashion collections, shoes, and tech products are delivered same-day or on convenient scheduled morning/evening slots. Every order includes an SMS tracking link and real-time live map tracking.",
+    author: "Kim's Store Logistics",
+    createdAt: new Date().toISOString(),
+    views: 985,
+    helpfulCount: 174,
+    featured: true,
+  },
+  {
+    id: 'art-momo-security',
+    title: "Payment Security & Mobile Money Checkout (MTN MoMo & Orange Money)",
+    summary: "Seamless zero-fee Mobile Money checkout, Cash on Delivery options, and instant automated digital invoices.",
+    category: "Payments & MoMo",
+    slug: "payment-momo-security-guide",
+    content: "Paying on Kim's Store is instant and secure. We accept MTN Mobile Money, Orange Money, credit/debit cards, and Cash on Delivery for eligible zones. Digital payments trigger a prompt on your phone with zero hidden fees. Once authorized, a digital receipt and invoice is automatically generated.",
+    author: "Kim's Store Finance",
+    createdAt: new Date().toISOString(),
+    views: 1120,
+    helpfulCount: 195,
+    featured: true,
+  },
+  {
+    id: 'art-returns-policy',
+    title: "Returns, Sizing Guide & 7-Day Easy Exchange Policy",
+    summary: "Hassle-free 7-day size exchanges for shoes and apparel, size charts, and our 100% authentic merchandise guarantee.",
+    category: "Returns & Exchanges",
+    slug: "returns-exchanges-warranty",
+    content: "We want you to love everything you order from Kim's Store. If a pair of sneakers or an outfit does not fit properly, request a size exchange within 7 days. If an item arrives with any defect, we pick it up and replace it completely free of charge. Chat with Kimzy to start an exchange instantly.",
+    author: "Kim's Store Care",
+    createdAt: new Date().toISOString(),
+    views: 860,
+    helpfulCount: 142,
+    featured: false,
+  },
+  {
+    id: 'art-sell-with-us',
+    title: "Sell on Kim's Store — Merchant & Local Brand Partnership Guide",
+    summary: "How fashion designers, local boutiques, and tech importers can showcase their inventory on Cameroon's top lifestyle store.",
+    category: "Partner With Us",
+    slug: "sell-on-kims-store",
+    content: "Expand your retail brand across Cameroon. Approved vendors get instant access to our customer base, delivery courier network, and automated weekly Mobile Money payouts. Submit your catalog through the partner portal to get verified in 48 hours.",
+    author: "Kim's Store Partnerships",
+    createdAt: new Date().toISOString(),
+    views: 650,
+    helpfulCount: 110,
+    featured: false,
+  },
+  {
+    id: 'art-kimzy-support',
+    title: "24/7 Customer Care — Chatting with Kimzy & Direct Support Hotlines",
+    summary: "How to get quick assistance via our Kimzy chat widget, direct phone numbers, and official customer email.",
+    category: "Customer Support",
+    slug: "customer-support-kimzy",
+    content: "Our customer support team is always within reach. Tap the floating chat bubble on the bottom right to speak with Kimzy in real-time. For urgent order inquiries, call +237 655 822 100 or +237 677 822 200, or email support@kimsstore.cm.",
+    author: "Kim's Store Care",
+    createdAt: new Date().toISOString(),
+    views: 790,
+    helpfulCount: 135,
+    featured: false,
+  },
+];
 
 export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPageProps) {
   const { t, i18n } = useTranslation();
   const reduxHelpArticles = useAppSelector((state) => state.admin.helpArticles || []);
   const [faqs, setFaqs] = useState<FAQItem[]>([]);
-  const [helpArticles, setHelpArticles] = useState<HelpArticleItem[]>(reduxHelpArticles);
+  const [helpArticles, setHelpArticles] = useState<HelpArticleItem[]>(
+    reduxHelpArticles.length > 0 ? reduxHelpArticles : DEFAULT_HELP_ARTICLES
+  );
   const [selectedArticle, setSelectedArticle] = useState<HelpArticleItem | null>(null);
   const [activeTab, setActiveTab] = useState<'customers' | 'pros' | 'account'>('customers');
   const [searchQuery, setSearchQuery] = useState('');
@@ -108,20 +189,22 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
       .list<{ data?: Record<string, unknown>[]; articles?: Record<string, unknown>[] }>({ lang: currentLang })
       .then((res) => {
         const rawList = res?.data || res?.articles || (Array.isArray(res) ? res : []);
-        const mappedArticles: HelpArticleItem[] = rawList.map((item: Record<string, unknown>) => ({
-          id: String(item._id || item.id || ''),
-          title: typeof item.title === 'string' ? item.title : String((item.title as Record<string, unknown>)?.[currentLang] || (item.title as Record<string, unknown>)?.en || ''),
-          summary: typeof item.summary === 'string' ? item.summary : String((item.summary as Record<string, unknown>)?.[currentLang] || (item.summary as Record<string, unknown>)?.en || ''),
-          category: String(item.category || 'General'),
-          slug: String(item.slug || item._id || ''),
-          content: typeof item.content === 'string' ? item.content : String((item.content as Record<string, unknown>)?.[currentLang] || (item.content as Record<string, unknown>)?.en || JSON.stringify(item.content || '')),
-          author: String(item.author || 'Supermarche Team'),
-          createdAt: String(item.createdAt || new Date().toISOString()),
-          views: typeof item.views === 'number' ? item.views : 0,
-          helpfulCount: typeof item.helpfulCount === 'number' ? item.helpfulCount : 0,
-          featured: Boolean(item.is_featured || item.featured || false),
-        }));
-        setHelpArticles(mappedArticles);
+        if (rawList && rawList.length > 0) {
+          const mappedArticles: HelpArticleItem[] = rawList.map((item: Record<string, unknown>) => ({
+            id: String(item._id || item.id || ''),
+            title: typeof item.title === 'string' ? item.title : String((item.title as Record<string, unknown>)?.[currentLang] || (item.title as Record<string, unknown>)?.en || ''),
+            summary: typeof item.summary === 'string' ? item.summary : String((item.summary as Record<string, unknown>)?.[currentLang] || (item.summary as Record<string, unknown>)?.en || ''),
+            category: String(item.category || 'General'),
+            slug: String(item.slug || item._id || ''),
+            content: typeof item.content === 'string' ? item.content : String((item.content as Record<string, unknown>)?.[currentLang] || (item.content as Record<string, unknown>)?.en || JSON.stringify(item.content || '')),
+            author: String(item.author || "Kim's Store Team"),
+            createdAt: String(item.createdAt || new Date().toISOString()),
+            views: typeof item.views === 'number' ? item.views : 0,
+            helpfulCount: typeof item.helpfulCount === 'number' ? item.helpfulCount : 0,
+            featured: Boolean(item.is_featured || item.featured || false),
+          }));
+          setHelpArticles(mappedArticles);
+        }
       })
       .catch(() => {});
   }, [i18n.language]);
@@ -165,7 +248,7 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
     <Box sx={{ pb: 10 }}>
       <SEO
         title="Help Center & Customer Support"
-        description="Find answers to FAQs about Supermarche express cooking gas delivery, market shopping, payment methods, provider verification, and account support."
+        description="Find answers to FAQs about Kim's Store products, express delivery, size exchanges, Mobile Money payments, and customer care."
         canonicalPath="/help"
         jsonLd={[breadcrumbSchema, faqSchema]}
       />
@@ -626,7 +709,6 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
               component={RouterLink}
               to="/help/articles"
               variant="outlined"
-              color="success"
               size="small"
               startIcon={<MenuBookIcon fontSize="small" />}
               sx={{
@@ -728,7 +810,7 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
                         }}
                       />
                       {art.featured && (
-                        <Chip label="FEATURED" size="small" color="success" sx={{ fontWeight: 700, fontSize: 9 }} />
+                        <Chip label="FEATURED" size="small" sx={{ fontWeight: 800, fontSize: 9, bgcolor: '#FF6B00', color: '#FFFFFF' }} />
                       )}
                     </Box>
 
@@ -844,7 +926,17 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
       {selectedArticle && (
         <Dialog open={Boolean(selectedArticle)} onClose={() => setSelectedArticle(null)} disableRestoreFocus maxWidth="sm" fullWidth>
           <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Chip label={selectedArticle.category.toUpperCase()} size="small" color="success" sx={{ fontWeight: 700, fontSize: 10 }} />
+            <Chip
+              label={selectedArticle.category.toUpperCase()}
+              size="small"
+              sx={{
+                fontWeight: 800,
+                fontSize: 10,
+                bgcolor: 'rgba(255, 107, 0, 0.15)',
+                color: '#FF6B00',
+                border: '1px solid rgba(255, 107, 0, 0.3)',
+              }}
+            />
             <IconButton size="small" onClick={() => setSelectedArticle(null)}>
               <CloseIcon />
             </IconButton>
@@ -870,7 +962,6 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
               component={RouterLink}
               to={`/help/articles/${selectedArticle.id}`}
               variant="outlined"
-              color="success"
               sx={{ borderColor: '#FF6B00', color: '#FF6B00', fontWeight: 700, borderRadius: '10px' }}
             >
               Open Full Sidebar View →

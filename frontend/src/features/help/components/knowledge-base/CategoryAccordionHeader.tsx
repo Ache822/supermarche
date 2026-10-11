@@ -16,7 +16,7 @@ interface CategoryAccordionHeaderProps {
 }
 
 const renderCategoryIcon = (iconName?: string) => {
-  const iconSx = { fontSize: 20, color: '#16a34a' };
+  const iconSx = { fontSize: 20, color: '#FF6B00' };
   switch (iconName) {
     case 'Assignment':
       return <AssignmentIcon sx={iconSx} />;
@@ -55,14 +55,14 @@ export const CategoryAccordionHeader: React.FC<CategoryAccordionHeaderProps> = (
         textAlign: 'left',
         p: 1.5,
         borderRadius: '12px',
-        bgcolor: isDark ? '#0d1510' : '#ffffff',
+        bgcolor: isDark ? '#1F140C' : '#ffffff',
         border: '1px solid',
-        borderColor: isDark ? '#1e2a22' : '#e2e8f0',
+        borderColor: isDark ? '#3A2316' : '#e2e8f0',
         textTransform: 'none',
         transition: 'all 0.2s ease',
         '&:hover': {
-          bgcolor: isDark ? 'rgba(30, 42, 34, 0.6)' : 'rgba(22, 163, 74, 0.05)',
-          borderColor: '#16a34a',
+          bgcolor: isDark ? 'rgba(255, 107, 0, 0.15)' : 'rgba(255, 107, 0, 0.05)',
+          borderColor: '#FF6B00',
         },
       }}
     >
@@ -71,8 +71,8 @@ export const CategoryAccordionHeader: React.FC<CategoryAccordionHeaderProps> = (
           sx={{
             p: 1,
             borderRadius: '8px',
-            bgcolor: 'rgba(22, 163, 74, 0.1)',
-            border: '1px solid rgba(22, 163, 74, 0.25)',
+            bgcolor: 'rgba(255, 107, 0, 0.1)',
+            border: '1px solid rgba(255, 107, 0, 0.25)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -119,10 +119,10 @@ export const CategoryAccordionHeader: React.FC<CategoryAccordionHeaderProps> = (
             px: 1,
             py: 0.25,
             borderRadius: '999px',
-            bgcolor: isDark ? '#1e2a22' : '#f1f5f9',
-            color: isDark ? '#cbd5e1' : '#475569',
+            bgcolor: isDark ? '#2D1A10' : '#FFF4ED',
+            color: isDark ? '#FFA27B' : '#C74A00',
             border: '1px solid',
-            borderColor: isDark ? '#1e2a22' : '#cbd5e1',
+            borderColor: isDark ? '#3A2316' : '#FFE4D4',
           }}
         >
           {category.articles.length}
@@ -130,7 +130,7 @@ export const CategoryAccordionHeader: React.FC<CategoryAccordionHeaderProps> = (
         <ExpandMoreIcon
           sx={{
             fontSize: 20,
-            color: isOpen ? '#16a34a' : isDark ? '#94a3b8' : '#64748b',
+            color: isOpen ? '#FF6B00' : isDark ? '#94a3b8' : '#64748b',
             transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
             transition: 'transform 0.2s ease',
           }}

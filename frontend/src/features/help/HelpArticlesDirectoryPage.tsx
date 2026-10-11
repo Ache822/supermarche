@@ -21,8 +21,8 @@ export function HelpArticlesDirectoryPage({ onOpenLiveChat }: HelpArticlesDirect
   return (
     <>
       <SEO
-        title="Knowledge Base | Supermarche Help Center"
-        description="Browse help articles, guides, warranties, Mobile Money escrow documentation, and provider manuals."
+        title="Knowledge Base & Guides | Kim's Store Help Center"
+        description="Browse help articles, sizing guides, express delivery timelines, size exchanges, and Mobile Money documentation for Kim's Store."
       />
       <KnowledgeBaseView
         initialSelectedArticleId={articleSlug}

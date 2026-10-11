@@ -30,7 +30,7 @@ const articleSchema = new Schema<IArticle>(
     title: { type: String, required: true },
     summary: { type: String, required: true },
     content: { type: String, required: true },
-    author: { type: String, default: "Supermarche Team" },
+    author: { type: String, default: "Kim's Store Team" },
     category: { type: String, required: true, default: "General", index: true },
     categoryId: { type: String },
     categoryName: { type: String },

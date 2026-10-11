@@ -186,6 +186,9 @@ export interface HelpArticleItem {
   views: number;
   helpfulCount: number;
   featured: boolean;
+  slug?: string;
+  author?: string;
+  createdAt?: string;
 }
 
 export interface Testimonial {

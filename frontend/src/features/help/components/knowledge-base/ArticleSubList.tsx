@@ -34,7 +34,7 @@ export const ArticleSubList: React.FC<ArticleSubListProps> = ({
         ml: 2,
         pl: 1.5,
         borderLeft: '1px solid',
-        borderColor: isDark ? '#1e2a22' : '#cbd5e1',
+        borderColor: isDark ? '#3A2316' : '#E2E8F0',
         display: 'flex',
         flexDirection: 'column',
         gap: 0.5,

@@ -13,15 +13,15 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({ section }) => {
 
   return (
     <Box sx={{ mb: 3 }}>
-      {/* SectionSubheading: H3 with green accent dot */}
+      {/* SectionSubheading: H3 with orange accent dot */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25, mb: 1.25 }}>
         <Box
           sx={{
             width: 8,
             height: 8,
             borderRadius: '50%',
-            bgcolor: '#16a34a',
-            boxShadow: '0 0 8px rgba(22, 163, 74, 0.6)',
+            bgcolor: '#FF6B00',
+            boxShadow: '0 0 8px rgba(255, 107, 0, 0.6)',
             flexShrink: 0,
           }}
         />
@@ -44,7 +44,7 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({ section }) => {
         sx={{
           ml: 0.5,
           pl: 2,
-          borderLeft: '2px solid #16a34a',
+          borderLeft: '2px solid #FF6B00',
         }}
       >
         <Typography

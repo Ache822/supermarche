@@ -30,9 +30,9 @@ export const CategoryAccordionList: React.FC<CategoryAccordionListProps> = ({
           p: 3,
           textAlign: 'center',
           borderRadius: '12px',
-          bgcolor: isDark ? '#0d1510' : '#ffffff',
+          bgcolor: isDark ? '#1F140C' : '#ffffff',
           border: '1px solid',
-          borderColor: isDark ? '#1e2a22' : '#e2e8f0',
+          borderColor: isDark ? '#3A2316' : '#e2e8f0',
           color: isDark ? '#94a3b8' : '#64748b',
           fontSize: '14px',
         }}

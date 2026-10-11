@@ -31,11 +31,11 @@ export const KnowledgeBaseSidebar: React.FC<KnowledgeBaseSidebarProps> = ({
   return (
     <Box
       sx={{
-        bgcolor: isDark ? '#0d1510' : '#ffffff',
+        bgcolor: isDark ? '#1F140C' : '#ffffff',
         p: 2.5,
         borderRadius: '18px',
         border: '1px solid',
-        borderColor: isDark ? '#1e2a22' : '#e2e8f0',
+        borderColor: isDark ? '#3A2316' : '#e2e8f0',
         boxShadow: isDark ? '0 8px 32px rgba(0,0,0,0.4)' : '0 4px 20px rgba(0,0,0,0.06)',
       }}
     >
