@@ -24,6 +24,7 @@ import api from '../../api/client';
 import { useCart } from '../../context/CartContext';
 import type { ProductItem } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
   {
@@ -169,6 +170,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
 ];
 
 export const ShopPage: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const [products, setProducts] = useState<ProductItem[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -185,6 +187,43 @@ export const ShopPage: React.FC = () => {
     'Electronics & Tech',
     'Fresh Produce & Snacks',
   ];
+
+  const getLocalizedCategoryName = (cat: string) => {
+    switch (cat) {
+      case 'All':
+      case 'Tout':
+      case 'Tous':
+        return t('shop.categories.all');
+      case 'Apparel & Fashion':
+      case 'Vêtements & Mode':
+      case 'Mode & Vêtements':
+        return t('shop.categories.apparel');
+      case 'Footwear & Shoes':
+      case 'Chaussures & Baskets':
+        return t('shop.categories.footwear');
+      case 'Cosmetics & Beauty':
+      case 'Cosmétiques & Beauté':
+        return t('shop.categories.cosmetics');
+      case 'Electronics & Tech':
+      case 'Électronique & High-Tech':
+        return t('shop.categories.electronics');
+      case 'Fresh Produce & Snacks':
+      case 'Produits Frais & Snacks':
+        return t('shop.categories.fresh');
+      default:
+        return cat;
+    }
+  };
+
+  const getLocalizedProduct = (product: ProductItem) => {
+    const titleKey = `shop.products.${product._id}.title`;
+    const descKey = `shop.products.${product._id}.desc`;
+    const hasTranslation = i18n.exists(titleKey);
+    return {
+      title: hasTranslation ? t(titleKey) : product.title,
+      description: hasTranslation ? t(descKey) : product.shortDescription || product.description,
+    };
+  };
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -265,22 +304,22 @@ export const ShopPage: React.FC = () => {
         >
           <Chip
             icon={<LocalOfferIcon sx={{ fontSize: 16, color: '#FF6B00 !important' }} />}
-            label="Kim's Store Marketplace"
+            label={t('shop.marketplaceChip', "Kim's Store Marketplace")}
             size="small"
             sx={{ mb: 2, fontWeight: 700, bgcolor: 'rgba(255, 107, 0, 0.15)', color: '#FF6B00', border: '1px solid #FF6B00' }}
           />
           <Typography variant="h3" sx={{ fontSize: { xs: '2rem', md: '2.8rem' }, fontWeight: 800, mb: 2 }}>
-            Trending Fashion, Footwear, Beauty & Everyday Essentials
+            {t('shop.heroTitle', 'Trending Fashion, Footwear, Beauty & Everyday Essentials')}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" sx={{ maxWidth: 640, mx: 'auto', mb: 4 }}>
-            Discover high-quality apparel, sneakers, cosmetics glow kits, electronics, fresh produce, and dorm snacks delivered fast.
+            {t('shop.heroSubtitle', 'Discover high-quality apparel, sneakers, cosmetics glow kits, electronics, fresh produce, and dorm snacks delivered fast.')}
           </Typography>
 
           {/* Search bar */}
           <Box component="form" onSubmit={handleSearchSubmit} sx={{ maxWidth: 540, mx: 'auto' }}>
             <TextField
               fullWidth
-              placeholder="Search fashion, sneakers, skincare, electronics, snacks..."
+              placeholder={t('shop.searchPlaceholder', 'Search fashion, sneakers, skincare, electronics, snacks...')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               slotProps={{
@@ -293,7 +332,7 @@ export const ShopPage: React.FC = () => {
                   endAdornment: (
                     <InputAdornment position="end">
                       <Button variant="contained" type="submit" sx={{ borderRadius: 2, bgcolor: '#FF6B00', '&:hover': { bgcolor: '#E05D00' } }}>
-                        Search
+                        {t('shop.searchBtn', 'Search')}
                       </Button>
                     </InputAdornment>
                   ),
@@ -313,7 +352,7 @@ export const ShopPage: React.FC = () => {
           {(categories.length > 0 ? categories : STORE_CATEGORIES).map((cat) => (
             <Chip
               key={cat}
-              label={cat}
+              label={getLocalizedCategoryName(cat)}
               clickable
               onClick={() => setSelectedCategory(cat)}
               sx={{
@@ -341,10 +380,10 @@ export const ShopPage: React.FC = () => {
         ) : products.length === 0 ? (
           <Box sx={{ textAlign: 'center', py: 8 }}>
             <Typography variant="h6" color="text.secondary">
-              No products found matching your search.
+              {t('shop.noProducts', 'No products found matching your search.')}
             </Typography>
             <Button sx={{ mt: 2 }} onClick={() => { setSelectedCategory('All'); setSearchQuery(''); }}>
-              Reset Filters
+              {t('shop.resetFilters', 'Reset Filters')}
             </Button>
           </Box>
         ) : (
@@ -355,121 +394,127 @@ export const ShopPage: React.FC = () => {
               gap: 3
             }}
           >
-            {products.map((product) => (
-              <Card
-                key={product._id}
-                sx={{
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  borderRadius: 3,
-                  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: '0 12px 24px rgba(0,0,0,0.2)'
-                  }
-                }}
-              >
-                <Box sx={{ position: 'relative' }}>
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={product.images?.[0] || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80'}
-                    alt={product.title}
-                    sx={{ objectFit: 'cover' }}
-                  />
-                  <Chip
-                    label={typeof product.category === 'object' && product.category !== null ? (product.category as any).name : String(product.category || 'Groceries')}
-                    size="small"
-                    sx={{
-                      position: 'absolute',
-                      top: 12,
-                      left: 12,
-                      bgcolor: 'rgba(0,0,0,0.6)',
-                      color: '#fff',
-                      backdropFilter: 'blur(4px)',
-                      fontSize: '0.75rem'
-                    }}
-                  />
-                  {product.compareAtPrice && product.compareAtPrice > product.price && (
-                    <Chip
-                      label="SALE"
-                      size="small"
-                      color="error"
-                      sx={{ position: 'absolute', top: 12, right: 12, fontWeight: 700 }}
+            {products.map((product) => {
+              const localized = getLocalizedProduct(product);
+              const catRaw = typeof product.category === 'object' && product.category !== null ? (product.category as any).name : String(product.category || 'Groceries');
+              const localizedCategory = getLocalizedCategoryName(catRaw);
+
+              return (
+                <Card
+                  key={product._id}
+                  sx={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    borderRadius: 3,
+                    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      boxShadow: '0 12px 24px rgba(0,0,0,0.2)'
+                    }
+                  }}
+                >
+                  <Box sx={{ position: 'relative' }}>
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={product.images?.[0] || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80'}
+                      alt={localized.title}
+                      sx={{ objectFit: 'cover' }}
                     />
-                  )}
-                </Box>
-
-                <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                  <Typography
-                    variant="h6"
-                    onClick={() => navigate(`/shop/product/${product.slug || product._id}`)}
-                    sx={{ fontWeight: 700, mb: 1, cursor: 'pointer', '&:hover': { color: 'primary.main' } }}
-                  >
-                    {product.title}
-                  </Typography>
-
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{
-                      mb: 2,
-                      flexGrow: 1,
-                      display: '-webkit-box',
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: 'vertical',
-                      overflow: 'hidden'
-                    }}
-                  >
-                    {product.shortDescription || product.description}
-                  </Typography>
-
-                  <Stack direction="row" sx={{ alignItems: 'center', gap: 1, mb: 2 }}>
-                    <Rating value={4.8} precision={0.5} size="small" readOnly />
-                    <Typography variant="caption" color="text.secondary">
-                      (4.8)
-                    </Typography>
-                  </Stack>
-
-                  <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between', mt: 'auto' }}>
-                    <Box>
-                      <Typography variant="h6" color="primary.main" sx={{ fontWeight: 800 }}>
-                        XAF {product.price.toLocaleString()}
-                      </Typography>
-                      {product.compareAtPrice && (
-                        <Typography variant="caption" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                          XAF {product.compareAtPrice.toLocaleString()}
-                        </Typography>
-                      )}
-                    </Box>
-
-                    <Stack direction="row" spacing={1}>
-                      <Tooltip title="Quick View">
-                        <IconButton
-                          size="small"
-                          onClick={() => navigate(`/shop/product/${product.slug || product._id}`)}
-                          sx={{ border: '1px solid rgba(255, 255, 255, 0.12)' }}
-                        >
-                          <VisibilityIcon fontSize="small" />
-                        </IconButton>
-                      </Tooltip>
-
-                      <Button
-                        variant="contained"
+                    <Chip
+                      label={localizedCategory}
+                      size="small"
+                      sx={{
+                        position: 'absolute',
+                        top: 12,
+                        left: 12,
+                        bgcolor: 'rgba(0,0,0,0.6)',
+                        color: '#fff',
+                        backdropFilter: 'blur(4px)',
+                        fontSize: '0.75rem'
+                      }}
+                    />
+                    {product.compareAtPrice && product.compareAtPrice > product.price && (
+                      <Chip
+                        label={t('shop.sale', 'SALE')}
                         size="small"
-                        startIcon={<AddShoppingCartIcon />}
-                        onClick={() => addToCart(product)}
-                        sx={{ borderRadius: 2, px: 2, fontWeight: 600 }}
-                      >
-                        Add
-                      </Button>
+                        color="error"
+                        sx={{ position: 'absolute', top: 12, right: 12, fontWeight: 700 }}
+                      />
+                    )}
+                  </Box>
+
+                  <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                    <Typography
+                      variant="h6"
+                      onClick={() => navigate(`/shop/product/${product.slug || product._id}`)}
+                      sx={{ fontWeight: 700, mb: 1, cursor: 'pointer', '&:hover': { color: 'primary.main' } }}
+                    >
+                      {localized.title}
+                    </Typography>
+
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{
+                        mb: 2,
+                        flexGrow: 1,
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden'
+                      }}
+                    >
+                      {localized.description}
+                    </Typography>
+
+                    <Stack direction="row" sx={{ alignItems: 'center', gap: 1, mb: 2 }}>
+                      <Rating value={4.8} precision={0.5} size="small" readOnly />
+                      <Typography variant="caption" color="text.secondary">
+                        (4.8)
+                      </Typography>
                     </Stack>
-                  </Stack>
-                </CardContent>
-              </Card>
-            ))}
+
+                    <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between', mt: 'auto' }}>
+                      <Box>
+                        <Typography variant="h6" color="primary.main" sx={{ fontWeight: 800 }}>
+                          XAF {product.price.toLocaleString()}
+                        </Typography>
+                        {product.compareAtPrice && (
+                          <Typography variant="caption" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
+                            XAF {product.compareAtPrice.toLocaleString()}
+                          </Typography>
+                        )}
+                      </Box>
+
+                      <Stack direction="row" spacing={1}>
+                        <Tooltip title={t('shop.quickView', 'Quick View')}>
+                          <IconButton
+                            size="small"
+                            onClick={() => navigate(`/shop/product/${product.slug || product._id}`)}
+                            sx={{ border: '1px solid rgba(255, 255, 255, 0.12)' }}
+                          >
+                            <VisibilityIcon fontSize="small" />
+                          </IconButton>
+                        </Tooltip>
+
+                        <Button
+                          variant="contained"
+                          size="small"
+                          startIcon={<AddShoppingCartIcon />}
+                          onClick={() => addToCart(product)}
+                          sx={{ borderRadius: 2, px: 2, fontWeight: 600 }}
+                        >
+                          {t('shop.add', 'Add')}
+                        </Button>
+                      </Stack>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </Box>
         )}
       </Container>

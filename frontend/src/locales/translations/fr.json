@@ -802,5 +802,95 @@
     "pending": "EN ATTENTE",
     "continueShopping": "Continuer les Achats",
     "supportNote": "Besoin de modifier votre livraison ou d'assistance ? Échangez avec Kimzy sur le chat en direct."
+  },
+  "shop": {
+    "marketplaceChip": "Place de Marché Kim's Store",
+    "heroTitle": "Mode Tendance, Chaussures, Beauté & Essentiels du Quotidien",
+    "heroSubtitle": "Découvrez des vêtements de qualité, des sneakers, des soins éclat, de l'électronique, des produits frais et des snacks livrés rapidement.",
+    "searchPlaceholder": "Rechercher mode, baskets, soins visage, électronique, snacks...",
+    "searchBtn": "Rechercher",
+    "noProducts": "Aucun produit trouvé pour votre recherche.",
+    "resetFilters": "Réinitialiser les Filtres",
+    "quickView": "Aperçu Rapide",
+    "add": "Ajouter",
+    "sale": "PROMO",
+    "categories": {
+      "all": "Tout",
+      "apparel": "Vêtements & Mode",
+      "footwear": "Chaussures & Baskets",
+      "cosmetics": "Cosmétiques & Beauté",
+      "electronics": "Électronique & High-Tech",
+      "fresh": "Produits Frais & Snacks"
+    },
+    "products": {
+      "prod-hoodie-01": {
+        "title": "Sweat à Capuche Vintage Graphique Oversize",
+        "desc": "Sweat à capuche oversize en coton épais haut de gamme avec imprimé vintage. Ultra-confortable pour le campus et le quotidien."
+      },
+      "prod-tee-02": {
+        "title": "T-Shirt Streetwear Minimaliste Épais",
+        "desc": "T-shirt graphique en coton 240GSM coupe décontractée. Respirant, résistant et tendance."
+      },
+      "prod-sneakers-01": {
+        "title": "Baskets Rétro Montantes Campus",
+        "desc": "Baskets rétro montantes classiques style basketball avec semelle intérieure amortissante et semelle extérieure en caoutchouc résistant."
+      },
+      "prod-running-02": {
+        "title": "Chaussures de Course Légères & Respirantes",
+        "desc": "Chaussures de running en maille aérée conçues pour un confort optimal pendant vos marches ou trajets quotidiens."
+      },
+      "prod-serum-01": {
+        "title": "Sérum Visage Hydratant Éclat Vitamine C",
+        "desc": "Sérum visage nourrissant enrichi en acide hyaluronique et vitamine C pour une peau éclatante et hydratée."
+      },
+      "prod-sunscreen-02": {
+        "title": "Crème Solaire Bouclier Invisible SPF 50+",
+        "desc": "Lotion solaire visage SPF 50+ à large spectre, fini non gras et sans traces blanches."
+      },
+      "prod-earbuds-01": {
+        "title": "Écouteurs Bluetooth Sans Fil Pro ANC",
+        "desc": "Écouteurs sans fil à réduction active du bruit avec autonomie totale de 30 heures et son HD aux basses profondes."
+      },
+      "prod-powerbank-02": {
+        "title": "Batterie Externe Ultra Rapide 20 000mAh",
+        "desc": "Batterie externe à charge rapide 22.5W avec double port USB-C. Unité compacte pour téléphones, tablettes et ordinateurs."
+      },
+      "prod-fruits-01": {
+        "title": "Panier de Fruits Biologiques & Épicerie Fraîche",
+        "desc": "Sélection de pommes, bananes, oranges biologiques et produits frais du marché livrés à votre porte."
+      },
+      "prod-snacks-02": {
+        "title": "Chocolats Artisanaux & Pack Snacks Gourmands",
+        "desc": "Assortiment gourmand de chocolats importés, biscuits croquants, gaufrettes et en-cas."
+      }
+    }
+  },
+  "cartDrawer": {
+    "title": "Panier d'Achats",
+    "itemCount": "{{count}} articles",
+    "emptyTitle": "Votre panier est vide",
+    "emptySub": "Parcourez notre catalogue et ajoutez vos articles préférés pour commencer !",
+    "startShopping": "Commencer les Achats",
+    "each": "l'unité",
+    "subtotal": "Sous-total",
+    "estimatedShipping": "Livraison Estimée",
+    "free": "GRATUIT",
+    "total": "Total",
+    "checkoutNow": "Passer à la Caisse"
+  },
+  "productDetail": {
+    "notFound": "Produit Introuvable",
+    "backToStore": "Retour au Magasin",
+    "store": "Magasin",
+    "reviews": "4.5 (28 avis clients)",
+    "inStock": "En Stock",
+    "outOfStock": "Rupture de Stock",
+    "addToCart": "Ajouter au Panier",
+    "freeShippingTitle": "Livraison Gratuite",
+    "freeShippingSub": "Dès 25 000 XAF d'achats",
+    "qualityTitle": "Qualité Garantie",
+    "qualitySub": "100% Authentique & Vérifié",
+    "returnsTitle": "Retours Faciles",
+    "returnsSub": "Échange garanti sous 7 jours"
   }
 }
