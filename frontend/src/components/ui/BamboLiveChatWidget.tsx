@@ -269,7 +269,7 @@ export function BamboLiveChatWidget({
     <>
       {/* Floating Trigger Button (Bottom Right) */}
       {!isOpen && (
-        <Tooltip title={t('chatWidget.fabTooltip', "Chat with Kimzy Bot Customer Service")} placement="left" arrow>
+        <Tooltip title={t('chatWidget.fabTooltip', "Chat with Kimzy Customer Service")} placement="left" arrow>
           <Fab
             onClick={() => setIsOpen(true)}
             sx={{
@@ -476,7 +476,7 @@ export function BamboLiveChatWidget({
                         {msg.id === 'welcome-1'
                           ? t('chatWidget.welcomeMsg')
                           : msg.text
-                              .replace(/Supermarche Bot/gi, 'Kimzy Bot')
+                              .replace(/Supermarche Bot|Kimzy Bot/gi, 'Kimzy')
                               .replace(/Supermarche/gi, "Kim's Store")}
                       </Typography>
                     )}
@@ -594,7 +594,7 @@ export function BamboLiveChatWidget({
             <TextField
               fullWidth
               size="small"
-              placeholder={t('chatWidget.inputPlaceholder', "Type your message to Kimzy Bot...")}
+              placeholder={t('chatWidget.inputPlaceholder', "Type your message to Kimzy...")}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {

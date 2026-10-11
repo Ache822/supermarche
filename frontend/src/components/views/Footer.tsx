@@ -276,7 +276,7 @@ export function Footer({ mode, onOpenBooking }: FooterProps) {
               </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, fontSize: 13, color: '#FFC4A8' }}>
                 <Box component={Link} to="/shop" sx={{ color: '#FFC4A8', textDecoration: 'none', '&:hover': { color: '#FFFFFF' } }}>
-                  Explore Marketplace Store
+                  Shop Products
                 </Box>
                 <Box component={Link} to="/about" sx={{ color: '#FFC4A8', textDecoration: 'none', '&:hover': { color: '#FFFFFF' } }}>
                   {t('footer.aboutUs', 'About Us')}
@@ -347,15 +347,15 @@ export function Footer({ mode, onOpenBooking }: FooterProps) {
                   <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Box
                       component="a"
-                      href="mailto:info@supermarche.com"
+                      href="mailto:support@kimsstore.cm"
                       sx={{ color: '#FFFFFF', fontSize: 12.5, fontWeight: 700, textDecoration: 'none', fontFamily: 'Space Grotesk, sans-serif' }}
                     >
-                      info@supermarche.com
+                      support@kimsstore.cm
                     </Box>
                     <Box
                       component="a"
-                      href="mailto:info@supermarche.com"
-                      title="Send Email (info@supermarche.com)"
+                      href="mailto:support@kimsstore.cm"
+                      title="Send Email (support@kimsstore.cm)"
                       sx={{ color: '#FF6B00', display: 'inline-flex', p: 0.4 }}
                     >
                       <EmailIcon sx={{ fontSize: 15 }} />
@@ -364,15 +364,15 @@ export function Footer({ mode, onOpenBooking }: FooterProps) {
                   <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Box
                       component="a"
-                      href="tel:+237681891467"
+                      href="tel:+237655822100"
                       sx={{ color: '#FFFFFF', fontSize: 12.5, fontWeight: 700, textDecoration: 'none', fontFamily: 'Space Grotesk, sans-serif' }}
                     >
-                      +237 681 891 467
+                      +237 655 822 100
                     </Box>
                     <Box
                       component="a"
-                      href="tel:+237681891467"
-                      title="Direct Phone Call (+237 681 891 467)"
+                      href="tel:+237655822100"
+                      title="Direct Phone Call (+237 655 822 100)"
                       sx={{ color: '#FF6B00', display: 'inline-flex', p: 0.4 }}
                     >
                       <PhoneIcon sx={{ fontSize: 15 }} />
@@ -381,15 +381,15 @@ export function Footer({ mode, onOpenBooking }: FooterProps) {
                   <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Box
                       component="a"
-                      href="tel:+237697984955"
+                      href="tel:+237677822200"
                       sx={{ color: '#FFFFFF', fontSize: 12.5, fontWeight: 700, textDecoration: 'none', fontFamily: 'Space Grotesk, sans-serif' }}
                     >
-                      +237 697 984 955
+                      +237 677 822 200
                     </Box>
                     <Box
                       component="a"
-                      href="tel:+237697984955"
-                      title="Direct Phone Call (+237 697 984 955)"
+                      href="tel:+237677822200"
+                      title="Direct Phone Call (+237 677 822 200)"
                       sx={{ color: '#FF6B00', display: 'inline-flex', p: 0.4 }}
                     >
                       <PhoneIcon sx={{ fontSize: 15 }} />
@@ -519,26 +519,26 @@ export function Footer({ mode, onOpenBooking }: FooterProps) {
                   </Typography>
                   <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.8 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <Box component="a" href="mailto:info@supermarche.com" sx={{ color: '#FFFFFF', fontSize: 12.5, fontWeight: 700, textDecoration: 'none' }}>
-                        info@supermarche.com
+                      <Box component="a" href="mailto:support@kimsstore.cm" sx={{ color: '#FFFFFF', fontSize: 12.5, fontWeight: 700, textDecoration: 'none' }}>
+                        support@kimsstore.cm
                       </Box>
-                      <Box component="a" href="mailto:info@supermarche.com" sx={{ color: '#FF6B00', display: 'inline-flex' }}>
+                      <Box component="a" href="mailto:support@kimsstore.cm" sx={{ color: '#FF6B00', display: 'inline-flex' }}>
                         <EmailIcon sx={{ fontSize: 15 }} />
                       </Box>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <Box component="a" href="tel:+237681891467" sx={{ color: '#FFFFFF', fontSize: 12.5, fontWeight: 700, textDecoration: 'none' }}>
-                        +237 681 891 467
+                      <Box component="a" href="tel:+237655822100" sx={{ color: '#FFFFFF', fontSize: 12.5, fontWeight: 700, textDecoration: 'none' }}>
+                        +237 655 822 100
                       </Box>
-                      <Box component="a" href="tel:+237681891467" sx={{ color: '#FF6B00', display: 'inline-flex' }}>
+                      <Box component="a" href="tel:+237655822100" sx={{ color: '#FF6B00', display: 'inline-flex' }}>
                         <PhoneIcon sx={{ fontSize: 15 }} />
                       </Box>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <Box component="a" href="tel:+237697984955" sx={{ color: '#FFFFFF', fontSize: 12.5, fontWeight: 700, textDecoration: 'none' }}>
-                        +237 697 984 955
+                      <Box component="a" href="tel:+237677822200" sx={{ color: '#FFFFFF', fontSize: 12.5, fontWeight: 700, textDecoration: 'none' }}>
+                        +237 677 822 200
                       </Box>
-                      <Box component="a" href="tel:+237697984955" sx={{ color: '#FF6B00', display: 'inline-flex' }}>
+                      <Box component="a" href="tel:+237677822200" sx={{ color: '#FF6B00', display: 'inline-flex' }}>
                         <PhoneIcon sx={{ fontSize: 15 }} />
                       </Box>
                     </Box>
