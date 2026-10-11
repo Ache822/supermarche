@@ -10,7 +10,8 @@ import {
   postSupportMessageHandler,
   uploadSupportAttachmentHandler,
   resolveSupportSessionHandler,
-  reopenSupportSessionHandler
+  reopenSupportSessionHandler,
+  deleteSupportChatHandler
 } from "./support.controller";
 
 export const supportRouter = Router();
@@ -32,4 +33,7 @@ supportRouter.patch("/chats/:session_id/archive", authenticate, requirePermissio
 supportRouter.patch("/chats/:session_id/assign", authenticate, requirePermission("support:chat"), assignSupportChatHandler);
 supportRouter.post("/chats/:session_id/resolve", authenticate, requirePermission("support:chat"), resolveSupportSessionHandler);
 supportRouter.post("/chats/:session_id/reopen", authenticate, requirePermission("support:chat"), reopenSupportSessionHandler);
+supportRouter.delete("/chats/:session_id", authenticate, deleteSupportChatHandler);
+supportRouter.delete("/:session_id", authenticate, deleteSupportChatHandler);
+
 

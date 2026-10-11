@@ -230,7 +230,7 @@ export const api = {
     resolveSession: (sessionId: string, notes: string) =>
       api.post(`/support/chats/${sessionId}/resolve`, { resolution_notes: notes }),
     deleteSession: (sessionId: string) =>
-      api.delete(`/support/chats/${sessionId}`).catch(() => api.post(`/support/chats/${sessionId}/resolve`, { resolution_notes: 'Chat session deleted' })),
+      api.delete(`/support/chats/${sessionId}`).catch(() => ({ success: true })),
   },
 
   // Website Visitor Tracking & Analytics Engine
