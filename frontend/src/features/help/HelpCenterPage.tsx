@@ -552,7 +552,7 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
                 {t('help.noResultsFound', 'No matching help articles found for "{{query}}"', { query: searchQuery })}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary', mb: 3 }}>
-                {t('help.noResultsSub', 'Try searching with different terms or speak directly with our 24/7 Supermarche Bot Support Desk.')}
+                {t('help.noResultsSub', 'Try searching with different terms or speak directly with our 24/7 Kimzy Support Desk.')}
               </Typography>
               <Button
                 variant="contained"
@@ -560,7 +560,7 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
                 startIcon={<ChatIcon />}
                 sx={{ bgcolor: '#FF6B00', color: '#FFFFFF', fontWeight: 700, px: 3, py: 1 }}
               >
-                {t('help.chatWithSupportBtn', 'Chat with Supermarche Bot Support')}
+                {t('help.chatWithSupportBtn', 'Chat with Kimzy Support')}
               </Button>
             </Paper>
           ) : (
