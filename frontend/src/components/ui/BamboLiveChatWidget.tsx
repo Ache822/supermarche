@@ -473,7 +473,11 @@ export function BamboLiveChatWidget({
                   >
                     {msg.text && (
                       <Typography sx={{ fontSize: 13, lineHeight: 1.45, fontFamily: 'Inter, sans-serif' }}>
-                        {msg.id === 'welcome-1' ? t('chatWidget.welcomeMsg') : msg.text}
+                        {msg.id === 'welcome-1'
+                          ? t('chatWidget.welcomeMsg')
+                          : msg.text
+                              .replace(/Supermarche Bot/gi, 'Kimzy Bot')
+                              .replace(/Supermarche/gi, "Kim's Store")}
                       </Typography>
                     )}
 
