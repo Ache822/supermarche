@@ -31,7 +31,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import EmailIcon from '@mui/icons-material/Email';
 import SmartphoneIcon from '@mui/icons-material/Smartphone';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
-import HandymanIcon from '@mui/icons-material/Handyman';
+import StorefrontIcon from '@mui/icons-material/Storefront';
 import CloseIcon from '@mui/icons-material/Close';
 import DescriptionIcon from '@mui/icons-material/Description';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
@@ -310,15 +310,15 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
           <Autocomplete
             freeSolo
             options={[
-              'Cooking Gas Refill & Delivery',
-              'Prepped Foods & Market Shopping',
-              'Back to School Supplies',
-              'Deep Home & Office Cleaning',
-              'CCTV & Digital Security',
-              '14-Day Service Warranty',
-              'How to Become a Service Provider',
-              'Payment & Refund Methods',
-              'Emergency Dispatch Protocol',
+              "About Kim's Store & Curated Collections",
+              'Express Supermarket & Grocery Delivery',
+              'Sneakers & Streetwear Sizing Guide',
+              '7-Day Easy Size Exchanges',
+              'MTN MoMo & Orange Money Payments',
+              'Track Order with Mascot Kimzy',
+              "Sell on Kim's Store (Merchant Partners)",
+              'Cash on Delivery & Instant Receipts',
+              'Authentic Quality & Verification Guarantee',
             ]}
             inputValue={searchQuery}
             onInputChange={(_, newValue) => setSearchQuery(newValue)}
@@ -358,7 +358,7 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
                 <TextField
                   {...params}
                   fullWidth
-                  placeholder={t('help.searchQuestionsPlaceholder', "Search questions (e.g. 'Gas Refill', 'Refunds', 'Become a Provider', '14-Day Warranty')...")}
+                  placeholder={t('help.searchQuestionsPlaceholder', "Search questions (e.g. 'Orders', 'Refunds', 'Size Exchange', 'Kimzy', 'Delivery')...")}
                   sx={{
                     bgcolor: (theme: Theme) => (theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.5)' : '#FFFFFF'),
                     borderRadius: '16px',
@@ -387,11 +387,11 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
           {/* Quick Tag Pills */}
           <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center', flexWrap: 'wrap', mt: 2.5 }}>
             {[
-              { key: 'help.tagGas', defaultVal: 'Gas Refill' },
-              { key: 'help.tagMoMo', defaultVal: 'Mobile Money Payout' },
-              { key: 'help.tagWarranty', defaultVal: '14-Day Warranty' },
-              { key: 'help.tagBecomePro', defaultVal: 'Become a Provider' },
-              { key: 'help.tagDispute', defaultVal: 'Dispute Refund' },
+              { key: 'help.tagDelivery', defaultVal: 'Express Delivery' },
+              { key: 'help.tagMoMo', defaultVal: 'Mobile Money Checkout' },
+              { key: 'help.tagExchanges', defaultVal: '7-Day Size Exchanges' },
+              { key: 'help.tagSell', defaultVal: "Sell on Kim's Store" },
+              { key: 'help.tagKimzy', defaultVal: 'Kimzy Support' },
             ].map((tagItem) => {
               const label = t(tagItem.key, tagItem.defaultVal);
               return (
@@ -612,12 +612,12 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
             }}
           >
             {activeTab === 'customers' && <PersonIcon sx={{ color: '#FF6B00' }} />}
-            {activeTab === 'pros' && <HandymanIcon sx={{ color: '#FF6B00' }} />}
+            {activeTab === 'pros' && <StorefrontIcon sx={{ color: '#FF6B00' }} />}
             {activeTab === 'account' && <SecurityIcon sx={{ color: '#FF6B00' }} />}
             {activeTab === 'customers'
               ? t('help.kbCustomersTitle', 'Customer Support Knowledge Base')
               : activeTab === 'pros'
-              ? t('help.kbProsTitle', 'Service Professional (Pro) Onboarding & Commission Guide')
+              ? t('help.kbProsTitle', "Merchant & Partner Guide (Sell on Kim's Store)")
               : t('help.kbAccountTitle', 'Account Security & Privacy Center')}
           </Typography>
 
@@ -701,7 +701,7 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
                   {t('help.featuredDocsTitle', 'Featured Knowledge Base & Documentation')}
                 </Typography>
                 <Typography sx={{ fontSize: 13, color: 'text.secondary' }}>
-                  {t('help.featuredDocsSub', 'Firebase-styled official guides, dispatch rules, and emergency protocols')}
+                  {t('help.featuredDocsSub', 'Official guides, shopping policies, size exchanges, and delivery guarantees')}
                 </Typography>
               </Box>
             </Box>
@@ -858,7 +858,7 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
               {t('help.ctaStillQuestions', 'Still have questions or need instant support?')}
             </Typography>
             <Typography variant="body1" sx={{ color: 'text.secondary', maxWidth: 600 }}>
-              {t('help.ctaDesc', 'Our dedicated Supermarche support team in Douala & Yaoundé is ready to assist you 24/7 with real-time runner dispatch updates.')}
+              {t('help.ctaDesc', "Our dedicated Kim's Store support team in Douala & Yaoundé is ready to assist you 24/7 with real-time order updates.")}
             </Typography>
           </Box>
 
