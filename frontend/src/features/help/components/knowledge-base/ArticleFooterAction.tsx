@@ -35,14 +35,14 @@ export const ArticleFooterAction: React.FC<ArticleFooterActionProps> = ({ onOpen
           {t('help.footer.still_need_assistance', 'Still need assistance?')}
         </Typography>
         <Typography sx={{ fontSize: '12px', color: isDark ? '#94a3b8' : '#64748b', mt: 0.5 }}>
-          {t('help.footer.support_availability', 'Our Supermarche support team is ready 24/7 to help resolve your inquiry.')}
+          {t('help.footer.support_availability', "Our Kim's Store support team is ready 24/7 to help resolve your inquiry.")}
         </Typography>
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
         <Button
           component="a"
-          href="mailto:support@supermarche.com"
+          href="mailto:support@kimsstore.cm"
           variant="outlined"
           startIcon={<EmailIcon sx={{ fontSize: 18 }} />}
           sx={{

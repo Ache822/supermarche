@@ -802,7 +802,7 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
 
             <Button
               component="a"
-              href="mailto:info@supermarche.com"
+              href="mailto:support@kimsstore.cm"
               variant="outlined"
               startIcon={<EmailIcon />}
               sx={{
@@ -816,7 +816,7 @@ export function HelpCenterPage({ onOpenBooking, onOpenLiveChat }: HelpCenterPage
                 '&:hover': { bgcolor: 'rgba(255, 107, 0, 0.1)', borderColor: '#E05D00' },
               }}
             >
-              {t('help.emailUs', 'Email Us: info@supermarche.com')}
+              {t('help.emailUs', 'Email Us: support@kimsstore.cm')}
             </Button>
 
             <Button
