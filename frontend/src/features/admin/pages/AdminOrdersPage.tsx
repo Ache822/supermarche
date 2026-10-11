@@ -152,15 +152,49 @@ export const AdminOrdersPage: React.FC = () => {
       id: 'payment',
       label: 'PAYMENT',
       minWidth: 160,
-      render: (ord) => (
-        <Chip
-          label={`${(ord.paymentMethod || 'card').replace(/_/g, ' ')} (${ord.paymentStatus || 'pending'})`}
-          size="small"
-          color={ord.paymentStatus === 'paid' ? 'success' : 'warning'}
-          variant="outlined"
-          sx={{ fontWeight: 600, fontSize: 11 }}
-        />
-      ),
+      render: (ord) => {
+        const methodLabels: Record<string, { label: string; bg: string; color: string }> = {
+          orange_money: { label: 'Orange Money', bg: 'rgba(255, 121, 0, 0.12)', color: '#FF7900' },
+          mtn_momo: { label: 'MTN MoMo', bg: 'rgba(255, 204, 0, 0.18)', color: '#B38600' },
+          card: { label: 'Card Online', bg: 'rgba(37, 99, 235, 0.12)', color: '#2563EB' },
+          cash_on_delivery: { label: 'COD (Doorstep)', bg: 'rgba(255, 107, 0, 0.12)', color: '#FF6B00' },
+        };
+        const m = methodLabels[ord.paymentMethod] || {
+          label: (ord.paymentMethod || 'COD').replace(/_/g, ' '),
+          bg: 'rgba(100, 116, 139, 0.12)',
+          color: 'text.primary',
+        };
+        const isPaid = ord.paymentStatus === 'paid';
+
+        return (
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5, alignItems: 'flex-start' }}>
+            <Chip
+              label={m.label}
+              size="small"
+              sx={{
+                fontWeight: 700,
+                fontSize: 10,
+                bgcolor: m.bg,
+                color: m.color,
+                border: '1px solid',
+                borderColor: m.color,
+                height: 20,
+              }}
+            />
+            <Chip
+              label={isPaid ? 'PAID' : 'PENDING'}
+              size="small"
+              color={isPaid ? 'success' : 'warning'}
+              sx={{ fontWeight: 800, fontSize: 10, height: 18 }}
+            />
+            {ord.transactionReference && (
+              <Typography variant="caption" sx={{ fontSize: 10, color: 'text.secondary', fontFamily: 'monospace' }}>
+                {ord.transactionReference}
+              </Typography>
+            )}
+          </Box>
+        );
+      },
     },
     {
       id: 'status',

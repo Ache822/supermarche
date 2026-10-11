@@ -42,10 +42,10 @@ export const CheckoutPage: React.FC = () => {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    street: '',
+    name: 'Brenda T.',
+    email: 'brenda@example.com',
+    phone: '670123456',
+    street: 'Akwa, Boulevard de la Liberté',
     city: 'Douala',
     state: 'Littoral',
     postalCode: 'BP 1024',
@@ -53,12 +53,12 @@ export const CheckoutPage: React.FC = () => {
     paymentMethod: 'mtn_momo' as 'mtn_momo' | 'orange_money' | 'card' | 'cash_on_delivery',
     notes: '',
     // Specialized payment inputs
-    momoPhone: '',
-    orangePhone: '',
-    cardHolder: '',
-    cardNumber: '',
-    cardExpiry: '',
-    cardCvv: '',
+    momoPhone: '670123456',
+    orangePhone: '690123456',
+    cardHolder: 'Brenda T.',
+    cardNumber: '4242 4242 4242 4242',
+    cardExpiry: '12/28',
+    cardCvv: '888',
   });
 
   // Gateway Simulation Modal State
@@ -640,14 +640,14 @@ export const CheckoutPage: React.FC = () => {
 
               <List disablePadding sx={{ mb: 2, maxHeight: 280, overflowY: 'auto' }}>
                 {cart.map(({ product, quantity }) => (
-                  <ListItem key={product._id} disableGutters sx={{ py: 1.5 }}>
+                  <ListItem key={product._id} disableGutters sx={{ py: 1.5, alignItems: 'center' }}>
                     <Avatar
                       variant="rounded"
                       src={product.images?.[0]}
                       alt={product.title}
-                      sx={{ width: 48, height: 48, mr: 2 }}
+                      sx={{ width: 48, height: 48, mr: 1.5, flexShrink: 0 }}
                     />
-                    <Box sx={{ flex: 1 }}>
+                    <Box sx={{ flex: 1, minWidth: 0, mr: 1.5 }}>
                       <Typography variant="body2" sx={{ fontWeight: 600 }} noWrap>
                         {product.title}
                       </Typography>
@@ -655,7 +655,7 @@ export const CheckoutPage: React.FC = () => {
                         Qty: {quantity} × XAF {product.price.toLocaleString()}
                       </Typography>
                     </Box>
-                    <Typography variant="body2" sx={{ fontWeight: 700 }}>
+                    <Typography variant="body2" sx={{ fontWeight: 700, whiteSpace: 'nowrap', flexShrink: 0 }}>
                       XAF {(product.price * quantity).toLocaleString()}
                     </Typography>
                   </ListItem>
