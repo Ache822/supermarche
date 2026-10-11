@@ -335,11 +335,12 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
                 component="h1"
                 className="bb-hero-title"
                 sx={{
-                  fontSize: { xs: 34, sm: 46, md: 54 },
-                  fontWeight: 700,
+                  fontSize: { xs: 26, sm: 34, md: 40 },
+                  fontWeight: 800,
                   fontFamily: 'Space Grotesk, sans-serif',
-                  lineHeight: 1.1,
-                  mb: 2.5,
+                  lineHeight: 1.15,
+                  mb: 2,
+                  letterSpacing: '-0.02em',
                   color: 'text.primary',
                 }}
               >
@@ -349,11 +350,11 @@ export function LandingPage({ onOpenBookingWithService }: LandingPageProps) {
               <Typography
                 className="bb-hero-subtitle"
                 sx={{
-                  fontSize: { xs: 16, md: 18 },
+                  fontSize: { xs: 14, sm: 15, md: 16 },
                   color: 'text.secondary',
-                  mb: 4,
-                  lineHeight: 1.6,
-                  maxWidth: 580,
+                  mb: 3.5,
+                  lineHeight: 1.55,
+                  maxWidth: 500,
                 }}
               >
                 {t('hero.subtitle')}

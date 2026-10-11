@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button, Stack, Chip } from '@mui/material';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import BoltIcon from '@mui/icons-material/Bolt';
-import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import { Box, Typography, Button, Stack } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useCart } from '../../../context/CartContext';
 import { useToast } from '../../../context/useToast';
 
@@ -11,81 +8,75 @@ interface FeaturedDepartmentProduct {
   id: string;
   department: string;
   tabLabel: string;
-  emoji: string;
+  tag: string;
   title: string;
   brand: string;
   price: number;
   compareAtPrice: number;
   imageUrl: string;
   stockNote: string;
-  badgeText: string;
 }
 
 const FEATURED_ITEMS: FeaturedDepartmentProduct[] = [
   {
     id: 'prod-showcase-shoes',
-    department: 'Footwear & Kicks',
-    tabLabel: 'Kicks',
-    emoji: '👟',
-    title: 'Air Jordan 1 Retro High "Lost & Found"',
-    brand: 'NIKE // VINTAGE SERIES',
+    department: 'Footwear',
+    tabLabel: 'FOOTWEAR',
+    tag: 'LIMITED RUN',
+    title: 'Air Jordan 1 Retro High OG "Lost & Found"',
+    brand: 'NIKE SPORTSWEAR',
     price: 48000,
     compareAtPrice: 65000,
     imageUrl: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80',
-    stockNote: '3 Pairs Remaining in Douala Hub',
-    badgeText: 'Trending #1 This Week',
+    stockNote: '3 pairs remaining in Douala Hub',
   },
   {
     id: 'prod-showcase-hoodie',
-    department: 'Apparel & Fashion',
-    tabLabel: 'Streetwear',
-    emoji: '👕',
+    department: 'Streetwear',
+    tabLabel: 'APPAREL',
+    tag: 'NEW DROP',
     title: 'Oversized Heavyweight Acid-Wash Hoodie',
-    brand: "KIM'S ESSENTIALS // DROP 04",
+    brand: "KIM'S ATELIER",
     price: 24500,
     compareAtPrice: 32000,
     imageUrl: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80',
-    stockNote: 'Selling Fast • Sizes S-XL In Stock',
-    badgeText: 'Gen-Z Best Seller',
+    stockNote: 'Sizes S – XL in stock • 100% Cotton',
   },
   {
     id: 'prod-showcase-skincare',
-    department: 'Cosmetics & Beauty',
-    tabLabel: 'Glow Care',
-    emoji: '✨',
-    title: 'Advanced Hydration B5 Glow Repair Serum',
-    brand: 'CERAVE // DERMA LABS',
+    department: 'Cosmetics',
+    tabLabel: 'BEAUTY',
+    tag: 'DERM TESTED',
+    title: 'Hydrating Daily B5 Barrier Repair Serum',
+    brand: 'CERAVE DERMATOLOGY',
     price: 16500,
     compareAtPrice: 22000,
     imageUrl: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80',
-    stockNote: '100% Authentic Sealed Batch',
-    badgeText: 'Dermatologist Pick',
+    stockNote: 'Sealed authentic batch • Douala dispatch',
   },
   {
     id: 'prod-showcase-tech',
-    department: 'Electronics & Tech',
-    tabLabel: 'Tech Gear',
-    emoji: '🎧',
-    title: 'Pro ANC Wireless Earbuds with Spatial Audio',
-    brand: 'SOUNDCORE // ULTRA TECH',
+    department: 'Electronics',
+    tabLabel: 'TECH',
+    tag: 'SPATIAL AUDIO',
+    title: 'Pro ANC Wireless Earbuds with MagSafe Case',
+    brand: 'APPLE ARCHIVE',
     price: 29000,
     compareAtPrice: 38000,
     imageUrl: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=800&q=80',
     stockNote: 'Official 1-Year Warranty Included',
-    badgeText: 'Top Tech Drop',
   },
   {
     id: 'prod-showcase-snacks',
-    department: 'Fresh Produce & Snacks',
-    tabLabel: 'Snacks & Sips',
-    emoji: '🍿',
-    title: 'Artisan Crispy Gourmet Treat Bundle',
-    brand: "KIM'S PANTRY // DELIGHTS",
+    department: 'Pantry',
+    tabLabel: 'PANTRY',
+    tag: 'SAME-DAY CHILL',
+    title: 'Artisan Gourmet Snack & Beverage Pack',
+    brand: "KIM'S PANTRY",
     price: 6500,
     compareAtPrice: 8500,
     imageUrl: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=800&q=80',
-    stockNote: 'Fresh Batch Delivered Same-Day',
-    badgeText: 'Campus Favorite',
+    stockNote: 'Fresh daily batch • Campus express delivery',
   },
 ];
 
@@ -95,12 +86,15 @@ export const HeroDepartmentShowcase: React.FC = () => {
   const toast = useToast();
 
   const activeItem = FEATURED_ITEMS[activeIdx];
+  const discountPercent = Math.round(
+    ((activeItem.compareAtPrice - activeItem.price) / activeItem.compareAtPrice) * 100
+  );
 
   const handleQuickAdd = () => {
     addToCart({
       _id: activeItem.id,
       title: activeItem.title,
-      description: `${activeItem.department} - ${activeItem.badgeText}`,
+      description: `${activeItem.department} - ${activeItem.brand}`,
       price: activeItem.price,
       compareAtPrice: activeItem.compareAtPrice,
       images: [activeItem.imageUrl],
@@ -110,7 +104,7 @@ export const HeroDepartmentShowcase: React.FC = () => {
       sku: `KS-DROP-${activeIdx + 1}`,
       slug: activeItem.id,
     });
-    toast.success(`Added "${activeItem.title}" to your shopping bag!`);
+    toast.success(`Added "${activeItem.title}" to bag`);
   };
 
   return (
@@ -120,81 +114,94 @@ export const HeroDepartmentShowcase: React.FC = () => {
         display: 'flex',
         flexDirection: 'column',
         gap: 2,
-        position: 'relative',
       }}
     >
-      {/* Department Selector Pills */}
-      <Stack
-        direction="row"
-        spacing={1}
+      {/* Minimalist Editorial Category Switcher (Zero Emojis) */}
+      <Box
         sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 0.5,
+          p: 0.5,
+          borderRadius: '12px',
+          bgcolor: (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)'),
+          border: '1px solid',
+          borderColor: (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.15)' : 'rgba(0, 0, 0, 0.06)'),
           overflowX: 'auto',
-          pb: 0.5,
-          width: '100%',
-          '&::-webkit-scrollbar': { height: '3px' },
-          '&::-webkit-scrollbar-thumb': { bgcolor: 'rgba(255, 107, 0, 0.3)', borderRadius: '3px' },
+          '&::-webkit-scrollbar': { display: 'none' },
+          msOverflowStyle: 'none',
+          scrollbarWidth: 'none',
         }}
       >
         {FEATURED_ITEMS.map((item, idx) => {
           const isSelected = idx === activeIdx;
           return (
-            <Chip
+            <Box
               key={item.id}
-              label={`${item.emoji} ${item.tabLabel}`}
               onClick={() => setActiveIdx(idx)}
-              clickable
-              size="small"
               sx={{
-                fontSize: 12,
-                fontWeight: isSelected ? 800 : 600,
-                fontFamily: 'Space Grotesk, sans-serif',
+                flex: 1,
+                py: 0.85,
+                px: 1.5,
                 borderRadius: '8px',
-                py: 1.8,
-                px: 0.8,
+                textAlign: 'center',
                 cursor: 'pointer',
+                userSelect: 'none',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
                 bgcolor: isSelected
-                  ? '#FF6B00'
-                  : (theme) => (theme.palette.mode === 'dark' ? 'rgba(31, 20, 12, 0.7)' : 'rgba(255, 255, 255, 0.8)'),
-                color: isSelected ? '#FFFFFF' : 'text.primary',
-                border: '1px solid',
-                borderColor: isSelected
-                  ? '#FF6B00'
-                  : (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.2)' : 'rgba(255, 107, 0, 0.15)'),
-                transition: 'all 0.2s ease',
+                  ? (theme) => (theme.palette.mode === 'dark' ? '#FF6B00' : '#140C07')
+                  : 'transparent',
+                color: isSelected
+                  ? '#FFFFFF'
+                  : 'text.secondary',
                 '&:hover': {
-                  bgcolor: isSelected ? '#E05D00' : 'rgba(255, 107, 0, 0.12)',
-                  transform: 'translateY(-1px)',
+                  color: isSelected ? '#FFFFFF' : 'text.primary',
+                  bgcolor: isSelected
+                    ? (theme) => (theme.palette.mode === 'dark' ? '#FF6B00' : '#140C07')
+                    : (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.04)'),
                 },
               }}
-            />
+            >
+              <Typography
+                sx={{
+                  fontFamily: "'Space Grotesk', -apple-system, sans-serif",
+                  fontSize: '0.72rem',
+                  fontWeight: isSelected ? 800 : 600,
+                  letterSpacing: '0.08em',
+                  lineHeight: 1,
+                }}
+              >
+                {item.tabLabel}
+              </Typography>
+            </Box>
           );
         })}
-      </Stack>
+      </Box>
 
-      {/* Main Interactive Showcase Card */}
+      {/* Flagship Product Showcase Card (Clean, Studio Editorial) */}
       <Box
         sx={{
-          position: 'relative',
-          borderRadius: '24px',
+          borderRadius: '20px',
           overflow: 'hidden',
-          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#1B1109' : '#FFFFFF'),
+          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#140C07' : '#FFFFFF'),
           border: '1px solid',
-          borderColor: (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.25)' : 'rgba(255, 107, 0, 0.18)'),
+          borderColor: (theme) => (theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.22)' : 'rgba(0, 0, 0, 0.08)'),
           boxShadow: (theme) =>
             theme.palette.mode === 'dark'
-              ? '0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 107, 0, 0.1)'
-              : '0 20px 45px rgba(255, 107, 0, 0.12), 0 0 20px rgba(255, 107, 0, 0.05)',
-          transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+              ? '0 16px 40px rgba(0, 0, 0, 0.5)'
+              : '0 16px 36px rgba(0, 0, 0, 0.06)',
+          transition: 'border-color 0.2s ease',
         }}
       >
-        {/* Visual Frame */}
+        {/* Studio Product Photo Frame */}
         <Box
           sx={{
             position: 'relative',
-            height: { xs: 240, sm: 280 },
+            height: { xs: 220, sm: 260 },
             width: '100%',
             overflow: 'hidden',
-            bgcolor: '#0E0804',
+            bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#0A0604' : '#F8FAFC'),
           }}
         >
           <Box
@@ -206,201 +213,173 @@ export const HeroDepartmentShowcase: React.FC = () => {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-              animation: 'fadeInImage 0.4s ease-out',
-              '@keyframes fadeInImage': {
-                '0%': { opacity: 0, transform: 'scale(1.05)' },
-                '100%': { opacity: 1, transform: 'scale(1)' },
-              },
+              transition: 'transform 0.4s ease',
               '&:hover': {
-                transform: 'scale(1.06)',
+                transform: 'scale(1.03)',
               },
             }}
           />
 
-          {/* Vignette Overlay */}
+          {/* Minimalist Status Tag */}
           <Box
             sx={{
               position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(20, 12, 7, 0.85) 100%)',
-              pointerEvents: 'none',
-            }}
-          />
-
-          {/* Top Left Floating Tag */}
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 14,
-              left: 14,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 0.8,
-              py: 0.5,
-              px: 1.25,
-              borderRadius: '9999px',
-              bgcolor: 'rgba(20, 12, 7, 0.8)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 107, 0, 0.35)',
-              color: '#FF6B00',
-            }}
-          >
-            <LocalFireDepartmentIcon sx={{ fontSize: 14 }} />
-            <Typography sx={{ fontSize: 11, fontWeight: 700, fontFamily: 'Space Grotesk, sans-serif' }}>
-              {activeItem.badgeText}
-            </Typography>
-          </Box>
-
-          {/* Top Right Department Badge */}
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 14,
-              right: 14,
-              py: 0.4,
-              px: 1.2,
-              borderRadius: '8px',
-              bgcolor: 'rgba(255, 107, 0, 0.9)',
+              top: 12,
+              right: 12,
+              py: 0.35,
+              px: 1,
+              borderRadius: '6px',
+              bgcolor: 'rgba(0, 0, 0, 0.72)',
+              backdropFilter: 'blur(8px)',
               color: '#FFFFFF',
-              fontSize: 10,
-              fontWeight: 800,
-              fontFamily: 'IBM Plex Mono, monospace',
-              letterSpacing: '0.05em',
+              fontFamily: "'Space Grotesk', monospace",
+              fontSize: '0.62rem',
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
             }}
           >
-            {activeItem.department.toUpperCase()}
-          </Box>
-
-          {/* Bottom Overlaid Delivery Indicator */}
-          <Box
-            sx={{
-              position: 'absolute',
-              bottom: 12,
-              left: 14,
-              right: 14,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              color: '#FFFFFF',
-            }}
-          >
-            <Stack direction="row" spacing={0.8} sx={{ alignItems: 'center' }}>
-              <BoltIcon sx={{ color: '#FFB800', fontSize: 16 }} />
-              <Typography sx={{ fontSize: 11.5, fontWeight: 600, color: 'rgba(255,255,255,0.92)' }}>
-                30-Min Campus & Doorstep Dispatch
-              </Typography>
-            </Stack>
-            <Typography sx={{ fontSize: 10.5, fontFamily: 'IBM Plex Mono, monospace', color: '#FFB28A' }}>
-              DOUALA & YAOUNDÉ
-            </Typography>
+            {activeItem.tag}
           </Box>
         </Box>
 
-        {/* Content & Action Tray */}
-        <Box sx={{ p: { xs: 2.2, sm: 2.5 } }}>
-          <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 2, mb: 1.5 }}>
-            <Box sx={{ minWidth: 0 }}>
-              <Typography
-                sx={{
-                  fontSize: 10,
-                  fontWeight: 800,
-                  fontFamily: 'IBM Plex Mono, monospace',
-                  letterSpacing: '0.1em',
-                  color: '#FF6B00',
-                  mb: 0.3,
-                }}
-              >
-                {activeItem.brand}
-              </Typography>
-              <Typography
-                variant="h6"
-                sx={{
-                  fontWeight: 800,
-                  fontFamily: 'Space Grotesk, sans-serif',
-                  fontSize: { xs: 15, sm: 17 },
-                  lineHeight: 1.25,
-                  color: 'text.primary',
-                }}
-                noWrap
-              >
-                {activeItem.title}
-              </Typography>
-            </Box>
-
-            {/* Price Block */}
-            <Box sx={{ textAlign: 'right', flexShrink: 0 }}>
-              <Typography
-                sx={{
-                  fontWeight: 800,
-                  fontFamily: 'Space Grotesk, sans-serif',
-                  fontSize: { xs: 18, sm: 20 },
-                  color: '#FF6B00',
-                  lineHeight: 1,
-                }}
-              >
-                XAF {activeItem.price.toLocaleString()}
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: 11,
-                  color: 'text.secondary',
-                  textDecoration: 'line-through',
-                  mt: 0.3,
-                }}
-              >
-                XAF {activeItem.compareAtPrice.toLocaleString()}
-              </Typography>
-            </Box>
-          </Box>
-
-          {/* Stock Availability Indicator */}
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1,
-              py: 0.8,
-              px: 1.4,
-              borderRadius: '10px',
-              bgcolor: (theme) => (theme.palette.mode === 'dark' ? 'rgba(34, 197, 94, 0.1)' : '#F0FDF4'),
-              border: '1px solid',
-              borderColor: (theme) => (theme.palette.mode === 'dark' ? 'rgba(34, 197, 94, 0.25)' : '#BBF7D0'),
-              mb: 2,
-            }}
-          >
-            <CheckCircleIcon sx={{ fontSize: 14, color: '#16A34A' }} />
-            <Typography sx={{ fontSize: 11.5, fontWeight: 600, color: (theme) => (theme.palette.mode === 'dark' ? '#86EFAC' : '#15803D') }}>
-              {activeItem.stockNote}
+        {/* Product Details & Action Tray */}
+        <Box sx={{ p: 2.5 }}>
+          {/* Brand & Title */}
+          <Box sx={{ mb: 1.5 }}>
+            <Typography
+              sx={{
+                fontFamily: "'Space Grotesk', monospace",
+                fontSize: '0.68rem',
+                fontWeight: 700,
+                letterSpacing: '0.1em',
+                color: '#FF6B00',
+                textTransform: 'uppercase',
+                mb: 0.5,
+              }}
+            >
+              {activeItem.brand}
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 700,
+                fontFamily: "'Space Grotesk', -apple-system, sans-serif",
+                fontSize: '1.05rem',
+                lineHeight: 1.3,
+                color: 'text.primary',
+              }}
+              noWrap
+            >
+              {activeItem.title}
             </Typography>
           </Box>
 
-          {/* CTA Action Button */}
+          {/* Price & Discount Lockup */}
+          <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1.25, mb: 1.5 }}>
+            <Typography
+              sx={{
+                fontWeight: 800,
+                fontFamily: "'Space Grotesk', sans-serif",
+                fontSize: '1.25rem',
+                color: 'text.primary',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              XAF {activeItem.price.toLocaleString()}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: '0.8rem',
+                color: 'text.disabled',
+                textDecoration: 'line-through',
+              }}
+            >
+              XAF {activeItem.compareAtPrice.toLocaleString()}
+            </Typography>
+            <Box
+              sx={{
+                py: 0.2,
+                px: 0.7,
+                borderRadius: '4px',
+                bgcolor: 'rgba(255, 107, 0, 0.12)',
+                color: '#FF6B00',
+                fontSize: '0.65rem',
+                fontWeight: 800,
+                fontFamily: "'Space Grotesk', monospace",
+              }}
+            >
+              -{discountPercent}%
+            </Box>
+          </Box>
+
+          {/* Availability & Delivery Indicator */}
+          <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mb: 2 }}>
+            <Box
+              sx={{
+                width: 6,
+                height: 6,
+                borderRadius: '50%',
+                bgcolor: '#22C55E',
+                boxShadow: '0 0 6px #22C55E',
+                flexShrink: 0,
+              }}
+            />
+            <Typography sx={{ fontSize: '0.75rem', color: 'text.secondary', fontWeight: 500 }}>
+              {activeItem.stockNote}
+            </Typography>
+          </Stack>
+
+          {/* High-Conviction CTA Button */}
           <Button
             fullWidth
-            variant="contained"
-            size="large"
             onClick={handleQuickAdd}
-            startIcon={<ShoppingBagIcon />}
+            variant="contained"
+            endIcon={<ArrowForwardIcon sx={{ fontSize: 16 }} />}
             sx={{
-              borderRadius: '14px',
-              py: 1.3,
+              py: 1.25,
+              borderRadius: '10px',
+              fontFamily: "'Space Grotesk', sans-serif",
+              fontSize: '0.85rem',
               fontWeight: 800,
-              fontSize: 14,
-              fontFamily: 'Space Grotesk, sans-serif',
+              letterSpacing: '0.04em',
+              textTransform: 'none',
               bgcolor: '#FF6B00',
               color: '#FFFFFF',
-              boxShadow: '0 8px 24px rgba(255, 107, 0, 0.35)',
-              transition: 'all 0.25s ease',
+              boxShadow: '0 4px 14px rgba(255, 107, 0, 0.3)',
               '&:hover': {
                 bgcolor: '#E05D00',
-                boxShadow: '0 12px 28px rgba(255, 107, 0, 0.5)',
-                transform: 'translateY(-2px)',
+                boxShadow: '0 6px 18px rgba(255, 107, 0, 0.4)',
               },
             }}
           >
             Add to Shopping Bag
           </Button>
+
+          {/* Micro Payment Rails Trustline */}
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 1.5,
+              mt: 1.5,
+              pt: 1.25,
+              borderTop: (theme) =>
+                `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 107, 0, 0.1)' : 'rgba(0, 0, 0, 0.05)'}`,
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "'Space Grotesk', monospace",
+                fontSize: '0.62rem',
+                color: 'text.disabled',
+                letterSpacing: '0.04em',
+              }}
+            >
+              MTN MOMO • ORANGE MONEY • CASH ON DELIVERY
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </Box>
