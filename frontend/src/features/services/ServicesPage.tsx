@@ -544,8 +544,20 @@ export function ServicesPage({ onOpenBooking }: ServicesPageProps) {
                       {srv.title}
                     </Typography>
 
-                    <Typography sx={{ fontSize: 13, color: 'text.secondary', mb: 3, lineHeight: 1.5 }}>
-                      {srv.description}
+                    <Typography
+                      sx={{
+                        fontSize: 13,
+                        color: 'text.secondary',
+                        mb: 3,
+                        lineHeight: 1.5,
+                        display: '-webkit-box',
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                        minHeight: 58,
+                      }}
+                    >
+                      {srv.shortDescription || (srv.description ? srv.description.replace(/<[^>]*>/g, '').trim() : '')}
                     </Typography>
                   </Box>
 

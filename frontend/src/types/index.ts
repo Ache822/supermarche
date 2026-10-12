@@ -33,6 +33,8 @@ export interface ServiceItem {
   category: 'gas' | 'market' | 'cleaning' | 'security' | 'school' | 'prepped' | 'repair' | 'auto' | CategoryItem | string;
   categoryLabel?: string;
   description: string;
+  shortDescription?: string;
+  plainDescription?: string;
   priceRange: string;
   estimatedTime: string;
   iconName: string;

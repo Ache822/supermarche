@@ -19,6 +19,7 @@ import type { ServiceItem, LocationItem } from '../../types';
 import { getServiceCategoryLabel } from '../../types';
 import { useState } from 'react';
 import { VerifiedBadge } from './VerifiedBadge';
+import { HtmlContent } from './HtmlContent';
 
 interface ServiceDetailModalProps {
   open: boolean;
@@ -84,9 +85,11 @@ export function ServiceDetailModal({
           {service.title}
         </Typography>
 
-        <Typography sx={{ fontSize: 14, color: 'text.secondary', lineHeight: 1.6, mb: 3 }}>
-          {service.description}
-        </Typography>
+        <HtmlContent
+          content={service.description}
+          variant="body1"
+          sx={{ fontSize: 14, color: 'text.secondary', lineHeight: 1.6, mb: 3 }}
+        />
 
         <Divider sx={{ mb: 2.5 }} />
 
