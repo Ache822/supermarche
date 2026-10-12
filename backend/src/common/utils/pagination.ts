@@ -57,6 +57,7 @@ export const getPaginatedData = async <T extends Document>(
     data = dbData;
     totalDocuments = count;
   } catch (error) {
+    console.error("[getPaginatedData] Error during pagination query:", error);
     data = [];
     totalDocuments = 0;
   }
