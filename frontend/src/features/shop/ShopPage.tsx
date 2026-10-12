@@ -17,7 +17,8 @@ import {
   Tooltip,
   Select,
   MenuItem,
-  FormControl
+  FormControl,
+  Pagination,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -40,7 +41,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 28500,
     compareAtPrice: 34000,
     category: 'Apparel & Fashion',
-    images: ['https://i.pinimg.com/736x/28/65/c1/2865c192634e79b4a45a201b17b2bc4e.jpg'],
+    images: ['https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 45,
     inStock: true,
     sku: 'APP-HD-001',
@@ -54,7 +55,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 14000,
     compareAtPrice: 18000,
     category: 'Apparel & Fashion',
-    images: ['https://i.pinimg.com/736x/4a/12/3b/4a123b38c29141029c182a5214811a0c.jpg'],
+    images: ['https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 60,
     inStock: true,
     sku: 'APP-TE-002',
@@ -68,7 +69,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 22500,
     compareAtPrice: 27000,
     category: 'Apparel & Fashion',
-    images: ['https://i.pinimg.com/736x/b5/6f/9d/b56f9dc8e75e3a8932b56e4c02931a23.jpg'],
+    images: ['https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 35,
     inStock: true,
     sku: 'APP-CG-003',
@@ -82,7 +83,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 38000,
     compareAtPrice: 45000,
     category: 'Apparel & Fashion',
-    images: ['https://i.pinimg.com/736x/7e/3a/2c/7e3a2c5b8f9e1d0c4a3b2e1f0e9d8c7b.jpg'],
+    images: ['https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 20,
     inStock: true,
     sku: 'APP-VR-004',
@@ -96,7 +97,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 32000,
     compareAtPrice: 38500,
     category: 'Apparel & Fashion',
-    images: ['https://i.pinimg.com/736x/3d/8c/1a/3d8c1a7e2b3c4d5e6f7a8b9c0d1e2f3a.jpg'],
+    images: ['https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 28,
     inStock: true,
     sku: 'APP-DN-005',
@@ -110,7 +111,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 35000,
     compareAtPrice: 42000,
     category: 'Apparel & Fashion',
-    images: ['https://i.pinimg.com/736x/91/51/55/915155694762c4a3b2e1f0e9d8c7b6a5.jpg'],
+    images: ['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 30,
     inStock: true,
     sku: 'APP-TS-006',
@@ -126,7 +127,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 45000,
     compareAtPrice: 52000,
     category: 'Footwear & Shoes',
-    images: ['https://i.pinimg.com/736x/f6/8b/6e/f68b6e3f4e5a9638b97c83f98299292b.jpg'],
+    images: ['https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 32,
     inStock: true,
     sku: 'FTW-BB-001',
@@ -140,7 +141,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 28000,
     compareAtPrice: 33000,
     category: 'Footwear & Shoes',
-    images: ['https://i.pinimg.com/736x/8e/31/6a/8e316a75a0dfbb86fc6f52e505bf77a1.jpg'],
+    images: ['https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 40,
     inStock: true,
     sku: 'FTW-RN-002',
@@ -154,7 +155,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 36500,
     compareAtPrice: 44000,
     category: 'Footwear & Shoes',
-    images: ['https://i.pinimg.com/736x/5b/c2/ea/5bc2ea6bfb05f2c4180479152b1b36c2.jpg'],
+    images: ['https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 25,
     inStock: true,
     sku: 'FTW-CK-003',
@@ -168,7 +169,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 24000,
     compareAtPrice: 29000,
     category: 'Footwear & Shoes',
-    images: ['https://i.pinimg.com/736x/cb/2d/a5/cb2da59f77f5f9e8a719114de95cb532.jpg'],
+    images: ['https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 45,
     inStock: true,
     sku: 'FTW-SK-004',
@@ -182,7 +183,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 48000,
     compareAtPrice: 58000,
     category: 'Footwear & Shoes',
-    images: ['https://i.pinimg.com/736x/1a/df/77/1adf778931b26859b870fa4a9b5f6241.jpg'],
+    images: ['https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 18,
     inStock: true,
     sku: 'FTW-HK-005',
@@ -196,7 +197,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 12500,
     compareAtPrice: 16000,
     category: 'Footwear & Shoes',
-    images: ['https://i.pinimg.com/736x/2c/54/1e/2c541e4113e680a37b3be6858e946fc1.jpg'],
+    images: ['https://images.unsplash.com/photo-1603808033192-082d6919d3e1?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 50,
     inStock: true,
     sku: 'FTW-SL-006',
@@ -212,7 +213,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 16000,
     compareAtPrice: 20000,
     category: 'Cosmetics & Beauty',
-    images: ['https://i.pinimg.com/736x/0a/8f/3e/0a8f3e264628a803f295b94ff1929311.jpg'],
+    images: ['https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 55,
     inStock: true,
     sku: 'COS-VC-001',
@@ -226,7 +227,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 14500,
     compareAtPrice: 18000,
     category: 'Cosmetics & Beauty',
-    images: ['https://i.pinimg.com/736x/d4/72/75/d472753381e4b854e488ceb9fcf822e1.jpg'],
+    images: ['https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 65,
     inStock: true,
     sku: 'COS-SF-002',
@@ -240,7 +241,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 11000,
     compareAtPrice: 14000,
     category: 'Cosmetics & Beauty',
-    images: ['https://i.pinimg.com/736x/5c/49/a1/5c49a1d95ec76d338f01b97061d4fa4c.jpg'],
+    images: ['https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 40,
     inStock: true,
     sku: 'COS-SC-003',
@@ -254,7 +255,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 9500,
     compareAtPrice: 12500,
     category: 'Cosmetics & Beauty',
-    images: ['https://i.pinimg.com/736x/3b/68/70/3b68700947ae5b410c51b72e1855a019.jpg'],
+    images: ['https://images.unsplash.com/photo-1608248597359-52e463a5661b?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 70,
     inStock: true,
     sku: 'COS-BB-004',
@@ -268,7 +269,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 8000,
     compareAtPrice: 10500,
     category: 'Cosmetics & Beauty',
-    images: ['https://i.pinimg.com/736x/21/df/b4/21dfb4bf2eb76f5053cf36f2fe1a8e99.jpg'],
+    images: ['https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 45,
     inStock: true,
     sku: 'COS-LP-005',
@@ -282,7 +283,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 12000,
     compareAtPrice: 15000,
     category: 'Cosmetics & Beauty',
-    images: ['https://i.pinimg.com/736x/67/29/73/67297312386121e7d22cb4342502ef0a.jpg'],
+    images: ['https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 38,
     inStock: true,
     sku: 'COS-RM-006',
@@ -298,7 +299,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 29000,
     compareAtPrice: 36000,
     category: 'Electronics & Tech',
-    images: ['https://i.pinimg.com/736x/77/34/09/77340989f61b0c03dc82b8a74e5025a1.jpg'],
+    images: ['https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 42,
     inStock: true,
     sku: 'TEC-EB-001',
@@ -312,7 +313,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 22000,
     compareAtPrice: 27500,
     category: 'Electronics & Tech',
-    images: ['https://i.pinimg.com/736x/52/a9/12/52a9127bcfb927d754b2b62b13735072.jpg'],
+    images: ['https://images.unsplash.com/photo-1609592424109-dd9892f1b177?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 50,
     inStock: true,
     sku: 'TEC-PB-002',
@@ -326,7 +327,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 26500,
     compareAtPrice: 32000,
     category: 'Electronics & Tech',
-    images: ['https://i.pinimg.com/736x/a2/11/44/a2114421d01243eb2ee7d8cb280cf2a4.jpg'],
+    images: ['https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 30,
     inStock: true,
     sku: 'TEC-SP-003',
@@ -340,7 +341,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 34000,
     compareAtPrice: 42000,
     category: 'Electronics & Tech',
-    images: ['https://i.pinimg.com/736x/88/54/6a/88546a1656bc5276e053d2bf262506e1.jpg'],
+    images: ['https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 24,
     inStock: true,
     sku: 'TEC-SW-004',
@@ -354,7 +355,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 11500,
     compareAtPrice: 15000,
     category: 'Electronics & Tech',
-    images: ['https://i.pinimg.com/736x/34/b7/65/34b7654a10dfa19be1a7b69324545084.jpg'],
+    images: ['https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 36,
     inStock: true,
     sku: 'TEC-ST-005',
@@ -368,7 +369,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 6500,
     compareAtPrice: 9000,
     category: 'Electronics & Tech',
-    images: ['https://i.pinimg.com/736x/e4/f1/89/e4f1896791ef64bcda50b4fa81729351.jpg'],
+    images: ['https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 80,
     inStock: true,
     sku: 'TEC-CB-006',
@@ -384,7 +385,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 12500,
     compareAtPrice: 15500,
     category: 'Fresh Produce & Snacks',
-    images: ['https://i.pinimg.com/736x/43/fa/81/43fa81309d7477543886be747ea015b1.jpg'],
+    images: ['https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 60,
     inStock: true,
     sku: 'PRD-FB-001',
@@ -398,7 +399,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 9000,
     compareAtPrice: 11500,
     category: 'Fresh Produce & Snacks',
-    images: ['https://i.pinimg.com/736x/f1/44/e9/f144e99506644ec8dc2153597c55169a.jpg'],
+    images: ['https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 75,
     inStock: true,
     sku: 'PRD-CH-002',
@@ -412,7 +413,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 6500,
     compareAtPrice: 8500,
     category: 'Fresh Produce & Snacks',
-    images: ['https://i.pinimg.com/736x/8a/a5/d2/8aa5d2729a67a0753a8c5123d24268e2.jpg'],
+    images: ['https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 85,
     inStock: true,
     sku: 'PRD-CS-003',
@@ -426,7 +427,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 7500,
     compareAtPrice: 9500,
     category: 'Fresh Produce & Snacks',
-    images: ['https://i.pinimg.com/736x/12/9b/74/129b7405be1071da51897368297cb7a2.jpg'],
+    images: ['https://images.unsplash.com/photo-1587486913049-53fc88980cfc?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 50,
     inStock: true,
     sku: 'PRD-EG-004',
@@ -440,7 +441,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 8500,
     compareAtPrice: 11000,
     category: 'Fresh Produce & Snacks',
-    images: ['https://i.pinimg.com/736x/6d/f4/43/6df4436577a76045353592f69be84281.jpg'],
+    images: ['https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 40,
     inStock: true,
     sku: 'PRD-WF-005',
@@ -454,7 +455,7 @@ const DEFAULT_STORE_PRODUCTS: ProductItem[] = [
     price: 7000,
     compareAtPrice: 9000,
     category: 'Fresh Produce & Snacks',
-    images: ['https://i.pinimg.com/736x/bb/98/91/bb9891823908819074092b37805188bf.jpg'],
+    images: ['https://images.unsplash.com/photo-1557800636-894a64c1696f?auto=format&fit=crop&w=800&q=80'],
     stockQuantity: 65,
     inStock: true,
     sku: 'PRD-CT-006',
@@ -471,6 +472,12 @@ export const ShopPage: React.FC = () => {
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
+  // Pagination state (10 items per page)
+  const PAGE_SIZE = 10;
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+
   const [sortBy, setSortBy] = useState<'featured' | 'price_low' | 'price_high' | 'newest'>('featured');
   const [inStockOnly, setInStockOnly] = useState(false);
 
@@ -482,6 +489,26 @@ export const ShopPage: React.FC = () => {
     'Electronics & Tech',
     'Fresh Produce & Snacks',
   ];
+
+  const getCategoryFallbackImage = (categoryName: string) => {
+    const cat = (categoryName || '').toLowerCase();
+    if (cat.includes('apparel') || cat.includes('mode') || cat.includes('vêtement')) {
+      return 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80';
+    }
+    if (cat.includes('footwear') || cat.includes('shoes') || cat.includes('chaussure')) {
+      return 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80';
+    }
+    if (cat.includes('cosmetics') || cat.includes('beauty') || cat.includes('beauté')) {
+      return 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80';
+    }
+    if (cat.includes('electr') || cat.includes('tech')) {
+      return 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80';
+    }
+    if (cat.includes('produce') || cat.includes('snack') || cat.includes('frais')) {
+      return 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=800&q=80';
+    }
+    return 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80';
+  };
 
   const getLocalizedCategoryName = (cat: string) => {
     switch (cat) {
@@ -521,73 +548,99 @@ export const ShopPage: React.FC = () => {
     };
   };
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (targetPage = page) => {
     setLoading(true);
     try {
-      const params: Record<string, string> = {};
+      const params: Record<string, any> = {
+        page: targetPage,
+        limit: PAGE_SIZE,
+      };
       if (selectedCategory !== 'All') {
         params.category = selectedCategory;
       }
       if (searchQuery.trim()) {
         params.search = searchQuery.trim();
       }
+      if (inStockOnly) {
+        params.inStock = true;
+      }
+      if (sortBy === 'price_low') {
+        params.sort = 'price';
+      } else if (sortBy === 'price_high') {
+        params.sort = '-price';
+      } else if (sortBy === 'newest') {
+        params.sort = '-createdAt';
+      }
 
       const response: any = await api.products.list(params);
       let items: ProductItem[] = response?.data || [];
       
-      // Fallback seed products if database returns empty
-      if (!items || items.length === 0) {
-        items = DEFAULT_STORE_PRODUCTS;
-      }
+      if (items.length > 0 && response?.meta) {
+        setProducts(items);
+        setTotalPages(response.meta.totalPages || 1);
+        setTotalCount(response.meta.totalDocuments || items.length);
+      } else if (items.length > 0) {
+        setProducts(items);
+        setTotalPages(Math.ceil(items.length / PAGE_SIZE) || 1);
+        setTotalCount(items.length);
+      } else {
+        // Fallback seed products if database returns empty
+        let fallbackItems = DEFAULT_STORE_PRODUCTS;
 
-      // Filter locally if search or category active on seed
-      if (selectedCategory !== 'All') {
-        items = items.filter((p) => {
-          const cat = typeof p.category === 'object' && p.category !== null ? (p.category as any).name : String(p.category || '');
-          return cat.toLowerCase().includes(selectedCategory.toLowerCase());
-        });
-      }
+        if (selectedCategory !== 'All') {
+          fallbackItems = fallbackItems.filter((p) => {
+            const cat = typeof p.category === 'object' && p.category !== null ? (p.category as any).name : String(p.category || '');
+            return cat.toLowerCase().includes(selectedCategory.toLowerCase());
+          });
+        }
 
-      if (searchQuery.trim()) {
-        const q = searchQuery.trim().toLowerCase();
-        items = items.filter(
-          (p) =>
-            p.title.toLowerCase().includes(q) ||
-            p.description.toLowerCase().includes(q) ||
-            String(p.category).toLowerCase().includes(q)
-        );
-      }
+        if (searchQuery.trim()) {
+          const q = searchQuery.trim().toLowerCase();
+          fallbackItems = fallbackItems.filter(
+            (p) =>
+              p.title.toLowerCase().includes(q) ||
+              p.description.toLowerCase().includes(q) ||
+              String(p.category).toLowerCase().includes(q)
+          );
+        }
 
-      if (inStockOnly) {
-        items = items.filter((p) => p.inStock !== false);
-      }
+        if (inStockOnly) {
+          fallbackItems = fallbackItems.filter((p) => p.inStock !== false);
+        }
 
-      if (sortBy === 'price_low') {
-        items = [...items].sort((a, b) => a.price - b.price);
-      } else if (sortBy === 'price_high') {
-        items = [...items].sort((a, b) => b.price - a.price);
-      } else if (sortBy === 'newest') {
-        items = [...items].reverse();
-      }
+        if (sortBy === 'price_low') {
+          fallbackItems = [...fallbackItems].sort((a, b) => a.price - b.price);
+        } else if (sortBy === 'price_high') {
+          fallbackItems = [...fallbackItems].sort((a, b) => b.price - a.price);
+        } else if (sortBy === 'newest') {
+          fallbackItems = [...fallbackItems].reverse();
+        }
 
-      setProducts(items);
+        setTotalCount(fallbackItems.length);
+        setTotalPages(Math.max(1, Math.ceil(fallbackItems.length / PAGE_SIZE)));
+        const startIndex = (targetPage - 1) * PAGE_SIZE;
+        setProducts(fallbackItems.slice(startIndex, startIndex + PAGE_SIZE));
+      }
       setCategories(STORE_CATEGORIES);
     } catch (err) {
       console.error('Failed to load products:', err);
-      // Use fallback seed products on network failure
-      let items = DEFAULT_STORE_PRODUCTS;
+      // Fallback seed products on network failure
+      let fallbackItems = DEFAULT_STORE_PRODUCTS;
       if (selectedCategory !== 'All') {
-        items = items.filter((p) => String(p.category).toLowerCase().includes(selectedCategory.toLowerCase()));
+        fallbackItems = fallbackItems.filter((p) => String(p.category).toLowerCase().includes(selectedCategory.toLowerCase()));
       }
       if (inStockOnly) {
-        items = items.filter((p) => p.inStock !== false);
+        fallbackItems = fallbackItems.filter((p) => p.inStock !== false);
       }
       if (sortBy === 'price_low') {
-        items = [...items].sort((a, b) => a.price - b.price);
+        fallbackItems = [...fallbackItems].sort((a, b) => a.price - b.price);
       } else if (sortBy === 'price_high') {
-        items = [...items].sort((a, b) => b.price - a.price);
+        fallbackItems = [...fallbackItems].sort((a, b) => b.price - a.price);
       }
-      setProducts(items);
+      setTotalCount(fallbackItems.length);
+      setTotalPages(Math.max(1, Math.ceil(fallbackItems.length / PAGE_SIZE)));
+      const startIndex = (targetPage - 1) * PAGE_SIZE;
+      setProducts(fallbackItems.slice(startIndex, startIndex + PAGE_SIZE));
       setCategories(STORE_CATEGORIES);
     } finally {
       setLoading(false);
@@ -595,12 +648,25 @@ export const ShopPage: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchProducts();
+    setPage(1);
+    fetchProducts(1);
   }, [selectedCategory, sortBy, inStockOnly]);
+
+  const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    fetchProducts(value);
+    const catalogEl = document.getElementById('products-catalog-section');
+    if (catalogEl) {
+      catalogEl.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 380, behavior: 'smooth' });
+    }
+  };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    fetchProducts();
+    setPage(1);
+    fetchProducts(1);
   };
 
   return (
@@ -690,6 +756,7 @@ export const ShopPage: React.FC = () => {
 
         {/* Sorting & Filter Bar */}
         <Box
+          id="products-catalog-section"
           sx={{
             display: 'flex',
             flexDirection: { xs: 'column', sm: 'row' },
@@ -701,7 +768,7 @@ export const ShopPage: React.FC = () => {
           }}
         >
           <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 600 }}>
-            {products.length} {t('shop.productsFound', 'products available')}
+            {totalCount > 0 ? `${totalCount} ${t('shop.productsFound', 'products available')}` : `${products.length} ${t('shop.productsFound', 'products available')}`}
           </Typography>
 
           <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center', width: { xs: '100%', sm: 'auto' }, flexWrap: 'wrap' }}>
@@ -757,135 +824,178 @@ export const ShopPage: React.FC = () => {
             </Button>
           </Box>
         ) : (
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
-              gap: 3
-            }}
-          >
-            {products.map((product) => {
-              const localized = getLocalizedProduct(product);
-              const catRaw = typeof product.category === 'object' && product.category !== null ? (product.category as any).name : String(product.category || 'Groceries');
-              const localizedCategory = getLocalizedCategoryName(catRaw);
+          <>
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
+                gap: 3
+              }}
+            >
+              {products.map((product) => {
+                const localized = getLocalizedProduct(product);
+                const catRaw = typeof product.category === 'object' && product.category !== null ? (product.category as any).name : String(product.category || 'Groceries');
+                const localizedCategory = getLocalizedCategoryName(catRaw);
 
-              return (
-                <Card
-                  key={product._id}
-                  sx={{
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    borderRadius: 3,
-                    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
-                      boxShadow: '0 12px 24px rgba(0,0,0,0.2)'
-                    }
-                  }}
-                >
-                  <Box sx={{ position: 'relative' }}>
-                    <CardMedia
-                      component="img"
-                      height="200"
-                      image={product.images?.[0] || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80'}
-                      alt={localized.title}
-                      sx={{ objectFit: 'cover' }}
-                    />
-                    <Chip
-                      label={localizedCategory}
-                      size="small"
-                      sx={{
-                        position: 'absolute',
-                        top: 12,
-                        left: 12,
-                        bgcolor: 'rgba(0,0,0,0.6)',
-                        color: '#fff',
-                        backdropFilter: 'blur(4px)',
-                        fontSize: '0.75rem'
-                      }}
-                    />
-                    {product.compareAtPrice && product.compareAtPrice > product.price && (
-                      <Chip
-                        label={t('shop.sale', 'SALE')}
-                        size="small"
-                        color="error"
-                        sx={{ position: 'absolute', top: 12, right: 12, fontWeight: 700 }}
+                return (
+                  <Card
+                    key={product._id}
+                    sx={{
+                      height: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      borderRadius: 3,
+                      transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      '&:hover': {
+                        transform: 'translateY(-4px)',
+                        boxShadow: '0 12px 24px rgba(0,0,0,0.2)'
+                      }
+                    }}
+                  >
+                    <Box sx={{ position: 'relative' }}>
+                      <CardMedia
+                        component="img"
+                        height="200"
+                        image={product.images?.[0] || getCategoryFallbackImage(catRaw)}
+                        alt={localized.title}
+                        sx={{ objectFit: 'cover' }}
+                        onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = getCategoryFallbackImage(catRaw);
+                        }}
                       />
-                    )}
-                  </Box>
-
-                  <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                    <Typography
-                      variant="h6"
-                      onClick={() => navigate(`/shop/product/${product.slug || product._id}`)}
-                      sx={{ fontWeight: 700, mb: 1, cursor: 'pointer', '&:hover': { color: 'primary.main' } }}
-                    >
-                      {localized.title}
-                    </Typography>
-
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{
-                        mb: 2,
-                        flexGrow: 1,
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden'
-                      }}
-                    >
-                      {localized.description}
-                    </Typography>
-
-                    <Stack direction="row" sx={{ alignItems: 'center', gap: 1, mb: 2 }}>
-                      <Rating value={4.8} precision={0.5} size="small" readOnly />
-                      <Typography variant="caption" color="text.secondary">
-                        (4.8)
-                      </Typography>
-                    </Stack>
-
-                    <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between', mt: 'auto' }}>
-                      <Box>
-                        <Typography variant="h6" color="primary.main" sx={{ fontWeight: 800 }}>
-                          XAF {product.price.toLocaleString()}
-                        </Typography>
-                        {product.compareAtPrice && (
-                          <Typography variant="caption" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
-                            XAF {product.compareAtPrice.toLocaleString()}
-                          </Typography>
-                        )}
-                      </Box>
-
-                      <Stack direction="row" spacing={1}>
-                        <Tooltip title={t('shop.quickView', 'Quick View')}>
-                          <IconButton
-                            size="small"
-                            onClick={() => navigate(`/shop/product/${product.slug || product._id}`)}
-                            sx={{ border: '1px solid rgba(255, 255, 255, 0.12)' }}
-                          >
-                            <VisibilityIcon fontSize="small" />
-                          </IconButton>
-                        </Tooltip>
-
-                        <Button
-                          variant="contained"
+                      <Chip
+                        label={localizedCategory}
+                        size="small"
+                        sx={{
+                          position: 'absolute',
+                          top: 12,
+                          left: 12,
+                          bgcolor: 'rgba(0,0,0,0.6)',
+                          color: '#fff',
+                          backdropFilter: 'blur(4px)',
+                          fontSize: '0.75rem'
+                        }}
+                      />
+                      {product.compareAtPrice && product.compareAtPrice > product.price && (
+                        <Chip
+                          label={t('shop.sale', 'SALE')}
                           size="small"
-                          startIcon={<AddShoppingCartIcon />}
-                          onClick={() => addToCart(product)}
-                          sx={{ borderRadius: 2, px: 2, fontWeight: 600 }}
-                        >
-                          {t('shop.add', 'Add')}
-                        </Button>
+                          color="error"
+                          sx={{ position: 'absolute', top: 12, right: 12, fontWeight: 700 }}
+                        />
+                      )}
+                    </Box>
+
+                    <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                      <Typography
+                        variant="h6"
+                        onClick={() => navigate(`/shop/product/${product.slug || product._id}`)}
+                        sx={{ fontWeight: 700, mb: 1, cursor: 'pointer', '&:hover': { color: 'primary.main' } }}
+                      >
+                        {localized.title}
+                      </Typography>
+
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{
+                          mb: 2,
+                          flexGrow: 1,
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden'
+                        }}
+                      >
+                        {localized.description}
+                      </Typography>
+
+                      <Stack direction="row" sx={{ alignItems: 'center', gap: 1, mb: 2 }}>
+                        <Rating value={4.8} precision={0.5} size="small" readOnly />
+                        <Typography variant="caption" color="text.secondary">
+                          (4.8)
+                        </Typography>
                       </Stack>
-                    </Stack>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </Box>
+
+                      <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between', mt: 'auto' }}>
+                        <Box>
+                          <Typography variant="h6" color="primary.main" sx={{ fontWeight: 800 }}>
+                            XAF {product.price.toLocaleString()}
+                          </Typography>
+                          {product.compareAtPrice && (
+                            <Typography variant="caption" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
+                              XAF {product.compareAtPrice.toLocaleString()}
+                            </Typography>
+                          )}
+                        </Box>
+
+                        <Stack direction="row" spacing={1}>
+                          <Tooltip title={t('shop.quickView', 'Quick View')}>
+                            <IconButton
+                              size="small"
+                              onClick={() => navigate(`/shop/product/${product.slug || product._id}`)}
+                              sx={{ border: '1px solid rgba(255, 255, 255, 0.12)' }}
+                            >
+                              <VisibilityIcon fontSize="small" />
+                            </IconButton>
+                          </Tooltip>
+
+                          <Button
+                            variant="contained"
+                            size="small"
+                            startIcon={<AddShoppingCartIcon />}
+                            onClick={() => addToCart(product)}
+                            sx={{ borderRadius: 2, px: 2, fontWeight: 600 }}
+                          >
+                            {t('shop.add', 'Add')}
+                          </Button>
+                        </Stack>
+                      </Stack>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </Box>
+
+            {/* Pagination Bar */}
+            {totalPages > 1 && (
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  mt: 6,
+                  mb: 2,
+                  gap: 1.5,
+                }}
+              >
+                <Pagination
+                  count={totalPages}
+                  page={page}
+                  onChange={handlePageChange}
+                  color="primary"
+                  size="large"
+                  showFirstButton
+                  showLastButton
+                  sx={{
+                    '& .MuiPaginationItem-root': {
+                      fontWeight: 700,
+                      borderRadius: 2,
+                    },
+                  }}
+                />
+                <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500 }}>
+                  {t('shop.pageIndicator', 'Page {{page}} of {{totalPages}} ({{total}} products)', {
+                    page,
+                    totalPages,
+                    total: totalCount || products.length,
+                  })}
+                </Typography>
+              </Box>
+            )}
+          </>
         )}
       </Container>
     </Box>

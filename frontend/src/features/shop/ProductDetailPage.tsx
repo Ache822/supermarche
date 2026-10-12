@@ -148,6 +148,10 @@ export const ProductDetailPage: React.FC = () => {
               src={selectedImage || product.images?.[0] || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80'}
               alt={localized.title}
               sx={{ width: '100%', height: 420, objectFit: 'cover' }}
+              onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80';
+              }}
             />
           </Paper>
 
@@ -160,6 +164,10 @@ export const ProductDetailPage: React.FC = () => {
                   component="img"
                   src={img}
                   onClick={() => setSelectedImage(img)}
+                  onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80';
+                  }}
                   sx={{
                     width: 72,
                     height: 72,

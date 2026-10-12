@@ -153,13 +153,34 @@ export const getProductsHandler = async (req: Request, res: Response, next: Next
   try {
     const includeAll = req.query.includeAll === "true";
     const isFeatured = req.query.featured !== undefined ? req.query.featured === "true" : undefined;
-    const categoryId = req.query.category ? String(req.query.category) : undefined;
+    const inStock = req.query.inStock === "true" ? true : undefined;
+    const categoryParam = req.query.category ? String(req.query.category) : undefined;
     const search = req.query.search ? String(req.query.search) : undefined;
+
+    let categoryFilterCondition: any = undefined;
+    if (categoryParam && categoryParam !== "All") {
+      if (mongoose.Types.ObjectId.isValid(categoryParam)) {
+        categoryFilterCondition = { category: categoryParam };
+      } else {
+        const cat = await Category.findOne({
+          $or: [
+            { slug: categoryParam },
+            { name: { $regex: categoryParam, $options: "i" } }
+          ]
+        });
+        if (cat) {
+          categoryFilterCondition = { $or: [{ category: cat._id }, { category: categoryParam }] };
+        } else {
+          categoryFilterCondition = { category: categoryParam };
+        }
+      }
+    }
 
     const filter: any = {
       ...(includeAll ? {} : { isLive: true }),
       ...(isFeatured !== undefined ? { featured: isFeatured } : {}),
-      ...(categoryId ? { category: categoryId } : {})
+      ...(inStock ? { inStock: true } : {}),
+      ...(categoryFilterCondition || {})
     };
 
     if (search) {
@@ -169,22 +190,26 @@ export const getProductsHandler = async (req: Request, res: Response, next: Next
       ];
     }
 
-    const result = await getPaginatedData(req, Product, filter, { populate: "category" });
+    const result = await getPaginatedData(req, Product, filter);
     const requestedLang = getRequestedLanguage(req);
     const localizedData = localizeArray(result.data, requestedLang);
 
+    const categories = await Category.find({ is_active: true }).select("name slug iconName");
+    const categoryMap = new Map(categories.map((c: any) => [String(c._id), c.name]));
+
     const enrichedData = localizedData.map((item: any) => {
       const catObj = typeof item.category === "object" && item.category !== null ? item.category : null;
+      const categoryNameFromId = (item.category && categoryMap.has(String(item.category)))
+        ? categoryMap.get(String(item.category))
+        : null;
       const mainImage = item.imageUrl || item.images?.[0] || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80';
       return {
         ...item,
         images: item.images?.length ? item.images : [mainImage],
         imageUrl: mainImage,
-        categoryLabel: catObj?.name || (typeof item.category === "string" ? item.category : "Groceries")
+        categoryLabel: catObj?.name || categoryNameFromId || (typeof item.category === "string" ? item.category : "Groceries")
       };
     });
-
-    const categories = await Category.find({ is_active: true }).select("name slug iconName");
 
     res.status(200).json({
       success: true,
