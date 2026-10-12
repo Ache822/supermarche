@@ -1679,7 +1679,7 @@ export function LandingPage({ onOpenBookingWithService, onOpenLiveChat }: Landin
             {/* Right Side: Quick Action Service Cards */}
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
               <Box
-                onClick={() => onOpenBookingWithService()}
+                onClick={() => onOpenLiveChat?.()}
                 sx={{
                   p: 2.5,
                   borderRadius: '14px',
@@ -1705,7 +1705,7 @@ export function LandingPage({ onOpenBookingWithService, onOpenLiveChat }: Landin
               </Box>
 
               <Box
-                onClick={() => onOpenBookingWithService()}
+                onClick={() => navigate('/shop')}
                 sx={{
                   p: 2.5,
                   borderRadius: '14px',
