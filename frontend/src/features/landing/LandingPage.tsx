@@ -87,50 +87,85 @@ export function LandingPage({ onOpenBookingWithService, onOpenLiveChat }: Landin
   const toast = useToast();
   const { items: services } = useAppSelector((state) => state.services);
 
+  const getCleanPlainText = (text?: string): string => {
+    if (!text) return '';
+    return text
+      .replace(/<[^>]*>/g, '')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '"')
+      .replace(/&apos;/g, "'")
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/\s+/g, ' ')
+      .trim();
+  };
+
   const getLocalizedService = (srv: ServiceItem) => {
+    const prodTitleKey = `shop.products.${srv.id}.title`;
+    const prodDescKey = `shop.products.${srv.id}.desc`;
+    const hasProdTitle = i18n.exists(prodTitleKey);
+    const hasProdDesc = i18n.exists(prodDescKey);
+
+    const title = hasProdTitle ? t(prodTitleKey) : srv.title;
+    const rawDesc = hasProdDesc
+      ? t(prodDescKey)
+      : (srv.shortDescription || srv.description || '');
+    const cleanDesc = getCleanPlainText(rawDesc);
+
     switch (srv.id) {
       case 'srv-clothes':
         return {
           ...srv,
-          title: t('services.clothesTitle', { defaultValue: srv.title }),
+          title: t('services.clothesTitle', { defaultValue: title }),
           categoryLabel: t('catalog.filterClothes', { defaultValue: srv.categoryLabel || '' }),
-          description: t('services.clothesDesc', { defaultValue: srv.description }),
+          description: t('services.clothesDesc', { defaultValue: cleanDesc }),
+          shortDescription: t('services.clothesDesc', { defaultValue: cleanDesc }),
           estimatedTime: i18n.language === 'fr' ? '15 – 30 min livraison campus' : srv.estimatedTime,
         };
       case 'srv-shoes':
         return {
           ...srv,
-          title: t('services.shoesTitle', { defaultValue: srv.title }),
+          title: t('services.shoesTitle', { defaultValue: title }),
           categoryLabel: t('catalog.filterShoes', { defaultValue: srv.categoryLabel || '' }),
-          description: t('services.shoesDesc', { defaultValue: srv.description }),
+          description: t('services.shoesDesc', { defaultValue: cleanDesc }),
+          shortDescription: t('services.shoesDesc', { defaultValue: cleanDesc }),
           estimatedTime: i18n.language === 'fr' ? 'Livraison express le jour même' : srv.estimatedTime,
         };
       case 'srv-cosmetics':
         return {
           ...srv,
-          title: t('services.cosmeticsTitle', { defaultValue: srv.title }),
+          title: t('services.cosmeticsTitle', { defaultValue: title }),
           categoryLabel: t('catalog.filterCosmetics', { defaultValue: srv.categoryLabel || '' }),
-          description: t('services.cosmeticsDesc', { defaultValue: srv.description }),
+          description: t('services.cosmeticsDesc', { defaultValue: cleanDesc }),
+          shortDescription: t('services.cosmeticsDesc', { defaultValue: cleanDesc }),
           estimatedTime: i18n.language === 'fr' ? '20 – 40 min' : srv.estimatedTime,
         };
       case 'srv-tech':
         return {
           ...srv,
-          title: t('services.techTitle', { defaultValue: srv.title }),
+          title: t('services.techTitle', { defaultValue: title }),
           categoryLabel: t('catalog.filterTech', { defaultValue: srv.categoryLabel || '' }),
-          description: t('services.techDesc', { defaultValue: srv.description }),
+          description: t('services.techDesc', { defaultValue: cleanDesc }),
+          shortDescription: t('services.techDesc', { defaultValue: cleanDesc }),
           estimatedTime: i18n.language === 'fr' ? '30 min express' : srv.estimatedTime,
         };
       case 'srv-snacks':
         return {
           ...srv,
-          title: t('services.snacksTitle', { defaultValue: srv.title }),
+          title: t('services.snacksTitle', { defaultValue: title }),
           categoryLabel: t('catalog.filterSnacks', { defaultValue: srv.categoryLabel || '' }),
-          description: t('services.snacksDesc', { defaultValue: srv.description }),
+          description: t('services.snacksDesc', { defaultValue: cleanDesc }),
+          shortDescription: t('services.snacksDesc', { defaultValue: cleanDesc }),
           estimatedTime: i18n.language === 'fr' ? '15 min express' : srv.estimatedTime,
         };
       default:
-        return srv;
+        return {
+          ...srv,
+          title,
+          description: cleanDesc,
+          shortDescription: cleanDesc,
+        };
     }
   };
 
@@ -1252,8 +1287,20 @@ export function LandingPage({ onOpenBookingWithService, onOpenLiveChat }: Landin
                       {srv.title}
                     </Typography>
 
-                    <Typography sx={{ fontSize: 13, color: 'text.secondary', mb: 3, lineHeight: 1.5 }}>
-                      {srv.description}
+                    <Typography
+                      sx={{
+                        fontSize: 13,
+                        color: 'text.secondary',
+                        mb: 3,
+                        lineHeight: 1.5,
+                        display: '-webkit-box',
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                        minHeight: 58,
+                      }}
+                    >
+                      {srv.shortDescription || srv.description}
                     </Typography>
                   </Box>
 

@@ -202,9 +202,14 @@ export const getProductsHandler = async (req: Request, res: Response, next: Next
       const categoryNameFromId = (item.category && categoryMap.has(String(item.category)))
         ? categoryMap.get(String(item.category))
         : null;
-      const mainImage = item.imageUrl || item.images?.[0] || 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80';
+      const rawDesc = item.shortDescription || item.description || '';
+      const cleanPlainDesc = rawDesc.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+      const shortDesc = item.shortDescription || (cleanPlainDesc.length > 140 ? cleanPlainDesc.slice(0, 137) + '...' : cleanPlainDesc);
+
       return {
         ...item,
+        shortDescription: shortDesc,
+        plainDescription: cleanPlainDesc,
         images: item.images?.length ? item.images : [mainImage],
         imageUrl: mainImage,
         categoryLabel: catObj?.name || categoryNameFromId || (typeof item.category === "string" ? item.category : "Groceries")

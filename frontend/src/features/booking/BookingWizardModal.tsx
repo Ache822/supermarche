@@ -40,7 +40,7 @@ const CAMEROON_CITIES = [
 ];
 
 export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpenLiveChat }: BookingWizardModalProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const services = useAppSelector((state) => state.services.items);
   const citySelectId = useId();
 
@@ -57,6 +57,9 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const getLocalizedServiceTitle = (srvId?: string, defaultTitle?: string) => {
+    if (srvId && i18n.exists(`shop.products.${srvId}.title`)) {
+      return t(`shop.products.${srvId}.title`);
+    }
     switch (srvId) {
       case 'srv-clothes': return t('services.clothesTitle', defaultTitle || 'Express Clothing & Tailoring Delivery');
       case 'srv-shoes': return t('services.shoesTitle', defaultTitle || 'Shoes & Footwear Courier');
@@ -68,13 +71,17 @@ export function BookingWizardModal({ open, onClose, preselectedServiceId, onOpen
   };
 
   const getLocalizedServiceDesc = (srvId?: string, defaultDesc?: string) => {
+    const clean = (text?: string) => (text ? text.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim() : '');
+    if (srvId && i18n.exists(`shop.products.${srvId}.desc`)) {
+      return clean(t(`shop.products.${srvId}.desc`));
+    }
     switch (srvId) {
-      case 'srv-clothes': return t('services.clothesDesc', defaultDesc || '');
-      case 'srv-shoes': return t('services.shoesDesc', defaultDesc || '');
-      case 'srv-cosmetics': return t('services.cosmeticsDesc', defaultDesc || '');
-      case 'srv-tech': return t('services.techDesc', defaultDesc || '');
-      case 'srv-snacks': return t('services.snacksDesc', defaultDesc || '');
-      default: return defaultDesc || 'Fast, reliable runner and doorstep delivery across Cameroon.';
+      case 'srv-clothes': return clean(t('services.clothesDesc', defaultDesc || ''));
+      case 'srv-shoes': return clean(t('services.shoesDesc', defaultDesc || ''));
+      case 'srv-cosmetics': return clean(t('services.cosmeticsDesc', defaultDesc || ''));
+      case 'srv-tech': return clean(t('services.techDesc', defaultDesc || ''));
+      case 'srv-snacks': return clean(t('services.snacksDesc', defaultDesc || ''));
+      default: return clean(currentService?.shortDescription || defaultDesc) || 'Fast, reliable runner and doorstep delivery across Cameroon.';
     }
   };
 

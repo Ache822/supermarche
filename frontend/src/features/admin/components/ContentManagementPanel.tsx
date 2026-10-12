@@ -907,8 +907,18 @@ export function ContentManagementPanel() {
                             <DeleteIcon sx={{ fontSize: 16 }} />
                           </IconButton>
                         </Box>
-                        <Typography sx={{ fontSize: 12, color: 'text.secondary', mb: 1 }}>
-                          {srv.description}
+                        <Typography
+                          sx={{
+                            fontSize: 12,
+                            color: 'text.secondary',
+                            mb: 1,
+                            display: '-webkit-box',
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden',
+                          }}
+                        >
+                          {srv.shortDescription || (srv.description ? srv.description.replace(/<[^>]*>/g, '').trim() : '')}
                         </Typography>
                         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
                           <Chip
